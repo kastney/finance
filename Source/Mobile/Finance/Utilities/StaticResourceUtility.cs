@@ -1,4 +1,4 @@
-﻿namespace Finance.Utilities;
+﻿namespace Finance;
 
 internal static class StaticResourceUtility {
 

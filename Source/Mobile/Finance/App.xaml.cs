@@ -1,9 +1,11 @@
-﻿namespace Finance {
-    public partial class App : Application {
-        public App() {
-            InitializeComponent();
+﻿using Finance.Pages;
 
-            MainPage = new AppShell();
-        }
+namespace Finance;
+
+public partial class App : Application {
+
+    public App() {
+        InitializeComponent();
+        MainPage = new AppShell();
     }
 }

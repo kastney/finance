@@ -11,10 +11,12 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="App.xaml">
+    <MauiXaml Update="Pages\Initials\LoadingPage.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Update="AppShell.xaml">
+    </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
     <None Update="Platforms\Windows\App.xaml">
