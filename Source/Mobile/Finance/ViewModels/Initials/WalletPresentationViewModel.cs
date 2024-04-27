@@ -12,6 +12,7 @@ internal partial class WalletPresentationViewModel : ObservableObject {
     private async Task NewWallet() {
         IsRunning = true;
         await Task.Delay(3000);
+        await Shell.Current.GoToAsync("///dashboard");
         IsRunning = false;
     }
 }

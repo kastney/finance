@@ -1,8 +1,8 @@
 ﻿namespace Finance.Pages;
 
-public partial class MainPage : ContentPage {
+public partial class DashboardPage : ContentPage {
 
-    public MainPage() {
+    public DashboardPage() {
         InitializeComponent();
         Application.Current.RequestedThemeChanged += Current_RequestedThemeChanged;
         Current_RequestedThemeChanged(null, null);

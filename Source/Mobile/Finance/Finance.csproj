@@ -64,6 +64,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.5" />
+		<PackageReference Include="LiteDB" Version="5.0.19" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -72,6 +73,9 @@
 	<ItemGroup>
 	  <Compile Update="Pages\Initials\WalletPresentationPage.xaml.cs">
 	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Dashboard\DashboardPage.xaml.cs">
+	    <DependentUpon>DashboardPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
