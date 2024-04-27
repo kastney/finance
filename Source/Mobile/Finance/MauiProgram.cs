@@ -17,6 +17,7 @@ namespace Finance {
 
             // ViewModels
             builder.Services.AddTransient<LoadingViewModel>();
+            builder.Services.AddTransient<WalletPresentationViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

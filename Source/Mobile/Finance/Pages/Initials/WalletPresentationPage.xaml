@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:models="clr-namespace:Finance.Models"
+             x:Class="Finance.Pages.WalletPresentationPage"
+             Shell.FlyoutBehavior="Disabled">
+
+    <Grid RowDefinitions="120,*,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="0">
+        <Grid Grid.RowSpan="5" Grid.ColumnSpan="2">
+            <CarouselView x:Name="carouselView" IndicatorView="{x:Reference indicatorView}" CurrentItemChanged="CarouselView_CurrentItemChanged">
+                <CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type models:BannerItem}">
+                        <models:BannerItem Title="Gerencie Seus Ativos" Subtitle="Gerencie seus investimentos em Renda Fixa, Fundos Imobiliários e Ações" Image="show_banner_1" />
+                        <models:BannerItem Title="Defina Estratégias" Subtitle="Estabeleça Indicadores de Ativos, a porcentagem da Composição Patrimonial e suas Metas" Image="show_banner_2" />
+                    </x:Array>
+                </CarouselView.ItemsSource>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="6*,4*" RowSpacing="5">
+                            <Image Grid.RowSpan="2" Source="{Binding Image}" Aspect="AspectFill" />
+                            <Label Grid.Row="0" Text="{Binding Title}" LineBreakMode="CharacterWrap" FontSize="Title" MaxLines="3" FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="End" Margin="20,0" TextColor="White">
+                                <Label.Shadow>
+                                    <Shadow Brush="Black" Offset="0,0" Radius="35" Opacity="1" />
+                                </Label.Shadow>
+                            </Label>
+                            <Label Grid.Row="1" Text="{Binding Subtitle}" LineBreakMode="CharacterWrap" FontSize="Small" MaxLines="4" FontAttributes="None" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" Margin="20,0" TextColor="White">
+                                <Label.Shadow>
+                                    <Shadow Brush="Black" Offset="0,0" Radius="35" Opacity="1" />
+                                </Label.Shadow>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Border StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="Transparent" Offset="0.7" />
+                        <GradientStop Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" Offset="0.85" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
+
+        <Image Grid.ColumnSpan="2" Source="dotnet_bot" />
+        <IndicatorView x:Name="indicatorView" Grid.Row="2" Grid.ColumnSpan="2" Margin="19,15,19,20" IndicatorSize="12" IndicatorsShape="Circle" />
+        <controls:IndicatorButton Grid.Row="3" Grid.ColumnSpan="2" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,0,20,30" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" />
+    </Grid>
+</ContentPage>

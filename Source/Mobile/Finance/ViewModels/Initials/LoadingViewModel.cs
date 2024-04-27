@@ -3,7 +3,7 @@
 internal class LoadingViewModel {
 
     internal async void Initialization() {
-        await Task.Delay(5000);
-        await Shell.Current.GoToAsync("///main");
+        await Task.Delay(1000);
+        await Shell.Current.GoToAsync("///presentation");
     }
 }
