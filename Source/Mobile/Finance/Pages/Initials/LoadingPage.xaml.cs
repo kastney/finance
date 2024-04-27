@@ -8,7 +8,7 @@ public partial class LoadingPage : ContentPage {
     public LoadingPage() {
         InitializeComponent();
         BindingContext = viewModel = Service.Get<LoadingViewModel>();
-        viewModel.Initialization();
+        LoadingViewModel.Initialization();
     }
 
     protected override bool OnBackButtonPressed() {
