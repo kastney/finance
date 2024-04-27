@@ -1,9 +1,14 @@
-﻿namespace Finance.Pages;
+﻿using Finance.ViewModels;
+
+namespace Finance.Pages;
 
 public partial class DashboardPage : ContentPage {
 
     public DashboardPage() {
         InitializeComponent();
+
+        BindingContext = Service.Get<DashboardViewModel>();
+
         Application.Current.RequestedThemeChanged += Current_RequestedThemeChanged;
         Current_RequestedThemeChanged(null, null);
     }

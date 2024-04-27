@@ -1,4 +1,5 @@
-﻿using Finance.ViewModels;
+﻿using Finance.Services;
+using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace Finance {
@@ -15,9 +16,14 @@ namespace Finance {
                     fonts.AddFont("Font Awesome 6 Free-Regular-400.otf", "IconsRegular");
                 });
 
+            // Services
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
+            builder.Services.AddSingleton<IWalletService, WalletService>();
+
             // ViewModels
             builder.Services.AddTransient<LoadingViewModel>();
             builder.Services.AddTransient<WalletPresentationViewModel>();
+            builder.Services.AddTransient<DashboardViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

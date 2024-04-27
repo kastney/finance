@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance.Pages.DashboardPage"
              Shell.FlyoutBehavior="Disabled"
-             Title="Finance">
+             Title="{Binding Wallet.Name}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="walletItem" />

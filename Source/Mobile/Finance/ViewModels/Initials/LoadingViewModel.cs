@@ -1,9 +1,22 @@
-﻿namespace Finance.ViewModels;
+﻿using Finance.Models;
+using Finance.Services;
+
+namespace Finance.ViewModels;
 
 internal class LoadingViewModel {
+    private readonly IWalletService walletService;
+    private readonly INavigationService navigationService;
 
-    internal static async void Initialization() {
-        await Task.Delay(1000);
-        await Shell.Current.GoToAsync("///presentation");
+    public LoadingViewModel() {
+        walletService = Service.Get<IWalletService>();
+        navigationService = Service.Get<INavigationService>();
+    }
+
+    internal async void Initialization() {
+        if(walletService.GetCurrent() is Wallet wallet) {
+            await navigationService.NavigateTo("///dashboard", wallet);
+        } else {
+            await navigationService.NavigateTo("///presentation");
+        }
     }
 }
