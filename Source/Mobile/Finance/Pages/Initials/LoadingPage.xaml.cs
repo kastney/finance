@@ -8,6 +8,10 @@ public partial class LoadingPage : ContentPage {
     public LoadingPage() {
         InitializeComponent();
         BindingContext = viewModel = Service.Get<LoadingViewModel>();
+        Initialization();
+    }
+
+    public void Initialization() {
         viewModel.Initialization();
     }
 

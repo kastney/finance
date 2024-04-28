@@ -5,7 +5,7 @@
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
              x:Class="Finance.Pages.CreateWalletPage"
-             Title="Nova Carteira">
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <styles:MultilineEditStyle />
@@ -13,18 +13,21 @@
 
     <Grid RowDefinitions="*,Auto">
         <VerticalStackLayout Margin="15,0" Spacing="10">
-            <Label Text="Informação Essencial:" Margin="0,10,0,0" />
-            <editors:MultilineEdit Text="{Binding BusinessCode.Value}"
-                                   HasError="{Binding BusinessCode.HasError}"
-                                   ErrorText="{Binding BusinessCode.ErrorText}"
+            <Label Text="Nova Carteira" FontSize="Title" Margin="0,10,0,10" FontAttributes="Bold" />
+            <Label Text="Informação Essencial:" />
+            <editors:MultilineEdit x:Name="entry"
+                                   Text="{Binding WalletName.Value}"
+                                   HasError="{Binding WalletName.HasError}"
+                                   ErrorText="{Binding WalletName.ErrorText}"
                                    IsReadOnly="{Binding IsRunning}"
                                    LabelText="Nome da Carteira"
                                    StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf555;}"
                                    Keyboard="Text"
                                    MaxCharacterCount="50"
                                    MaxCharacterCountOverflowMode="LimitInput"
-                                   ReturnType="Done" />
+                                   ReturnType="Done"
+                                   Completed="Entry_Completed"/>
         </VerticalStackLayout>
-        <controls:IndicatorButton Grid.Row="1" Margin="20,0,20,30" Glyph="&#xf0c7;" Text="Criar Carteira"/>
+        <controls:IndicatorButton Grid.Row="1" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Criar Carteira" Command="{Binding CreateCommand}" />
     </Grid>
 </ContentPage>

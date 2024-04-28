@@ -1,9 +1,16 @@
-﻿namespace Finance.Services;
+﻿using Finance.Services.Navigation;
+
+namespace Finance.Services;
 
 internal class NavigationService : INavigationService {
 
-    public async Task NavigateTo(string route, bool animate = true) {
+    public async Task<Page> NavigateTo(string route, bool animate = true) {
         await Shell.Current.GoToAsync(route, animate);
+        if(Shell.Current.Navigation.NavigationStack.Count == 1) {
+            return Shell.Current.CurrentPage;
+        } else {
+            return Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
+        }
     }
 
     public async Task NavigateTo<TEntity>(string route, TEntity entity, bool animate = true) {
@@ -15,14 +22,36 @@ internal class NavigationService : INavigationService {
     }
 
     public async Task NavigateToModal<TPage>(bool animate = true) where TPage : Page {
+        var loadingPage = new LoadingPage();
+        Page page;
+
         if(Shell.Current.Navigation.ModalStack.Count == 0) {
-            var page = Activator.CreateInstance<TPage>();
-            var navigation = new NavigationPage(page);
+            var navigation = new NavigationPage(loadingPage);
             await Shell.Current.Navigation.PushModalAsync(navigation, animate);
+            await Task.Delay(10);
+
+            page = Activator.CreateInstance<TPage>();
+            await navigation.PushAsync(page, false);
+            Shell.Current.Navigation.ModalStack[0].Navigation.RemovePage(loadingPage);
         } else {
-            var page = Activator.CreateInstance<TPage>();
             var navigation = Shell.Current.Navigation.ModalStack[0].Navigation;
-            await navigation.PushAsync(page, animate);
+            await navigation.PushAsync(loadingPage, animate);
+            await Task.Delay(10);
+
+            page = Activator.CreateInstance<TPage>();
+            await navigation.PushAsync(page, false);
+            navigation.RemovePage(loadingPage);
+        }
+    }
+
+    public async Task NavigateToBackModal(bool animate = true) {
+        if(Shell.Current.Navigation.ModalStack.Count == 1) {
+            var modal = Shell.Current.Navigation.ModalStack[0];
+            if(modal.Navigation.NavigationStack.Count != 1) {
+                await modal.Navigation.PopAsync(animate);
+            } else {
+                await Shell.Current.Navigation.PopModalAsync(animate);
+            }
         }
     }
 }

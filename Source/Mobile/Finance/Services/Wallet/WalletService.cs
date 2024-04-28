@@ -25,6 +25,15 @@ internal class WalletService : IWalletService {
         return wallet;
     }
 
+    public void SetCurrent(Wallet wallet) {
+        Preferences.Set("WalletId", wallet.Id.ToString());
+    }
+
+    public void Create(Wallet wallet) {
+        var collection = database.GetCollection<Wallet>(nameof(Wallet));
+        collection.Insert(wallet);
+    }
+
     public static string GetConnectionString() {
         var path = FileSystem.Current.AppDataDirectory;
         return Path.Combine(path, "finance.db");
