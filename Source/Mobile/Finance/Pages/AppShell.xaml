@@ -7,5 +7,5 @@
     <!-- Page Registration -->
     <ShellContent FlyoutItemIsVisible="False" Route="loading" ContentTemplate="{DataTemplate pages:LoadingPage}" />
     <ShellContent FlyoutItemIsVisible="False" Route="presentation" ContentTemplate="{DataTemplate pages:WalletPresentationPage}" />
-    <ShellContent FlyoutItemIsVisible="False" Route="dashboard" ContentTemplate="{DataTemplate pages:DashboardPage}" />
+    <ShellContent FlyoutItemIsVisible="False" Route="main" ContentTemplate="{DataTemplate pages:MainPage}" />
 </Shell>

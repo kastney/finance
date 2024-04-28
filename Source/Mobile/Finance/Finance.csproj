@@ -57,8 +57,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\chart_pie_solid.svg" />
+	  <None Remove="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	  <None Remove="Resources\Images\show_banner_1.jpeg" />
 	  <None Remove="Resources\Images\show_banner_2.jpeg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\AppIcon\chart_pie_solid.svg" />
+	  <MauiImage Include="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,8 +81,8 @@
 	  <Compile Update="Pages\Initials\WalletPresentationPage.xaml.cs">
 	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Dashboard\DashboardPage.xaml.cs">
-	    <DependentUpon>DashboardPage.xaml</DependentUpon>
+	  <Compile Update="Pages\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -93,6 +100,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\TabViewStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Services\Navigation\LoadingPage.xaml">

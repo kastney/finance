@@ -26,6 +26,9 @@
     <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Resources\Styles\TabViewStyle.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Services\Navigation\LoadingPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

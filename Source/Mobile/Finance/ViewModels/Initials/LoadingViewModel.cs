@@ -14,7 +14,7 @@ internal class LoadingViewModel {
 
     internal async void Initialization() {
         if(walletService.GetCurrent() is Wallet wallet) {
-            await navigationService.NavigateTo("///dashboard", wallet);
+            await navigationService.NavigateTo("///main", wallet);
         } else {
             await navigationService.NavigateTo("///presentation");
         }

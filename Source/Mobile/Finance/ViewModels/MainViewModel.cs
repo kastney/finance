@@ -4,7 +4,7 @@ using Finance.Models;
 namespace Finance.ViewModels;
 
 [QueryProperty(nameof(Wallet), "Entity")]
-internal partial class DashboardViewModel : ObservableObject {
+internal partial class MainViewModel : ObservableObject {
 
     [ObservableProperty]
     private Wallet wallet;
