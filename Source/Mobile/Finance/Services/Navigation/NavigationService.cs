@@ -13,4 +13,16 @@ internal class NavigationService : INavigationService {
             await Shell.Current.GoToAsync(route, animate, new ShellNavigationQueryParameters { { "Entity", entity } });
         }
     }
+
+    public async Task NavigateToModal<TPage>(bool animate = true) where TPage : Page {
+        if(Shell.Current.Navigation.ModalStack.Count == 0) {
+            var page = Activator.CreateInstance<TPage>();
+            var navigation = new NavigationPage(page);
+            await Shell.Current.Navigation.PushModalAsync(navigation, animate);
+        } else {
+            var page = Activator.CreateInstance<TPage>();
+            var navigation = Shell.Current.Navigation.ModalStack[0].Navigation;
+            await navigation.PushAsync(page, animate);
+        }
+    }
 }

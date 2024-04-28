@@ -1,4 +1,5 @@
-﻿using Finance.Services;
+﻿using DevExpress.Maui;
+using Finance.Services;
 using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -9,6 +10,7 @@ namespace Finance {
         public static MauiApp CreateMauiApp() {
             var builder = MauiApp.CreateBuilder();
             builder.UseMauiApp<App>()
+                .UseDevExpress()
                 .ConfigureFonts(fonts => {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

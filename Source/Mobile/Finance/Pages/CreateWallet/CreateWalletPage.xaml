@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:styles="clr-namespace:Finance.Resources.Styles"
+             x:Class="Finance.Pages.CreateWalletPage"
+             Title="Nova Carteira">
+
+    <ContentPage.Resources>
+        <styles:MultilineEditStyle />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+        <VerticalStackLayout Margin="15,0" Spacing="10">
+            <Label Text="Informação Essencial:" Margin="0,10,0,0" />
+            <editors:MultilineEdit Text="{Binding BusinessCode.Value}"
+                                   HasError="{Binding BusinessCode.HasError}"
+                                   ErrorText="{Binding BusinessCode.ErrorText}"
+                                   IsReadOnly="{Binding IsRunning}"
+                                   LabelText="Nome da Carteira"
+                                   StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf555;}"
+                                   Keyboard="Text"
+                                   MaxCharacterCount="50"
+                                   MaxCharacterCountOverflowMode="LimitInput"
+                                   ReturnType="Done" />
+        </VerticalStackLayout>
+        <controls:IndicatorButton Grid.Row="1" Margin="20,0,20,30" Glyph="&#xf0c7;" Text="Criar Carteira"/>
+    </Grid>
+</ContentPage>
