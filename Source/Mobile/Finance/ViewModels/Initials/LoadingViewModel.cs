@@ -1,4 +1,5 @@
 ﻿using Finance.Models;
+using Finance.Pages;
 using Finance.Services;
 
 namespace Finance.ViewModels;
@@ -14,7 +15,7 @@ internal class LoadingViewModel {
 
     internal async void Initialization() {
         if(walletService.GetCurrent() is Wallet wallet) {
-            await navigationService.NavigateTo("///main", wallet);
+            if(await navigationService.NavigateTo("///main", wallet) is MainPage page) { page.Initialization(); }
         } else {
             await navigationService.NavigateTo("///presentation");
         }

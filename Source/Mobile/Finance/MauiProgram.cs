@@ -27,6 +27,7 @@ namespace Finance {
             builder.Services.AddTransient<WalletPresentationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
             builder.Services.AddTransient<CreateWalletViewModel>();
+            builder.Services.AddTransient<DeleteWalletViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

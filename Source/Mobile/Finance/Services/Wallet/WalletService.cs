@@ -34,6 +34,11 @@ internal class WalletService : IWalletService {
         collection.Insert(wallet);
     }
 
+    public void Delete(Wallet wallet) {
+        var collection = database.GetCollection<Wallet>(nameof(Wallet));
+        collection.Delete(wallet.Id);
+    }
+
     public static string GetConnectionString() {
         var path = FileSystem.Current.AppDataDirectory;
         return Path.Combine(path, "finance.db");

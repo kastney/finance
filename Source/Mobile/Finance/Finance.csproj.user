@@ -14,7 +14,16 @@
     <MauiXaml Update="Controls\IndicatorButton.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
+    <MauiXaml Update="Controls\IndicatorButtonError.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Wallet\CreateWalletPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\DangerZone\DangerZoneTabViewItem.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\Initials\WalletPresentationPage.xaml">

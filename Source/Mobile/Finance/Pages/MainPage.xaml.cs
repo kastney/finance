@@ -13,6 +13,10 @@ public partial class MainPage : ContentPage {
         Current_RequestedThemeChanged(null, null);
     }
 
+    public void Initialization() {
+        tabView.SelectedItemIndex = 0;
+    }
+
     private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
         if(Application.Current.RequestedTheme == AppTheme.Light) {
             walletItem.IconImageSource = new FontImageSource { Glyph = "\xf555", FontFamily = "IconsSolid", Size = 18, Color = StaticResourceUtility.Get<Color>("Gray900") };

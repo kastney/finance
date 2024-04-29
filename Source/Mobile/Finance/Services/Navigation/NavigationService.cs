@@ -6,24 +6,21 @@ internal class NavigationService : INavigationService {
 
     public async Task<Page> NavigateTo(string route, bool animate = true) {
         await Shell.Current.GoToAsync(route, animate);
-        if(Shell.Current.Navigation.NavigationStack.Count == 1) {
-            return Shell.Current.CurrentPage;
-        } else {
-            return Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
-        }
+        return Shell.Current.Navigation.NavigationStack.Count == 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
     }
 
-    public async Task NavigateTo<TEntity>(string route, TEntity entity, bool animate = true) {
+    public async Task<Page> NavigateTo<TEntity>(string route, TEntity entity, bool animate = true) {
         if(entity is null) {
             await NavigateTo(route, animate);
         } else {
             await Shell.Current.GoToAsync(route, animate, new ShellNavigationQueryParameters { { "Entity", entity } });
         }
+        return Shell.Current.Navigation.NavigationStack.Count == 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
     }
 
-    public async Task NavigateToModal<TPage>(bool animate = true) where TPage : Page {
+    public async Task<TPage> NavigateToModal<TPage>(bool animate = true) where TPage : Page {
         var loadingPage = new LoadingPage();
-        Page page;
+        TPage page;
 
         if(Shell.Current.Navigation.ModalStack.Count == 0) {
             var navigation = new NavigationPage(loadingPage);
@@ -42,6 +39,8 @@ internal class NavigationService : INavigationService {
             await navigation.PushAsync(page, false);
             navigation.RemovePage(loadingPage);
         }
+
+        return page;
     }
 
     public async Task NavigateToBackModal(bool animate = true) {

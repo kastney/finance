@@ -9,4 +9,6 @@ internal interface IWalletService {
     void SetCurrent(Wallet wallet);
 
     void Create(Wallet wallet);
+
+    void Delete(Wallet wallet);
 }

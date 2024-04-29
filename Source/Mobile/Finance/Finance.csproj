@@ -58,6 +58,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\chart_pie_solid.svg" />
+	  <None Remove="Resources\AppIcon\dashboard.svg" />
 	  <None Remove="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	  <None Remove="Resources\Images\show_banner_1.jpeg" />
 	  <None Remove="Resources\Images\show_banner_2.jpeg" />
@@ -65,6 +66,7 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\AppIcon\chart_pie_solid.svg" />
+	  <MauiImage Include="Resources\AppIcon\dashboard.svg" />
 	  <MauiImage Include="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	</ItemGroup>
 
@@ -78,6 +80,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Wallet\DeleteWalletPage.xaml.cs">
+	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Initials\WalletPresentationPage.xaml.cs">
 	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
 	  </Compile>
@@ -90,7 +95,16 @@
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
+	  <MauiXaml Update="Controls\IndicatorButtonError.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Wallet\CreateWalletPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\DangerZone\DangerZoneTabViewItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Initials\WalletPresentationPage.xaml">

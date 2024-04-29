@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls_devexpress="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:pages="clr-namespace:Finance.Pages"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
              x:Class="Finance.Pages.MainPage"
              Shell.FlyoutBehavior="Disabled"
@@ -15,8 +16,8 @@
         <ToolbarItem x:Name="walletItem" />
     </ContentPage.ToolbarItems>
 
-    <controls_devexpress:TabView>
-        <controls_devexpress:TabViewItem HeaderText="Dashboard" HeaderIcon="chart_pie_solid" />
-        <controls_devexpress:TabViewItem HeaderText="Zona de Perigo" HeaderIcon="triangle_exclamation_solid" />
+    <controls_devexpress:TabView x:Name="tabView">
+        <controls_devexpress:TabViewItem HeaderText="Dashboard" HeaderIcon="dashboard" />
+        <pages:DangerZoneTabViewItem />
     </controls_devexpress:TabView>
 </ContentPage>
