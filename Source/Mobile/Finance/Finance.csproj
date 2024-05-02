@@ -57,7 +57,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\chart_pie_solid.svg" />
 	  <None Remove="Resources\AppIcon\dashboard.svg" />
 	  <None Remove="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	  <None Remove="Resources\Images\show_banner_1.jpeg" />
@@ -65,7 +64,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\chart_pie_solid.svg" />
 	  <MauiImage Include="Resources\AppIcon\dashboard.svg" />
 	  <MauiImage Include="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	</ItemGroup>
