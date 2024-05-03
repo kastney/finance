@@ -21,6 +21,7 @@
                                    ErrorText="{Binding WalletName.ErrorText}"
                                    IsReadOnly="{Binding IsRunning}"
                                    LabelText="Nome da Carteira"
+                                   PlaceholderText="Minha Carteira"
                                    StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf555;}"
                                    Keyboard="Text"
                                    MaxCharacterCount="50"
