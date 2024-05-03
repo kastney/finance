@@ -11,6 +11,9 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="BottomSheets\SelectWalletBottomSheet.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Controls\IndicatorButton.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

@@ -11,4 +11,6 @@ internal interface IWalletService {
     void Create(Wallet wallet);
 
     void Delete(Wallet wallet);
+
+    bool Exists(string name);
 }

@@ -34,9 +34,8 @@ internal partial class DeleteWalletViewModel : ObservableObject {
 
         // Ir para o dashboard, passando pelo loading
         await Task.Delay(500);
-        await navigationService.NavigateToBackModal();
         if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
-        await Task.Delay(500);
+        await navigationService.NavigateToBackModal();
 
         IsRunning = false;
         IsRunningInverse = true;

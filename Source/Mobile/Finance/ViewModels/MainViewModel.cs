@@ -29,4 +29,15 @@ internal partial class MainViewModel : ObservableObject {
 
         IsRunning = false;
     }
+
+    [RelayCommand]
+    private async Task NewWallet() {
+        IsRunning = true;
+
+        await Task.Delay(100);
+        await navigationService.NavigateToModal<CreateWalletPage>();
+        await Task.Delay(900);
+
+        IsRunning = false;
+    }
 }

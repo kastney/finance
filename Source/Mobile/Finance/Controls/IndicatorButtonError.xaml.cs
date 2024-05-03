@@ -28,6 +28,8 @@ public partial class IndicatorButtonError : ContentView {
         set => SetValue(CommandProperty, value);
     }
 
+    public event EventHandler Clicked;
+
     public IndicatorButtonError() {
         InitializeComponent();
     }
@@ -49,6 +51,7 @@ public partial class IndicatorButtonError : ContentView {
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) {
+        Clicked?.Invoke(this, e);
         if(Command is not null && Command.CanExecute(null)) {
             Command.Execute(null);
         }

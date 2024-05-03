@@ -29,22 +29,29 @@ internal partial class CreateWalletViewModel : ObservableObject {
     [RelayCommand]
     private async Task Create() {
         // Validação do formulário
-        if(!WalletName.Validate()) { return; }
+        if(!WalletName.Validate()) {
+            return;
+        }
+
+        // Verifica se a carteira já existe
+        if(!walletService.Exists(WalletName.Value.Trim())) {
+            WalletName.AddError("Nome da Carteira já está em uso, tente outro nome!");
+            return;
+        }
 
         IsRunning = true;
 
         // Cria a nova carteira
-        var wallet = new Wallet { Id = Guid.NewGuid(), Name = WalletName.Value };
+        var wallet = new Wallet { Id = Guid.NewGuid(), Name = WalletName.Value.Trim() };
         walletService.Create(wallet);
         // Define a nova carteira como a principal
         walletService.SetCurrent(wallet);
 
         // Ir para o dashboard, passando pelo loading
-        await Task.Delay(500);
-        await navigationService.NavigateToBackModal();
+        await Task.Delay(500);        
         if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
+        await navigationService.NavigateToBackModal();
 
-        await Task.Delay(500);
         IsRunning = false;
     }
 

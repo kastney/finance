@@ -13,7 +13,8 @@ public partial class MainPage : ContentPage {
         Current_RequestedThemeChanged(null, null);
     }
 
-    public void Initialization() {
+    public async void Initialization() {
+        await Task.Delay(100);
         tabView.SelectedItemIndex = 0;
     }
 
@@ -23,5 +24,9 @@ public partial class MainPage : ContentPage {
         } else if(Application.Current.RequestedTheme == AppTheme.Dark) {
             walletItem.IconImageSource = new FontImageSource { Glyph = "\xf555", FontFamily = "IconsSolid", Size = 18, Color = StaticResourceUtility.Get<Color>("Gray200") };
         }
+    }
+
+    private void WalletItem_Clicked(object sender, EventArgs e) {
+        selectWalletBottomSheet.Show();
     }
 }

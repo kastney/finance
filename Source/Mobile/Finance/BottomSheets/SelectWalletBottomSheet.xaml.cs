@@ -1,0 +1,14 @@
+using DevExpress.Maui.Controls;
+
+namespace Finance.BottomSheets;
+
+public partial class SelectWalletBottomSheet : BottomSheet {
+
+    public SelectWalletBottomSheet() {
+        InitializeComponent();
+    }
+
+    private void IndicatorButton_Clicked(object sender, EventArgs e) {
+        Close();
+    }
+}

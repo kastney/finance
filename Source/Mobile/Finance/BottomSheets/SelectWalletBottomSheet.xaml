@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls_devexpress:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                 xmlns:controls="clr-namespace:Finance.Controls"
+                                 xmlns:controls_devexpress="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+                                 x:Class="Finance.BottomSheets.SelectWalletBottomSheet"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
+                                 CornerRadius="20"
+                                 AllowedState="HalfExpanded"
+                                 HalfExpandedRatio="0.8"
+                                 UpdateSizeToContent="False">
+
+    <Grid RowDefinitions="60,*,Auto,Auto" ColumnDefinitions="*,Auto,*">
+        <Label Text="Suas Carteiras" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.ColumnSpan="3" FontSize="Medium" FontAttributes="Bold" FontFamily="OpenSansRegular" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource PrimaryDark}}" />
+        <BoxView Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" Grid.ColumnSpan="3" HeightRequest="1" VerticalOptions="End" />
+
+        <VerticalStackLayout Grid.Row="1" Margin="20" Spacing="20" Grid.ColumnSpan="3">
+            <Label Text="Selecione uma Carteira:" Padding="2.5,0" FontSize="Caption" FontAttributes="Bold" />
+        </VerticalStackLayout>
+
+        <BoxView Grid.Row="2" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
+        <Label Grid.Row="2" Grid.Column="1" Text="OU" Margin="10,0" FontSize="Caption" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+        <BoxView Grid.Row="2" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
+
+        <controls:IndicatorButton Grid.Row="3" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,30" Grid.ColumnSpan="3" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" Clicked="IndicatorButton_Clicked" />
+    </Grid>
+</controls_devexpress:BottomSheet>

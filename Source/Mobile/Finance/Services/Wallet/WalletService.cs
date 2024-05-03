@@ -29,6 +29,15 @@ internal class WalletService : IWalletService {
         Preferences.Set("WalletId", wallet.Id.ToString());
     }
 
+    public bool Exists(string name) {
+        var collection = database.GetCollection<Wallet>(nameof(Wallet));
+        if(collection.FindOne(a => a.Name.Equals(name)) is null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void Create(Wallet wallet) {
         var collection = database.GetCollection<Wallet>(nameof(Wallet));
         collection.Insert(wallet);
