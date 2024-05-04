@@ -17,10 +17,10 @@
 
         <Label Grid.Row="1" Grid.ColumnSpan="3" Text="Selecione uma Carteira:" Margin="15,20,15,10" FontSize="Caption" FontAttributes="Bold" />
         <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="100" Style="{x:StaticResource Card}" Margin="15,11,15,0" VerticalOptions="Start">
-            <Label Text="Não há outra carteira para selecionar aqui!&#10;Você pode criar uma nova carteira abaixo" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20"/>
+            <Label Text="Não há outra carteira para selecionar aqui!&#10;Você pode criar uma nova carteira abaixo" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
         </Border>
         <ScrollView Grid.Row="2" Grid.ColumnSpan="3">
-            <collection:DXCollectionView ItemSeparatorThickness="0" ItemsSource="{Binding Wallets}">
+            <collection:DXCollectionView ItemSeparatorThickness="0" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}" SelectionChanged="CollectionView_SelectionChanged">
                 <collection:DXCollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{x:StaticResource Card}" Margin="15,10">
@@ -31,6 +31,9 @@
                         </Border>
                     </DataTemplate>
                 </collection:DXCollectionView.ItemTemplate>
+                <collection:DXCollectionView.SortDescriptions>
+                    <collection:SortDescription FieldName="Name" SortOrder="Ascending" />
+                </collection:DXCollectionView.SortDescriptions>
             </collection:DXCollectionView>
         </ScrollView>
 

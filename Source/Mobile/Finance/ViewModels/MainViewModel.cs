@@ -21,6 +21,9 @@ internal partial class MainViewModel : ObservableObject {
     [ObservableProperty]
     private bool isEmpty;
 
+    [ObservableProperty]
+    private Wallet selectedWallet;
+
     public ObservableCollection<Wallet> Wallets { get; set; }
 
     public MainViewModel() {
@@ -50,11 +53,28 @@ internal partial class MainViewModel : ObservableObject {
         IsRunning = false;
     }
 
+    [RelayCommand]
+    private async Task SelectWallet() {
+        IsRunning = true;
+
+        walletService.SetCurrent(SelectedWallet);
+        SelectedWallet = null;
+        await Task.Delay(500);
+        if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
+        await Task.Delay(500);
+
+        IsRunning = false;
+    }
+
     internal void StartSelectWallet() {
         Wallets.Clear();
         foreach(var wallet in walletService.AvailableWallets()) {
             Wallets.Add(wallet);
         }
         IsEmpty = Wallets.Count == 0;
+    }
+
+    internal bool CanBack() {
+        return IsRunning;
     }
 }

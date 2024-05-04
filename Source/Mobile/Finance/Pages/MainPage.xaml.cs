@@ -31,4 +31,8 @@ public partial class MainPage : ContentPage {
         viewModel.StartSelectWallet();
         selectWalletBottomSheet.Show();
     }
+
+    protected override bool OnBackButtonPressed() {
+        return viewModel.CanBack();
+    }
 }

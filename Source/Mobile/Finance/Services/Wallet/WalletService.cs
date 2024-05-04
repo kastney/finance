@@ -40,7 +40,7 @@ internal class WalletService : IWalletService {
 
     public List<Wallet> AvailableWallets() {
         var collection = database.GetCollection<Wallet>(nameof(Wallet));
-        return collection.Find(a => !a.Id.Equals(GetCurrent().Id)).OrderBy(a => a.Name).ToList();
+        return collection.Find(a => !a.Id.Equals(GetCurrent().Id)).ToList();
     }
 
     public void Create(Wallet wallet) {
