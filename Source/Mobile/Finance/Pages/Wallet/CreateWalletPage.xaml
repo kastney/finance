@@ -27,7 +27,7 @@
                                    MaxCharacterCount="50"
                                    MaxCharacterCountOverflowMode="LimitInput"
                                    ReturnType="Done"
-                                   Completed="Entry_Completed"/>
+                                   Completed="Entry_Completed" />
         </VerticalStackLayout>
         <controls:IndicatorButton Grid.Row="1" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Criar Carteira" Command="{Binding CreateCommand}" />
     </Grid>

@@ -49,7 +49,7 @@ internal partial class CreateWalletViewModel : ObservableObject {
         walletService.SetCurrent(wallet);
 
         // Ir para o dashboard, passando pelo loading
-        await Task.Delay(500);        
+        await Task.Delay(500);
         if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
         await navigationService.NavigateToBackModal();
 

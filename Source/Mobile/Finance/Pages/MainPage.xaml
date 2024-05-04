@@ -22,6 +22,6 @@
             <controls_devexpress:TabViewItem HeaderText="Dashboard" HeaderIcon="dashboard" />
             <pages:DangerZoneTabViewItem />
         </controls_devexpress:TabView>
-        <bottomSheet:SelectWalletBottomSheet x:Name="selectWalletBottomSheet"/>
+        <bottomSheet:SelectWalletBottomSheet x:Name="selectWalletBottomSheet" />
     </Grid>
 </ContentPage>
