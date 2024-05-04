@@ -13,4 +13,6 @@ internal interface IWalletService {
     void Delete(Wallet wallet);
 
     bool Exists(string name);
+
+    List<Wallet> AvailableWallets();
 }

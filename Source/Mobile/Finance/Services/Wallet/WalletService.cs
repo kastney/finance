@@ -38,6 +38,11 @@ internal class WalletService : IWalletService {
         }
     }
 
+    public List<Wallet> AvailableWallets() {
+        var collection = database.GetCollection<Wallet>(nameof(Wallet));
+        return collection.Find(a => !a.Id.Equals(GetCurrent().Id)).OrderBy(a => a.Name).ToList();
+    }
+
     public void Create(Wallet wallet) {
         var collection = database.GetCollection<Wallet>(nameof(Wallet));
         collection.Insert(wallet);

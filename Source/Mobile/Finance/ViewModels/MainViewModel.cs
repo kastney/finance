@@ -3,11 +3,13 @@ using CommunityToolkit.Mvvm.Input;
 using Finance.Models;
 using Finance.Pages;
 using Finance.Services;
+using System.Collections.ObjectModel;
 
 namespace Finance.ViewModels;
 
 [QueryProperty(nameof(Wallet), "Entity")]
 internal partial class MainViewModel : ObservableObject {
+    private readonly IWalletService walletService;
     private readonly INavigationService navigationService;
 
     [ObservableProperty]
@@ -16,8 +18,15 @@ internal partial class MainViewModel : ObservableObject {
     [ObservableProperty]
     private bool isRunning;
 
+    [ObservableProperty]
+    private bool isEmpty;
+
+    public ObservableCollection<Wallet> Wallets { get; set; }
+
     public MainViewModel() {
+        walletService = Service.Get<IWalletService>();
         navigationService = Service.Get<INavigationService>();
+        Wallets = [];
     }
 
     [RelayCommand]
@@ -39,5 +48,13 @@ internal partial class MainViewModel : ObservableObject {
         await Task.Delay(900);
 
         IsRunning = false;
+    }
+
+    internal void StartSelectWallet() {
+        Wallets.Clear();
+        foreach(var wallet in walletService.AvailableWallets()) {
+            Wallets.Add(wallet);
+        }
+        IsEmpty = Wallets.Count == 0;
     }
 }

@@ -3,11 +3,12 @@
 namespace Finance.Pages;
 
 public partial class MainPage : ContentPage {
+    private readonly MainViewModel viewModel;
 
     public MainPage() {
         InitializeComponent();
 
-        BindingContext = Service.Get<MainViewModel>();
+        BindingContext = viewModel = Service.Get<MainViewModel>();
 
         Application.Current.RequestedThemeChanged += Current_RequestedThemeChanged;
         Current_RequestedThemeChanged(null, null);
@@ -27,6 +28,7 @@ public partial class MainPage : ContentPage {
     }
 
     private void WalletItem_Clicked(object sender, EventArgs e) {
+        viewModel.StartSelectWallet();
         selectWalletBottomSheet.Show();
     }
 }

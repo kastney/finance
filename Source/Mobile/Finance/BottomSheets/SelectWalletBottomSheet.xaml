@@ -3,6 +3,7 @@
                                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                                  xmlns:controls="clr-namespace:Finance.Controls"
                                  xmlns:controls_devexpress="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+                                 xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
                                  x:Class="Finance.BottomSheets.SelectWalletBottomSheet"
                                  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
                                  CornerRadius="20"
@@ -10,18 +11,33 @@
                                  HalfExpandedRatio="0.8"
                                  UpdateSizeToContent="False">
 
-    <Grid RowDefinitions="60,*,Auto,Auto" ColumnDefinitions="*,Auto,*">
+    <Grid RowDefinitions="60,Auto,*,Auto,Auto" ColumnDefinitions="*,Auto,*">
         <Label Text="Suas Carteiras" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.ColumnSpan="3" FontSize="Medium" FontAttributes="Bold" FontFamily="OpenSansRegular" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource PrimaryDark}}" />
         <BoxView Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" Grid.ColumnSpan="3" HeightRequest="1" VerticalOptions="End" />
 
-        <VerticalStackLayout Grid.Row="1" Margin="20" Spacing="20" Grid.ColumnSpan="3">
-            <Label Text="Selecione uma Carteira:" Padding="2.5,0" FontSize="Caption" FontAttributes="Bold" />
-        </VerticalStackLayout>
+        <Label Grid.Row="1" Grid.ColumnSpan="3" Text="Selecione uma Carteira:" Margin="15,20,15,10" FontSize="Caption" FontAttributes="Bold" />
+        <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="100" Style="{x:StaticResource Card}" Margin="15,11,15,0" VerticalOptions="Start">
+            <Label Text="Não há outra carteira para selecionar aqui!&#10;Você pode criar uma nova carteira abaixo" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20"/>
+        </Border>
+        <ScrollView Grid.Row="2" Grid.ColumnSpan="3">
+            <collection:DXCollectionView ItemSeparatorThickness="0" ItemsSource="{Binding Wallets}">
+                <collection:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{x:StaticResource Card}" Margin="15,10">
+                            <Grid HeightRequest="50" ColumnDefinitions="Auto, *" ColumnSpacing="20">
+                                <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                                <Label Text="{Binding Name}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </collection:DXCollectionView.ItemTemplate>
+            </collection:DXCollectionView>
+        </ScrollView>
 
-        <BoxView Grid.Row="2" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
-        <Label Grid.Row="2" Grid.Column="1" Text="OU" Margin="10,0" FontSize="Caption" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
-        <BoxView Grid.Row="2" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
+        <BoxView Grid.Row="3" Grid.Column="0" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
+        <Label Grid.Row="3" Grid.Column="1" Text="OU" Margin="10,0" FontSize="Caption" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+        <BoxView Grid.Row="3" Grid.Column="2" Color="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" HeightRequest="1" />
 
-        <controls:IndicatorButton Grid.Row="3" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,30" Grid.ColumnSpan="3" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" Clicked="IndicatorButton_Clicked" />
+        <controls:IndicatorButton Grid.Row="4" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,30" Grid.ColumnSpan="3" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" Clicked="IndicatorButton_Clicked" />
     </Grid>
 </controls_devexpress:BottomSheet>

@@ -1,4 +1,5 @@
 using DevExpress.Maui.Controls;
+using Finance.Models;
 
 namespace Finance.BottomSheets;
 

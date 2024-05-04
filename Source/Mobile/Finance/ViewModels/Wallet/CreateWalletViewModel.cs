@@ -23,6 +23,7 @@ internal partial class CreateWalletViewModel : ObservableObject {
 
         WalletName = new ValidatableObject<string>(nameof(WalletName), OnPropertyChanged);
         WalletName.Validations.Add(new IsNullOrEmptyRule { Message = "Este campo é obrigatório" });
+        WalletName.Validations.Add(new IsStringRangeRule(5, 51) { Message = "É requerido no mínimo 5 caracteres" });
         WalletName.Reset();
     }
 
