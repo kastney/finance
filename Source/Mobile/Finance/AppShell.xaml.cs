@@ -1,4 +1,4 @@
-﻿namespace Finance.Pages;
+﻿namespace Finance;
 
 public partial class AppShell : Shell {
 

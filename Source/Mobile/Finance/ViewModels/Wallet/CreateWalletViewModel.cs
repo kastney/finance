@@ -25,6 +25,8 @@ internal partial class CreateWalletViewModel : ObservableObject {
         WalletName.Validations.Add(new IsNullOrEmptyRule { Message = "Este campo é obrigatório" });
         WalletName.Validations.Add(new IsStringRangeRule(5, 51) { Message = "É requerido no mínimo 5 caracteres" });
         WalletName.Reset();
+
+        IsRunning = true;
     }
 
     [RelayCommand]
@@ -46,17 +48,17 @@ internal partial class CreateWalletViewModel : ObservableObject {
         var wallet = new Wallet { Id = Guid.NewGuid(), Name = WalletName.Value.Trim() };
         walletService.Create(wallet);
         // Define a nova carteira como a principal
-        walletService.SetCurrent(wallet);
+        walletService.SetWallet(wallet);
 
         // Ir para o dashboard, passando pelo loading
         await Task.Delay(500);
         if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
-        await navigationService.NavigateToBackModal();
+        //await navigationService.NavigateToBackModal();
 
         IsRunning = false;
     }
 
-    public bool IsProcessing() {
+    internal bool CanBack() {
         return IsRunning;
     }
 }

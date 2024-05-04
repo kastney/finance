@@ -1,27 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:bottomSheet="clr-namespace:Finance.BottomSheets"
-             xmlns:controls_devexpress="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
-             xmlns:pages="clr-namespace:Finance.Pages"
-             xmlns:styles="clr-namespace:Finance.Resources.Styles"
+             xmlns:controls="clr-namespace:Finance.Controls"
              x:Class="Finance.Pages.MainPage"
              Shell.FlyoutBehavior="Disabled"
              Title="{Binding Wallet.Name}">
 
-    <ContentPage.Resources>
-        <styles:TabViewStyle />
-    </ContentPage.Resources>
-
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="walletItem" Clicked="WalletItem_Clicked" />
+        <ToolbarItem x:Name="walletItem" Command="{Binding SelectWalletCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid>
-        <controls_devexpress:TabView x:Name="tabView">
-            <controls_devexpress:TabViewItem HeaderText="Dashboard" HeaderIcon="dashboard" />
-            <pages:DangerZoneTabViewItem />
-        </controls_devexpress:TabView>
-        <bottomSheet:SelectWalletBottomSheet x:Name="selectWalletBottomSheet" />
-    </Grid>
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
+            <Border Style="{x:StaticResource Card}" HeightRequest="150" />
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
+                <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
+                <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

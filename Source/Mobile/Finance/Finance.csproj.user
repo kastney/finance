@@ -20,6 +20,9 @@
     <MauiXaml Update="Controls\IndicatorButtonError.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Controls\SmallButtonCard.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -36,9 +39,6 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Resources\Styles\TabViewStyle.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Services\Navigation\LoadingPage.xaml">

@@ -1,6 +1,4 @@
-﻿using Finance.ViewModels;
-
-namespace Finance.Pages;
+﻿namespace Finance.Pages;
 
 public partial class MainPage : ContentPage {
     private readonly MainViewModel viewModel;
@@ -14,11 +12,6 @@ public partial class MainPage : ContentPage {
         Current_RequestedThemeChanged(null, null);
     }
 
-    public async void Initialization() {
-        await Task.Delay(100);
-        tabView.SelectedItemIndex = 0;
-    }
-
     private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
         if(Application.Current.RequestedTheme == AppTheme.Light) {
             walletItem.IconImageSource = new FontImageSource { Glyph = "\xf555", FontFamily = "IconsSolid", Size = 18, Color = StaticResourceUtility.Get<Color>("Gray900") };
@@ -27,9 +20,10 @@ public partial class MainPage : ContentPage {
         }
     }
 
-    private void WalletItem_Clicked(object sender, EventArgs e) {
-        viewModel.StartSelectWallet();
-        selectWalletBottomSheet.Show();
+    protected override async void OnAppearing() {
+        viewModel.IsRunning = true;
+        await Task.Delay(500);
+        viewModel.IsRunning = false;
     }
 
     protected override bool OnBackButtonPressed() {

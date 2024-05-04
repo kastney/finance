@@ -1,6 +1,4 @@
-﻿using Finance.Pages;
-
-namespace Finance;
+﻿namespace Finance;
 
 public partial class App : Application {
 

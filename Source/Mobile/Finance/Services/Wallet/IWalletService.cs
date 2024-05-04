@@ -3,10 +3,11 @@
 namespace Finance.Services;
 
 internal interface IWalletService {
+    Wallet Wallet { get; }
 
-    Wallet GetCurrent();
+    bool Exists();
 
-    void SetCurrent(Wallet wallet);
+    void SetWallet(Wallet wallet);
 
     void Create(Wallet wallet);
 

@@ -6,27 +6,25 @@ namespace Finance.Services;
 internal class WalletService : IWalletService {
     private readonly LiteDatabase database;
 
+    public Wallet Wallet { get; set; }
+
     public WalletService() {
         database = new LiteDatabase(GetConnectionString());
     }
 
-    public Wallet GetCurrent() {
+    public bool Exists() {
         // Verifica se existe carteiras cadastradas.
         var collection = database.GetCollection<Wallet>(nameof(Wallet)).Query().ToEnumerable();
-        if(!collection.Any()) { return null; }
+        if(!collection.Any()) { return false; }
 
         // Verifica se a carteira atual existe.
-        var wallet = collection.FirstOrDefault(a => a.Id.Equals(Guid.Parse(Preferences.Get("WalletId", default(string)))));
-        if(wallet is not null) { return wallet; }
+        Wallet = collection.FirstOrDefault(a => a.Id.Equals(Guid.Parse(Preferences.Get("WalletId", default(string)))));
+        if(Wallet is not null) { return true; }
 
         // Salva a primeira carteira da lista como atual.
-        wallet = collection.FirstOrDefault();
-        Preferences.Set("WalletId", wallet.Id.ToString());
-        return wallet;
-    }
-
-    public void SetCurrent(Wallet wallet) {
-        Preferences.Set("WalletId", wallet.Id.ToString());
+        Wallet = collection.FirstOrDefault();
+        Preferences.Set("WalletId", Wallet.Id.ToString());
+        return true;
     }
 
     public bool Exists(string name) {
@@ -38,9 +36,13 @@ internal class WalletService : IWalletService {
         }
     }
 
+    public void SetWallet(Wallet wallet) {
+        Preferences.Set("WalletId", wallet.Id.ToString());
+    }
+
     public List<Wallet> AvailableWallets() {
         var collection = database.GetCollection<Wallet>(nameof(Wallet));
-        return collection.Find(a => !a.Id.Equals(GetCurrent().Id)).ToList();
+        return collection.Find(a => !a.Id.Equals(Wallet.Id)).ToList();
     }
 
     public void Create(Wallet wallet) {

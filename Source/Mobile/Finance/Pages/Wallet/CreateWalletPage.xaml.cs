@@ -11,12 +11,15 @@ public partial class CreateWalletPage : ContentPage {
     }
 
     protected override async void OnAppearing() {
+        viewModel.IsRunning = true;
         await Task.Delay(100);
         entry.Focus();
+        await Task.Delay(400);
+        viewModel.IsRunning = false;
     }
 
     protected override bool OnBackButtonPressed() {
-        return viewModel.IsProcessing();
+        return viewModel.CanBack();
     }
 
     private void Entry_Completed(object sender, EventArgs e) {

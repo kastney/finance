@@ -57,15 +57,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\dashboard.svg" />
-	  <None Remove="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	  <None Remove="Resources\Images\show_banner_1.jpeg" />
 	  <None Remove="Resources\Images\show_banner_2.jpeg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\dashboard.svg" />
-	  <MauiImage Include="Resources\AppIcon\triangle_exclamation_solid.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -99,6 +92,9 @@
 	  <MauiXaml Update="Controls\IndicatorButtonError.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\SmallButtonCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -115,9 +111,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\TabViewStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Services\Navigation\LoadingPage.xaml">
