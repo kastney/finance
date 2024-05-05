@@ -1,26 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Finance.Models;
-using Finance.Services;
 
 namespace Finance.Pages;
 
-internal partial class MainViewModel : ObservableObject {
-    private readonly IWalletService walletService;
-    private readonly INavigationService navigationService;
+internal partial class MainViewModel : ViewModel {
 
     [ObservableProperty]
     private Wallet wallet;
 
-    [ObservableProperty]
-    private bool isRunning;
-
     public MainViewModel() {
-        walletService = Service.Get<IWalletService>();
-        navigationService = Service.Get<INavigationService>();
+        Initialization();
+    }
 
+    internal void Initialization() {
         Wallet = walletService.Wallet;
-        IsRunning = true;
     }
 
     [RelayCommand]
@@ -43,9 +37,5 @@ internal partial class MainViewModel : ObservableObject {
         await Task.Delay(500);
 
         IsRunning = false;
-    }
-
-    internal bool CanBack() {
-        return IsRunning;
     }
 }

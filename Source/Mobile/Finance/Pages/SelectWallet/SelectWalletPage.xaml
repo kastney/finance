@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
              x:Class="Finance.Pages.SelectWallet.SelectWalletPage"
              Title="Suas Carteiras">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="newItem" Command="{Binding NewWalletCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="100" Style="{x:StaticResource Card}" Margin="15,11,15,0" VerticalOptions="Start">
+            <Label Text="Não há outra carteira para selecionar aqui!&#10;Você pode criar uma nova carteira abaixo" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
+        </Border>
+        <collection:DXCollectionView ItemSeparatorThickness="0" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}">
+            <collection:DXCollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{x:StaticResource Card}" Margin="15,10">
+                        <Grid HeightRequest="50" ColumnDefinitions="Auto, *" ColumnSpacing="20">
+                            <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                            <Label Text="{Binding Name}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </collection:DXCollectionView.ItemTemplate>
+            <collection:DXCollectionView.SortDescriptions>
+                <collection:SortDescription FieldName="Name" SortOrder="Ascending" />
+            </collection:DXCollectionView.SortDescriptions>
+        </collection:DXCollectionView>
+    </Grid>
 </ContentPage>
