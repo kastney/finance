@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Finance.Pages;
 using Finance.Services;
 
-namespace Finance.ViewModels;
+namespace Finance.Pages;
 
 internal partial class WalletPresentationViewModel : ObservableObject {
     private readonly INavigationService navigationService;
@@ -20,7 +19,7 @@ internal partial class WalletPresentationViewModel : ObservableObject {
         IsRunning = true;
 
         //await navigationService.NavigateToModal<CreateWalletPage>();
-        await Task.Delay(1000);
+        await Task.Delay(500);
 
         IsRunning = false;
     }

@@ -11,7 +11,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="BottomSheets\SelectWalletBottomSheet.xaml">
+    <MauiXaml Update="ViewModels\Wallet\SelectWalletBottomSheet.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\IndicatorButton.xaml">
@@ -23,19 +23,22 @@
     <MauiXaml Update="Controls\SmallButtonCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
+    <MauiXaml Update="ViewModels\Wallet\DeleteWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Wallet\CreateWalletPage.xaml">
+    <MauiXaml Update="ViewModels\Wallet\CreateWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\DangerZone\DangerZoneTabViewItem.xaml">
+    <MauiXaml Update="ViewModels\Wallet\DangerZoneTabViewItem.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Initials\WalletPresentationPage.xaml">
+    <MauiXaml Update="Pages\WalletPresentationPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Initials\LoadingPage.xaml">
+    <MauiXaml Update="Pages\LoadingPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\SelectWallet\SelectWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">

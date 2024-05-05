@@ -1,5 +1,3 @@
-using Finance.ViewModels;
-
 namespace Finance.Pages;
 
 public partial class LoadingPage : ContentPage {

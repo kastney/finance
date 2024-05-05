@@ -1,7 +1,7 @@
 ﻿using DevExpress.Maui;
 using Finance.Pages;
+using Finance.Pages.SelectWallet;
 using Finance.Services;
-using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace Finance {
@@ -19,16 +19,17 @@ namespace Finance {
                     fonts.AddFont("Font Awesome 6 Free-Regular-400.otf", "IconsRegular");
                 });
 
-            // Services
+            /// Services
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             builder.Services.AddSingleton<IWalletService, WalletService>();
 
-            // ViewModels
+            /// ViewModels
+            // ...
             builder.Services.AddTransient<LoadingViewModel>();
             builder.Services.AddTransient<WalletPresentationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
-            builder.Services.AddTransient<CreateWalletViewModel>();
-            builder.Services.AddTransient<DeleteWalletViewModel>();
+            // ...
+            builder.Services.AddTransient<SelectWalletViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

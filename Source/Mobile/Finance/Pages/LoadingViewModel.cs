@@ -1,6 +1,6 @@
 ﻿using Finance.Services;
 
-namespace Finance.ViewModels;
+namespace Finance.Pages;
 
 internal class LoadingViewModel {
     private readonly IWalletService walletService;

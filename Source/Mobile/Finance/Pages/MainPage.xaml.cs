@@ -22,6 +22,7 @@ public partial class MainPage : ContentPage {
 
     protected override async void OnAppearing() {
         viewModel.IsRunning = true;
+        Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
         await Task.Delay(500);
         viewModel.IsRunning = false;
     }

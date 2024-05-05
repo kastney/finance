@@ -71,10 +71,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\Wallet\DeleteWalletPage.xaml.cs">
+	  <Compile Update="ViewModels\Wallet\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Initials\WalletPresentationPage.xaml.cs">
+	  <Compile Update="Pages\WalletPresentationPage.xaml.cs">
 	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\MainPage.xaml.cs">
@@ -83,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="BottomSheets\SelectWalletBottomSheet.xaml">
+	  <MauiXaml Update="ViewModels\Wallet\SelectWalletBottomSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
@@ -95,19 +95,22 @@
 	  <MauiXaml Update="Controls\SmallButtonCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Wallet\DeleteWalletPage.xaml">
+	  <MauiXaml Update="ViewModels\Wallet\DeleteWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Wallet\CreateWalletPage.xaml">
+	  <MauiXaml Update="ViewModels\Wallet\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\DangerZone\DangerZoneTabViewItem.xaml">
+	  <MauiXaml Update="ViewModels\Wallet\DangerZoneTabViewItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Initials\WalletPresentationPage.xaml">
+	  <MauiXaml Update="Pages\WalletPresentationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Initials\LoadingPage.xaml">
+	  <MauiXaml Update="Pages\LoadingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SelectWallet\SelectWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
