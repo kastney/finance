@@ -11,6 +11,7 @@ internal class NavigationService : INavigationService {
 
         await Shell.Current.GoToAsync(route, false);
         Shell.Current.Navigation.RemovePage(loadingPage);
+        await Task.Delay(10);
 
         return Shell.Current.Navigation.NavigationStack.Count == 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
     }
