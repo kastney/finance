@@ -3,6 +3,4 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance.Pages.LoadingPage"
              Shell.FlyoutBehavior="Disabled">
-
-    <ActivityIndicator IsRunning="True" IsVisible="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
 </ContentPage>

@@ -9,11 +9,12 @@ internal class LoadingViewModel {
     public LoadingViewModel() {
         walletService = Service.Get<IWalletService>();
         navigationService = Service.Get<INavigationService>();
+        Initialization();
     }
 
     internal async void Initialization() {
         if(walletService.Exists()) {
-            await navigationService.NavigateTo("///main");
+            if(await navigationService.NavigateTo("///main") is MainPage page) { page.Initialization(); }
         } else {
             await navigationService.NavigateTo("///presentation");
         }

@@ -17,10 +17,6 @@ internal partial class SelectWalletViewModel : ViewModel {
 
     public SelectWalletViewModel() {
         Wallets = [];
-    }
-
-    internal void Initialization() {
-        Wallets.Clear();
         foreach(var wallet in walletService.AvailableWallets()) {
             Wallets.Add(wallet);
         }
@@ -32,7 +28,8 @@ internal partial class SelectWalletViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
 
-            await Task.Delay(5000);
+            await navigationService.NavigateTo("create");
+            await Task.Delay(500);
 
             IsRunning = false;
         }
@@ -44,20 +41,10 @@ internal partial class SelectWalletViewModel : ViewModel {
 
         walletService.SetWallet(SelectedWallet);
         SelectedWallet = null;
-        await Task.Delay(500);
-        if(await navigationService.NavigateTo("///loading") is LoadingPage page) { page.Initialization(); }
-        await Task.Delay(500);
+
+        await Task.Delay(250);
+        if(await navigationService.NavigateTo("///loading", false) is LoadingPage page) { page.Initialization(); }
 
         IsRunning = false;
     }
 }
-
-//[RelayCommand]
-//private async Task DeleteWallet() {
-//    IsRunning = true;
-//
-//    if(await navigationService.NavigateToModal<DeleteWalletPage>() is DeleteWalletPage page) { ((DeleteWalletViewModel)page.BindingContext).Wallet = Wallet; }
-//    await Task.Delay(1000);
-//
-//    IsRunning = false;
-//}

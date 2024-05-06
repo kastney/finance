@@ -4,8 +4,9 @@
              xmlns:controls="clr-namespace:Finance.Controls"
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
-             x:Class="Finance.Pages.CreateWalletPage"
-             NavigationPage.HasNavigationBar="False">
+             x:Class="Finance.Pages.CreateWallet.CreateWalletPage"
+             Title="Nova Carteira"
+             Shell.FlyoutBehavior="Disabled">
 
     <ContentPage.Resources>
         <styles:MultilineEditStyle />
@@ -13,8 +14,6 @@
 
     <Grid RowDefinitions="*,Auto">
         <VerticalStackLayout Margin="15,0" Spacing="10">
-            <Label Text="Nova Carteira" FontSize="Title" Margin="0,10,0,10" FontAttributes="Bold" />
-            <Label Text="Informação Essencial:" />
             <editors:MultilineEdit x:Name="entry"
                                    Text="{Binding WalletName.Value}"
                                    HasError="{Binding WalletName.HasError}"
@@ -27,7 +26,7 @@
                                    MaxCharacterCount="50"
                                    MaxCharacterCountOverflowMode="LimitInput"
                                    ReturnType="Done"
-                                   Completed="Entry_Completed" />
+                                   ReturnCommand="{Binding CreateCommand}" />
         </VerticalStackLayout>
         <controls:IndicatorButton Grid.Row="1" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Criar Carteira" Command="{Binding CreateCommand}" />
     </Grid>

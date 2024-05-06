@@ -9,10 +9,6 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private Wallet wallet;
 
-    public MainViewModel() {
-        Initialization();
-    }
-
     internal void Initialization() {
         Wallet = walletService.Wallet;
     }
@@ -33,7 +29,7 @@ internal partial class MainViewModel : ViewModel {
     private async Task DangerZone() {
         IsRunning = true;
 
-        await Shell.Current.Navigation.PushAsync(new ContentPage { Title = "Zona de Perigo" });
+        // ...
         await Task.Delay(500);
 
         IsRunning = false;

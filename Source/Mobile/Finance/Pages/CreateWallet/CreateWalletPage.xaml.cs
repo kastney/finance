@@ -1,6 +1,4 @@
-using Finance.ViewModels;
-
-namespace Finance.Pages;
+namespace Finance.Pages.CreateWallet;
 
 public partial class CreateWalletPage : ContentPage {
     private readonly CreateWalletViewModel viewModel;
@@ -11,20 +9,16 @@ public partial class CreateWalletPage : ContentPage {
     }
 
     protected override async void OnAppearing() {
-        viewModel.IsRunning = true;
-        await Task.Delay(100);
-        entry.Focus();
-        await Task.Delay(400);
-        viewModel.IsRunning = false;
+        if(!viewModel.IsRunning) {
+            viewModel.IsRunning = true;
+            await Task.Delay(500);
+            entry.Focus();
+            Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
+            viewModel.IsRunning = false;
+        }
     }
 
     protected override bool OnBackButtonPressed() {
         return viewModel.CanBack();
-    }
-
-    private void Entry_Completed(object sender, EventArgs e) {
-        if(viewModel.CreateCommand.CanExecute(null)) {
-            viewModel.CreateCommand.Execute(null);
-        }
     }
 }
