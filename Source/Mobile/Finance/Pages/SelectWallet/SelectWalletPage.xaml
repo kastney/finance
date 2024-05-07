@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
              x:Class="Finance.Pages.SelectWallet.SelectWalletPage"
-             Title="Suas Carteiras">
+             Title="Selecionar Carteira">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="newItem" Command="{Binding NewWalletCommand}" />
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="100" Style="{x:StaticResource Card}" Margin="15,11,15,0" VerticalOptions="Start">
-            <Label Text="Não há outra carteira para selecionar aqui!&#10;Você pode criar uma nova carteira abaixo" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
+        <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,11,15,0" VerticalOptions="Start">
+            <Label Text="Não há outra carteira para selecionar aqui!&#10;&#10;Você pode criar uma nova carteira no botão + no canto superior direito da tela." FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
         </Border>
         <collection:DXCollectionView ItemSeparatorThickness="0" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}">
             <collection:DXCollectionView.ItemTemplate>

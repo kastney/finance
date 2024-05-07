@@ -29,7 +29,7 @@ internal partial class MainViewModel : ViewModel {
     private async Task DangerZone() {
         IsRunning = true;
 
-        // ...
+        await navigationService.NavigateTo("dangerZone");
         await Task.Delay(500);
 
         IsRunning = false;

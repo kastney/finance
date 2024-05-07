@@ -18,7 +18,7 @@ internal partial class WalletPresentationViewModel : ObservableObject {
     private async Task NewWallet() {
         IsRunning = true;
 
-        //await navigationService.NavigateToModal<CreateWalletPage>();
+        await navigationService.NavigateTo("create");
         await Task.Delay(500);
 
         IsRunning = false;

@@ -1,8 +1,10 @@
 ﻿using DevExpress.Maui;
 using Finance.Pages;
 using Finance.Pages.CreateWallet;
+using Finance.Pages.DangerZone;
 using Finance.Pages.SelectWallet;
 using Finance.Services;
+using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace Finance {
@@ -32,6 +34,8 @@ namespace Finance {
             // ...
             builder.Services.AddTransient<SelectWalletViewModel>();
             builder.Services.AddTransient<CreateWalletViewModel>();
+            builder.Services.AddTransient<DangerZoneViewModel>();
+            builder.Services.AddTransient<DeleteWalletViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

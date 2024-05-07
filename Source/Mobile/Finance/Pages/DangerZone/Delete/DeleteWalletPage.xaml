@@ -4,13 +4,20 @@
              xmlns:controls="clr-namespace:Finance.Controls"
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
-             x:Class="Finance.Pages.DeleteWalletPage"
-             NavigationPage.HasNavigationBar="False">
+             x:Class="Finance.Pages.DangerZone.Delete.DeleteWalletPage"
+             Title="Deletar Carteira">
 
     <Grid RowDefinitions="*,Auto,Auto">
         <VerticalStackLayout Margin="15,0" Spacing="10">
-            <Label Text="Deletar Carteira" FontSize="Title" Margin="0,10,0,30" FontAttributes="Bold" />
-            <Label Text="Depois de apagar uma carteira, não há como voltar atrás. Por favor, tenha certeza!" />
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Apagando a carteira: " />
+                        <Span Text="{Binding Wallet.Name}" FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Text="Depois de apagar esta carteira, não há como voltar atrás. Por favor, tenha certeza!" />
         </VerticalStackLayout>
         <HorizontalStackLayout Grid.Row="1" Margin="10" IsEnabled="{Binding IsRunningInverse}">
             <CheckBox x:Name="checkBox" />

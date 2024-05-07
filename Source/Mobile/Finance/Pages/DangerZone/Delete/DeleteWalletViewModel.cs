@@ -2,16 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using Finance.Models;
 using Finance.Pages;
-using Finance.Services;
 
 namespace Finance.ViewModels;
 
-internal partial class DeleteWalletViewModel : ObservableObject {
-    private readonly IWalletService walletService;
-    private readonly INavigationService navigationService;
-
-    [ObservableProperty]
-    private bool isRunning;
+internal partial class DeleteWalletViewModel : ViewModel {
 
     [ObservableProperty]
     private bool isRunningInverse;
@@ -19,9 +13,8 @@ internal partial class DeleteWalletViewModel : ObservableObject {
     public Wallet Wallet { get; set; }
 
     public DeleteWalletViewModel() {
-        walletService = Service.Get<IWalletService>();
-        navigationService = Service.Get<INavigationService>();
         IsRunningInverse = true;
+        Wallet = walletService.Wallet;
     }
 
     [RelayCommand]
@@ -34,14 +27,9 @@ internal partial class DeleteWalletViewModel : ObservableObject {
 
         // Ir para o dashboard, passando pelo loading
         await Task.Delay(250);
-        await navigationService.NavigateTo("///loading");
-        await Task.Delay(250);
+        if(await navigationService.NavigateTo("///loading", false) is LoadingPage page) { page.Initialization(); }
 
         IsRunning = false;
         IsRunningInverse = true;
-    }
-
-    public bool IsProcessing() {
-        return IsRunning;
     }
 }

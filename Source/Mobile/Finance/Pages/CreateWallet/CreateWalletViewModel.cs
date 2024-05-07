@@ -44,13 +44,3 @@ internal partial class CreateWalletViewModel : ViewModel {
         IsRunning = false;
     }
 }
-
-//[RelayCommand]
-//private async Task DeleteWallet() {
-//    IsRunning = true;
-//
-//    if(await navigationService.NavigateToModal<DeleteWalletPage>() is DeleteWalletPage page) { ((DeleteWalletViewModel)page.BindingContext).Wallet = Wallet; }
-//    await Task.Delay(1000);
-//
-//    IsRunning = false;
-//}

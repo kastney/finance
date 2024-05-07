@@ -4,6 +4,37 @@
        xmlns:pages="clr-namespace:Finance.Pages"
        x:Class="Finance.AppShell">
 
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout Spacing="20">
+            <Label Margin="20,20,20,0" FontSize="Title">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}" />
+                        <Span Text="   ATENÇÃO" TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Margin="20,0,20,20" FontSize="Subtitle">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Finance " />
+                        <Span Text="NÃO" FontAttributes="Bold" />
+                        <Span Text=" é recomendação de investimentos" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout>
+            <Label x:Name="appNameLabel" FontSize="Caption" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+            <Label Text="Distribuido por kastney" FontSize="Caption" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+            <Label x:Name="versionLabel" FontSize="Caption" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+            <Label Text="© 2024 kastney. Todos os direitos reservados." FontSize="Micro" HorizontalTextAlignment="Center" Margin="10,20" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+
     <!-- Page Registration -->
     <ShellContent FlyoutItemIsVisible="False" Route="loading" ContentTemplate="{DataTemplate pages:LoadingPage}" />
     <ShellContent FlyoutItemIsVisible="False" Route="presentation" ContentTemplate="{DataTemplate pages:WalletPresentationPage}" />
