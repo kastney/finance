@@ -15,4 +15,8 @@ internal class NavigationService : INavigationService {
 
         return Shell.Current.Navigation.NavigationStack.Count == 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
     }
+
+    public async Task NavigateToBack(bool animate = true) {
+        await Shell.Current.Navigation.PopAsync(animate);
+    }
 }

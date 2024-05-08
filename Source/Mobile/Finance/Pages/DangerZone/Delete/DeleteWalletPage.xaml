@@ -5,21 +5,25 @@
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
              x:Class="Finance.Pages.DangerZone.Delete.DeleteWalletPage"
-             Title="Deletar Carteira">
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
-    <Grid RowDefinitions="*,Auto,Auto">
-        <VerticalStackLayout Margin="15,0" Spacing="10">
+    <Grid RowDefinitions="Auto,*,Auto,Auto">
+        <controls:NavigationBar Title="Deletar Carteira" IsRoot="False" Clicked="BackButtom_Clicked" />
+
+        <VerticalStackLayout Grid.Row="1" Margin="15,0" Spacing="10">
             <Label FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Apagando a carteira: " />
+                        <Span Text="Apagando: " />
                         <Span Text="{Binding Wallet.Name}" FontAttributes="Bold" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
             <Label Text="Depois de apagar esta carteira, não há como voltar atrás. Por favor, tenha certeza!" />
         </VerticalStackLayout>
-        <HorizontalStackLayout Grid.Row="1" Margin="10" IsEnabled="{Binding IsRunningInverse}">
+
+        <HorizontalStackLayout Grid.Row="2" Margin="10" IsEnabled="{Binding IsRunningInverse}">
             <CheckBox x:Name="checkBox" />
             <Label Text="Estou ciente que tudo será apagado." VerticalTextAlignment="Center">
                 <Label.GestureRecognizers>
@@ -27,6 +31,7 @@
                 </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
-        <controls:IndicatorButton Grid.Row="2" Margin="20,0,20,30" Glyph="&#xf2ed;" IsEnabled="{Binding Source={x:Reference checkBox}, Path=IsChecked}" IsRunning="{Binding IsRunning}" Text="Apagar Carteira" Command="{Binding DeleteCommand}" />
+
+        <controls:IndicatorButton Grid.Row="3" Margin="20,0,20,30" Glyph="&#xf2ed;" IsEnabled="{Binding Source={x:Reference checkBox}, Path=IsChecked}" IsRunning="{Binding IsRunning}" Text="Apagar Carteira" Command="{Binding DeleteCommand}" />
     </Grid>
 </ContentPage>

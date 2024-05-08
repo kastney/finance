@@ -13,12 +13,18 @@ public partial class CreateWalletPage : ContentPage {
             viewModel.IsRunning = true;
             await Task.Delay(500);
             entry.Focus();
-            Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
             viewModel.IsRunning = false;
         }
     }
 
     protected override bool OnBackButtonPressed() {
-        return viewModel.CanBack();
+        BackButtom_Clicked(null, null);
+        return true;
+    }
+
+    private async void BackButtom_Clicked(object sender, EventArgs e) {
+        if(viewModel.CanBack()) {
+            await viewModel.NavigationBack();
+        }
     }
 }

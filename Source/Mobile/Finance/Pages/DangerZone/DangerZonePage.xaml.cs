@@ -12,12 +12,18 @@ public partial class DangerZonePage : ContentPage {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
             await Task.Delay(500);
-            Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
             viewModel.IsRunning = false;
         }
     }
 
     protected override bool OnBackButtonPressed() {
-        return viewModel.CanBack();
+        BackButtom_Clicked(null, null);
+        return true;
+    }
+
+    private async void BackButtom_Clicked(object sender, EventArgs e) {
+        if(viewModel.CanBack()) {
+            await viewModel.NavigationBack();
+        }
     }
 }

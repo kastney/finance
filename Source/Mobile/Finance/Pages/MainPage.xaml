@@ -3,19 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Finance.Controls"
              x:Class="Finance.Pages.MainPage"
-             Title="{Binding Wallet.Name}">
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="walletItem" Command="{Binding SelectWalletCommand}" />
-    </ContentPage.ToolbarItems>
-
-    <ScrollView>
-        <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-            <Border Style="{x:StaticResource Card}" HeightRequest="150" />
-            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
-                <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
-                <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid RowDefinitions="Auto,*">
+        <controls:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
+            <controls:NavigationBar.ToolbarItems>
+                <VerticalStackLayout>
+                    <controls:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
+                </VerticalStackLayout>
+            </controls:NavigationBar.ToolbarItems>
+        </controls:NavigationBar>
+        <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
+                <Border Style="{x:StaticResource Card}" HeightRequest="150" />
+                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
+                    <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
+                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

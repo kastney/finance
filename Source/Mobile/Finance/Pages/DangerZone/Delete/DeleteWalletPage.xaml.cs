@@ -15,14 +15,20 @@ public partial class DeleteWalletPage : ContentPage {
             viewModel.IsRunning = true;
             viewModel.IsRunningInverse = false;
             await Task.Delay(500);
-            Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
             viewModel.IsRunningInverse = true;
             viewModel.IsRunning = false;
         }
     }
 
     protected override bool OnBackButtonPressed() {
-        return viewModel.CanBack();
+        BackButtom_Clicked(null, null);
+        return true;
+    }
+
+    private async void BackButtom_Clicked(object sender, EventArgs e) {
+        if(viewModel.CanBack()) {
+            await viewModel.NavigationBack();
+        }
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) {

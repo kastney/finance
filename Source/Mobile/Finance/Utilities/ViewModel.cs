@@ -16,6 +16,10 @@ internal partial class ViewModel : ObservableObject {
     }
 
     internal virtual bool CanBack() {
-        return IsRunning;
+        return !IsRunning;
+    }
+
+    internal virtual async Task NavigationBack() {
+        await navigationService.NavigateToBack();
     }
 }

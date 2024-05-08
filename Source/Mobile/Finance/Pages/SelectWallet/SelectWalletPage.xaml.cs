@@ -5,31 +5,25 @@ public partial class SelectWalletPage : ContentPage {
 
     public SelectWalletPage() {
         InitializeComponent();
-
         BindingContext = viewModel = Service.Get<SelectWalletViewModel>();
-
-        Application.Current.RequestedThemeChanged += Current_RequestedThemeChanged;
-        Current_RequestedThemeChanged(null, null);
     }
 
     protected override async void OnAppearing() {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
             await Task.Delay(500);
-            Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
             viewModel.IsRunning = false;
         }
     }
 
     protected override bool OnBackButtonPressed() {
-        return viewModel.CanBack();
+        BackButtom_Clicked(null, null);
+        return true;
     }
 
-    private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
-        if(Application.Current.RequestedTheme == AppTheme.Light) {
-            newItem.IconImageSource = new FontImageSource { Glyph = "\x2b", FontFamily = "IconsSolid", Size = 18, Color = StaticResourceUtility.Get<Color>("Gray900") };
-        } else if(Application.Current.RequestedTheme == AppTheme.Dark) {
-            newItem.IconImageSource = new FontImageSource { Glyph = "\x2b", FontFamily = "IconsSolid", Size = 18, Color = StaticResourceUtility.Get<Color>("Gray200") };
+    private async void BackButtom_Clicked(object sender, EventArgs e) {
+        if(viewModel.CanBack()) {
+            await viewModel.NavigationBack();
         }
     }
 }
