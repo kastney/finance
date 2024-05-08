@@ -35,6 +35,9 @@
     <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\Extract\ExtractPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\WalletPresentationPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

@@ -26,6 +26,16 @@ internal partial class MainViewModel : ViewModel {
     }
 
     [RelayCommand]
+    private async Task Extract() {
+        IsRunning = true;
+
+        await navigationService.NavigateTo("extract");
+        await Task.Delay(500);
+
+        IsRunning = false;
+    }
+
+    [RelayCommand]
     private async Task DangerZone() {
         IsRunning = true;
 
