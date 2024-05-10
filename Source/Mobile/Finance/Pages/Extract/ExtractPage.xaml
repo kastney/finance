@@ -8,7 +8,7 @@
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="Lançamentos" IsRoot="False" Clicked="BackButtom_Clicked">
+        <controls:NavigationBar Title="Operações" IsRoot="False" Clicked="BackButtom_Clicked">
             <controls:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
                     <controls:ToolbarItem Glyph="&#x2b;" Command="{Binding NewWalletCommand}" />

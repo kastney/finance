@@ -19,8 +19,8 @@
                 <Border Style="{x:StaticResource Card}" HeightRequest="150" />
                 <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Lançamentos" Glyph="&#xf54e;" Command="{Binding ExtractCommand}" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />                    
+                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Operações" Glyph="&#xf54e;" Command="{Binding ExtractCommand}" />
+                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
