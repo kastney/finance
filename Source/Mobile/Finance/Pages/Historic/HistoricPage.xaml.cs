@@ -1,11 +1,11 @@
-namespace Finance.Pages.Extract;
+namespace Finance.Pages.Historic;
 
-public partial class ExtractPage : ContentPage {
-    private readonly ExtractViewModel viewModel;
+public partial class HistoricPage : ContentPage {
+    private readonly HistoricViewModel viewModel;
 
-    public ExtractPage() {
+    public HistoricPage() {
         InitializeComponent();
-        BindingContext = viewModel = new ExtractViewModel();
+        BindingContext = viewModel = new HistoricViewModel();
     }
 
     protected override async void OnAppearing() {

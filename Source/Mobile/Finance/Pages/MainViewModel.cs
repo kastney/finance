@@ -26,10 +26,10 @@ internal partial class MainViewModel : ViewModel {
     }
 
     [RelayCommand]
-    private async Task Extract() {
+    private async Task Historic() {
         IsRunning = true;
 
-        await navigationService.NavigateTo("extract");
+        await navigationService.NavigateTo("historic");
         await Task.Delay(500);
 
         IsRunning = false;

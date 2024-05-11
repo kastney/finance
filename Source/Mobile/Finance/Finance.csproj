@@ -106,6 +106,9 @@
 	  <Compile Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Historic\HistoricPage.xaml.cs">
+	    <DependentUpon>HistoricPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\WalletPresentationPage.xaml.cs">
 	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
 	  </Compile>
@@ -139,7 +142,7 @@
 	  <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Extract\ExtractPage.xaml">
+	  <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WalletPresentationPage.xaml">

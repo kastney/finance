@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
              xmlns:controls="clr-namespace:Finance.Controls"
-             x:Class="Finance.Pages.Extract.ExtractPage"
+             x:Class="Finance.Pages.Historic.HistoricPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="Operações" IsRoot="False" Clicked="BackButtom_Clicked">
+        <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked">
             <controls:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
                     <controls:ToolbarItem Glyph="&#x2b;" Command="{Binding NewWalletCommand}" />
