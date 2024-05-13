@@ -12,6 +12,7 @@ public partial class HistoricPage : ContentPage {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
             await Task.Delay(500);
+            viewModel.Loading();
             viewModel.IsRunning = false;
         }
     }
