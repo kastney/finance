@@ -9,7 +9,6 @@
 
     <Grid RowDefinitions="Auto,Auto,*">
         <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked" />
-        <Border Style="{x:StaticResource Card}" Grid.Row="1" HeightRequest="50" Margin="15,0"/>
         <Grid Grid.Row="2">
             <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
                 <Label Text="Não há nenhum histórico de operações na sua carteira!" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
@@ -19,13 +18,13 @@
                     <DataTemplate>
                         <Grid HeightRequest="70" ColumnDefinitions="Auto, *" ColumnSpacing="20">
                             <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                            <Label Text="{Binding ApplicationDate}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                            <Label Text="{Binding Issuer}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
                         </Grid>
                     </DataTemplate>
                 </collection:DXCollectionView.ItemTemplate>
 
                 <collection:DXCollectionView.GroupDescription>
-                    <collection:GroupDescription FieldName="ApplicationDate" GroupInterval="Date" SortOrder="Descending" />
+                    <collection:GroupDescription FieldName="AppliedDate" GroupInterval="Date" SortOrder="Descending" />
                 </collection:DXCollectionView.GroupDescription>
                 <collection:DXCollectionView.GroupHeaderTemplate>
                     <DataTemplate>
@@ -34,7 +33,7 @@
                 </collection:DXCollectionView.GroupHeaderTemplate>
 
                 <collection:DXCollectionView.SortDescriptions>
-                    <collection:SortDescription FieldName="ApplicationDate" SortOrder="Descending" />
+                    <collection:SortDescription FieldName="AppliedDate" SortOrder="Descending" />
                 </collection:DXCollectionView.SortDescriptions>
             </collection:DXCollectionView>
         </Grid>
