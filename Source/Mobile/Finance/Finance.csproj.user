@@ -11,7 +11,13 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="Controls\Cells\FixedIncomeOperationCell.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Controls\Collection\DateGroupHeader.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cells\OperationCell.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\IndicatorButton.xaml">

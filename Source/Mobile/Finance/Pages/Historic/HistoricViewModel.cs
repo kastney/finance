@@ -23,13 +23,25 @@ internal partial class HistoricViewModel : ViewModel {
         Operations.Add(new FixedIncomeOperation {
             AppliedDate = new DateTime(2023, 10, 3, 10, 34, 0),
             DueDate = new DateTime(2025, 9, 23),
-            Issuer = "Banco Inter",
+            Issuer = "BANCO INTER S.A.",
             TitleType = TitleType.CDB,
             FixedType = FixedType.Postfixed,
             Value = 100,
             IndexerType = IndexerType.CDI,
             Rate = 100,
-            isBuy = true
+            IsBuy = true
+        });
+
+        Operations.Add(new FixedIncomeOperation {
+            AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
+            DueDate = new DateTime(2026, 5, 14),
+            Issuer = "PICPAY",
+            TitleType = TitleType.CDB,
+            FixedType = FixedType.Postfixed,
+            Value = 1400,
+            IndexerType = IndexerType.CDI,
+            Rate = 102,
+            IsBuy = true
         });
 
         //// BTCI11

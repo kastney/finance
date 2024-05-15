@@ -16,13 +16,9 @@
             <collection:DXCollectionView ItemSeparatorThickness="0" IsScrollBarVisible="False" ItemsSource="{Binding Operations}" SelectionMode="Single">
                 <collection:DXCollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HeightRequest="70" ColumnDefinitions="Auto, *" ColumnSpacing="20">
-                            <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                            <Label Text="{Binding Issuer}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                        </Grid>
+                        <controls:OperationCell Entity="{Binding }" />
                     </DataTemplate>
                 </collection:DXCollectionView.ItemTemplate>
-
                 <collection:DXCollectionView.GroupDescription>
                     <collection:GroupDescription FieldName="AppliedDate" GroupInterval="Date" SortOrder="Descending" />
                 </collection:DXCollectionView.GroupDescription>
@@ -31,7 +27,6 @@
                         <controls:DateGroupHeader Text="{Binding Value}" />
                     </DataTemplate>
                 </collection:DXCollectionView.GroupHeaderTemplate>
-
                 <collection:DXCollectionView.SortDescriptions>
                     <collection:SortDescription FieldName="AppliedDate" SortOrder="Descending" />
                 </collection:DXCollectionView.SortDescriptions>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Finance.Controls.Cells.FixedIncomeOperationCell">
+
+    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" Margin="15,0" HeightRequest="70">
+        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="icon" FontFamily="IconsSolid" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+        <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="1,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span x:Name="titleType" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                    <Span Text=" " />
+                    <Span x:Name="description" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label Grid.Row="1" Grid.Column="2" x:Name="price" Grid.RowSpan="2" FontSize="Small" FontFamily="OpenSansSemibold" FontAttributes="Bold" VerticalTextAlignment="Start" />
+        <Label Grid.Row="0" Grid.Column="2" x:Name="isBuy" FontSize="Micro" FontFamily="OpenSansSemibold" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Issuer}" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" MaxLines="1" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+        <Label Grid.Row="2" Grid.Column="1" x:Name="fixedType" Margin="1,0" FontSize="Micro" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+    </Grid>
+</ContentView>

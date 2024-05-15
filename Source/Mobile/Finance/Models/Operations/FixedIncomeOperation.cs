@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Finance.Models;
+﻿namespace Finance.Models;
 
 internal sealed class FixedIncomeOperation : Operation {
     public DateTime DueDate { get; set; }
@@ -10,5 +8,5 @@ internal sealed class FixedIncomeOperation : Operation {
     public float Value { get; set; }
     public IndexerType IndexerType { get; set; }
     public float Rate { get; set; }
-    public bool isBuy { get; set; }
+    public bool IsBuy { get; set; }
 }
