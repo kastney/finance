@@ -100,12 +100,6 @@ internal partial class HistoricViewModel : ViewModel {
         //    Type = AssetType.FII
         //});
 
-        //// TAEE3F
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 13, 15, 38, 0),
-        //    Type = AssetType.Stock
-        //});
-
         Operations.Add(new StockOperation {
             AppliedDate = new DateTime(2024, 5, 13, 15, 38, 0),
             Issuer = "TAESA ON ED N2",

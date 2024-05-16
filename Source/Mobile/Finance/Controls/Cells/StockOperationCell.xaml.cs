@@ -12,6 +12,7 @@ public partial class StockOperationCell : ContentView {
             price.Text = (value.Count * value.Price).ToString("C2", new CultureInfo("pt-BR"));
             ticket.Text = value.Ticket;
             isBuy.Text = value.IsBuy ? "Compra" : "Venda";
+            icon.Source = new HtmlWebViewSource { Html = @$"<HTML><BODY style=""margin: 0px""><img src=""{value.Logo}"" width=""40"" height=""40""/></BODY></HTML>" };
         }
     }
 
