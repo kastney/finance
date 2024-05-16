@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="Finance.Controls.Cells.StockOperationCell">
 
-    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" Margin="15,0" HeightRequest="70">
-        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="icon" FontFamily="IconsSolid" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="5" Margin="15,0" HeightRequest="80">
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" HeightRequest="35" WidthRequest="35">
+            <ff:SvgCachedImage Source="{Binding Logo}" CacheType="Disk" HeightRequest="35" WidthRequest="35" RetryCount="3" RetryDelay="500" />
+        </Border>
         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="1,0">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span x:Name="titleType" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                    <Span Text=" " />
-                    <Span x:Name="description" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
+                    <Span Text="AÇÃO  " FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                    <Span x:Name="ticket" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
                 </FormattedString>
             </Label.FormattedText>
         </Label>
@@ -19,6 +21,6 @@
         <Label Grid.Row="1" Grid.Column="2" x:Name="price" Grid.RowSpan="2" FontSize="Small" FontFamily="OpenSansSemibold" FontAttributes="Bold" VerticalTextAlignment="Start" />
         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Issuer}" FontAttributes="Bold" FontSize="Small" VerticalTextAlignment="End" LineBreakMode="TailTruncation" MaxLines="1" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
 
-        <Label Grid.Row="2" Grid.Column="1" x:Name="fixedType" Margin="1,0" FontSize="Micro" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+        <Label Grid.Row="2" Grid.Column="1" x:Name="launch" Margin="1,0" FontSize="Micro" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
     </Grid>
 </ContentView>

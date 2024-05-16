@@ -1,4 +1,5 @@
 ﻿using DevExpress.Maui;
+using FFImageLoading.Maui;
 using Finance.Pages;
 using Finance.Pages.CreateWallet;
 using Finance.Pages.DangerZone;
@@ -15,6 +16,7 @@ namespace Finance {
             var builder = MauiApp.CreateBuilder();
             builder.UseMauiApp<App>()
                 .UseDevExpress()
+                .UseFFImageLoading()
                 .ConfigureFonts(fonts => {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

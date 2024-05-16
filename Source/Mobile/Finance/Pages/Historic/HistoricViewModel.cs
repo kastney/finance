@@ -23,10 +23,10 @@ internal partial class HistoricViewModel : ViewModel {
         Operations.Add(new FixedIncomeOperation {
             AppliedDate = new DateTime(2023, 10, 3, 10, 34, 0),
             DueDate = new DateTime(2025, 9, 23),
-            Issuer = "Banco Inter S.A.",
+            Issuer = "BANCO INTER S.A.",
             TitleType = TitleType.CDB,
             FixedType = FixedType.Postfixed,
-            Value = 100,
+            Price = 100,
             Rate = 100,
             IndexerType = IndexerType.CDI,
             IsBuy = true
@@ -64,15 +64,23 @@ internal partial class HistoricViewModel : ViewModel {
 
         Operations.Add(new StockOperation {
             AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
-            IsBuy = true
+            Issuer = "BRASIL ON NM",
+            Ticket = "BBAS3",
+            Count = 2,
+            Price = 28.33f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg"
         });
-        //// BBAS3F
 
-        //// ITSA3F
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 3, 16, 21, 0),
-        //    Type = AssetType.Stock
-        //});
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 3, 16, 21, 0),
+            Issuer = "ITAUSA ON N1",
+            Ticket = "ITSA3",
+            Count = 5,
+            Price = 9.87f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/itausa--big.svg"
+        });
 
         //// GARE11
         //Operations.Add(new Operation {
@@ -98,16 +106,36 @@ internal partial class HistoricViewModel : ViewModel {
         //    Type = AssetType.Stock
         //});
 
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 13, 15, 38, 0),
+            Issuer = "TAESA ON ED N2",
+            Ticket = "TAEE3",
+            Count = 5,
+            Price = 11.53f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/taesa--big.svg"
+        });
+
         Operations.Add(new FixedIncomeOperation {
             AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
             DueDate = new DateTime(2027, 5, 14),
-            Issuer = "PicPay Bank",
+            Issuer = "PICPAY BANK",
             TitleType = TitleType.CDB,
             FixedType = FixedType.Postfixed,
-            Value = 1400,
+            Price = 1400,
             Rate = 102,
             IndexerType = IndexerType.CDI,
             IsBuy = true
+        });
+
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 15, 16, 19, 0),
+            Issuer = "PETROBRAS PN EDR N2",
+            Ticket = "PETR4",
+            Count = 2,
+            Price = 38.45f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg"
         });
 
         #endregion

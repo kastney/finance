@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance.Controls.Cells.FixedIncomeOperationCell">
 
-    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" Margin="15,0" HeightRequest="70">
-        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="icon" FontFamily="IconsSolid" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="5" Margin="15,0" HeightRequest="80">
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" HeightRequest="35" WidthRequest="35">
+            <Label x:Name="icon" FontFamily="IconsSolid" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+        </Border>
         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="1,0">
             <Label.FormattedText>
                 <FormattedString>
                     <Span x:Name="titleType" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                    <Span Text=" " />
+                    <Span Text="  " />
                     <Span x:Name="description" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />
                 </FormattedString>
             </Label.FormattedText>

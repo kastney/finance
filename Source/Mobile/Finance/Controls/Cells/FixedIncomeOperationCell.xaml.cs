@@ -16,7 +16,7 @@ public partial class FixedIncomeOperationCell : ContentView {
             }
             description.Text = $"({value.Rate}% do {value.IndexerType})";
             fixedType.Text = value.FixedType == FixedType.Postfixed ? "Pós-Fixado" : "Prefixado";
-            price.Text = value.Value.ToString("C2", new CultureInfo("pt-BR"));
+            price.Text = value.Price.ToString("C2", new CultureInfo("pt-BR"));
             isBuy.Text = value.IsBuy ? "Compra" : "Venda";
         }
     }

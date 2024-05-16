@@ -7,7 +7,7 @@
         <VerticalStackLayout.GestureRecognizers>
             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
         </VerticalStackLayout.GestureRecognizers>
-        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray000}, Dark={StaticResource Gray600}}" HeightRequest="60" StrokeThickness="0">
+        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" HeightRequest="60" StrokeThickness="0">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="8" StrokeThickness="0" />
             </Border.StrokeShape>
