@@ -5,7 +5,7 @@ namespace Finance.Controls.Cells;
 
 public partial class FixedIncomeOperationCell : ContentView {
 
-    internal FixedIncomeOperation Entity {
+    internal FixedIncomeOperation FixedIncome {
         set {
             switch(value.TitleType) {
                 case TitleType.CDB: {

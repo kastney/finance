@@ -103,6 +103,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\Cells\StockOperationCell.xaml.cs">
+	    <DependentUpon>StockOperationCell.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Controls\Cells\OperationCell.xaml.cs">
 	    <DependentUpon>OperationCell.xaml</DependentUpon>
 	  </Compile>
@@ -121,6 +124,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\Cells\StockOperationCell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cells\FixedIncomeOperationCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

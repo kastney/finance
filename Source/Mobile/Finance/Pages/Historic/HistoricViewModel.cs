@@ -23,24 +23,12 @@ internal partial class HistoricViewModel : ViewModel {
         Operations.Add(new FixedIncomeOperation {
             AppliedDate = new DateTime(2023, 10, 3, 10, 34, 0),
             DueDate = new DateTime(2025, 9, 23),
-            Issuer = "BANCO INTER S.A.",
+            Issuer = "Banco Inter S.A.",
             TitleType = TitleType.CDB,
             FixedType = FixedType.Postfixed,
             Value = 100,
-            IndexerType = IndexerType.CDI,
             Rate = 100,
-            IsBuy = true
-        });
-
-        Operations.Add(new FixedIncomeOperation {
-            AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
-            DueDate = new DateTime(2026, 5, 14),
-            Issuer = "PICPAY",
-            TitleType = TitleType.CDB,
-            FixedType = FixedType.Postfixed,
-            Value = 1400,
             IndexerType = IndexerType.CDI,
-            Rate = 102,
             IsBuy = true
         });
 
@@ -74,11 +62,11 @@ internal partial class HistoricViewModel : ViewModel {
         //    Type = AssetType.FII
         //});
 
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
+            IsBuy = true
+        });
         //// BBAS3F
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
-        //    Type = AssetType.Stock
-        //});
 
         //// ITSA3F
         //Operations.Add(new Operation {
@@ -109,6 +97,18 @@ internal partial class HistoricViewModel : ViewModel {
         //    AppliedDate = new DateTime(2024, 5, 13, 15, 38, 0),
         //    Type = AssetType.Stock
         //});
+
+        Operations.Add(new FixedIncomeOperation {
+            AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
+            DueDate = new DateTime(2027, 5, 14),
+            Issuer = "PicPay Bank",
+            TitleType = TitleType.CDB,
+            FixedType = FixedType.Postfixed,
+            Value = 1400,
+            Rate = 102,
+            IndexerType = IndexerType.CDI,
+            IsBuy = true
+        });
 
         #endregion
 

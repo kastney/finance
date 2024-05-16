@@ -17,8 +17,10 @@ public partial class OperationCell : ContentView {
 
     private static void OnEntityChanged(BindableObject bindable, object oldValue, object newValue) {
         if(bindable is not OperationCell control) { return; }
-        if(control.Entity is FixedIncomeOperation entity) {
-            control.Content = new FixedIncomeOperationCell { Entity = entity };
+        if(control.Entity is FixedIncomeOperation fixedIncome) {
+            control.Content = new FixedIncomeOperationCell { FixedIncome = fixedIncome };
+        } else if(control.Entity is StockOperation stock) {
+            control.Content = new StockOperationCell { Stock = stock };
         }
     }
 }
