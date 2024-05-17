@@ -4,6 +4,7 @@
              x:Class="Finance.Controls.Cells.FixedIncomeOperationCell">
 
     <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="5" Margin="15,0" HeightRequest="80">
+        <BoxView Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" HeightRequest="42" WidthRequest="42" CornerRadius="11" BackgroundColor="#22000000" />
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="40" WidthRequest="40" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
             <Label x:Name="icon" FontFamily="IconsSolid" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
         </Border>
