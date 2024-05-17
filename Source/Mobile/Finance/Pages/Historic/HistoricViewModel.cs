@@ -132,6 +132,26 @@ internal partial class HistoricViewModel : ViewModel {
             Logo = "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg"
         });
 
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 17, 11, 45, 0),
+            Issuer = "BRASIL ON NM",
+            Ticket = "BBAS3",
+            Count = 2,
+            Price = 27.69f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg"
+        });
+
+        Operations.Add(new StockOperation {
+            AppliedDate = new DateTime(2024, 5, 17, 16, 51, 0),
+            Issuer = "SANEPAR PN N2",
+            Ticket = "SAPR4",
+            Count = 4,
+            Price = 5.8f,
+            IsBuy = true,
+            Logo = "https://s3-symbol-logo.tradingview.com/sanepar--big.svg"
+        });
+
         #endregion
 
         IsEmpty = Operations.Count == 0;
