@@ -95,7 +95,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.5" />
+		<PackageReference Include="DevExpress.Maui.Editors" Version="23.2.6" />
 		<PackageReference Include="LiteDB" Version="5.0.19" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
