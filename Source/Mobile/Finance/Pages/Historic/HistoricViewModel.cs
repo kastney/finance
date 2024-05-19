@@ -32,35 +32,50 @@ internal partial class HistoricViewModel : ViewModel {
             IsBuy = true
         });
 
-        //// BTCI11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 4, 12, 14, 0, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 4, 12, 14, 0, 0),
+            Issuer = "FII BTG CRI CI ER",
+            Ticket = "BTCI11",
+            Count = 2,
+            Price = 10.24f,
+            IsBuy = true
+        });
 
-        //// VGHF11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 4, 12, 14, 5, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 4, 12, 14, 5, 0),
+            Issuer = "FII VALOR HECI ER",
+            Ticket = "VGHF11",
+            Count = 2,
+            Price = 9.18f,
+            IsBuy = true
+        });
 
-        //// XPCA11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 4, 12, 14, 6, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 4, 12, 14, 6, 0),
+            Issuer = "FIAGRO XP CACI ER",
+            Ticket = "XPCA11",
+            Count = 2,
+            Price = 8.62f,
+            IsBuy = true
+        });
 
-        //// VINO11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 4, 12, 14, 16, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 4, 12, 14, 16, 0),
+            Issuer = "FII VINCI OFCI ER",
+            Ticket = "VINO11",
+            Count = 2,
+            Price = 8.16f,
+            IsBuy = true
+        });
 
-        //// GARE11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 4, 12, 14, 24, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 4, 12, 14, 24, 0),
+            Issuer = "FII GUARDIANCI ER",
+            Ticket = "GARE11",
+            Count = 2,
+            Price = 9.13f,
+            IsBuy = true
+        });
 
         Operations.Add(new StockOperation {
             AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
@@ -82,23 +97,32 @@ internal partial class HistoricViewModel : ViewModel {
             Logo = "https://s3-symbol-logo.tradingview.com/itausa--big.svg"
         });
 
-        //// GARE11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 3, 16, 24, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 5, 3, 16, 24, 0),
+            Issuer = "FII GUARDIANCI ER",
+            Ticket = "GARE11",
+            Count = 4,
+            Price = 9.07f,
+            IsBuy = true
+        });
 
-        //// XPCA11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 3, 16, 25, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 5, 3, 16, 25, 0),
+            Issuer = "FIAGRO XP CACI ER",
+            Ticket = "XPCA11",
+            Count = 4,
+            Price = 8.57f,
+            IsBuy = true
+        });
 
-        //// BTCI11
-        //Operations.Add(new Operation {
-        //    AppliedDate = new DateTime(2024, 5, 3, 16, 26, 0),
-        //    Type = AssetType.FII
-        //});
+        Operations.Add(new FIIOperation {
+            AppliedDate = new DateTime(2024, 5, 3, 16, 26, 0),
+            Issuer = "FII BTG CRI CI ER",
+            Ticket = "BTCI11",
+            Count = 3,
+            Price = 10.21f,
+            IsBuy = true
+        });
 
         Operations.Add(new StockOperation {
             AppliedDate = new DateTime(2024, 5, 13, 15, 38, 0),
