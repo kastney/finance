@@ -1,6 +1,7 @@
 ﻿namespace Finance.Enumerations;
 
-internal enum AssetType {
+public enum AssetType {
+    None,
     Stock,
     FII,
     BDR,

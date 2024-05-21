@@ -103,12 +103,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Controls\Cells\StockOperationCell.xaml.cs">
-	    <DependentUpon>StockOperationCell.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Controls\Cells\OperationCell.xaml.cs">
-	    <DependentUpon>OperationCell.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
@@ -124,16 +118,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\Cells\StockOperationCell.xaml">
+	  <MauiXaml Update="Cells\OperationCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\Cells\FixedIncomeOperationCell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\Collection\DateGroupHeader.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\Cells\OperationCell.xaml">
+	  <MauiXaml Update="Cells\OperationGroupCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">

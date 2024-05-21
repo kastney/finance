@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:cells="clr-namespace:Finance.Cells"
              xmlns:controls="clr-namespace:Finance.Controls"
              x:Class="Finance.Pages.Historic.HistoricPage"
              Shell.NavBarIsVisible="False"
@@ -13,41 +13,18 @@
             <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
                 <Label Text="Não há nenhum histórico de operações na sua carteira!" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
             </Border>
-            <collection:DXCollectionView ItemSeparatorThickness="0" IsScrollBarVisible="False" ItemsSource="{Binding Operations}" SelectionMode="Single">
-                <collection:DXCollectionView.ItemTemplate>
+            <ListView ItemsSource="{Binding OperationsGroup}" IsRefreshing="{Binding IsLoading}" RefreshControlColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" HasUnevenRows="True" VerticalScrollBarVisibility="Never" SeparatorVisibility="None" SelectionMode="None" IsGroupingEnabled="True">
+                <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="5" Margin="15,0" HeightRequest="80">
-                            <!--<BoxView Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" HeightRequest="42" WidthRequest="42" CornerRadius="11" BackgroundColor="#22000000" />-->
-                            <!--<Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="40" WidthRequest="40" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">-->
-                                <!--<WebView x:Name="icon" BackgroundColor="Transparent" />-->
-                            <!--</Border>-->
-                            <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" Margin="1,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="AÇÃO  " FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                                        <!--<Span Text="{Binding Ticket}" FontAttributes="Bold" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray400}}" />-->
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <!--<Label Grid.Row="0" Grid.Column="2" FontSize="Micro" FontFamily="OpenSansSemibold" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />-->
-                            <!--<Label Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" FontSize="Small" FontFamily="OpenSansSemibold" FontAttributes="Bold" VerticalTextAlignment="Start" />-->
-                            <!--<Label Grid.Row="1" Grid.Column="1" Text="{Binding Issuer}" FontAttributes="Bold" FontSize="Small" VerticalTextAlignment="End" LineBreakMode="TailTruncation" MaxLines="1" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />-->
-                            <!--<Label Grid.Row="2" Grid.Column="1" Margin="1,0" FontSize="Micro" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />-->
-                        </Grid>
+                        <cells:OperationGroupCell />
                     </DataTemplate>
-                </collection:DXCollectionView.ItemTemplate>
-                <collection:DXCollectionView.GroupDescription>
-                    <collection:GroupDescription FieldName="AppliedDate" GroupInterval="Date" SortOrder="Descending" />
-                </collection:DXCollectionView.GroupDescription>
-                <collection:DXCollectionView.GroupHeaderTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:DateGroupHeader Text="{Binding Value}" />
+                        <cells:OperationCell AssetType="{Binding AssetType}" Title="{Binding Title}" Text="{Binding Text}" Detail="{Binding Detail}" Time="{Binding AppliedDate}" IsBuy="{Binding IsBuy}" />
                     </DataTemplate>
-                </collection:DXCollectionView.GroupHeaderTemplate>
-                <collection:DXCollectionView.SortDescriptions>
-                    <collection:SortDescription FieldName="AppliedDate" SortOrder="Descending" />
-                </collection:DXCollectionView.SortDescriptions>
-            </collection:DXCollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </ContentPage>

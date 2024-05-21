@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="Finance.Cells.OperationCell">
+
+    <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="*,Auto,*" ColumnSpacing="5" Margin="10,0,15,0" HeightRequest="110">
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="40" WidthRequest="40" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
+            <WebView BackgroundColor="Transparent">
+                <WebView.Source>
+                    <HtmlWebViewSource Html="{Binding Icon}" />
+                </WebView.Source>
+            </WebView>
+        </Border>
+
+        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Margin="2,0" Spacing="5" VerticalOptions="End">
+            <Label x:Name="assetType" FontAttributes="Bold" FontFamily="" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+            <Border x:Name="ticket" StrokeThickness="0" StrokeShape="RoundRectangle 10" IsVisible="False" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" Padding="10,0">
+                <Label x:Name="ticketTitle" FontAttributes="Bold" FontFamily="" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+            </Border>
+            <Label x:Name="title" FontAttributes="Bold" FontFamily="" FontSize="Caption" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+        </HorizontalStackLayout>
+        <Label Grid.Row="0" Grid.Column="2" x:Name="hour" FontSize="Micro" VerticalOptions="End" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+
+        <Label Grid.Row="1" Grid.Column="1" x:Name="text" FontAttributes="Bold" FontSize="Small" LineBreakMode="TailTruncation" MaxLines="1" FontFamily="OpenSansSemibold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+        <Label Grid.Row="1" Grid.Column="2" x:Name="price" FontSize="Small" FontFamily="OpenSansSemibold" HorizontalTextAlignment="End" FontAttributes="Bold" />
+
+        <Label Grid.Row="2" Grid.Column="1" x:Name="detail" FontSize="Micro" FontFamily="OpenSansSemibold" VerticalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+        <Label Grid.Row="2" Grid.Column="2" x:Name="buy" Text="Compra" FontSize="Micro" FontAttributes="Bold" FontFamily="" VerticalOptions="Start" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+    </Grid>
+</ViewCell>
