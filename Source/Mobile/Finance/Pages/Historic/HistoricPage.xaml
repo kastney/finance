@@ -7,7 +7,7 @@
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
-    <Grid RowDefinitions="Auto,*,*">
+    <Grid RowDefinitions="Auto,.45*,.55*">
         <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked" />
         <Border Grid.Row="1" Margin="15,0" Style="{StaticResource Card}">
             <editors:DXCalendar BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" DisableDate="DXCalendar_DisableDate"
@@ -15,16 +15,15 @@
                 <editors:DXCalendar.HeaderAppearance>
                     <editors:CalendarHeaderAppearance HeaderTitleTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
                                                       HeaderSubtitleTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
-                                                      BackgroundColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}" />
+                                                      BackgroundColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}"
+                                                      HeaderTitleFontAttributes="None" />
                 </editors:DXCalendar.HeaderAppearance>
                 <editors:DXCalendar.DayCellAppearance>
                     <editors:CalendarDayCellAppearance TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
                                                        DisabledTextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"
                                                        SelectedFontAttributes="Bold"
-                                                       FontAttributes="Bold"
                                                        TodayEllipseBackgroundColor="Transparent"
-                                                       TodayTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
-                                                       TodayFontAttributes="Bold" />
+                                                       TodayTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}" />
                 </editors:DXCalendar.DayCellAppearance>
             </editors:DXCalendar>
         </Border>

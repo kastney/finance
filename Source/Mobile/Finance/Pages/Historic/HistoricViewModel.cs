@@ -20,11 +20,10 @@ internal partial class HistoricViewModel : ViewModel {
 
     public HistoricViewModel() {
         walletService = Service.Get<IWalletService>();
-
-        MinDate = new DateTime(2024, 3, 19);
-
-        MaxDate = new DateTime(2024, 4, 20);
-        SelectedDate = new DateTime(2024, 4, 20);
-        DisplayDate = new DateTime(2024, 4, 20);
+        var date = DateTime.Now;
+        MinDate = date;
+        MaxDate = date;
+        DisplayDate = date;
+        SelectedDate = date;
     }
 }
