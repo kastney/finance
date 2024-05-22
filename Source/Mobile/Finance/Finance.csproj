@@ -118,12 +118,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Cells\OperationCell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Cells\OperationGroupCell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

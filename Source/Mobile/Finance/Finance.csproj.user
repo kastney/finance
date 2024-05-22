@@ -11,12 +11,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="Cells\OperationCell.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Cells\OperationGroupCell.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="Controls\IndicatorButton.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

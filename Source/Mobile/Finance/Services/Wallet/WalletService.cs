@@ -12,6 +12,8 @@ internal class WalletService : IWalletService {
         database = new LiteDatabase(GetConnectionString());
     }
 
+    #region Wallet Manager
+
     public bool Exists() {
         // Verifica se existe carteiras cadastradas.
         var collection = database.GetCollection<Wallet>(nameof(Wallet)).Query().ToEnumerable();
@@ -59,4 +61,12 @@ internal class WalletService : IWalletService {
         var path = FileSystem.Current.AppDataDirectory;
         return Path.Combine(path, "finance.db");
     }
+
+    #endregion Wallet Manager
+
+    #region Historic
+
+    // ...
+
+    #endregion Historic
 }

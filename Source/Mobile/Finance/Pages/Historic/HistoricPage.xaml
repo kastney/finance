@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cells="clr-namespace:Finance.Cells"
              xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              x:Class="Finance.Pages.Historic.HistoricPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
-    <Grid RowDefinitions="Auto,Auto,*">
+    <Grid RowDefinitions="Auto,*,*">
         <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked" />
-        <Grid Grid.Row="2">
-            <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
-                <Label Text="Não há nenhum histórico de operações na sua carteira!" FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
-            </Border>
-            <ListView ItemsSource="{Binding OperationsGroup}" IsRefreshing="{Binding IsLoading}" RefreshControlColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" HasUnevenRows="True" VerticalScrollBarVisibility="Never" SeparatorVisibility="None" SelectionMode="None" IsGroupingEnabled="True">
-                <ListView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <cells:OperationGroupCell />
-                    </DataTemplate>
-                </ListView.GroupHeaderTemplate>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <cells:OperationCell AssetType="{Binding AssetType}" Title="{Binding Title}" Text="{Binding Text}" Detail="{Binding Detail}" Time="{Binding AppliedDate}" IsBuy="{Binding IsBuy}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+        <Border Grid.Row="1" Margin="15,0" Style="{StaticResource Card}">
+            <editors:DXCalendar BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" DisableDate="DXCalendar_DisableDate"
+                                MinDate="{Binding MinDate}" MaxDate="{Binding MaxDate}" DisplayDate="{Binding DisplayDate}" SelectedDate="{Binding SelectedDate}">
+                <editors:DXCalendar.HeaderAppearance>
+                    <editors:CalendarHeaderAppearance HeaderTitleTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
+                                                      HeaderSubtitleTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
+                                                      BackgroundColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray500}}" />
+                </editors:DXCalendar.HeaderAppearance>
+                <editors:DXCalendar.DayCellAppearance>
+                    <editors:CalendarDayCellAppearance TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
+                                                       DisabledTextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}"
+                                                       SelectedFontAttributes="Bold"
+                                                       FontAttributes="Bold"
+                                                       TodayEllipseBackgroundColor="Transparent"
+                                                       TodayTextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray000}}"
+                                                       TodayFontAttributes="Bold" />
+                </editors:DXCalendar.DayCellAppearance>
+            </editors:DXCalendar>
+        </Border>
     </Grid>
 </ContentPage>
