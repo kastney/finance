@@ -1,4 +1,5 @@
 ﻿using Finance.Models;
+using Finance.Models.Operations;
 using LiteDB;
 
 namespace Finance.Services;
@@ -10,6 +11,7 @@ internal class WalletService : IWalletService {
 
     public WalletService() {
         database = new LiteDatabase(GetConnectionString());
+        Operations = [];
     }
 
     #region Wallet Manager
@@ -66,7 +68,20 @@ internal class WalletService : IWalletService {
 
     #region Historic
 
-    // ...
+    public List<Operation> Operations { get; }
+
+    public DateTime MinData() {
+        return DateTime.Now;
+    }
+
+    public DateTime MaxData() {
+        return DateTime.Now;
+    }
+
+    public void SetOperation(params Operation[] operations) {
+        foreach(var operation in operations) {
+        }
+    }
 
     #endregion Historic
 }
