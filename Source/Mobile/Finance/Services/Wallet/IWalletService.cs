@@ -5,7 +5,8 @@ namespace Finance.Services;
 
 internal interface IWalletService {
     Wallet Wallet { get; }
-    List<Operation> Operations { get; }
+
+    #region Wallet Manager
 
     bool Exists();
 
@@ -19,13 +20,15 @@ internal interface IWalletService {
 
     List<Wallet> AvailableWallets();
 
+    #endregion Wallet Manager
+
     #region Historic
 
     DateTime MinData();
 
     DateTime MaxData();
 
-    public void SetOperation(params Operation[] operations);
+    public void AddOperation(params Operation[] operations);
 
     #endregion Historic
 }

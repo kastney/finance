@@ -19,7 +19,27 @@ internal partial class HistoricViewModel : ViewModel {
     private DateTime selectedDate;
 
     public HistoricViewModel() {
-        walletService.SetOperation(
+        walletService.AddOperation(
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
+                Ticket = "BBAS3",
+                Issuer = "BRASIL ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
+                Price = 28.33f,
+                Count = 2,
+                IsBuy = true
+            },
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 5, 3, 16, 21, 0),
+                Ticket = "ITSA3",
+                Issuer = "ITAUSA ON N1",
+                Logo = "https://s3-symbol-logo.tradingview.com/itausa--big.svg",
+                Price = 9.87f,
+                Count = 5,
+                IsBuy = true
+            }
+        );
+        walletService.AddOperation(
             new CDBOperation {
                 Issuer = "BANCO INTER S.A.",
                 FixedType = FixedType.Postfixed,
@@ -28,7 +48,7 @@ internal partial class HistoricViewModel : ViewModel {
                 DueDate = new DateTime(2025, 9, 23),
                 IndexerType = IndexerType.CDI,
                 Rate = 100,
-                isBuy = true
+                IsBuy = true
             },
             new CDBOperation {
                 Issuer = "PICPAY BANK",
@@ -38,7 +58,7 @@ internal partial class HistoricViewModel : ViewModel {
                 DueDate = new DateTime(2027, 5, 14),
                 IndexerType = IndexerType.CDI,
                 Rate = 102,
-                isBuy = true
+                IsBuy = true
             }
         );
 

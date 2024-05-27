@@ -11,7 +11,6 @@ internal class WalletService : IWalletService {
 
     public WalletService() {
         database = new LiteDatabase(GetConnectionString());
-        Operations = [];
     }
 
     #region Wallet Manager
@@ -68,18 +67,43 @@ internal class WalletService : IWalletService {
 
     #region Historic
 
-    public List<Operation> Operations { get; }
-
     public DateTime MinData() {
-        return DateTime.Now;
+        if(Wallet.Operations.Count == 0) {
+            return DateTime.Now;
+        }
+
+        var year = Wallet.Operations.First();
+        var month = year.Value.First();
+        var day = month.Value.First();
+        return new DateTime(year.Key, month.Key, day.Key);
     }
 
     public DateTime MaxData() {
-        return DateTime.Now;
+        if(Wallet.Operations.Count == 0) {
+            return DateTime.Now;
+        }
+
+        var year = Wallet.Operations.Last();
+        var month = year.Value.Last();
+        var day = month.Value.Last();
+        return new DateTime(year.Key, month.Key, day.Key);
     }
 
-    public void SetOperation(params Operation[] operations) {
+    public void AddOperation(params Operation[] operations) {
         foreach(var operation in operations) {
+            if(!Wallet.Operations.ContainsKey(operation.AppliedDate.Year)) {
+                Wallet.Operations.Add(operation.AppliedDate.Year, []);
+            }
+            var year = Wallet.Operations[operation.AppliedDate.Year];
+            if(!year.ContainsKey(operation.AppliedDate.Month)) {
+                year.Add(operation.AppliedDate.Month, []);
+            }
+            var month = year[operation.AppliedDate.Month];
+            if(!month.ContainsKey(operation.AppliedDate.Day)) {
+                month.Add(operation.AppliedDate.Day, []);
+            }
+            var day = month[operation.AppliedDate.Day];
+            day.Add(operation.AppliedDate, operation);
         }
     }
 
