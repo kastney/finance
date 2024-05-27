@@ -1,5 +1,5 @@
 ﻿namespace Finance.Models.Operations;
 
-internal sealed class BrazilStockOperation : StockOperation {
+internal class BDROperation : StockOperation {
     public string Logo { get; set; }
 }
