@@ -28,7 +28,7 @@ internal interface IWalletService {
 
     DateTime MaxData();
 
-    public void AddOperation(params Operation[] operations);
+    public bool AddOperation(Operation operation);
 
     #endregion Historic
 }

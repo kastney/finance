@@ -89,8 +89,8 @@ internal class WalletService : IWalletService {
         return new DateTime(year.Key, month.Key, day.Key);
     }
 
-    public void AddOperation(params Operation[] operations) {
-        foreach(var operation in operations) {
+    public bool AddOperation(Operation operation) {
+        try {
             if(!Wallet.Operations.ContainsKey(operation.AppliedDate.Year)) {
                 Wallet.Operations.Add(operation.AppliedDate.Year, []);
             }
@@ -103,7 +103,13 @@ internal class WalletService : IWalletService {
                 month.Add(operation.AppliedDate.Day, []);
             }
             var day = month[operation.AppliedDate.Day];
+            while(day.ContainsKey(operation.AppliedDate)) {
+                operation.AppliedDate.AddMilliseconds(1);
+            }
             day.Add(operation.AppliedDate, operation);
+            return true;
+        } catch {
+            return false;
         }
     }
 
