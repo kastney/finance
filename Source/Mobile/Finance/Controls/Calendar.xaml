@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Finance.Controls.Calendar">
+
+    <Border Style="{StaticResource Card}">
+        <Grid RowDefinitions="30,30,25,25,25,25,25,25" RowSpacing="10" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="10" Margin="10">
+            <HorizontalStackLayout Grid.ColumnSpan="7" HorizontalOptions="Center">
+                <Label Text="maio" FontSize="Large" FontFamily="" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <Label Text=" / " FontSize="Large" FontFamily="" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <Label Text="2024" FontSize="Large" FontFamily="" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            </HorizontalStackLayout>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="DOM" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="1" Text="SEG" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="2" Text="TER" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="3" Text="QUA" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="4" Text="QUI" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="5" Text="SEX" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <Label Grid.Row="1" Grid.Column="6" Text="SÁB" FontAttributes="Bold" FontFamily="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+
+            <Label Grid.Row="2" Grid.Column="0" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="1" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="2" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="3" Text="1" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="4" Text="2" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="5" Text="3" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="2" Grid.Column="6" Text="4" VerticalOptions="Center" HorizontalOptions="Center" />
+
+            <Label Grid.Row="3" Grid.Column="0" Text="5" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="1" Text="6" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="2" Text="7" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="3" Text="8" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="4" Text="9" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="5" Text="10" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="3" Grid.Column="6" Text="11" VerticalOptions="Center" HorizontalOptions="Center" />
+
+            <Label Grid.Row="4" Grid.Column="0" Text="12" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="1" Text="13" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="2" Text="14" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="3" Text="15" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="4" Text="16" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="5" Text="17" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="4" Grid.Column="6" Text="18" VerticalOptions="Center" HorizontalOptions="Center" />
+
+            <Label Grid.Row="5" Grid.Column="0" Text="19" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="1" Text="20" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="2" Text="21" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="3" Text="22" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="4" Text="23" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="5" Text="24" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="5" Grid.Column="6" Text="25" VerticalOptions="Center" HorizontalOptions="Center" />
+
+            <Label Grid.Row="6" Grid.Column="0" Text="26" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="1" Text="27" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="2" Text="28" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="3" Text="29" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="4" Text="30" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="5" Text="31" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Grid.Row="6" Grid.Column="6" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
+        </Grid>
+    </Border>
+</ContentView>

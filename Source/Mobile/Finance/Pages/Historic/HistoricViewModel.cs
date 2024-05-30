@@ -23,7 +23,7 @@ internal partial class HistoricViewModel : ViewModel {
         #region BDR
 
         walletService.AddOperation(new BDROperation {
-            AppliedDate = new DateTime(2024, 5, 20, 12, 45, 0),
+            AppliedDate = new DateTime(2024, 5, 20, 14, 31, 0),
             Ticket = "ROXO34",
             Issuer = "NU HOLDINGS DRN",
             Logo = "https://s3-symbol-logo.tradingview.com/nu-holdings--big.svg",
@@ -97,7 +97,7 @@ internal partial class HistoricViewModel : ViewModel {
         });
 
         walletService.AddOperation(new BrazilStockOperation {
-            AppliedDate = new DateTime(2024, 5, 21, 13, 14, 0),
+            AppliedDate = new DateTime(2024, 5, 23, 14, 26, 0),
             Ticket = "PETR4",
             Issuer = "PETROBRAS PN EDR N2",
             Logo = "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg",
@@ -107,7 +107,7 @@ internal partial class HistoricViewModel : ViewModel {
         });
 
         walletService.AddOperation(new BrazilStockOperation {
-            AppliedDate = new DateTime(2024, 5, 28, 11, 51, 0),
+            AppliedDate = new DateTime(2024, 5, 28, 11, 49, 0),
             Ticket = "SAPR4",
             Issuer = "SANEPAR PN N2",
             Logo = "https://s3-symbol-logo.tradingview.com/sanepar--big.svg",
@@ -189,6 +189,15 @@ internal partial class HistoricViewModel : ViewModel {
             Issuer = "FII BTG CRI CI ER",
             Count = 3,
             Price = 10.21f,
+            IsBuy = true
+        });
+
+        walletService.AddOperation(new FIIOperation {
+            AppliedDate = new DateTime(2024, 5, 28, 13, 54, 0),
+            Ticket = "GARE11",
+            Issuer = "FII GUARDIANCI ER",
+            Count = 6,
+            Price = 9.03f,
             IsBuy = true
         });
 

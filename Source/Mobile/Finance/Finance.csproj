@@ -118,6 +118,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\Calendar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
