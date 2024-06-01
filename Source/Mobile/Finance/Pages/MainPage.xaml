@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
              xmlns:controls="clr-namespace:Finance.Controls"
              x:Class="Finance.Pages.MainPage"
              Shell.NavBarIsVisible="False"
@@ -16,8 +17,46 @@
         </controls:NavigationBar>
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-                <Border Style="{x:StaticResource Card}" HeightRequest="150" />
-                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
+                <Border Style="{x:StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Label Text="Posição na Carteira" Padding="10" />
+                        <charts:PieChartView HeightRequest="250" SelectionBehavior="Hatch">
+                            <charts:PieChartView.Series>
+                                <charts:DonutSeries>
+                                    <charts:DonutSeries.Data>
+                                        <charts:PieSeriesDataAdapter AllowLiveDataUpdates="True" DataSource="{Binding SecuritiesByRisk}" LabelDataMember="Label" ValueDataMember="Value" />
+                                    </charts:DonutSeries.Data>
+                                    <charts:DonutSeries.Label>
+                                        <charts:PieSeriesLabel Position="TwoColumns" TextPattern="{}{L}&#x0a;{VP}%" />
+                                    </charts:DonutSeries.Label>
+                                    <charts:DonutSeries.CenterLabel>
+                                        <charts:PieCenterTextLabel TextPattern="{}R${TV}" AutoSizeText="False" />
+                                    </charts:DonutSeries.CenterLabel>
+                                    <charts:DonutSeries.HintOptions>
+                                        <charts:PieSeriesHintOptions PointTextPattern="{}{L}: {VP}%&#x0a;&#x0a;R$ {V}" />
+                                    </charts:DonutSeries.HintOptions>
+                                </charts:DonutSeries>
+                            </charts:PieChartView.Series>
+                            <charts:PieChartView.Hint>
+                                <charts:PieHint Enabled="True" />
+                            </charts:PieChartView.Hint>
+                            <charts:PieChartView.Legend>
+                                <charts:Legend Orientation="LeftToRight" HorizontalPosition="Center" VerticalPosition="BottomOutside" />
+                            </charts:PieChartView.Legend>
+                            <charts:PieChartView.ChartStyle>
+                                <charts:PieChartStyle Palette="{Binding Palette}" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" BorderColor="Transparent" BorderThickness="0" SeriesIndent="70" Padding="10"/>
+                            </charts:PieChartView.ChartStyle>
+                        </charts:PieChartView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Lista de Ativos" />
+                <controls:AssetCard />
+                <controls:AssetCard />
+                <controls:AssetCard />
+                <controls:AssetCard />
+
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
