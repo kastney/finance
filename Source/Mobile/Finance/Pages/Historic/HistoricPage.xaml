@@ -6,7 +6,7 @@
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
-    <Grid RowDefinitions="Auto,Auto,*" >
+    <Grid RowDefinitions="Auto,Auto,*">
         <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked" />
         <controls:Calendar Grid.Row="1" Margin="15,0" />
         <!--<Border Grid.Row="2" Margin="15,20" Style="{StaticResource Card}">
