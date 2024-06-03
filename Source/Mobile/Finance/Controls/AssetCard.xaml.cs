@@ -4,6 +4,7 @@ namespace Finance.Controls;
 
 public partial class AssetCard : ContentView {
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(AssetCard), string.Empty, propertyChanged: OnTitleChanged);
+    public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(string), typeof(AssetCard), string.Empty, propertyChanged: OnIconChanged);
     public static readonly BindableProperty TitleColorProperty = BindableProperty.Create(nameof(TitleColor), typeof(Color), typeof(AssetCard), default, propertyChanged: OnTitleColorChanged);
     public static readonly BindableProperty AssetCountProperty = BindableProperty.Create(nameof(AssetCount), typeof(int), typeof(AssetCard), 0, propertyChanged: OnAssetCountChanged);
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(nameof(Price), typeof(float), typeof(AssetCard), default, propertyChanged: OnPriceChanged);
@@ -13,6 +14,11 @@ public partial class AssetCard : ContentView {
     public string Title {
         get { return (string)GetValue(TitleProperty); }
         set { SetValue(TitleProperty, value); }
+    }
+
+    public string Icon {
+        get { return (string)GetValue(IconProperty); }
+        set { SetValue(IconProperty, value); }
     }
 
     public Color TitleColor {
@@ -50,10 +56,16 @@ public partial class AssetCard : ContentView {
         control.title.Text = newValue.ToString();
     }
 
+    private static void OnIconChanged(BindableObject bindable, object oldValue, object newValue) {
+        if(bindable is not AssetCard control) { return; }
+        control.icon.Text = newValue.ToString();
+    }
+
     private static void OnTitleColorChanged(BindableObject bindable, object oldValue, object newValue) {
         if(bindable is not AssetCard control) { return; }
         if(newValue is not Color color) { return; }
         control.title.TextColor = color;
+        control.icon.TextColor = color;
     }
 
     private static void OnAssetCountChanged(BindableObject bindable, object oldValue, object newValue) {
@@ -76,7 +88,7 @@ public partial class AssetCard : ContentView {
         } else if(variation < 0) {
             control.variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Red") : StaticResourceUtility.Get<Color>("RedDark");
         } else {
-            control.variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Black") : StaticResourceUtility.Get<Color>("White");
+            control.variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Gray600") : StaticResourceUtility.Get<Color>("Gray300");
         }
     }
 
@@ -89,7 +101,7 @@ public partial class AssetCard : ContentView {
         } else if(performance < 0) {
             control.performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Red") : StaticResourceUtility.Get<Color>("RedDark");
         } else {
-            control.performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Black") : StaticResourceUtility.Get<Color>("White");
+            control.performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Gray600") : StaticResourceUtility.Get<Color>("Gray300");
         }
     }
 
@@ -99,15 +111,15 @@ public partial class AssetCard : ContentView {
         } else if(Variation < 0) {
             variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Red") : StaticResourceUtility.Get<Color>("RedDark");
         } else {
-            variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Black") : StaticResourceUtility.Get<Color>("White");
+            variation.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Gray600") : StaticResourceUtility.Get<Color>("Gray300");
         }
 
         if(Performance > 0) {
             performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Green") : StaticResourceUtility.Get<Color>("GreenDark");
         } else if(Performance < 0) {
-            performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Red") : StaticResourceUtility.Get<Color>("RedDark");
+            performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Gray600") : StaticResourceUtility.Get<Color>("RedDark");
         } else {
-            performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Black") : StaticResourceUtility.Get<Color>("White");
+            performance.TextColor = Application.Current.RequestedTheme == AppTheme.Light ? StaticResourceUtility.Get<Color>("Black") : StaticResourceUtility.Get<Color>("Gray300");
         }
     }
 }

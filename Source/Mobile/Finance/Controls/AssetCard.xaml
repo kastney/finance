@@ -5,13 +5,24 @@
 
     <Border Style="{x:StaticResource Card}">
         <Grid Padding="10" RowDefinitions="*,*,*" ColumnDefinitions="40,*,Auto,Auto" ColumnSpacing="15">
-            <Label Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="title" FontSize="Medium" FontAttributes="Bold" Margin="0,0,0,10" FontFamily="" />
+            <Label Grid.ColumnSpan="2" VerticalTextAlignment="Center" Margin="0,0,0,10">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span x:Name="icon" FontSize="Medium" FontAttributes="Bold" FontFamily="IconsSolid" />
+                        <Span Text="   " />
+                        <Span x:Name="title" FontSize="Medium" FontAttributes="Bold" FontFamily="" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.Shadow>
+                    <Shadow Radius="1" Opacity="0.2" Brush="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                </Label.Shadow>
+            </Label>
 
             <Label Grid.Row="1" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="2" Grid.Column="0" x:Name="assetCount" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
+            <Label Grid.Row="2" Grid.Column="0" x:Name="assetCount" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
 
             <Label Grid.Row="1" Grid.Column="1" Text="Valor Total" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="2" Grid.Column="1" x:Name="price" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="price" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
 
             <Label Grid.Row="1" Grid.Column="2" Text="Variação" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
             <Label Grid.Row="2" Grid.Column="2" x:Name="variation" VerticalTextAlignment="Start" HorizontalTextAlignment="End" FontAttributes="Bold" FontFamily="" />
@@ -19,7 +30,7 @@
             <Label Grid.Row="1" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
             <Label Grid.Row="2" Grid.Column="3" x:Name="performance" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
 
-            <Label Grid.Row="0" Grid.Column="3" Text="&#xf054;" FontFamily="IconsSolid" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontAttributes="Bold" />
+            <Label Grid.Row="0" Grid.Column="3" IsVisible="False" Text="&#xf06a;" FontSize="Small" FontFamily="IconsSolid" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}" />
         </Grid>
     </Border>
 </ContentView>

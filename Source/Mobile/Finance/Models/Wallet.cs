@@ -12,7 +12,7 @@ internal class Wallet {
     public float BrazilStocksPrice { get; private set; }
     public float BrazilStocksVariation { get; private set; }
     public float BrazilStocksPerformance { get; private set; }
-    public Color BrazilStocksColor { get; } = new(252, 92, 101);
+    public Color BrazilStocksColor { get; } = new(217, 100, 35);
     public int BrazilStocksCount { get => BrazilStocks.Count; }
     public ObservableCollection<BrazilStockOperation> BrazilStocks { get; }
 
@@ -28,6 +28,17 @@ internal class Wallet {
     public ObservableCollection<FIIOperation> FIIs { get; }
 
     #endregion FII
+
+    #region BDR
+
+    public float BDRsPrice { get; private set; }
+    public float BDRsVariation { get; private set; }
+    public float BDRsPerformance { get; private set; }
+    public Color BDRsColor { get; } = new(252, 92, 101);
+    public int BDRsCount { get => BDRs.Count; }
+    public ObservableCollection<BDROperation> BDRs { get; }
+
+    #endregion BDR
 
     public Wallet() {
         BrazilStocks = [
@@ -60,6 +71,23 @@ internal class Wallet {
         FIIsPrice = 300;
         FIIsVariation = -0.5f;
         FIIsPerformance = 0.4f;
+
+        // ...
+
+        BDRs = [
+            new BDROperation {
+                AppliedDate = new DateTime(2024, 5, 20, 14, 31, 0),
+                Ticket = "ROXO34",
+                Issuer = "NU HOLDINGS DRN",
+                Logo = "https://s3-symbol-logo.tradingview.com/nu-holdings--big.svg",
+                Price = 9.84f,
+                Count = 4,
+                IsBuy = true
+            }
+        ];
+        BDRsPrice = 40;
+        BDRsVariation = 2.5f;
+        BDRsPerformance = 2.7f;
     }
 
     #region Methods
@@ -68,14 +96,16 @@ internal class Wallet {
         var palette = new List<Color>();
         if(HasBrazilStocks()) { palette.Add(BrazilStocksColor); }
         if(HasFIIs()) { palette.Add(FIIsColor); }
+        if(HasBDRs()) { palette.Add(BDRsColor); }
         if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
         return [.. palette];
     }
 
     public List<PieData> GetWalletPosition() {
         var palette = new List<PieData>();
-        if(HasBrazilStocks()) { palette.Add(new PieData($"Ações", BrazilStocksPrice)); }
-        if(HasFIIs()) { palette.Add(new PieData($"FIIs", FIIsPrice)); }
+        if(HasBrazilStocks()) { palette.Add(new PieData("Ações", BrazilStocksPrice)); }
+        if(HasFIIs()) { palette.Add(new PieData("FIIs", FIIsPrice)); }
+        if(HasBDRs()) { palette.Add(new PieData("BDRs", BDRsPrice)); }
         if(palette.Count == 0) { palette.Add(new PieData("Vazio", 1)); }
         return palette;
     }
@@ -86,6 +116,10 @@ internal class Wallet {
 
     public bool HasFIIs() {
         return FIIs.Count != 0;
+    }
+
+    public bool HasBDRs() {
+        return BDRs.Count != 0;
     }
 
     #endregion Methods
