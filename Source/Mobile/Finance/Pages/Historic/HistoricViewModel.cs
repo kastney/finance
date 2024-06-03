@@ -17,9 +17,9 @@ internal partial class HistoricViewModel : ViewModel {
     private DateTime selectedDate;
 
     public HistoricViewModel() {
-        MinDate = walletService.MinData();
-        MaxDate = walletService.MaxData();
-        DisplayDate = MaxDate;
-        SelectedDate = MaxDate;
+        //MinDate = walletService.MinData();
+        //MaxDate = walletService.MaxData();
+        //DisplayDate = MaxDate;
+        //SelectedDate = MaxDate;
     }
 }

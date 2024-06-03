@@ -6,6 +6,8 @@ public partial class MainPage : ContentPage {
     public MainPage() {
         InitializeComponent();
         BindingContext = viewModel = Service.Get<MainViewModel>();
+        Application.Current.RequestedThemeChanged += Current_RequestedThemeChanged;
+        Current_RequestedThemeChanged(null, null);
     }
 
     internal void Initialization() {
@@ -22,5 +24,15 @@ public partial class MainPage : ContentPage {
 
     protected override bool OnBackButtonPressed() {
         return !viewModel.CanBack();
+    }
+
+    private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
+        if(Application.Current.RequestedTheme == AppTheme.Light) {
+            chartStyle.BackgroundColor = StaticResourceUtility.Get<Color>("Gray200");
+            legendStyle.Color = labelStyle.Color = StaticResourceUtility.Get<Color>("Black");
+        } else {
+            chartStyle.BackgroundColor = StaticResourceUtility.Get<Color>("Gray600");
+            legendStyle.Color = labelStyle.Color = StaticResourceUtility.Get<Color>("White");
+        }
     }
 }

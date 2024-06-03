@@ -4,23 +4,22 @@
              x:Class="Finance.Controls.AssetCard">
 
     <Border Style="{x:StaticResource Card}">
-        <Grid Padding="10" RowDefinitions="*,*,*,*" ColumnDefinitions="40,*,Auto,Auto" ColumnSpacing="20">
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalTextAlignment="Center" Text="Ações" FontSize="Medium" FontAttributes="Bold" Margin="0,0,0,10" />
+        <Grid Padding="10" RowDefinitions="*,*,*" ColumnDefinitions="40,*,Auto,Auto" ColumnSpacing="15">
+            <Label Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="title" FontSize="Medium" FontAttributes="Bold" Margin="0,0,0,10" FontFamily="" />
 
-            <Label Grid.Row="0" Grid.Column="2" Text="Variação" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="1" Grid.Column="2" Text="3.05%" VerticalTextAlignment="Start" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="0" x:Name="assetCount" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
 
-            <Label Grid.Row="0" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="1" Grid.Column="3" Text="3.07%" VerticalTextAlignment="Start" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="1" Text="Valor Total" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="price" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
 
-            <Label Grid.Row="2" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="0" Text="5" VerticalTextAlignment="Start" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="2" Text="Variação" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="2" x:Name="variation" VerticalTextAlignment="Start" HorizontalTextAlignment="End" FontAttributes="Bold" FontFamily="" />
 
-            <Label Grid.Row="2" Grid.Column="1" Text="Valor Total" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="1" Text="R$ 1235,34" VerticalTextAlignment="Start" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="3" x:Name="performance" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="" />
 
-            <Label Grid.Row="2" Grid.Column="3" Text="% Carteira" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="3" Text="28.76%" VerticalTextAlignment="Start" FontAttributes="Bold" />
+            <Label Grid.Row="0" Grid.Column="3" Text="&#xf054;" FontFamily="IconsSolid" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontAttributes="Bold" />
         </Grid>
     </Border>
 </ContentView>

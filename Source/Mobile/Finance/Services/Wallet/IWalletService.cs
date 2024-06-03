@@ -1,5 +1,4 @@
 ﻿using Finance.Models;
-using Finance.Models.Operations;
 
 namespace Finance.Services;
 
@@ -21,14 +20,4 @@ internal interface IWalletService {
     List<Wallet> AvailableWallets();
 
     #endregion Wallet Manager
-
-    #region Historic
-
-    DateTime MinData();
-
-    DateTime MaxData();
-
-    public bool AddOperation(Operation operation);
-
-    #endregion Historic
 }

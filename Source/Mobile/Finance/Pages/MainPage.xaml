@@ -19,45 +19,64 @@
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
                 <Border Style="{x:StaticResource Card}">
                     <VerticalStackLayout>
-                        <Label Text="Posição na Carteira" Padding="10" />
-                        <charts:PieChartView HeightRequest="250" SelectionBehavior="Hatch">
+                        <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
+                        <charts:PieChartView HeightRequest="300" SelectionBehavior="Hatch" IsEnabled="{Binding HasAsset}">
                             <charts:PieChartView.Series>
                                 <charts:DonutSeries>
                                     <charts:DonutSeries.Data>
-                                        <charts:PieSeriesDataAdapter AllowLiveDataUpdates="True" DataSource="{Binding SecuritiesByRisk}" LabelDataMember="Label" ValueDataMember="Value" />
+                                        <charts:PieSeriesDataAdapter AllowLiveDataUpdates="True" DataSource="{Binding WalletPosition}" LabelDataMember="Label" ValueDataMember="Value" />
                                     </charts:DonutSeries.Data>
                                     <charts:DonutSeries.Label>
-                                        <charts:PieSeriesLabel Position="TwoColumns" TextPattern="{}{L}&#x0a;{VP}%" />
+                                        <charts:PieSeriesLabel Position="TwoColumns" TextPattern="{}{L}&#x0a;{VP}%">
+                                            <charts:PieSeriesLabel.Style>
+                                                <charts:PieSeriesLabelStyle ConnectorThickness="2">
+                                                    <charts:PieSeriesLabelStyle.TextStyle>
+                                                        <charts:TextStyle x:Name="labelStyle" />
+                                                    </charts:PieSeriesLabelStyle.TextStyle>
+                                                </charts:PieSeriesLabelStyle>
+                                            </charts:PieSeriesLabel.Style>
+                                        </charts:PieSeriesLabel>
                                     </charts:DonutSeries.Label>
-                                    <charts:DonutSeries.CenterLabel>
-                                        <charts:PieCenterTextLabel TextPattern="{}R${TV}" AutoSizeText="False" />
-                                    </charts:DonutSeries.CenterLabel>
                                     <charts:DonutSeries.HintOptions>
                                         <charts:PieSeriesHintOptions PointTextPattern="{}{L}: {VP}%&#x0a;&#x0a;R$ {V}" />
                                     </charts:DonutSeries.HintOptions>
                                 </charts:DonutSeries>
                             </charts:PieChartView.Series>
                             <charts:PieChartView.Hint>
-                                <charts:PieHint Enabled="True" />
+                                <charts:PieHint Enabled="True" ShowMode="OnTap">
+                                    <charts:PieHint.Style>
+                                        <charts:PieHintStyle BackgroundColor="White" Padding="10">
+                                            <charts:PieHintStyle.TextStyle>
+                                                <charts:TextStyle Color="Black" />
+                                            </charts:PieHintStyle.TextStyle>
+                                        </charts:PieHintStyle>
+                                    </charts:PieHint.Style>
+                                </charts:PieHint>
                             </charts:PieChartView.Hint>
                             <charts:PieChartView.Legend>
-                                <charts:Legend Orientation="LeftToRight" HorizontalPosition="Center" VerticalPosition="BottomOutside" />
+                                <charts:Legend Visible="{Binding HasAsset}" Orientation="LeftToRight" HorizontalPosition="Center" VerticalPosition="BottomOutside">
+                                    <charts:Legend.Style>
+                                        <charts:LegendStyle BackgroundColor="Transparent" ItemsHorizontalIndent="25">
+                                            <charts:LegendStyle.TextStyle>
+                                                <charts:TextStyle x:Name="legendStyle" />
+                                            </charts:LegendStyle.TextStyle>
+                                        </charts:LegendStyle>
+                                    </charts:Legend.Style>
+                                </charts:Legend>
                             </charts:PieChartView.Legend>
                             <charts:PieChartView.ChartStyle>
-                                <charts:PieChartStyle Palette="{Binding Palette}" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" BorderColor="Transparent" BorderThickness="0" SeriesIndent="70" Padding="10"/>
+                                <charts:PieChartStyle x:Name="chartStyle" Palette="{Binding Palette}" BorderColor="Transparent" BorderThickness="0" SeriesIndent="70" Padding="10" />
                             </charts:PieChartView.ChartStyle>
                         </charts:PieChartView>
                     </VerticalStackLayout>
                 </Border>
 
-                <Label Text="Lista de Ativos" />
-                <controls:AssetCard />
-                <controls:AssetCard />
-                <controls:AssetCard />
-                <controls:AssetCard />
+                <Label Text="Lista de Ativos" IsVisible="{Binding HasAsset}" FontFamily="" FontAttributes="Bold" />
+                <controls:AssetCard Title="Ações" AssetCount="{Binding Wallet.BrazilStocksCount}" Price="{Binding Wallet.BrazilStocksPrice}" Variation="{Binding Wallet.BrazilStocksVariation}" Performance="{Binding Wallet.BrazilStocksPerformance}" TitleColor="{Binding Wallet.BrazilStocksColor}" IsVisible="{Binding HasBrazilStocks}" />
+                <controls:AssetCard Title="FIIs" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" TitleColor="{Binding Wallet.FIIsColor}" IsVisible="{Binding HasFIIs}" />
 
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
-                    <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" />
+                    <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>

@@ -10,10 +10,19 @@ internal partial class MainViewModel : ViewModel {
     private Wallet wallet;
 
     [ObservableProperty]
-    private List<PieData> securitiesByRisk;
+    private Color[] palette;
 
     [ObservableProperty]
-    private Color[] palette;
+    private List<PieData> walletPosition;
+
+    [ObservableProperty]
+    private bool hasAsset;
+
+    [ObservableProperty]
+    private bool hasBrazilStocks;
+
+    [ObservableProperty]
+    private bool hasFIIs;
 
     public MainViewModel() {
         Palette = [];
@@ -21,20 +30,12 @@ internal partial class MainViewModel : ViewModel {
 
     internal void Initialization() {
         Wallet = walletService.Wallet;
-        SecuritiesByRisk = new List<PieData>() {
-           new PieData("Ações", 132826.00),
-           new PieData("FIIs", 208816.0),
-           new PieData("BDRs", 24700.00),
-           new PieData("CDBs", 80114.00),
-           new PieData("FIAGROS", 80114.00)
-       };
-        Palette = new Color[] {
-            Color.FromHex("#b04972"),
-            Color.FromHex("#9c5ba0"),
-            Color.FromHex("#7145a8"),
-            Color.FromHex("#1c7ed6"),
-            Color.FromHex("#1db2f5")
-        };
+
+        Palette = Wallet.GetPalette();
+        WalletPosition = Wallet.GetWalletPosition();
+        HasBrazilStocks = Wallet.HasBrazilStocks();
+        HasFIIs = Wallet.HasFIIs();
+        HasAsset = HasBrazilStocks || HasFIIs;
     }
 
     [RelayCommand]
@@ -67,25 +68,5 @@ internal partial class MainViewModel : ViewModel {
         await Task.Delay(500);
 
         IsRunning = false;
-    }
-}
-
-public class PieData {
-    public string Label { get; }
-    public double Value { get; }
-
-    public PieData(string label, double value) {
-        Label = label;
-        Value = value;
-    }
-}
-
-internal static class PaletteLoader {
-
-    public static Color[] LoadPalette(params string[] values) {
-        Color[] colors = new Color[values.Length];
-        for(int i = 0; i < values.Length; i++)
-            colors[i] = Color.FromArgb(values[i]);
-        return colors;
     }
 }
