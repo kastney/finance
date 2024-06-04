@@ -28,7 +28,7 @@ public partial class MainPage : ContentPage {
 
     private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
         if(Application.Current.RequestedTheme == AppTheme.Light) {
-            chartStyle.BackgroundColor = StaticResourceUtility.Get<Color>("Gray200");
+            chartStyle.BackgroundColor = StaticResourceUtility.Get<Color>("Gray100");
             legendStyle.Color = labelStyle.Color = StaticResourceUtility.Get<Color>("Black");
         } else {
             chartStyle.BackgroundColor = StaticResourceUtility.Get<Color>("Gray600");

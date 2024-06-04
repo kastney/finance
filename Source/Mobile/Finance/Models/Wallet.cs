@@ -1,4 +1,5 @@
-﻿using Finance.Models.Operations;
+﻿using Finance.Enumerations;
+using Finance.Models.Operations;
 using System.Collections.ObjectModel;
 
 namespace Finance.Models;
@@ -9,36 +10,78 @@ internal class Wallet {
 
     #region Brazil Stock
 
+    public string BrazilStocksName { get; } = "Ações";
+    public Color BrazilStocksColor { get; } = new(123, 140, 255);
+
+    public int BrazilStocksCount { get => BrazilStocks.Count; }
+
     public float BrazilStocksPrice { get; private set; }
     public float BrazilStocksVariation { get; private set; }
     public float BrazilStocksPerformance { get; private set; }
-    public Color BrazilStocksColor { get; } = new(217, 100, 35);
-    public int BrazilStocksCount { get => BrazilStocks.Count; }
+
     public ObservableCollection<BrazilStockOperation> BrazilStocks { get; }
 
     #endregion Brazil Stock
 
     #region FII
 
+    public string FIIsName { get; } = "FIIs";
+    public Color FIIsColor { get; } = new(45, 152, 218);
+
+    public int FIIsCount { get => FIIs.Count; }
+
     public float FIIsPrice { get; private set; }
     public float FIIsVariation { get; private set; }
     public float FIIsPerformance { get; private set; }
-    public Color FIIsColor { get; } = new(45, 152, 218);
-    public int FIIsCount { get => FIIs.Count; }
+
     public ObservableCollection<FIIOperation> FIIs { get; }
 
     #endregion FII
 
     #region BDR
 
+    public string BDRsName { get; } = "BDRs";
+    public Color BDRsColor { get; } = new(252, 80, 80);
+
+    public int BDRsCount { get => BDRs.Count; }
+
     public float BDRsPrice { get; private set; }
     public float BDRsVariation { get; private set; }
     public float BDRsPerformance { get; private set; }
-    public Color BDRsColor { get; } = new(252, 92, 101);
-    public int BDRsCount { get => BDRs.Count; }
+
     public ObservableCollection<BDROperation> BDRs { get; }
 
     #endregion BDR
+
+    #region FixedIncome
+
+    public string FixedIncomeName { get; } = "Renda Fixa";
+    public Color FixedIncomeColor { get; } = new(4, 160, 101);
+
+    public int FixedIncomeCount { get => FixedIncome.Count; }
+
+    public float FixedIncomePrice { get; private set; }
+    public float FixedIncomeVariation { get; private set; }
+    public float FixedIncomePerformance { get; private set; }
+
+    public ObservableCollection<FixedIncomeOperation> FixedIncome { get; }
+
+    #endregion FixedIncome
+
+    #region Crypto
+
+    public string CryptoName { get; } = "Criptomoedas";
+    public Color CryptoColor { get; } = new(225, 111, 0);
+
+    public int CryptoCount { get => Crypto.Count; }
+
+    public float CryptoPrice { get; private set; }
+    public float CryptoVariation { get; private set; }
+    public float CryptoPerformance { get; private set; }
+
+    public ObservableCollection<Operation> Crypto { get; }
+
+    #endregion Crypto
 
     public Wallet() {
         BrazilStocks = [
@@ -88,6 +131,42 @@ internal class Wallet {
         BDRsPrice = 40;
         BDRsVariation = 2.5f;
         BDRsPerformance = 2.7f;
+
+        // ...
+
+        FixedIncome = [
+            new CDBOperation {
+                Issuer = "PICPAY BANK",
+                FixedType = FixedType.Postfixed,
+                Price = 1400,
+                AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
+                DueDate = new DateTime(2027, 5, 14),
+                IndexerType = IndexerType.CDI,
+                Rate = 102,
+                IsBuy = true
+            }
+        ];
+        FixedIncomePrice = 1500;
+        FixedIncomeVariation = 2.5f;
+        FixedIncomePerformance = 2.7f;
+
+        // ...
+
+        Crypto = [
+            new CDBOperation {
+                Issuer = "PICPAY BANK",
+                FixedType = FixedType.Postfixed,
+                Price = 1400,
+                AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
+                DueDate = new DateTime(2027, 5, 14),
+                IndexerType = IndexerType.CDI,
+                Rate = 102,
+                IsBuy = true
+            }
+        ];
+        CryptoPrice = 50;
+        CryptoVariation = 42.5f;
+        CryptoPerformance = 42.7f;
     }
 
     #region Methods
@@ -95,17 +174,21 @@ internal class Wallet {
     public Color[] GetPalette() {
         var palette = new List<Color>();
         if(HasBrazilStocks()) { palette.Add(BrazilStocksColor); }
-        if(HasFIIs()) { palette.Add(FIIsColor); }
         if(HasBDRs()) { palette.Add(BDRsColor); }
+        if(HasFIIs()) { palette.Add(FIIsColor); }
+        if(HasFixedIncome()) { palette.Add(FixedIncomeColor); }
+        if(HasCrypto()) { palette.Add(CryptoColor); }
         if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
         return [.. palette];
     }
 
     public List<PieData> GetWalletPosition() {
         var palette = new List<PieData>();
-        if(HasBrazilStocks()) { palette.Add(new PieData("Ações", BrazilStocksPrice)); }
-        if(HasFIIs()) { palette.Add(new PieData("FIIs", FIIsPrice)); }
-        if(HasBDRs()) { palette.Add(new PieData("BDRs", BDRsPrice)); }
+        if(HasBrazilStocks()) { palette.Add(new PieData(BrazilStocksName, BrazilStocksPrice)); }
+        if(HasBDRs()) { palette.Add(new PieData(BDRsName, BDRsPrice)); }
+        if(HasFIIs()) { palette.Add(new PieData(FIIsName, FIIsPrice)); }
+        if(HasFixedIncome()) { palette.Add(new PieData(FixedIncomeName, FixedIncomePrice)); }
+        if(HasCrypto()) { palette.Add(new PieData(CryptoName, CryptoPrice)); }
         if(palette.Count == 0) { palette.Add(new PieData("Vazio", 1)); }
         return palette;
     }
@@ -120,6 +203,14 @@ internal class Wallet {
 
     public bool HasBDRs() {
         return BDRs.Count != 0;
+    }
+
+    public bool HasFixedIncome() {
+        return FixedIncome.Count != 0;
+    }
+
+    public bool HasCrypto() {
+        return Crypto.Count != 0;
     }
 
     #endregion Methods

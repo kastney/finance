@@ -27,6 +27,12 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private bool hasBDRs;
 
+    [ObservableProperty]
+    private bool hasFixedIncome;
+
+    [ObservableProperty]
+    private bool hasCrypto;
+
     public MainViewModel() {
         Palette = [];
     }
@@ -37,9 +43,11 @@ internal partial class MainViewModel : ViewModel {
         Palette = Wallet.GetPalette();
         WalletPosition = Wallet.GetWalletPosition();
         HasBrazilStocks = Wallet.HasBrazilStocks();
-        HasFIIs = Wallet.HasFIIs();
         HasBDRs = Wallet.HasBDRs();
-        HasAsset = HasBrazilStocks || HasFIIs;
+        HasFIIs = Wallet.HasFIIs();
+        HasFixedIncome = Wallet.HasFixedIncome();
+        HasCrypto = Wallet.HasCrypto();
+        HasAsset = HasBrazilStocks || HasFIIs || HasBDRs || HasFixedIncome || HasCrypto;
     }
 
     [RelayCommand]
