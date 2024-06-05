@@ -7,7 +7,7 @@ namespace Finance.Pages.Historic;
 internal partial class HistoricViewModel : ViewModel {
 
     public HistoricViewModel() {
-        var a = walletService.GetHistoric();
+        //var a = walletService.GetHistoric();
 
         //walletService.AddOperation(new CDBOperation {
         //    Issuer = "PICPAY BANK",
