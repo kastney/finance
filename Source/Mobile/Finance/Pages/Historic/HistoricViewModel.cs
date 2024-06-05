@@ -1,25 +1,36 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Finance.Enumerations;
+using Finance.Models.Operations;
 
 namespace Finance.Pages.Historic;
 
 internal partial class HistoricViewModel : ViewModel {
 
-    [ObservableProperty]
-    private DateTime minDate;
-
-    [ObservableProperty]
-    private DateTime maxDate;
-
-    [ObservableProperty]
-    private DateTime displayDate;
-
-    [ObservableProperty]
-    private DateTime selectedDate;
-
     public HistoricViewModel() {
-        //MinDate = walletService.MinData();
-        //MaxDate = walletService.MaxData();
-        //DisplayDate = MaxDate;
-        //SelectedDate = MaxDate;
+        var a = walletService.GetHistoric();
+
+        //walletService.AddOperation(new CDBOperation {
+        //    Issuer = "PICPAY BANK",
+        //    FixedType = FixedType.Postfixed,
+        //    Price = 1400,
+        //    AppliedDate = new DateTime(2024, 5, 14, 13, 34, 0),
+        //    DueDate = new DateTime(2027, 5, 14),
+        //    IndexerType = IndexerType.CDI,
+        //    Rate = 102,
+        //    IsBuy = true
+        //});
+
+        //var b = walletService.GetHistoric();
+    }
+
+    [RelayCommand]
+    private async Task NewOperation() {
+        if(!IsRunning) {
+            IsRunning = true;
+
+            await Task.Delay(500);
+
+            IsRunning = false;
+        }
     }
 }

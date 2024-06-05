@@ -11,7 +11,7 @@ internal class Wallet {
     #region Brazil Stock
 
     public string BrazilStocksName { get; } = "Ações";
-    public Color BrazilStocksColor { get; } = new(123, 140, 255);
+    public Color BrazilStocksColor { get; } = new(194, 98, 179);
 
     public int BrazilStocksCount { get => BrazilStocks.Count; }
 
@@ -56,7 +56,7 @@ internal class Wallet {
     #region FixedIncome
 
     public string FixedIncomeName { get; } = "Renda Fixa";
-    public Color FixedIncomeColor { get; } = new(4, 160, 101);
+    public Color FixedIncomeColor { get; } = new(3, 143, 89);
 
     public int FixedIncomeCount { get => FixedIncome.Count; }
 

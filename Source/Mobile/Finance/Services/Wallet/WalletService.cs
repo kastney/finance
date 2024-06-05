@@ -1,5 +1,4 @@
-﻿using Finance.Enumerations;
-using Finance.Models;
+﻿using Finance.Models;
 using Finance.Models.Operations;
 using LiteDB;
 
@@ -33,11 +32,7 @@ internal class WalletService : IWalletService {
 
     public bool Exists(string name) {
         var collection = database.GetCollection<Wallet>(nameof(Wallet));
-        if(collection.FindOne(a => a.Name.Equals(name)) is null) {
-            return true;
-        } else {
-            return false;
-        }
+        return collection.FindOne(a => a.Name.Equals(name)) is null;
     }
 
     public void SetWallet(Wallet wallet) {
@@ -59,60 +54,26 @@ internal class WalletService : IWalletService {
         collection.Delete(wallet.Id);
     }
 
-    public static string GetConnectionString() {
-        var path = FileSystem.Current.AppDataDirectory;
-        return Path.Combine(path, "finance.db");
-    }
-
     #endregion Wallet Manager
 
     #region Historic
 
-    //public DateTime MinData() {
-    //if(Wallet.Operations.Count == 0) {
-    //    return DateTime.Now;
-    //}
+    public void AddOperation(Operation operation) {
+        operation.Id = Guid.NewGuid();
+        operation.WalletId = Wallet.Id;
+        var collection = database.GetCollection<Operation>("Historic");
+        collection.Insert(operation);
+    }
 
-    //var year = Wallet.Operations.First();
-    //var month = year.Value.First();
-    //var day = month.Value.First();
-    //return new DateTime(year.Key, month.Key, day.Key);
-    //}
-
-    //public DateTime MaxData() {
-    //    if(Wallet.Operations.Count == 0) {
-    //        return DateTime.Now;
-    //    }
-
-    //    var year = Wallet.Operations.Last();
-    //    var month = year.Value.Last();
-    //    var day = month.Value.Last();
-    //    return new DateTime(year.Key, month.Key, day.Key);
-    //}
-
-    //public bool AddOperation(Operation operation) {
-    //    try {
-    //        if(!Wallet.Operations.ContainsKey(operation.AppliedDate.Year)) {
-    //            Wallet.Operations.Add(operation.AppliedDate.Year, []);
-    //        }
-    //        var year = Wallet.Operations[operation.AppliedDate.Year];
-    //        if(!year.ContainsKey(operation.AppliedDate.Month)) {
-    //            year.Add(operation.AppliedDate.Month, []);
-    //        }
-    //        var month = year[operation.AppliedDate.Month];
-    //        if(!month.ContainsKey(operation.AppliedDate.Day)) {
-    //            month.Add(operation.AppliedDate.Day, []);
-    //        }
-    //        var day = month[operation.AppliedDate.Day];
-    //        while(day.ContainsKey(operation.AppliedDate)) {
-    //            operation.AppliedDate = operation.AppliedDate.AddMilliseconds(1);
-    //        }
-    //        day.Add(operation.AppliedDate, operation);
-    //        return true;
-    //    } catch {
-    //        return false;
-    //    }
-    //}
+    public IEnumerable<Operation> GetHistoric() {
+        var collection = database.GetCollection<Operation>("Historic");
+        return collection.FindAll();
+    }
 
     #endregion Historic
+
+    public static string GetConnectionString() {
+        var path = FileSystem.Current.AppDataDirectory;
+        return Path.Combine(path, "finance.db");
+    }
 }

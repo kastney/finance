@@ -7,8 +7,13 @@
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,Auto,*">
-        <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked" />
-        <controls:Calendar Grid.Row="1" Margin="15,0" />
+        <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked">
+            <controls:NavigationBar.ToolbarItems>
+                <VerticalStackLayout>
+                    <controls:ToolbarItem Glyph="&#x2b;" Command="{Binding NewOperationCommand}" />
+                </VerticalStackLayout>
+            </controls:NavigationBar.ToolbarItems>
+        </controls:NavigationBar>
         <!--<Border Grid.Row="2" Margin="15,20" Style="{StaticResource Card}">
             <editors:DXCalendar BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
                                 MinDate="{Binding MinDate}" MaxDate="{Binding MaxDate}" DisplayDate="{Binding DisplayDate}" SelectedDate="{Binding SelectedDate}">
