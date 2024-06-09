@@ -17,7 +17,11 @@ internal partial class SelectWalletViewModel : ViewModel {
 
     public SelectWalletViewModel() {
         Wallets = [];
-        foreach(var wallet in walletService.AvailableWallets()) {
+        Loading();
+    }
+
+    private async void Loading() {
+        foreach(var wallet in await walletService.AvailableWallets()) {
             Wallets.Add(wallet);
         }
         IsEmpty = Wallets.Count == 0;

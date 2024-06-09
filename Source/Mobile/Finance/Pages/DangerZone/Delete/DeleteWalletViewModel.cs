@@ -23,7 +23,7 @@ internal partial class DeleteWalletViewModel : ViewModel {
         IsRunningInverse = false;
 
         // Deletar carteira
-        walletService.Delete(Wallet);
+        await walletService.Delete(Wallet);
 
         // Ir para o dashboard, passando pelo loading
         await Task.Delay(250);

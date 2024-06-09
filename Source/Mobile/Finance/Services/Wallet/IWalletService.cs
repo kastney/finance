@@ -1,15 +1,26 @@
-﻿namespace Finance.Services;
+﻿using Finance.Models;
+
+namespace Finance.Services;
 
 internal interface IWalletService {
-    //Wallet Wallet { get; }
-    //#region Wallet Manager
-    //bool Exists();
-    //void SetWallet(Wallet wallet);
-    //void Create(Wallet wallet);
-    //void Delete(Wallet wallet);
-    //bool Exists(string name);
-    //List<Wallet> AvailableWallets();
-    //#endregion Wallet Manager
+    Wallet Wallet { get; }
+
+    #region Wallet Manager
+
+    Task<int> Create(Wallet wallet);
+
+    Task Delete(Wallet wallet);
+
+    Task<bool> Exists();
+
+    Task<bool> Exists(string name);
+
+    Task<List<Wallet>> AvailableWallets();
+
+    void SetWallet(Wallet wallet);
+
+    #endregion Wallet Manager
+
     //#region Historic
     //IEnumerable<Operation> GetHistoric();
     //void AddOperation(Operation operation);

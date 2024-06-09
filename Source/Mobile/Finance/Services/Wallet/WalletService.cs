@@ -1,44 +1,63 @@
-﻿namespace Finance.Services;
+﻿using Finance.Models;
+using SQLite;
+
+namespace Finance.Services;
 
 internal class WalletService : IWalletService {
-    //private readonly LiteDatabase database;
-    //public Wallet Wallet { get; set; }
-    //public WalletService() {
-    //database = new LiteDatabase(GetConnectionString());
-    //}
-    //#region Wallet Manager
-    //public bool Exists() {
-    //// Verifica se existe carteiras cadastradas.
-    //var collection = database.GetCollection<Wallet>(nameof(Wallet)).Query().ToEnumerable();
-    //if(!collection.Any()) { return false; }
-    //// Verifica se a carteira atual existe.
-    //Wallet = collection.FirstOrDefault(a => a.Id.Equals(Guid.Parse(Preferences.Get("WalletId", default(string)))));
-    //if(Wallet is not null) { return true; }
-    //// Salva a primeira carteira da lista como atual.
-    //Wallet = collection.FirstOrDefault();
-    //Preferences.Set("WalletId", Wallet.Id.ToString());
-    //return true;
-    //}
-    //public bool Exists(string name) {
-    //var collection = database.GetCollection<Wallet>(nameof(Wallet));
-    //return collection.FindOne(a => a.Name.Equals(name)) is null;
-    //}
-    //public void SetWallet(Wallet wallet) {
-    //Preferences.Set("WalletId", wallet.Id.ToString());
-    //}
-    //public List<Wallet> AvailableWallets() {
-    //var collection = database.GetCollection<Wallet>(nameof(Wallet));
-    //return collection.Find(a => !a.Id.Equals(Wallet.Id)).ToList();
-    //}
-    //public void Create(Wallet wallet) {
-    //var collection = database.GetCollection<Wallet>(nameof(Wallet));
-    //collection.Insert(wallet);
-    //}
-    //public void Delete(Wallet wallet) {
-    //var collection = database.GetCollection<Wallet>(nameof(Wallet));
-    //collection.Delete(wallet.Id);
-    //}
-    //#endregion Wallet Manager
+    private SQLiteAsyncConnection database;
+
+    public Wallet Wallet { get; set; }
+
+    #region Wallet Manager
+
+    public async Task<int> Create(Wallet wallet) {
+        await Init();
+        return await database.InsertAsync(wallet);
+    }
+
+    public async Task Delete(Wallet wallet) {
+        await Init();
+        await database.DeleteAsync<Wallet>(wallet.Id);
+    }
+
+    public async Task<bool> Exists() {
+        await Init();
+        // Verifica se existe carteiras cadastradas.
+        var result = await database.QueryAsync<Wallet>("SELECT * FROM wallets LIMIT 1");
+        if(result.Count == 0) { return false; }
+        // Verifica se a carteira atual existe.
+        Wallet = (await database.QueryAsync<Wallet>($"SELECT * FROM wallets WHERE id='{Preferences.Get("WalletId", default(string))}' LIMIT 1")).FirstOrDefault();
+        if(Wallet is not null) { return true; }
+        // Salva a primeira carteira da lista como atual.
+        Wallet = result.FirstOrDefault();
+        Preferences.Set("WalletId", Wallet.Id.ToString());
+        return true;
+    }
+
+    public async Task<bool> Exists(string name) {
+        await Init();
+        var result = await database.QueryAsync<Wallet>($"SELECT id FROM wallets WHERE name='{name}' LIMIT 1");
+        return result.Count != 0;
+    }
+
+    public async Task<List<Wallet>> AvailableWallets() {
+        await Init();
+        return await database.QueryAsync<Wallet>($"SELECT id,name FROM wallets WHERE name!='{Wallet.Name}'");
+    }
+
+    public void SetWallet(Wallet wallet) {
+        Preferences.Set("WalletId", wallet.Id.ToString());
+    }
+
+    #endregion Wallet Manager
+
+    private async Task Init() {
+        if(database is not null) { return; }
+        database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+        //await database.DropTableAsync<Wallet>();
+        await database.CreateTableAsync<Wallet>();
+    }
+
     //#region Historic
     //public void AddOperation(Operation operation) {
     //operation.Id = Guid.NewGuid();

@@ -40,14 +40,14 @@ internal partial class MainViewModel : ViewModel {
     internal void Initialization() {
         Wallet = walletService.Wallet;
 
-        Palette = Wallet.GetPalette();
-        WalletPosition = Wallet.GetWalletPosition();
-        HasBrazilStocks = Wallet.HasBrazilStocks();
-        HasBDRs = Wallet.HasBDRs();
-        HasFIIs = Wallet.HasFIIs();
-        HasFixedIncome = Wallet.HasFixedIncome();
-        HasCrypto = Wallet.HasCrypto();
-        HasAsset = HasBrazilStocks || HasFIIs || HasBDRs || HasFixedIncome || HasCrypto;
+        //Palette = Wallet.GetPalette();
+        //WalletPosition = Wallet.GetWalletPosition();
+        //HasBrazilStocks = Wallet.HasBrazilStocks();
+        //HasBDRs = Wallet.HasBDRs();
+        //HasFIIs = Wallet.HasFIIs();
+        //HasFixedIncome = Wallet.HasFixedIncome();
+        //HasCrypto = Wallet.HasCrypto();
+        //HasAsset = HasBrazilStocks || HasFIIs || HasBDRs || HasFixedIncome || HasCrypto;
     }
 
     [RelayCommand]

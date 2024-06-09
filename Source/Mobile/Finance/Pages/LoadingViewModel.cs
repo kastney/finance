@@ -13,7 +13,7 @@ internal class LoadingViewModel {
     }
 
     internal async void Initialization() {
-        if(walletService.Exists()) {
+        if(await walletService.Exists()) {
             if(await navigationService.NavigateTo("///main") is MainPage page) { page.Initialization(); }
         } else {
             await navigationService.NavigateTo("///presentation");

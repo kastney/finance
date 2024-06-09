@@ -24,7 +24,7 @@ internal partial class CreateWalletViewModel : ViewModel {
         }
 
         // Verifica se a carteira já existe
-        if(!walletService.Exists(WalletName.Value)) {
+        if(await walletService.Exists(WalletName.Value)) {
             WalletName.AddError("Nome da Carteira já está em uso, tente outro nome!");
             return;
         }
@@ -32,8 +32,8 @@ internal partial class CreateWalletViewModel : ViewModel {
         IsRunning = true;
 
         // Cria a nova carteira
-        var wallet = new Wallet { Id = Guid.NewGuid(), Name = WalletName.Value };
-        walletService.Create(wallet);
+        var wallet = new Wallet { Name = WalletName.Value };
+        await walletService.Create(wallet);
         // Define a nova carteira como a principal
         walletService.SetWallet(wallet);
 
