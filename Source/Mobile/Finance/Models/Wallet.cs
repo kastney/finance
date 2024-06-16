@@ -8,14 +8,83 @@ internal class Wallet {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 
-    [MaxLength(250), Unique]
+    [MaxLength(50), Unique]
     public string Name { get; set; }
+
+    #region Brazil Stoocks
+
+    [NotNull]
+    public bool HasBrazilStocks { get; set; }
+
+    [NotNull]
+    public float BrazilStocksPrice { get; set; }
+
+    [NotNull]
+    public int BrazilStocksCount { get; set; }
+
+    [Ignore]
+    public string BrazilStocksName { get; } = "Ações";
+
+    [Ignore]
+    public Color BrazilStocksColor { get; } = new(194, 98, 179);
+
+    #endregion Brazil Stoocks
+
+    #region FIIs
+
+    [NotNull]
+    public bool HasFIIs { get; set; }
+
+    [NotNull]
+    public float FIIsPrice { get; set; }
+
+    [NotNull]
+    public int FIIsCount { get; set; }
+
+    [Ignore]
+    public string FIIsName { get; } = "FIIs";
+
+    [Ignore]
+    public Color FIIsColor { get; } = new(45, 152, 218);
+
+    #endregion FIIs
+
+    #region Initialization
+
+    public Wallet() {
+        HasBrazilStocks = false;
+        BrazilStocksPrice = 0;
+        BrazilStocksCount = 0;
+
+        HasFIIs = false;
+        FIIsPrice = 0;
+        FIIsCount = 0;
+    }
+
+    #endregion Initialization
+
+    #region Methods
+
+    internal Color[] GetPalette() {
+        var palette = new List<Color>();
+        if(HasBrazilStocks) { palette.Add(BrazilStocksColor); }
+        if(HasFIIs) { palette.Add(FIIsColor); }
+        if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
+        return [.. palette];
+    }
+
+    internal List<PieData> GetWalletPosition() {
+        var palette = new List<PieData>();
+        if(HasBrazilStocks) { palette.Add(new PieData(BrazilStocksName, BrazilStocksPrice)); }
+        if(HasFIIs) { palette.Add(new PieData(FIIsName, FIIsPrice)); }
+        if(palette.Count == 0) { palette.Add(new PieData("Vazio", 1)); }
+        return palette;
+    }
+
+    #endregion Methods
 }
 
 //#region Brazil Stock
-
-//public string BrazilStocksName { get; } = "Ações";
-//public Color BrazilStocksColor { get; } = new(194, 98, 179);
 
 //public int BrazilStocksCount { get => BrazilStocks.Count; }
 
@@ -28,9 +97,6 @@ internal class Wallet {
 //#endregion Brazil Stock
 
 //#region FII
-
-//public string FIIsName { get; } = "FIIs";
-//public Color FIIsColor { get; } = new(45, 152, 218);
 
 //public int FIIsCount { get => FIIs.Count; }
 
@@ -177,11 +243,11 @@ internal class Wallet {
 
 //public Color[] GetPalette() {
 //    var palette = new List<Color>();
-//    if(HasBrazilStocks()) { palette.Add(BrazilStocksColor); }
-//    if(HasBDRs()) { palette.Add(BDRsColor); }
-//    if(HasFIIs()) { palette.Add(FIIsColor); }
-//    if(HasFixedIncome()) { palette.Add(FixedIncomeColor); }
-//    if(HasCrypto()) { palette.Add(CryptoColor); }
+//    //    if(HasBrazilStocks()) { palette.Add(BrazilStocksColor); }
+//    //    if(HasBDRs()) { palette.Add(BDRsColor); }
+//    //    if(HasFIIs()) { palette.Add(FIIsColor); }
+//    //    if(HasFixedIncome()) { palette.Add(FixedIncomeColor); }
+//    //    if(HasCrypto()) { palette.Add(CryptoColor); }
 //    if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
 //    return [.. palette];
 //}
@@ -238,36 +304,6 @@ internal class Wallet {
             #endregion BDR
 
             #region Brazil Stock
-
-            new BrazilStockOperation {
-                AppliedDate = new DateTime(2024, 6, 7, 13, 52, 0),
-                Ticket = "BBAS3",
-                Issuer = "BRASIL ON NM",
-                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
-                Price = 27.37f,
-                Count = 4,
-                IsBuy = true
-            }
-
-            AddOperation(new BrazilStockOperation {
-                AppliedDate = new DateTime(2024, 6, 6, 10, 29, 0),
-                Ticket = "PETR4",
-                Issuer = "PETROBRAS PN EDR N2",
-                Logo = "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg",
-                Price = 38.5f,
-                Count = 4,
-                IsBuy = false
-            });
-
-            AddOperation(new BrazilStockOperation {
-                AppliedDate = new DateTime(2024, 6, 5, 11, 19, 0),
-                Ticket = "VALE3",
-                Issuer = "VALE ON NM",
-                Logo = "https://s3-symbol-logo.tradingview.com/vale--big.svg",
-                Price = 60.84f,
-                Count = 4,
-                IsBuy = true
-            });
 
             AddOperation(new BrazilStockOperation {
                 AppliedDate = new DateTime(2024, 5, 3, 16, 20, 0),
@@ -348,6 +384,46 @@ internal class Wallet {
                 Count = 6,
                 IsBuy = true
             });
+
+            AddOperation(new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 6, 5, 11, 19, 0),
+                Ticket = "VALE3",
+                Issuer = "VALE ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/vale--big.svg",
+                Price = 60.84f,
+                Count = 4,
+                IsBuy = true
+            });
+
+            AddOperation(new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 6, 6, 10, 29, 0),
+                Ticket = "PETR4",
+                Issuer = "PETROBRAS PN EDR N2",
+                Logo = "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg",
+                Price = 38.5f,
+                Count = 4,
+                IsBuy = false
+            });
+
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 6, 7, 13, 52, 0),
+                Ticket = "BBAS3",
+                Issuer = "BRASIL ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
+                Price = 27.37f,
+                Count = 4,
+                IsBuy = true
+            }
+
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 6, 12, 11, 23, 0),
+                Ticket = "BBAS3",
+                Issuer = "BRASIL ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
+                Price = 26.72f,
+                Count = 2,
+                IsBuy = true
+            }
 
             #endregion Brazil Stock
 
@@ -430,6 +506,24 @@ internal class Wallet {
                 Ticket = "GARE11",
                 Issuer = "FII GUARDIANCI ER",
                 Count = 6,
+                Price = 9.03f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 6, 10, 12, 07, 0),
+                Ticket = "RZTR11",
+                Issuer = "FII RIZA TX CI ER",
+                Count = 2,
+                Price = 94,65f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 6, 12, 10, 48, 0),
+                Ticket = "GARE11",
+                Issuer = "FII GUARDIANCI ER",
+                Count = 11,
                 Price = 9.03f,
                 IsBuy = true
             });

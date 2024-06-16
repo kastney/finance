@@ -20,9 +20,4 @@ internal interface IWalletService {
     void SetWallet(Wallet wallet);
 
     #endregion Wallet Manager
-
-    //#region Historic
-    //IEnumerable<Operation> GetHistoric();
-    //void AddOperation(Operation operation);
-    //#endregion Historic
 }

@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Finance.Enumerations;
-using Finance.Models.Operations;
 
 namespace Finance.Pages.Historic;
 

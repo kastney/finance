@@ -57,21 +57,4 @@ internal class WalletService : IWalletService {
         //await database.DropTableAsync<Wallet>();
         await database.CreateTableAsync<Wallet>();
     }
-
-    //#region Historic
-    //public void AddOperation(Operation operation) {
-    //operation.Id = Guid.NewGuid();
-    //operation.WalletId = Wallet.Id;
-    //var collection = database.GetCollection<Operation>("Historic");
-    //collection.Insert(operation);
-    //}
-    //public IEnumerable<Operation> GetHistoric() {
-    //var collection = database.GetCollection<Operation>("Historic");
-    //return collection.FindAll();
-    //}
-    //#endregion Historic
-    //public static string GetConnectionString() {
-    //var path = FileSystem.Current.AppDataDirectory;
-    //return Path.Combine(path, "finance.db");
-    //}
 }
