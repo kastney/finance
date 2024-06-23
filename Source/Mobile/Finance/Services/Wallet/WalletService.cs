@@ -53,6 +53,17 @@ internal class WalletService : IWalletService {
 
     #region FIIs Manager
 
+    public async Task<bool> SetBrazilStocksEnabled(bool value) {
+        try {
+            await Init();
+            Wallet.BrazilStocksEnabled = value;
+            await database.UpdateAsync(Wallet);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     public async Task<bool> SetFIIsEnabled(bool value) {
         try {
             await Init();

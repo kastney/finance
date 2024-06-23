@@ -6,7 +6,25 @@ namespace Finance.Pages.Strategy;
 internal partial class StrategyViewModel : ViewModel {
 
     [ObservableProperty]
+    private bool isBrazilStocksRunning;
+
+    [ObservableProperty]
     private bool isFIIsRunning;
+
+    [RelayCommand]
+    private async Task BrazilStocksEnabled() {
+        if(!IsRunning && !IsBrazilStocksRunning) {
+            IsRunning = true;
+            IsBrazilStocksRunning = true;
+
+            if(await walletService.SetBrazilStocksEnabled(!walletService.Wallet.BrazilStocksEnabled)) {
+                // Mudou
+            }
+
+            IsBrazilStocksRunning = false;
+            IsRunning = false;
+        }
+    }
 
     [RelayCommand]
     private async Task FIIsEnabled() {

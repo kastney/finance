@@ -23,6 +23,8 @@ internal interface IWalletService {
 
     #region FIIs Manager
 
+    Task<bool> SetBrazilStocksEnabled(bool value);
+
     Task<bool> SetFIIsEnabled(bool value);
 
     #endregion FIIs Manager

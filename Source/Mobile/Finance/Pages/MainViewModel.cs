@@ -22,6 +22,9 @@ internal partial class MainViewModel : ViewModel {
     #region Has
 
     [ObservableProperty]
+    private bool hasBrazilStocks;
+
+    [ObservableProperty]
     private bool hasFIIs;
 
     [ObservableProperty]
@@ -45,9 +48,10 @@ internal partial class MainViewModel : ViewModel {
         Palette = Wallet.GetPalette();
         WalletPosition = Wallet.GetWalletPosition();
         // Set has properties
-        HasAsset = Wallet.HasAsset();
+        HasBrazilStocks = Wallet.HasBrazilStock();
         HasFIIs = Wallet.HasFIIs();
-        HasAssetTitle = HasFIIs;
+        HasAssetTitle = HasBrazilStocks || HasFIIs;
+        HasAsset = Wallet.HasAsset();
     }
 
     [RelayCommand]
