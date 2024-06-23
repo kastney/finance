@@ -51,6 +51,21 @@ internal class WalletService : IWalletService {
 
     #endregion Wallet Manager
 
+    #region FIIs Manager
+
+    public async Task<bool> SetFIIsEnabled(bool value) {
+        try {
+            await Init();
+            Wallet.FIIsEnabled = value;
+            await database.UpdateAsync(Wallet);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    #endregion FIIs Manager
+
     private async Task Init() {
         if(database is not null) { return; }
         database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);

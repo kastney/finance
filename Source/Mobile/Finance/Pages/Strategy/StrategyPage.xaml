@@ -8,5 +8,15 @@
 
     <Grid RowDefinitions="Auto,*">
         <controls:NavigationBar Title="Estratégia" IsRoot="False" Clicked="BackButtom_Clicked" />
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
+                <Border Style="{x:StaticResource Card}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="FII" VerticalTextAlignment="Center" Margin="10,0" FontSize="Medium" FontAttributes="Bold" />
+                        <controls:IndicatorButton Grid.Column="1" Text="Desativar" WidthRequest="100" IsRunning="{Binding IsFIIsRunning}" Command="{Binding FIIsEnabledCommand}" />
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>

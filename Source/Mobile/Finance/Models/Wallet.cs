@@ -22,6 +22,9 @@ internal class Wallet {
     [Ignore]
     public Color FIIsColor { get; } = new(45, 152, 218);
 
+    [Ignore]
+    public int FIIsCount { get; } = 0;
+
     #endregion FIIs
 
     #region Initialization
@@ -34,19 +37,31 @@ internal class Wallet {
 
     #region Methods
 
+    #region Graphics
+
     internal Color[] GetPalette() {
         var palette = new List<Color>();
-        if(FIIsEnabled) { palette.Add(FIIsColor); }
+        if(FIIsCount != 0) { palette.Add(FIIsColor); }
         if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
         return [.. palette];
     }
 
     internal List<PieData> GetWalletPosition() {
         var palette = new List<PieData>();
-        if(FIIsEnabled) { palette.Add(new PieData(FIIsName, 1)); }
+        if(FIIsCount != 0) { palette.Add(new PieData(FIIsName, 1)); }
         if(palette.Count == 0) { palette.Add(new PieData("Vazio", 1)); }
         return palette;
     }
+
+    #endregion Graphics
+
+    #region Has Methods
+
+    internal bool HasFIIs() => FIIsEnabled || FIIsCount != 0;
+
+    internal bool HasAsset() => FIIsCount != 0;
+
+    #endregion Has Methods
 
     #endregion Methods
 }

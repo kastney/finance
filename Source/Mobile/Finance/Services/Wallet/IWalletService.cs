@@ -20,4 +20,10 @@ internal interface IWalletService {
     void SetWallet(Wallet wallet);
 
     #endregion Wallet Manager
+
+    #region FIIs Manager
+
+    Task<bool> SetFIIsEnabled(bool value);
+
+    #endregion FIIs Manager
 }

@@ -9,14 +9,28 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private Wallet wallet;
 
+    #region Graphics
+
     [ObservableProperty]
     private Color[] palette;
 
     [ObservableProperty]
     private List<PieData> walletPosition;
 
+    #endregion Graphics
+
+    #region Has
+
+    [ObservableProperty]
+    private bool hasFIIs;
+
+    [ObservableProperty]
+    private bool hasAssetTitle;
+
     [ObservableProperty]
     private bool hasAsset;
+
+    #endregion Has
 
     public MainViewModel() {
         Palette = [];
@@ -26,10 +40,14 @@ internal partial class MainViewModel : ViewModel {
 
     public override void BackFinish() {
         Wallet = walletService.Wallet;
-        // ...
+        OnPropertyChanged(nameof(Wallet));
+        // Set graphics
         Palette = Wallet.GetPalette();
         WalletPosition = Wallet.GetWalletPosition();
-        HasAsset = Wallet.FIIsEnabled;
+        // Set has properties
+        HasAsset = Wallet.HasAsset();
+        HasFIIs = Wallet.HasFIIs();
+        HasAssetTitle = HasFIIs;
     }
 
     [RelayCommand]

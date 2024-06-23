@@ -6,7 +6,7 @@ public partial class AssetCard : ContentView {
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(AssetCard), string.Empty, propertyChanged: OnTitleChanged);
     public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(string), typeof(AssetCard), string.Empty, propertyChanged: OnIconChanged);
     public static readonly BindableProperty TitleColorProperty = BindableProperty.Create(nameof(TitleColor), typeof(Color), typeof(AssetCard), default, propertyChanged: OnTitleColorChanged);
-    public static readonly BindableProperty AssetCountProperty = BindableProperty.Create(nameof(AssetCount), typeof(int), typeof(AssetCard), 0, propertyChanged: OnAssetCountChanged);
+    public static readonly BindableProperty AssetCountProperty = BindableProperty.Create(nameof(AssetCount), typeof(int), typeof(AssetCard), -1, propertyChanged: OnAssetCountChanged);
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(nameof(Price), typeof(float), typeof(AssetCard), default, propertyChanged: OnPriceChanged);
     public static readonly BindableProperty VariationProperty = BindableProperty.Create(nameof(Variation), typeof(float?), typeof(AssetCard), null, propertyChanged: OnVariationChanged);
     public static readonly BindableProperty PerformanceProperty = BindableProperty.Create(nameof(Performance), typeof(float?), typeof(AssetCard), null, propertyChanged: OnPerformanceChanged);

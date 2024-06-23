@@ -60,8 +60,8 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Label Text="Lista de Ativos" IsVisible="{Binding HasAsset}" FontFamily="" FontAttributes="Bold" />
-                <controls:AssetCard Title="{Binding Wallet.FIIsName}" Icon="&#xf64f;" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" TitleColor="{Binding Wallet.FIIsColor}" IsVisible="{Binding Wallet.FIIsEnabled}" />
+                <Label Text="Lista de Ativos" FontFamily="" FontAttributes="Bold" IsVisible="{Binding HasAssetTitle}" />
+                <controls:AssetCard Title="{Binding Wallet.FIIsName}" Icon="&#xf64f;" AssetCount="{Binding Wallet.FIIsCount}" TitleColor="{Binding Wallet.FIIsColor}" IsVisible="{Binding HasFIIs}" />
 
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
