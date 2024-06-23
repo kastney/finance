@@ -89,6 +89,35 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Enumerations\**" />
+	  <AndroidResource Remove="Models\Assets\**" />
+	  <AndroidResource Remove="Models\Operations\**" />
+	  <Compile Remove="Enumerations\**" />
+	  <Compile Remove="Models\Assets\**" />
+	  <Compile Remove="Models\Operations\**" />
+	  <EmbeddedResource Remove="Enumerations\**" />
+	  <EmbeddedResource Remove="Models\Assets\**" />
+	  <EmbeddedResource Remove="Models\Operations\**" />
+	  <MauiCss Remove="Enumerations\**" />
+	  <MauiCss Remove="Models\Assets\**" />
+	  <MauiCss Remove="Models\Operations\**" />
+	  <MauiXaml Remove="Enumerations\**" />
+	  <MauiXaml Remove="Models\Assets\**" />
+	  <MauiXaml Remove="Models\Operations\**" />
+	  <None Remove="Enumerations\**" />
+	  <None Remove="Models\Assets\**" />
+	  <None Remove="Models\Operations\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Controls\Calendar.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Controls\Calendar.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\show_banner_1.jpeg" />
 	  <None Remove="Resources\Images\show_banner_2.jpeg" />
 	</ItemGroup>
@@ -121,9 +150,6 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\AssetCard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\Calendar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
