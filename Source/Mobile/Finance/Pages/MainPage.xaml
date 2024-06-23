@@ -61,12 +61,11 @@
                 </Border>
 
                 <Label Text="Lista de Ativos" IsVisible="{Binding HasAsset}" FontFamily="" FontAttributes="Bold" />
-                <controls:AssetCard Title="{Binding Wallet.BrazilStocksName}" Icon="&#xe473;" AssetCount="{Binding Wallet.BrazilStocksCount}" Price="{Binding Wallet.BrazilStocksPrice}" Variation="{Binding Wallet.BrazilStocksVariation}" Performance="{Binding Wallet.BrazilStocksPerformance}" TitleColor="{Binding Wallet.BrazilStocksColor}" IsVisible="{Binding Wallet.HasBrazilStocks}" />
-                <controls:AssetCard Title="{Binding Wallet.FIIsName}" Icon="&#xf64f;" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" TitleColor="{Binding Wallet.FIIsColor}" IsVisible="{Binding Wallet.HasFIIs}" />
+                <controls:AssetCard Title="{Binding Wallet.FIIsName}" Icon="&#xf64f;" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" TitleColor="{Binding Wallet.FIIsColor}" IsVisible="{Binding Wallet.FIIsEnabled}" />
 
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding HistoricCommand}" />
+                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding StrategyCommand}" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
                     <controls:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>

@@ -3,6 +3,7 @@ using Finance.Pages;
 using Finance.Pages.CreateWallet;
 using Finance.Pages.DangerZone;
 using Finance.Pages.SelectWallet;
+using Finance.Pages.Strategy;
 using Finance.Services;
 using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -33,6 +34,7 @@ namespace Finance {
             // ...
             builder.Services.AddTransient<SelectWalletViewModel>();
             builder.Services.AddTransient<CreateWalletViewModel>();
+            builder.Services.AddTransient<StrategyViewModel>();
             builder.Services.AddTransient<DangerZoneViewModel>();
             builder.Services.AddTransient<DeleteWalletViewModel>();
 

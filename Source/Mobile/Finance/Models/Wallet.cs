@@ -11,35 +11,10 @@ internal class Wallet {
     [MaxLength(50), Unique]
     public string Name { get; set; }
 
-    #region Brazil Stoocks
-
-    [NotNull]
-    public bool HasBrazilStocks { get; set; }
-
-    [NotNull]
-    public float BrazilStocksPrice { get; set; }
-
-    [NotNull]
-    public int BrazilStocksCount { get; set; }
-
-    [Ignore]
-    public string BrazilStocksName { get; } = "Ações";
-
-    [Ignore]
-    public Color BrazilStocksColor { get; } = new(194, 98, 179);
-
-    #endregion Brazil Stoocks
-
     #region FIIs
 
     [NotNull]
-    public bool HasFIIs { get; set; }
-
-    [NotNull]
-    public float FIIsPrice { get; set; }
-
-    [NotNull]
-    public int FIIsCount { get; set; }
+    public bool FIIsEnabled { get; set; }
 
     [Ignore]
     public string FIIsName { get; } = "FIIs";
@@ -52,13 +27,7 @@ internal class Wallet {
     #region Initialization
 
     public Wallet() {
-        HasBrazilStocks = false;
-        BrazilStocksPrice = 0;
-        BrazilStocksCount = 0;
-
-        HasFIIs = false;
-        FIIsPrice = 0;
-        FIIsCount = 0;
+        FIIsEnabled = false;
     }
 
     #endregion Initialization
@@ -67,16 +36,14 @@ internal class Wallet {
 
     internal Color[] GetPalette() {
         var palette = new List<Color>();
-        if(HasBrazilStocks) { palette.Add(BrazilStocksColor); }
-        if(HasFIIs) { palette.Add(FIIsColor); }
+        if(FIIsEnabled) { palette.Add(FIIsColor); }
         if(palette.Count == 0) { palette.Add(new Color(0, 0, 0, 50)); }
         return [.. palette];
     }
 
     internal List<PieData> GetWalletPosition() {
         var palette = new List<PieData>();
-        if(HasBrazilStocks) { palette.Add(new PieData(BrazilStocksName, BrazilStocksPrice)); }
-        if(HasFIIs) { palette.Add(new PieData(FIIsName, FIIsPrice)); }
+        if(FIIsEnabled) { palette.Add(new PieData(FIIsName, 1)); }
         if(palette.Count == 0) { palette.Add(new PieData("Vazio", 1)); }
         return palette;
     }
@@ -525,6 +492,24 @@ internal class Wallet {
                 Issuer = "FII GUARDIANCI ER",
                 Count = 11,
                 Price = 9.03f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 6, 18, 16, 43, 0),
+                Ticket = "RZTR11",
+                Issuer = "FII RIZA TX CI ER",
+                Count = 4,
+                Price = 92,10f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 6, 20, 17, 37, 0),
+                Ticket = "GARE11",
+                Issuer = "FII GUARDIANCI ER",
+                Count = 23,
+                Price = 8.98f,
                 IsBuy = true
             });
 

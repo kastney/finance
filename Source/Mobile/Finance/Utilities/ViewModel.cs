@@ -21,5 +21,10 @@ internal partial class ViewModel : ObservableObject {
 
     internal virtual async Task NavigationBack() {
         await navigationService.NavigateToBack();
+        var page = Shell.Current.Navigation.NavigationStack.Count <= 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
+        if(page is not null && page.BindingContext is ViewModel viewModel) { viewModel.BackFinish(); }
+    }
+
+    public virtual void BackFinish() {
     }
 }
