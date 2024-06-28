@@ -25,6 +25,15 @@ internal class Wallet {
     [Ignore]
     public int BrazilStocksCount { get; } = 0;
 
+    [Ignore]
+    public int BrazilStocksPrice { get; } = 0;
+
+    [Ignore]
+    public int BrazilStocksVariation { get; } = 0;
+
+    [Ignore]
+    public int BrazilStocksPerformance { get; } = 0;
+
     #endregion BrazilStocks
 
     #region FIIs
@@ -40,6 +49,15 @@ internal class Wallet {
 
     [Ignore]
     public int FIIsCount { get; } = 0;
+
+    [Ignore]
+    public float FIIsPrice { get; } = 0;
+
+    [Ignore]
+    public float FIIsVariation { get; } = 0;
+
+    [Ignore]
+    public float FIIsPerformance { get; } = 0;
 
     #endregion FIIs
 
