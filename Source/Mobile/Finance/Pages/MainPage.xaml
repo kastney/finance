@@ -17,10 +17,27 @@
         </controls:NavigationBar>
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+                    <Border Grid.Column="0" Style="{x:StaticResource Card}">
+                        <VerticalStackLayout>
+                            <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
+                            <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Style="{x:StaticResource Card}">
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="Performance" FontFamily="" FontAttributes="Bold" />
+                            <Label Text="0.00%" />
+                            <Label Text="Variação" FontFamily="" FontAttributes="Bold" Margin="0,20,0,0" />
+                            <Label Text="0.00%" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
                 <Border Style="{x:StaticResource Card}">
                     <VerticalStackLayout>
                         <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
-                        <charts:PieChartView HeightRequest="300" SelectionBehavior="Hatch" IsEnabled="{Binding HasAsset}">
+                        <charts:PieChartView HeightRequest="280" SelectionBehavior="Hatch" IsEnabled="{Binding HasAsset}">
                             <charts:PieChartView.Series>
                                 <charts:DonutSeries>
                                     <charts:DonutSeries.Data>
