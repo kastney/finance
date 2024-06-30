@@ -17,23 +17,7 @@
         </controls:NavigationBar>
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
-                    <Border Grid.Column="0" Style="{x:StaticResource Card}">
-                        <VerticalStackLayout>
-                            <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
-                            <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
-                        </VerticalStackLayout>
-                    </Border>
-                    <Border Grid.Column="1" Style="{x:StaticResource Card}">
-                        <VerticalStackLayout Padding="10">
-                            <Label Text="Performance" FontFamily="" FontAttributes="Bold" />
-                            <Label Text="0.00%" />
-                            <Label Text="Variação" FontFamily="" FontAttributes="Bold" Margin="0,20,0,0" />
-                            <Label Text="0.00%" />
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
-
+                <controls:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
                 <Border Style="{x:StaticResource Card}">
                     <VerticalStackLayout>
                         <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
@@ -76,7 +60,7 @@
                         </charts:PieChartView>
                     </VerticalStackLayout>
                 </Border>
-
+                
                 <Label Text="Lista de Ativos" FontFamily="" FontAttributes="Bold" IsVisible="{Binding HasAssetTitle}" />
                 <controls:AssetCard Icon="&#xe473;" Title="{Binding Wallet.BrazilStocksName}" TitleColor="{Binding Wallet.BrazilStocksColor}" AssetCount="{Binding Wallet.BrazilStocksCount}" Price="{Binding Wallet.BrazilStocksPrice}" Variation="{Binding Wallet.BrazilStocksVariation}" Performance="{Binding Wallet.BrazilStocksPerformance}" IsVisible="{Binding HasBrazilStocks}" />
                 <controls:AssetCard Icon="&#xf64f;" Title="{Binding Wallet.FIIsName}" TitleColor="{Binding Wallet.FIIsColor}" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" IsVisible="{Binding HasFIIs}" />

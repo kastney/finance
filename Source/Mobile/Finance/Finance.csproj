@@ -134,6 +134,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\Cards\WalletStatusCard.xaml.cs">
+	    <DependentUpon>WalletStatusCard.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
@@ -149,7 +152,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\AssetCard.xaml">
+	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cards\AssetCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\IndicatorButton.xaml">
