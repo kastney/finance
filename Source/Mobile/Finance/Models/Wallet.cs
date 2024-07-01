@@ -567,6 +567,15 @@ internal class Wallet {
                 IsBuy = true
             });
 
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 7, 1, 16, 23, 0),
+                Ticket = "GARE11",
+                Issuer = "FII GUARDIANCI ER",
+                Count = 54,
+                Price = 8.97f,
+                IsBuy = true
+            });
+
             #endregion FII
 
             #region CDB
