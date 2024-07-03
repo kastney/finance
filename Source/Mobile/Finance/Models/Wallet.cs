@@ -576,6 +576,15 @@ internal class Wallet {
                 IsBuy = true
             });
 
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 7, 3, 15, 18, 0),
+                Ticket = "RZTR11",
+                Issuer = "FII RIZA TX CI ER",
+                Count = 2,
+                Price = 91.98f,
+                IsBuy = true
+            });
+
             #endregion FII
 
             #region CDB
