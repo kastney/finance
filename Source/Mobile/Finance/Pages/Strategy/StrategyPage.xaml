@@ -21,7 +21,7 @@
                         <Label Text="FII" VerticalTextAlignment="Center" Margin="10,0" FontSize="Medium" FontAttributes="Bold" />
                         <controls:IndicatorButton Grid.Column="1" Text="Desativar" WidthRequest="100" IsRunning="{Binding IsFIIsRunning}" Command="{Binding FIIsEnabledCommand}" />
                     </Grid>
-                </Border>                
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
