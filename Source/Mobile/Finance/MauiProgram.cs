@@ -15,7 +15,7 @@ namespace Finance {
         public static MauiApp CreateMauiApp() {
             var builder = MauiApp.CreateBuilder();
             builder.UseMauiApp<App>()
-                .UseDevExpress()
+                .UseDevExpress(useLocalization: false)
                 .UseDevExpressCollectionView()
                 .UseDevExpressControls()
                 .UseDevExpressEditors()
@@ -26,11 +26,11 @@ namespace Finance {
                     fonts.AddFont("Font Awesome 6 Free-Solid-900.otf", "IconsSolid");
                 });
 
-            /// Services
+            // Services
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             builder.Services.AddSingleton<IWalletService, WalletService>();
 
-            /// ViewModels
+            // ViewModels
             // ...
             builder.Services.AddTransient<LoadingViewModel>();
             builder.Services.AddTransient<WalletPresentationViewModel>();
