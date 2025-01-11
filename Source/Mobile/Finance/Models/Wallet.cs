@@ -446,6 +446,36 @@ internal class Wallet {
                 IsBuy = true
             }
 
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 8, 2, 12, 40, 0),
+                Ticket = "BBAS3",
+                Issuer = "BRASIL ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
+                Price = 26.10f,
+                Count = 10,
+                IsBuy = true
+            }
+
+            AddOperation(new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 8, 2, 16, 17, 0),
+                Ticket = "VALE3",
+                Issuer = "VALE ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/vale--big.svg",
+                Price = 59.67f,
+                Count = 4,
+                IsBuy = true
+            });
+
+            new BrazilStockOperation {
+                AppliedDate = new DateTime(2024, 10, 6, 10, 29, 0),
+                Ticket = "BBAS3",
+                Issuer = "BRASIL ON NM",
+                Logo = "https://s3-symbol-logo.tradingview.com/banco-do-brasil--big.svg",
+                Price = 26.00f,
+                Count = 10,
+                IsBuy = true
+            }
+
             #endregion Brazil Stock
 
             #region FII
@@ -582,6 +612,141 @@ internal class Wallet {
                 Issuer = "FII RIZA TX CI ER",
                 Count = 2,
                 Price = 91.98f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 8, 6, 11, 14, 0),
+                Ticket = "ALZR11",
+                Issuer = "",
+                Count = 2,
+                Price = 107.5f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 8, 6, 11, 44, 0),
+                Ticket = "HSML11",
+                Issuer = "",
+                Count = 2,
+                Price = 95.70f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 9, 12, 16, 45, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 1,
+                Price = 159.97f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 9, 23, 13, 22, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 1,
+                Price = 150.90f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 9, 25, 13, 22, 0),
+                Ticket = "GGRC11",
+                Issuer = "",
+                Count = 4,
+                Price = 10.60f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 9, 30, 14, 28, 0),
+                Ticket = "BTCI11",
+                Issuer = "FII BTG CRI CI ER",
+                Count = 5,
+                Price = 10.01f,
+                IsBuy = false
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 10, 9, 12, 33, 0),
+                Ticket = "RZTR11",
+                Issuer = "",
+                Count = 2,
+                Price = 88.80f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 10, 9, 13, 27, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 2,
+                Price = 157.00f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 10, 10, 15, 21, 0),
+                Ticket = "GARE11",
+                Issuer = "",
+                Count = 20,
+                Price = 8.95f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 11, 4, 11, 52, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 1,
+                Price = 153.70f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 11, 14, 14, 29, 0),
+                Ticket = "ALZR11",
+                Issuer = "",
+                Count = 3,
+                Price = 100.00f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 11, 14, 14, 51, 0),
+                Ticket = "RZTR11",
+                Issuer = "",
+                Count = 2,
+                Price = 88.00f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 11, 28, 11, 02, 0),
+                Ticket = "HSML11",
+                Issuer = "",
+                Count = 3,
+                Price = 85.00f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2024, 11, 29, 10, 48, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 1,
+                Price = 153.40f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2025, 1, 8, 11, 45, 0),
+                Ticket = "HGLG11",
+                Issuer = "",
+                Count = 2,
+                Price = 150.00f,
                 IsBuy = true
             });
 
