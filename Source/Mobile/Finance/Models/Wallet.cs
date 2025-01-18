@@ -750,6 +750,33 @@ internal class Wallet {
                 IsBuy = true
             });
 
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2025, 1, 17, 11, 42, 0),
+                Ticket = "GARE11",
+                Issuer = "",
+                Count = 13,
+                Price = 8.00f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2025, 1, 17, 11, 56, 0),
+                Ticket = "HSML11",
+                Issuer = "",
+                Count = 2,
+                Price = 72.10f,
+                IsBuy = true
+            });
+
+            AddOperation(new FIIOperation {
+                AppliedDate = new DateTime(2025, 1, 17, 14, 12, 0),
+                Ticket = "ALZRL11",
+                Issuer = "",
+                Count = 2,
+                Price = 99.20f,
+                IsBuy = true
+            });
+
             #endregion FII
 
             #region CDB
