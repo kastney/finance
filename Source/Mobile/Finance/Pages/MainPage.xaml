@@ -62,8 +62,24 @@
                 </Border>
 
                 <Label Text="Lista de Ativos" FontFamily="" FontAttributes="Bold" IsVisible="{Binding HasAssetTitle}" />
-                <controls:AssetCard Icon="&#xe473;" Title="{Binding Wallet.BrazilStocksName}" TitleColor="{Binding Wallet.BrazilStocksColor}" AssetCount="{Binding Wallet.BrazilStocksCount}" Price="{Binding Wallet.BrazilStocksPrice}" Variation="{Binding Wallet.BrazilStocksVariation}" Performance="{Binding Wallet.BrazilStocksPerformance}" IsVisible="{Binding HasBrazilStocks}" />
-                <controls:AssetCard Icon="&#xf64f;" Title="{Binding Wallet.FIIsName}" TitleColor="{Binding Wallet.FIIsColor}" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" IsVisible="{Binding HasFIIs}" />
+                <controls:AssetCard Title="{Binding Wallet.BrazilStocksName}"
+                                    Color="{Binding Wallet.BrazilStocksColor}"
+                                    AssetCount="{Binding Wallet.BrazilStocksCount}"
+                                    Price="{Binding Wallet.BrazilStocksPrice}"
+                                    Variation="{Binding Wallet.BrazilStocksVariation}"
+                                    Performance="{Binding Wallet.BrazilStocksPerformance}"
+                                    Culture="pt-br"
+                                    Flag="pt-br"
+                                    IsVisible="{Binding HasBrazilStocks}" />
+                <controls:AssetCard Title="{Binding Wallet.FIIsName}"
+                                    Color="{Binding Wallet.FIIsColor}"
+                                    AssetCount="{Binding Wallet.FIIsCount}"
+                                    Price="{Binding Wallet.FIIsPrice}"
+                                    Variation="{Binding Wallet.FIIsVariation}"
+                                    Performance="{Binding Wallet.FIIsPerformance}"
+                                    Culture="pt-br"
+                                    Flag="pt-br"
+                                    IsVisible="{Binding HasFIIs}" />
 
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
