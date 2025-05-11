@@ -1,23 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:Finance.Controls.Cards"
              xmlns:charts="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              x:Class="Finance.Pages.MainPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
-            <controls:NavigationBar.ToolbarItems>
+        <navigation:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
+            <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
-                    <controls:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
+                    <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
                 </VerticalStackLayout>
-            </controls:NavigationBar.ToolbarItems>
-        </controls:NavigationBar>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-                <controls:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
+                <cards:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
                 <Border Style="{x:StaticResource Card}">
                     <VerticalStackLayout>
                         <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
@@ -62,30 +64,29 @@
                 </Border>
 
                 <Label Text="Lista de Ativos" FontFamily="" FontAttributes="Bold" IsVisible="{Binding HasAssetTitle}" />
-                <controls:AssetCard Title="{Binding Wallet.BrazilStocksName}"
-                                    Color="{Binding Wallet.BrazilStocksColor}"
-                                    AssetCount="{Binding Wallet.BrazilStocksCount}"
-                                    Price="{Binding Wallet.BrazilStocksPrice}"
-                                    Variation="{Binding Wallet.BrazilStocksVariation}"
-                                    Performance="{Binding Wallet.BrazilStocksPerformance}"
-                                    Culture="pt-br"
-                                    Flag="pt-br"
-                                    IsVisible="{Binding HasBrazilStocks}" />
-                <controls:AssetCard Title="{Binding Wallet.FIIsName}"
-                                    Color="{Binding Wallet.FIIsColor}"
-                                    AssetCount="{Binding Wallet.FIIsCount}"
-                                    Price="{Binding Wallet.FIIsPrice}"
-                                    Variation="{Binding Wallet.FIIsVariation}"
-                                    Performance="{Binding Wallet.FIIsPerformance}"
-                                    Culture="pt-br"
-                                    Flag="pt-br"
-                                    IsVisible="{Binding HasFIIs}" />
-
+                <cards:AssetCard Title="{Binding Wallet.BrazilStocksName}"
+                                 Color="{Binding Wallet.BrazilStocksColor}"
+                                 AssetCount="{Binding Wallet.BrazilStocksCount}"
+                                 Price="{Binding Wallet.BrazilStocksPrice}"
+                                 Variation="{Binding Wallet.BrazilStocksVariation}"
+                                 Performance="{Binding Wallet.BrazilStocksPerformance}"
+                                 Culture="pt-br"
+                                 Flag="pt-br"
+                                 IsVisible="{Binding HasBrazilStocks}" />
+                <cards:AssetCard Title="{Binding Wallet.FIIsName}"
+                                 Color="{Binding Wallet.FIIsColor}"
+                                 AssetCount="{Binding Wallet.FIIsCount}"
+                                 Price="{Binding Wallet.FIIsPrice}"
+                                 Variation="{Binding Wallet.FIIsVariation}"
+                                 Performance="{Binding Wallet.FIIsPerformance}"
+                                 Culture="pt-br"
+                                 Flag="pt-br"
+                                 IsVisible="{Binding HasFIIs}" />
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding StrategyCommand}" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding StrategyCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

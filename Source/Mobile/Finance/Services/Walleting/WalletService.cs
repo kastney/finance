@@ -1,7 +1,7 @@
 ﻿using Finance.Models;
 using SQLite;
 
-namespace Finance.Services;
+namespace Finance.Services.Walleting;
 
 internal class WalletService : IWalletService {
     private SQLiteAsyncConnection database;
@@ -56,7 +56,7 @@ internal class WalletService : IWalletService {
     public async Task<bool> SetBrazilStocksEnabled(bool value) {
         try {
             await Init();
-            Wallet.BrazilStocksEnabled = value;
+            //Wallet.BrazilStocksEnabled = value;
             await database.UpdateAsync(Wallet);
             return true;
         } catch {
@@ -67,7 +67,7 @@ internal class WalletService : IWalletService {
     public async Task<bool> SetFIIsEnabled(bool value) {
         try {
             await Init();
-            Wallet.FIIsEnabled = value;
+            //Wallet.FIIsEnabled = value;
             await database.UpdateAsync(Wallet);
             return true;
         } catch {
@@ -78,9 +78,10 @@ internal class WalletService : IWalletService {
     #endregion FIIs Manager
 
     private async Task Init() {
-        if(database is not null) { return; }
-        database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-        //await database.DropTableAsync<Wallet>();
-        await database.CreateTableAsync<Wallet>();
+        if(database is null) {
+            database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+            //await database.DropTableAsync<Wallet>();
+            await database.CreateTableAsync<Wallet>();
+        }
     }
 }

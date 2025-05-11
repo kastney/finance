@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Finance.Controls.AssetCard">
+             x:Class="Finance.Controls.Cards.AssetCard">
 
     <Border Style="{x:StaticResource Card}">
         <VerticalStackLayout Spacing="0">
             <Grid RowDefinitions="*,*,*" ColumnDefinitions="40,*,Auto,Auto" ColumnSpacing="15" Padding="10">
                 <HorizontalStackLayout Grid.ColumnSpan="3" Margin="0,0,0,10" Spacing="10">
-                    <Border Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 20" WidthRequest="20" HeightRequest="20">
+                    <Border Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="20" HeightRequest="20">
                         <Image x:Name="flag" BackgroundColor="Gray" />
                     </Border>
-                    <Label x:Name="title" FontSize="Medium" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}">
+                    <Label x:Name="title" FontSize="Medium" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}">
                         <Label.Shadow>
                             <Shadow Radius="1" Opacity="0.2" Brush="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                         </Label.Shadow>
@@ -18,16 +18,16 @@
                 </HorizontalStackLayout>
                 <Label Grid.Column="3" IsVisible="False" Text="&#xf06a;" FontSize="Small" FontFamily="IconsSolid" VerticalTextAlignment="Start" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}" />
 
-                <Label Grid.Row="1" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-                <Label Grid.Row="2" Grid.Column="0" x:Name="assetCount" VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                <Label Grid.Row="2" Grid.Column="0" x:Name="assetCount" VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
-                <Label Grid.Row="1" Grid.Column="1" Text="Valor Total" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-                <Label Grid.Row="2" Grid.Column="1" x:Name="price" VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                <Label Grid.Row="1" Grid.Column="1" Text="Valor Total" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                <Label Grid.Row="2" Grid.Column="1" x:Name="price" VerticalTextAlignment="Start" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
-                <Label Grid.Row="1" Grid.Column="2" Text="Variação" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                <Label Grid.Row="1" Grid.Column="2" Text="Variação" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                 <Label Grid.Row="2" Grid.Column="2" x:Name="variation" VerticalTextAlignment="Start" HorizontalTextAlignment="End" FontAttributes="Bold" />
 
-                <Label Grid.Row="1" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                <Label Grid.Row="1" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                 <Label Grid.Row="2" Grid.Column="3" x:Name="performance" VerticalTextAlignment="Start" FontAttributes="Bold" />
             </Grid>
             <BoxView x:Name="color" HeightRequest="7" />

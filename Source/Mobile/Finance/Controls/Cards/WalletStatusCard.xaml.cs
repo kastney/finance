@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Finance.Controls;
+namespace Finance.Controls.Cards;
 
 public partial class WalletStatusCard : ContentView {
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(nameof(Price), typeof(float?), typeof(WalletStatusCard), null, propertyChanged: OnPriceChanged);

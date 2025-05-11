@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Finance.Controls.SmallButtonCard">
+             x:Class="Finance.Controls.Buttons.SmallButtonCard">
 
     <VerticalStackLayout Spacing="5">
         <VerticalStackLayout.GestureRecognizers>
@@ -12,10 +12,10 @@
                 <RoundRectangle CornerRadius="8" StrokeThickness="0" />
             </Border.StrokeShape>
             <Grid>
-                <Label x:Name="icon" FontFamily="IconsSolid" IsVisible="True" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-                <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False" HeightRequest="20" Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                <Label x:Name="icon" FontFamily="IconsSolid" IsVisible="True" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False" HeightRequest="20" Color="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
             </Grid>
         </Border>
-        <Label x:Name="text" FontSize="Micro" HorizontalTextAlignment="Center" FontFamily="OpenSansRegular" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+        <Label x:Name="text" FontSize="Micro" HorizontalTextAlignment="Center" FontFamily="OpenSansRegular" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
     </VerticalStackLayout>
 </ContentView>

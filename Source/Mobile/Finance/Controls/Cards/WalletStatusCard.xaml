@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Finance.Controls.WalletStatusCard">
+             x:Class="Finance.Controls.Cards.WalletStatusCard">
 
     <Border Style="{x:StaticResource Card}">
         <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*,Auto,Auto" ColumnSpacing="15" Padding="10">
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="End" Text="Valor Patrimonial" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="Start" x:Name="price" FontSize="Medium" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" Margin="0,0,0,10" />
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="End" Text="Valor Patrimonial" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="Start" x:Name="price" FontSize="Medium" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" Margin="0,0,0,10" />
 
-            <Label Grid.Row="2" Grid.Column="0" VerticalTextAlignment="End" Text="Rentabilidade" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Start" x:Name="profitability" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="0" VerticalTextAlignment="End" Text="Rentabilidade" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Start" x:Name="profitability" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
-            <Label Grid.Row="2" Grid.Column="2" VerticalTextAlignment="End" HorizontalTextAlignment="End" Text="Variação" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="2" VerticalTextAlignment="Start" HorizontalTextAlignment="End" x:Name="variation" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="2" VerticalTextAlignment="End" HorizontalTextAlignment="End" Text="Variação" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="2" VerticalTextAlignment="Start" HorizontalTextAlignment="End" x:Name="variation" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
-            <Label Grid.Row="2" Grid.Column="3" VerticalTextAlignment="End" Text="Performance" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
-            <Label Grid.Row="3" Grid.Column="3" VerticalTextAlignment="Start" x:Name="performance" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+            <Label Grid.Row="2" Grid.Column="3" VerticalTextAlignment="End" Text="Performance" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="3" VerticalTextAlignment="Start" x:Name="performance" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
         </Grid>
     </Border>
 </ContentView>

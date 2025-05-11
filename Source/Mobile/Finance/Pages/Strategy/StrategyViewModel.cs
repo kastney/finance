@@ -17,9 +17,9 @@ internal partial class StrategyViewModel : ViewModel {
             IsRunning = true;
             IsBrazilStocksRunning = true;
 
-            if(await walletService.SetBrazilStocksEnabled(!walletService.Wallet.BrazilStocksEnabled)) {
-                // Mudou
-            }
+            //if(await walletService.SetBrazilStocksEnabled(!walletService.Wallet.BrazilStocksEnabled)) {
+            // Mudou
+            //}
 
             IsBrazilStocksRunning = false;
             IsRunning = false;
@@ -32,9 +32,9 @@ internal partial class StrategyViewModel : ViewModel {
             IsRunning = true;
             IsFIIsRunning = true;
 
-            if(await walletService.SetFIIsEnabled(!walletService.Wallet.FIIsEnabled)) {
-                // Mudou
-            }
+            //if(await walletService.SetFIIsEnabled(!walletService.Wallet.FIIsEnabled)) {
+            // Mudou
+            //}
 
             IsFIIsRunning = false;
             IsRunning = false;

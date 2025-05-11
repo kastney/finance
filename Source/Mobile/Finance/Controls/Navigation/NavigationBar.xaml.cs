@@ -1,4 +1,4 @@
-namespace Finance.Controls;
+namespace Finance.Controls.Navigation;
 
 public partial class NavigationBar : ContentView {
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(NavigationBar), string.Empty, propertyChanged: OnTitleChanged);

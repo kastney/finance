@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Finance.Controls;
+namespace Finance.Controls.Buttons;
 
 public partial class SmallButtonCard : ContentView {
     public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(SmallButtonCard), string.Empty, propertyChanged: OnTextChanged);

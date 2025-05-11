@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
              xmlns:models="clr-namespace:Finance.Models"
              x:Class="Finance.Pages.WalletPresentationPage"
              Shell.FlyoutBehavior="Disabled">
@@ -45,6 +45,6 @@
 
         <Image Grid.ColumnSpan="2" Source="dotnet_bot" />
         <IndicatorView x:Name="indicatorView" Grid.Row="2" Grid.ColumnSpan="2" Margin="19,15,19,20" IndicatorSize="12" IndicatorsShape="Circle" />
-        <controls:IndicatorButton Grid.Row="3" Grid.ColumnSpan="2" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,0,20,30" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" />
+        <buttons:IndicatorButton Grid.Row="3" Grid.ColumnSpan="2" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,0,20,30" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" />
     </Grid>
 </ContentPage>

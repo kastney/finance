@@ -9,17 +9,11 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private Wallet wallet;
 
-    #region Graphics
-
     [ObservableProperty]
     private Color[] palette;
 
     [ObservableProperty]
     private List<PieData> walletPosition;
-
-    #endregion Graphics
-
-    #region Has
 
     [ObservableProperty]
     private bool hasBrazilStocks;
@@ -33,26 +27,26 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private bool hasAsset;
 
-    #endregion Has
-
     public MainViewModel() {
         Palette = [];
     }
 
-    internal void Initialization() => BackFinish();
+    internal void Initialization() => Update();
 
-    public override void BackFinish() {
+    public override void Update() {
         Wallet = walletService.Wallet;
         OnPropertyChanged(nameof(Wallet));
         // Set graphics
-        Palette = Wallet.GetPalette();
-        WalletPosition = Wallet.GetWalletPosition();
+        //Palette = Wallet.GetPalette();
+        //WalletPosition = Wallet.GetWalletPosition();
         // Set has properties
-        HasBrazilStocks = Wallet.HasBrazilStock();
-        HasFIIs = Wallet.HasFIIs();
-        HasAssetTitle = HasBrazilStocks || HasFIIs;
-        HasAsset = Wallet.HasAsset();
+        //HasBrazilStocks = Wallet.HasBrazilStock();
+        //HasFIIs = Wallet.HasFIIs();
+        //HasAssetTitle = HasBrazilStocks || HasFIIs;
+        //HasAsset = Wallet.HasAsset();
     }
+
+    #region Navigation Methods
 
     [RelayCommand]
     private async Task SelectWallet() {
@@ -66,25 +60,33 @@ internal partial class MainViewModel : ViewModel {
 
     [RelayCommand]
     private async Task Strategy() {
-        IsRunning = true;
-        await navigationService.NavigateTo("strategy");
-        await Task.Delay(500);
-        IsRunning = false;
+        if(!IsRunning) {
+            IsRunning = true;
+            await navigationService.NavigateTo("strategy");
+            await Task.Delay(500);
+            IsRunning = false;
+        }
     }
 
     [RelayCommand]
     private async Task Historic() {
-        IsRunning = true;
-        await navigationService.NavigateTo("historic");
-        await Task.Delay(500);
-        IsRunning = false;
+        if(!IsRunning) {
+            IsRunning = true;
+            await navigationService.NavigateTo("historic");
+            await Task.Delay(500);
+            IsRunning = false;
+        }
     }
 
     [RelayCommand]
     private async Task DangerZone() {
-        IsRunning = true;
-        await navigationService.NavigateTo("dangerZone");
-        await Task.Delay(500);
-        IsRunning = false;
+        if(!IsRunning) {
+            IsRunning = true;
+            await navigationService.NavigateTo("dangerZone");
+            await Task.Delay(500);
+            IsRunning = false;
+        }
     }
+
+    #endregion Navigation Methods
 }

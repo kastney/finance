@@ -1,7 +1,14 @@
 ﻿namespace Finance.Pages;
 
 public partial class MainPage : ContentPage {
+
+    #region Fields
+
     private readonly MainViewModel viewModel;
+
+    #endregion Fields
+
+    #region Constructor
 
     public MainPage() {
         InitializeComponent();
@@ -10,6 +17,10 @@ public partial class MainPage : ContentPage {
         Current_RequestedThemeChanged(null, null);
     }
 
+    #endregion Constructor
+
+    #region Started Methods
+
     internal void Initialization() {
         viewModel.Initialization();
     }
@@ -17,14 +28,22 @@ public partial class MainPage : ContentPage {
     protected override async void OnAppearing() {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
-            await Task.Delay(500);
+            await Task.Delay(100);
             viewModel.IsRunning = false;
         }
     }
 
+    #endregion Started Methods
+
+    #region Navigation Methods
+
     protected override bool OnBackButtonPressed() {
         return !viewModel.CanBack();
     }
+
+    #endregion Navigation Methods
+
+    #region Theme Methods
 
     private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
         if(Application.Current.RequestedTheme == AppTheme.Light) {
@@ -35,4 +54,6 @@ public partial class MainPage : ContentPage {
             legendStyle.Color = labelStyle.Color = StaticResourceUtility.Get<Color>("White");
         }
     }
+
+    #endregion Theme Methods
 }

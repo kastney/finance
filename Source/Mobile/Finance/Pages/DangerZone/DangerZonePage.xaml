@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              x:Class="Finance.Pages.DangerZone.DangerZonePage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="Zona de Perigo" IsRoot="False" Clicked="BackButtom_Clicked" />
+        <navigation:NavigationBar Title="Zona de Perigo" IsRoot="False" Clicked="BackButtom_Clicked" />
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <VerticalStackLayout Margin="20,10,20,50" Spacing="10">
                 <Label Text="Apagar esta carteira" FontAttributes="Bold" FontSize="Small" />
                 <Label Text="Depois de apagar uma carteira, não há como voltar atrás. Por favor, tenha certeza!" FontSize="Micro" />
-                <controls:IndicatorButtonError Text="Apagar Carteira" Glyph="&#xf2ed;" IsRunning="{Binding IsRunning}" Command="{Binding DeleteWalletCommand}" />
+                <buttons:IndicatorButtonError Text="Apagar Carteira" Glyph="&#xf2ed;" IsRunning="{Binding IsRunning}" Command="{Binding DeleteWalletCommand}" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Finance.Controls;
+namespace Finance.Controls.Navigation;
 
 public partial class ToolbarItem : ContentView {
     public static readonly BindableProperty GlyphProperty = BindableProperty.Create(nameof(Glyph), typeof(string), typeof(ToolbarItem), string.Empty, propertyChanged: OnGlyphChanged);

@@ -158,19 +158,19 @@
 	  <MauiXaml Update="Controls\Cards\AssetCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\IndicatorButton.xaml">
+	  <MauiXaml Update="Controls\Buttons\IndicatorButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\IndicatorButtonError.xaml">
+	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\NavigationBar.xaml">
+	  <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\SmallButtonCard.xaml">
+	  <MauiXaml Update="Controls\Buttons\SmallButtonCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\ToolbarItem.xaml">
+	  <MauiXaml Update="Controls\Navigation\ToolbarItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
@@ -179,7 +179,7 @@
 	  <MauiXaml Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\CreateWallet\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
@@ -203,6 +203,10 @@
 	  <MauiXaml Update="Services\Navigation\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Using Include="CommunityToolkit.Mvvm.Input" />
 	</ItemGroup>
 
 </Project>

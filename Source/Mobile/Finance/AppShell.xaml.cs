@@ -1,4 +1,4 @@
-﻿using Finance.Pages.CreateWallet;
+﻿using Finance.Pages.Walleting.CreateWallet;
 using Finance.Pages.DangerZone;
 using Finance.Pages.DangerZone.Delete;
 using Finance.Pages.Historic;
@@ -12,8 +12,8 @@ public partial class AppShell : Shell {
     public AppShell() {
         InitializeComponent();
 
-        Routing.RegisterRoute("select", typeof(SelectWalletPage));
         Routing.RegisterRoute("create", typeof(CreateWalletPage));
+        Routing.RegisterRoute("select", typeof(SelectWalletPage));
 
         Routing.RegisterRoute("strategy", typeof(StrategyPage));
         Routing.RegisterRoute("historic", typeof(HistoricPage));

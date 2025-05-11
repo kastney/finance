@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Finance.Controls;
+namespace Finance.Controls.Cards;
 
 public partial class AssetCard : ContentView {
 
@@ -97,13 +97,13 @@ public partial class AssetCard : ContentView {
     private static void OnVariationChanged(BindableObject bindable, object oldValue, object newValue) {
         if(bindable is not AssetCard control || newValue is not float variation) { return; }
         control.variation.Text = (variation / 100).ToString("P2");
-        ApplyColor(control.variation, variation, "Green", "Red", "Gray600");
+        ApplyColor(control.variation, variation, "Green", "Red", "TextColor");
     }
 
     private static void OnPerformanceChanged(BindableObject bindable, object oldValue, object newValue) {
         if(bindable is not AssetCard control || newValue is not float performance) { return; }
         control.performance.Text = (performance / 100).ToString("P2");
-        ApplyColor(control.performance, performance, "Green", "Red", "Gray600");
+        ApplyColor(control.performance, performance, "Green", "Red", "TextColor");
     }
 
     private static void OnCultureChanged(BindableObject bindable, object oldValue, object newValue) {
@@ -124,11 +124,11 @@ public partial class AssetCard : ContentView {
 
     private void Current_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e) {
         if(Variation.HasValue) {
-            ApplyColor(variation, Variation.Value, "Green", "Red", "Gray600");
+            ApplyColor(variation, Variation.Value, "Green", "Red", "TextColor");
         }
 
         if(Performance.HasValue) {
-            ApplyColor(performance, Performance.Value, "Green", "Red", "Gray600");
+            ApplyColor(performance, Performance.Value, "Green", "Red", "TextColor");
         }
     }
 

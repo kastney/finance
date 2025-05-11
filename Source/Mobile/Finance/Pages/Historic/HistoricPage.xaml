@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              x:Class="Finance.Pages.Historic.HistoricPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
     <Grid RowDefinitions="Auto,Auto,*">
-        <controls:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked">
-            <controls:NavigationBar.ToolbarItems>
+        <navigation:NavigationBar Title="Histórico" IsRoot="False" Clicked="BackButtom_Clicked">
+            <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
-                    <controls:ToolbarItem Glyph="&#x2b;" Command="{Binding NewOperationCommand}" />
+                    <navigation:ToolbarItem Glyph="&#x2b;" Command="{Binding NewOperationCommand}" />
                 </VerticalStackLayout>
-            </controls:NavigationBar.ToolbarItems>
-        </controls:NavigationBar>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
         <!--<Border Grid.Row="2" Margin="15,20" Style="{StaticResource Card}">
             <editors:DXCalendar BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"
                                 MinDate="{Binding MinDate}" MaxDate="{Binding MaxDate}" DisplayDate="{Binding DisplayDate}" SelectedDate="{Binding SelectedDate}">
