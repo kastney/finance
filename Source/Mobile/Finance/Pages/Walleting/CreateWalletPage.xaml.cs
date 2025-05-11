@@ -1,4 +1,4 @@
-namespace Finance.Pages.Walleting.CreateWallet;
+namespace Finance.Pages.Walleting;
 
 /// <summary>
 /// Página responsável por criar uma nova carteira.

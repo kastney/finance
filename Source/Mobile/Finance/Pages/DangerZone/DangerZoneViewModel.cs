@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-
-namespace Finance.Pages.DangerZone;
+﻿namespace Finance.Pages.DangerZone;
 
 internal partial class DangerZoneViewModel : ViewModel {
 
@@ -9,7 +7,7 @@ internal partial class DangerZoneViewModel : ViewModel {
         IsRunning = true;
 
         await navigationService.NavigateTo("delete");
-        await Task.Delay(500);
+        await Task.Delay(100);
 
         IsRunning = false;
     }

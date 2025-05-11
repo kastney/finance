@@ -179,7 +179,7 @@
 	  <MauiXaml Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Walleting\CreateWallet\CreateWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
@@ -194,7 +194,7 @@
 	  <MauiXaml Update="Pages\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SelectWallet\SelectWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
@@ -206,7 +206,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Using Include="CommunityToolkit.Mvvm.ComponentModel" />
 	  <Using Include="CommunityToolkit.Mvvm.Input" />
+	  <Using Include="System.Collections.ObjectModel" />
 	</ItemGroup>
 
 </Project>

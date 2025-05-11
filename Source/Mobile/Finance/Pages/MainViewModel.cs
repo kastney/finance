@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Finance.Models;
 
 namespace Finance.Pages;
@@ -53,7 +52,7 @@ internal partial class MainViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
             await navigationService.NavigateTo("select");
-            await Task.Delay(500);
+            await Task.Delay(100);
             IsRunning = false;
         }
     }
@@ -63,7 +62,7 @@ internal partial class MainViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
             await navigationService.NavigateTo("strategy");
-            await Task.Delay(500);
+            await Task.Delay(100);
             IsRunning = false;
         }
     }
@@ -73,7 +72,7 @@ internal partial class MainViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
             await navigationService.NavigateTo("historic");
-            await Task.Delay(500);
+            await Task.Delay(100);
             IsRunning = false;
         }
     }
@@ -83,7 +82,7 @@ internal partial class MainViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
             await navigationService.NavigateTo("dangerZone");
-            await Task.Delay(500);
+            await Task.Delay(100);
             IsRunning = false;
         }
     }

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Finance.Services;
 
 namespace Finance.Pages;
@@ -19,7 +18,7 @@ internal partial class WalletPresentationViewModel : ObservableObject {
         IsRunning = true;
 
         await navigationService.NavigateTo("create");
-        await Task.Delay(500);
+        await Task.Delay(100);
 
         IsRunning = false;
     }

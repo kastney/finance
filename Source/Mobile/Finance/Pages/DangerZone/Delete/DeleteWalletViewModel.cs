@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Finance.Models;
 using Finance.Pages;
 
@@ -26,7 +25,7 @@ internal partial class DeleteWalletViewModel : ViewModel {
         await walletService.Delete(Wallet);
 
         // Ir para o dashboard, passando pelo loading
-        await Task.Delay(250);
+        await Task.Delay(100);
         if(await navigationService.NavigateTo("///loading", false) is LoadingPage page) { page.Initialization(); }
 
         IsRunning = false;

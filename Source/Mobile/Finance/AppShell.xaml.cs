@@ -1,9 +1,8 @@
-﻿using Finance.Pages.Walleting.CreateWallet;
-using Finance.Pages.DangerZone;
+﻿using Finance.Pages.DangerZone;
 using Finance.Pages.DangerZone.Delete;
 using Finance.Pages.Historic;
-using Finance.Pages.SelectWallet;
 using Finance.Pages.Strategy;
+using Finance.Pages.Walleting;
 
 namespace Finance;
 

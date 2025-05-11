@@ -1,9 +1,8 @@
 ﻿using DevExpress.Maui;
 using Finance.Pages;
-using Finance.Pages.Walleting.CreateWallet;
 using Finance.Pages.DangerZone;
-using Finance.Pages.SelectWallet;
 using Finance.Pages.Strategy;
+using Finance.Pages.Walleting;
 using Finance.Services;
 using Finance.Services.Walleting;
 using Finance.ViewModels;

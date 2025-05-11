@@ -5,8 +5,8 @@
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
              xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              xmlns:styles="clr-namespace:Finance.Resources.Styles"
-             xmlns:viewModel="clr-namespace:Finance.Pages.Walleting.CreateWallet"
-             x:Class="Finance.Pages.Walleting.CreateWallet.CreateWalletPage"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
+             x:Class="Finance.Pages.Walleting.CreateWalletPage"
              x:DataType="viewModel:CreateWalletViewModel"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">

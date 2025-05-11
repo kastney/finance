@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-
-namespace Finance.Pages.Historic;
+﻿namespace Finance.Pages.Historic;
 
 internal partial class HistoricViewModel : ViewModel {
 
@@ -26,7 +24,7 @@ internal partial class HistoricViewModel : ViewModel {
         if(!IsRunning) {
             IsRunning = true;
 
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             IsRunning = false;
         }

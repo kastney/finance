@@ -14,7 +14,7 @@ public partial class DeleteWalletPage : ContentPage {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
             viewModel.IsRunningInverse = false;
-            await Task.Delay(500);
+            await Task.Delay(100);
             viewModel.IsRunningInverse = true;
             viewModel.IsRunning = false;
         }

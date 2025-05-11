@@ -11,7 +11,7 @@ public partial class StrategyPage : ContentPage {
     protected override async void OnAppearing() {
         if(!viewModel.IsRunning) {
             viewModel.IsRunning = true;
-            await Task.Delay(500);
+            await Task.Delay(100);
             viewModel.IsRunning = false;
         }
     }

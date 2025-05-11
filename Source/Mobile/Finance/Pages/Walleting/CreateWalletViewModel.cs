@@ -2,7 +2,7 @@
 using Finance.Validators.Objects;
 using Finance.Validators.Rules;
 
-namespace Finance.Pages.Walleting.CreateWallet;
+namespace Finance.Pages.Walleting;
 
 /// <summary>
 /// ViewModel responsável por controlar a lógica de criação de uma nova carteira,
@@ -68,7 +68,7 @@ internal partial class CreateWalletViewModel : ViewModel {
         walletService.SetWallet(wallet);
 
         // Aguarda um breve momento para garantir transição visual.
-        await Task.Delay(250);
+        await Task.Delay(100);
         // Navega para a página de loading e inicia sua lógica de inicialização, se for bem-sucedido.
         if(await navigationService.NavigateTo("///loading", false) is LoadingPage page) { page.Initialization(); }
 
