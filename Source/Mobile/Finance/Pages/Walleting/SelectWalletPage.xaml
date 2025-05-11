@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:models="clr-namespace:Finance.Models"
              xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
              x:Class="Finance.Pages.Walleting.SelectWalletPage"
@@ -32,7 +33,7 @@
                 <!-- Template de exibição de cada item da lista (carteira) -->
                 <collection:DXCollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{x:StaticResource Card}" Margin="15,0,15,210">
+                        <Border x:DataType="models:Wallet" Style="{x:StaticResource Card}" Margin="15,0,15,210">
                             <Grid HeightRequest="70" ColumnDefinitions="Auto, *" ColumnSpacing="20">
                                 <!-- Ícone representando a carteira -->
                                 <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />

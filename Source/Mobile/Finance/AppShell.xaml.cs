@@ -1,5 +1,4 @@
 ﻿using Finance.Pages.DangerZone;
-using Finance.Pages.DangerZone.Delete;
 using Finance.Pages.Historic;
 using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;

@@ -2,30 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
-             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
-             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
-             xmlns:styles="clr-namespace:Finance.Resources.Styles"
-             x:Class="Finance.Pages.DangerZone.Delete.DeleteWalletPage"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"             
+             xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
+             x:Class="Finance.Pages.Walleting.DeleteWalletPage"
+             x:DataType="viewModel:DeleteWalletViewModel"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
+    <!-- Define o layout principal com quatro linhas: barra de navegação, conteúdo principal, confirmação e botão -->
     <Grid RowDefinitions="Auto,*,Auto,Auto">
+        <!-- Barra de navegação personalizada com botão de voltar -->
         <navigation:NavigationBar Title="Deletar Carteira" IsRoot="False" Clicked="BackButtom_Clicked" />
 
+        <!-- Conteúdo principal exibindo o nome da carteira e um aviso -->
         <VerticalStackLayout Grid.Row="1" Margin="15,0" Spacing="10">
+            <!-- Título informando qual carteira será apagada -->
             <Label FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
+                        <!-- Texto estático -->
                         <Span Text="Apagando: " />
+                        <!-- Nome da carteira em negrito vindo do ViewModel -->
                         <Span Text="{Binding Wallet.Name}" FontAttributes="Bold" />
                     </FormattedString>
                 </Label.FormattedText>
-            </Label>
+            </Label>            
+            <!-- Aviso importante ao usuário sobre a irreversibilidade da ação -->
             <Label Text="Depois de apagar esta carteira, não há como voltar atrás. Por favor, tenha certeza!" />
         </VerticalStackLayout>
 
+        <!-- Seção de confirmação com checkbox e texto clicável -->
         <HorizontalStackLayout Grid.Row="2" Margin="10" IsEnabled="{Binding IsRunningInverse}">
+            <!-- Checkbox que habilita o botão de apagar quando marcado -->
             <CheckBox x:Name="checkBox" />
+            <!-- Texto que descreve a confirmação e permite marcar a checkbox ao ser tocado -->
             <Label Text="Estou ciente que tudo será apagado." VerticalTextAlignment="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
@@ -33,6 +43,7 @@
             </Label>
         </HorizontalStackLayout>
 
+        <!-- Botão com indicador de carregamento, habilitado somente quando a checkbox estiver marcada -->
         <buttons:IndicatorButton Grid.Row="3" Margin="20,0,20,30" Glyph="&#xf2ed;" IsEnabled="{Binding Source={x:Reference checkBox}, Path=IsChecked}" IsRunning="{Binding IsRunning}" Text="Apagar Carteira" Command="{Binding DeleteCommand}" />
     </Grid>
 </ContentPage>

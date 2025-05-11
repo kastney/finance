@@ -5,7 +5,6 @@ using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 using Finance.Services;
 using Finance.Services.Walleting;
-using Finance.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace Finance {
