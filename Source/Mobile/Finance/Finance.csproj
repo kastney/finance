@@ -140,11 +140,8 @@
 	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Historic\HistoricPage.xaml.cs">
-	    <DependentUpon>HistoricPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Pages\WalletPresentationPage.xaml.cs">
-	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
+	  <Compile Update="Pages\Initialize\PresentationPage.xaml.cs">
+	    <DependentUpon>PresentationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
@@ -182,16 +179,10 @@
 	  <MauiXaml Update="Pages\Walleting\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
+	  <MauiXaml Update="Pages\Initialize\PresentationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\WalletPresentationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoadingPage.xaml">
+	  <MauiXaml Update="Pages\Initialize\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">

@@ -3,27 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
              xmlns:models="clr-namespace:Finance.Models"
-             x:Class="Finance.Pages.WalletPresentationPage"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Initialize"
+             x:Class="Finance.Pages.Initialize.PresentationPage"
+             x:DataType="viewModel:PresentationViewModel"
              Shell.FlyoutBehavior="Disabled">
 
+    <!-- Layout principal da página, organizado em uma grade com 4 linhas e 2 colunas -->
     <Grid RowDefinitions="120,*,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="0">
+        <!-- Área de exibição em carrossel com banners informativos -->
         <Grid Grid.RowSpan="5" Grid.ColumnSpan="2">
+            <!-- Carrossel com indicadores e manipulação de item atual -->
             <CarouselView x:Name="carouselView" IndicatorView="{x:Reference indicatorView}" CurrentItemChanged="CarouselView_CurrentItemChanged">
+                <!-- Itens do carrossel definidos como array de objetos BannerItem -->
                 <CarouselView.ItemsSource>
                     <x:Array Type="{x:Type models:BannerItem}">
                         <models:BannerItem Title="Gerencie Seus Ativos" Subtitle="Gerencie seus investimentos em Renda Fixa, Fundos Imobiliários e Ações" Image="show_banner_1" />
                         <models:BannerItem Title="Defina Estratégias" Subtitle="Estabeleça Indicadores de Ativos, a porcentagem da Composição Patrimonial e suas Metas" Image="show_banner_2" />
                     </x:Array>
                 </CarouselView.ItemsSource>
+                <!-- Template para exibição de cada item do carrossel -->
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
+                        <!-- Grid interna com layout em 2 linhas -->
                         <Grid RowDefinitions="6*,4*" RowSpacing="5">
+                            <!-- Imagem principal do banner -->
                             <Image Grid.RowSpan="2" Source="{Binding Image}" Aspect="AspectFill" />
+                            <!-- Título do banner com sombra para contraste -->
                             <Label Grid.Row="0" Text="{Binding Title}" LineBreakMode="CharacterWrap" FontSize="Title" MaxLines="3" FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="End" Margin="20,0" TextColor="White">
                                 <Label.Shadow>
                                     <Shadow Brush="Black" Offset="0,0" Radius="35" Opacity="1" />
                                 </Label.Shadow>
                             </Label>
+                            <!-- Subtítulo do banner com sombra para melhor leitura -->
                             <Label Grid.Row="1" Text="{Binding Subtitle}" LineBreakMode="CharacterWrap" FontSize="Small" MaxLines="4" FontAttributes="None" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" Margin="20,0" TextColor="White">
                                 <Label.Shadow>
                                     <Shadow Brush="Black" Offset="0,0" Radius="35" Opacity="1" />
@@ -33,6 +44,8 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+
+            <!-- Gradiente sobreposto ao carrossel para suavizar transição visual -->
             <Border StrokeThickness="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -43,8 +56,11 @@
             </Border>
         </Grid>
 
+        <!-- Imagem da logo do aplicativo -->
         <Image Grid.ColumnSpan="2" Source="dotnet_bot" />
+        <!-- Indicador visual do carrossel, indicando qual banner está ativo -->
         <IndicatorView x:Name="indicatorView" Grid.Row="2" Grid.ColumnSpan="2" Margin="19,15,19,20" IndicatorSize="12" IndicatorsShape="Circle" />
+        <!-- Botão com indicador de carregamento para criar uma nova carteira -->
         <buttons:IndicatorButton Grid.Row="3" Grid.ColumnSpan="2" Glyph="&#xf555;" Text="Nova Carteira" Margin="20,0,20,30" IsRunning="{Binding IsRunning}" Command="{Binding NewWalletCommand}" />
     </Grid>
 </ContentPage>

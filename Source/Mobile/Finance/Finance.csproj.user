@@ -41,16 +41,10 @@
     <MauiXaml Update="Pages\Walleting\CreateWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
+    <MauiXaml Update="Pages\Initialize\PresentationPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Pages\WalletPresentationPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Pages\LoadingPage.xaml">
+    <MauiXaml Update="Pages\Initialize\LoadingPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">

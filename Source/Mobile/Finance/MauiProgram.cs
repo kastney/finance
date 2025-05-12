@@ -1,7 +1,7 @@
 ﻿using DevExpress.Maui;
 using Finance.Pages;
 using Finance.Pages.DangerZone;
-using Finance.Pages.Strategy;
+using Finance.Pages.Initialize;
 using Finance.Pages.Walleting;
 using Finance.Services;
 using Finance.Services.Walleting;
@@ -32,14 +32,14 @@ namespace Finance {
             // ViewModels
             // ...
             builder.Services.AddTransient<LoadingViewModel>();
-            builder.Services.AddTransient<WalletPresentationViewModel>();
+            builder.Services.AddTransient<PresentationViewModel>();
             builder.Services.AddTransient<MainViewModel>();
-            // ...
+            // Manage...
             builder.Services.AddTransient<SelectWalletViewModel>();
             builder.Services.AddTransient<CreateWalletViewModel>();
-            builder.Services.AddTransient<StrategyViewModel>();
-            builder.Services.AddTransient<DangerZoneViewModel>();
             builder.Services.AddTransient<DeleteWalletViewModel>();
+            // ..
+            builder.Services.AddTransient<DangerZoneViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
