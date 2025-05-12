@@ -3,19 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance.Controls.Buttons.SmallButtonCard">
 
+    <!-- Layout vertical que organiza os elementos do botão em pilha -->
     <VerticalStackLayout Spacing="5">
+        <!-- Reconhecedor de toque que dispara um evento ao tocar o controle -->
         <VerticalStackLayout.GestureRecognizers>
             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
         </VerticalStackLayout.GestureRecognizers>
+
+        <!-- Container com bordas arredondadas que envolve o ícone ou o indicador de carregamento -->
         <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" HeightRequest="60" StrokeThickness="0">
+            <!-- Define o formato da borda como retângulo arredondado -->
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="8" StrokeThickness="0" />
             </Border.StrokeShape>
+            <!-- Grade que sobrepõe o ícone e o indicador (visibilidade controlada dinamicamente) -->
             <Grid>
+                <!-- Ícone centralizado que representa a ação do botão -->
                 <Label x:Name="icon" FontFamily="IconsSolid" IsVisible="True" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                <!-- Indicador de carregamento que substitui o ícone quando necessário -->
                 <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False" HeightRequest="20" Color="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
             </Grid>
         </Border>
+        <!-- Texto exibido abaixo do ícone, representando a legenda ou descrição do botão -->
         <Label x:Name="text" FontSize="Micro" HorizontalTextAlignment="Center" FontFamily="OpenSansRegular" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
     </VerticalStackLayout>
 </ContentView>

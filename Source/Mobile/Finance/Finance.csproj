@@ -199,7 +199,10 @@
 	<ItemGroup>
 	  <Using Include="CommunityToolkit.Mvvm.ComponentModel" />
 	  <Using Include="CommunityToolkit.Mvvm.Input" />
+	  <Using Include="SQLite" />
 	  <Using Include="System.Collections.ObjectModel" />
+	  <Using Include="System.Globalization" />
+	  <Using Include="System.Windows.Input" />
 	</ItemGroup>
 
 </Project>

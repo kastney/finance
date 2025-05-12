@@ -6,16 +6,16 @@
     <Border Style="{x:StaticResource Card}">
         <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*,Auto,Auto" ColumnSpacing="15" Padding="10">
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="End" Text="Valor Patrimonial" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="Start" x:Name="price" FontSize="Medium" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" Margin="0,0,0,10" />
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalTextAlignment="Start" x:Name="price" FontSize="Medium" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" Margin="0,0,0,10" />
 
             <Label Grid.Row="2" Grid.Column="0" VerticalTextAlignment="End" Text="Rentabilidade" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-            <Label Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Start" x:Name="profitability" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Start" x:Name="profitability" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
             <Label Grid.Row="2" Grid.Column="2" VerticalTextAlignment="End" HorizontalTextAlignment="End" Text="Variação" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-            <Label Grid.Row="3" Grid.Column="2" VerticalTextAlignment="Start" HorizontalTextAlignment="End" x:Name="variation" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="2" VerticalTextAlignment="Start" HorizontalTextAlignment="End" x:Name="variation" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
 
             <Label Grid.Row="2" Grid.Column="3" VerticalTextAlignment="End" Text="Performance" FontSize="Micro" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-            <Label Grid.Row="3" Grid.Column="3" VerticalTextAlignment="Start" x:Name="performance" FontAttributes="Bold" FontFamily="" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+            <Label Grid.Row="3" Grid.Column="3" VerticalTextAlignment="Start" x:Name="performance" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
         </Grid>
     </Border>
 </ContentView>

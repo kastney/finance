@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Finance.Controls.Cards;
 
 public partial class WalletStatusCard : ContentView {
