@@ -89,28 +89,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Enumerations\**" />
 	  <AndroidResource Remove="Models\Assets\**" />
 	  <AndroidResource Remove="Models\Operations\**" />
-	  <Compile Remove="Enumerations\**" />
 	  <Compile Remove="Models\Assets\**" />
 	  <Compile Remove="Models\Operations\**" />
-	  <EmbeddedResource Remove="Enumerations\**" />
 	  <EmbeddedResource Remove="Models\Assets\**" />
 	  <EmbeddedResource Remove="Models\Operations\**" />
-	  <MauiCss Remove="Enumerations\**" />
 	  <MauiCss Remove="Models\Assets\**" />
 	  <MauiCss Remove="Models\Operations\**" />
-	  <MauiXaml Remove="Enumerations\**" />
 	  <MauiXaml Remove="Models\Assets\**" />
 	  <MauiXaml Remove="Models\Operations\**" />
-	  <None Remove="Enumerations\**" />
 	  <None Remove="Models\Assets\**" />
 	  <None Remove="Models\Operations\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Remove="Controls\Calendar.xaml.cs" />
+	  <Compile Remove="Enumerations\FixedType.cs" />
+	  <Compile Remove="Enumerations\IndexerType.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -134,24 +130,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Controls\Cards\WalletStatusCard.xaml.cs">
-	    <DependentUpon>WalletStatusCard.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Initialize\PresentationPage.xaml.cs">
 	    <DependentUpon>PresentationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\MainPage.xaml.cs">
-	    <DependentUpon>MainPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cards\AssetCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -159,6 +146,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
@@ -171,6 +161,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Walleting\DeleteWalletPage.xaml">
@@ -204,6 +197,8 @@
 	  <Using Include="SQLite" />
 	  <Using Include="System.Collections.ObjectModel" />
 	  <Using Include="System.Globalization" />
+	  <Using Include="System.Text.Json" />
+	  <Using Include="System.Text.Json.Serialization" />
 	  <Using Include="System.Windows.Input" />
 	</ItemGroup>
 

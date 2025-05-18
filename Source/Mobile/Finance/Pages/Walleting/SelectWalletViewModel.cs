@@ -50,7 +50,7 @@ internal partial class SelectWalletViewModel : ViewModel {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Carrega a lista de carteiras disponíveis para seleção,
@@ -67,7 +67,7 @@ internal partial class SelectWalletViewModel : ViewModel {
         IsEmpty = Wallets.Count == 0;
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 

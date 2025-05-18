@@ -58,22 +58,22 @@ internal class WalletService : IWalletService {
     public async Task<bool> Exists() {
         // Inicializa o banco de dados, caso ainda não tenha sido feito.
         await Init();
-        
+
         // Verifica se existe carteiras cadastradas.
         var result = await database.QueryAsync<Wallet>("SELECT * FROM wallets LIMIT 1");
         // Se nenhuma carteira foi encontrada, retorna falso.
         if(result.Count == 0) { return false; }
-        
+
         // Verifica se a carteira atual (armazenada nas preferências) ainda existe no banco.
         Wallet = (await database.QueryAsync<Wallet>($"SELECT * FROM wallets WHERE id='{Preferences.Get("WalletId", default(string))}' LIMIT 1")).FirstOrDefault();
         // Se a carteira atual for encontrada, retorna verdadeiro.
         if(Wallet is not null) { return true; }
-        
+
         // Caso a carteira atual não exista, define a primeira da lista como carteira ativa.
         Wallet = result.FirstOrDefault();
         // Armazena o ID da nova carteira ativa nas preferências.
         Preferences.Set("WalletId", Wallet.Id.ToString());
-        
+
         // Retorna verdadeiro indicando que uma carteira válida foi configurada.
         return true;
     }
@@ -89,7 +89,7 @@ internal class WalletService : IWalletService {
 
         // Verifica se há alguma carteira no banco com o nome informado.
         var result = await database.QueryAsync<Wallet>($"SELECT id FROM wallets WHERE name='{name}' LIMIT 1");
-        
+
         // Retorna verdadeiro se houver pelo menos uma ocorrência.
         return result.Count != 0;
     }
@@ -117,7 +117,7 @@ internal class WalletService : IWalletService {
 
     #endregion Wallet Management Methods
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Inicializa a conexão com o banco de dados SQLite e garante que a tabela de carteiras exista.
@@ -137,5 +137,5 @@ internal class WalletService : IWalletService {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 }
