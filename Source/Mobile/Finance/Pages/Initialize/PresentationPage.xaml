@@ -14,18 +14,18 @@
         <Grid Grid.RowSpan="5" Grid.ColumnSpan="2">
             <!-- Carrossel com indicadores e manipulação de item atual -->
             <CarouselView x:Name="carouselView" IndicatorView="{x:Reference indicatorView}" CurrentItemChanged="CarouselView_CurrentItemChanged">
-                <!-- Itens do carrossel definidos como array de objetos BannerItem -->
+                <!-- Itens do carrossel definidos como array de objetos PresentationItem -->
                 <CarouselView.ItemsSource>
-                    <x:Array Type="{x:Type models:BannerItem}">
-                        <models:BannerItem Title="Gerencie Seus Ativos" Subtitle="Gerencie seus investimentos em Renda Fixa, Fundos Imobiliários e Ações" Image="show_banner_1" />
-                        <models:BannerItem Title="Defina Estratégias" Subtitle="Estabeleça Indicadores de Ativos, a porcentagem da Composição Patrimonial e suas Metas" Image="show_banner_2" />
+                    <x:Array Type="{x:Type models:PresentationItem}">
+                        <models:PresentationItem Title="Gerencie Seus Ativos" Subtitle="Gerencie seus investimentos em Renda Fixa, Fundos Imobiliários e Ações" Image="show_banner_1" />
+                        <models:PresentationItem Title="Defina Estratégias" Subtitle="Estabeleça Indicadores de Ativos, a porcentagem da Composição Patrimonial e suas Metas" Image="show_banner_2" />
                     </x:Array>
                 </CarouselView.ItemsSource>
                 <!-- Template para exibição de cada item do carrossel -->
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <!-- Grid interna com layout em 2 linhas -->
-                        <Grid RowDefinitions="6*,4*" RowSpacing="5">
+                        <Grid RowDefinitions="6*,4*" RowSpacing="5" x:DataType="models:PresentationItem">
                             <!-- Imagem principal do banner -->
                             <Image Grid.RowSpan="2" Source="{Binding Image}" Aspect="AspectFill" />
                             <!-- Título do banner com sombra para contraste -->

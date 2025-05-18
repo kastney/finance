@@ -1,4 +1,6 @@
-﻿namespace Finance.Pages;
+﻿using Finance.Utilities;
+
+namespace Finance.Pages;
 
 public partial class MainPage : ContentPage {
 

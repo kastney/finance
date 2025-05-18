@@ -3,7 +3,7 @@
 /// <summary>
 /// Representa um item de banner exibido na tela de apresentação, contendo título, subtítulo e imagem.
 /// </summary>
-internal class BannerItem {
+internal class PresentationItem {
 
     /// <summary>
     /// Título principal do banner, usado para destacar o conteúdo da apresentação.

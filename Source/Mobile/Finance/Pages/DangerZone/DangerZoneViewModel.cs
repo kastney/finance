@@ -1,4 +1,6 @@
-﻿namespace Finance.Pages.DangerZone;
+﻿using Finance.Utilities;
+
+namespace Finance.Pages.DangerZone;
 
 /// <summary>
 /// ViewModel responsável pela lógica da página de Zona de Perigo, onde são realizadas ações sensíveis como deletar uma carteira.

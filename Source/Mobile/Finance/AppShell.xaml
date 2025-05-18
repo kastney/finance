@@ -5,8 +5,14 @@
        xmlns:pages_initialize="clr-namespace:Finance.Pages.Initialize"
        x:Class="Finance.AppShell">
 
-    <!-- Page Registration -->
+    <!-- Registro das páginas da aplicação no Shell -->
+
+    <!-- Página de carregamento inicial, não exibida no menu lateral (Flyout) -->
     <ShellContent FlyoutItemIsVisible="False" Route="loading" ContentTemplate="{DataTemplate pages_initialize:LoadingPage}" />
+
+    <!-- Página de apresentação inicial, também oculta do menu lateral -->
     <ShellContent FlyoutItemIsVisible="False" Route="presentation" ContentTemplate="{DataTemplate pages_initialize:PresentationPage}" />
+
+    <!-- Página principal da aplicação, oculta do menu lateral -->
     <ShellContent FlyoutItemIsVisible="False" Route="main" ContentTemplate="{DataTemplate pages:MainPage}" />
 </Shell>

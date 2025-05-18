@@ -6,5 +6,6 @@
              Shell.ForegroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"
              NavigationPage.HasNavigationBar="False">
 
+    <!-- Indicador de atividade visível e em execução, centralizado vertical e horizontalmente na tela. -->
     <ActivityIndicator IsRunning="True" IsVisible="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
 </ContentPage>

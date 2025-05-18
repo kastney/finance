@@ -35,24 +35,24 @@ public partial class ToolbarItem : ContentView {
     /// O ícone (geralmente um caractere Unicode de uma fonte de ícones).
     /// </summary>
     public string Glyph {
-        get { return (string)GetValue(GlyphProperty); }
-        set { SetValue(GlyphProperty, value); }
+        get => (string)GetValue(GlyphProperty);
+        set => SetValue(GlyphProperty, value);
     }
 
     /// <summary>
     /// Família de fonte usada para renderizar o ícone.
     /// </summary>
     public string FontFamily {
-        get { return (string)GetValue(FontFamilyProperty); }
-        set { SetValue(FontFamilyProperty, value); }
+        get => (string)GetValue(FontFamilyProperty);
+        set => SetValue(FontFamilyProperty, value);
     }
 
     /// <summary>
     /// Tamanho da fonte usada no ícone.
     /// </summary>
     public double FontSize {
-        get { return (double)GetValue(FontSizeProperty); }
-        set { SetValue(FontSizeProperty, value); }
+        get => (double)GetValue(FontSizeProperty);
+        set => SetValue(FontSizeProperty, value);
     }
 
     /// <summary>
