@@ -10,6 +10,30 @@ namespace Finance.Models;
 [Table("wallets")]
 internal class Wallet {
 
+    #region Fields
+
+    /// <summary>
+    /// Representa a estratégia de agrupamento de ativos definida para esta carteira.
+    /// </summary>
+    private string strategyJson;
+
+    /// <summary>
+    /// Representa as alocações de dados (quantidade, preço, etc.) por tipo de ativo.
+    /// </summary>
+    private string allocationsJson;
+
+    /// <summary>
+    /// Cache para armazenar a estratégia de agrupamento de ativos.
+    /// </summary>
+    private List<AssetGroup> strategy;
+
+    /// <summary>
+    /// Cache para armazenar os dados de alocação de ativos por tipo.
+    /// </summary>
+    private Dictionary<AssetType, AssetAllocationData> allocations;
+
+    #endregion Fields
+
     #region Database Properties
 
     /// <summary>
@@ -27,12 +51,28 @@ internal class Wallet {
     /// <summary>
     /// Representação serializada da estratégia de agrupamento de ativos definida para esta carteira.
     /// </summary>
-    public string StrategyJson { get; set; }
+    public string StrategyJson {
+        get => strategyJson;
+        set {
+            // Atribui o valor à variável privada e garante que a estratégia seja inicializada corretamente.
+            strategyJson = value;
+            // Invalida o cache.
+            strategy = null;
+        }
+    }
 
     /// <summary>
     /// Representação serializada das alocações de dados (quantidade, preço, etc.) por tipo de ativo.
     /// </summary>
-    public string AllocationsJson { get; set; }
+    public string AllocationsJson {
+        get => allocationsJson;
+        set {
+            // Atribui o valor à variável privada e garante que as alocações sejam inicializadas corretamente.
+            allocationsJson = value;
+            // Invalida o cache.
+            allocations = null;
+        }
+    }
 
     #endregion Database Properties
 
@@ -45,10 +85,13 @@ internal class Wallet {
     [Ignore]
     public List<AssetGroup> Strategy {
         get {
-            // Desserializa a estratégia salva ou usa a estratégia padrão caso esteja vazia.
-            var strategy = string.IsNullOrWhiteSpace(StrategyJson) ? AssetMetadata.GetDefaultStrategy() : JsonSerializer.Deserialize<List<AssetGroup>>(StrategyJson);
-            // Associa cada alocação de ativo a esta instância da carteira.
-            strategy.ForEach(group => group.Assets.ForEach(asset => asset.SetWallet(this)));
+            // Verifica se a estratégia já foi carregada.
+            if(strategy is null) {
+                // Desserializa a estratégia salva ou usa a estratégia padrão caso esteja vazia.
+                strategy = AssetMetadata.DeserializeStrategy(StrategyJson);
+                // Associa cada ativo à instância da carteira, permitindo acesso a dados contextuais.
+                strategy.ForEach(group => group.Assets.ForEach(asset => asset.SetWallet(this)));
+            }
             // Retorna a lista de grupos de ativos configurados.
             return strategy;
         }
@@ -63,7 +106,9 @@ internal class Wallet {
     public Dictionary<AssetType, AssetAllocationData> Allocations {
         get {
             // Desserializa os dados de alocação ou retorna a configuração padrão se estiver vazia.
-            return string.IsNullOrWhiteSpace(AllocationsJson) ? AssetMetadata.GetDefaultAllocations() : JsonSerializer.Deserialize<Dictionary<AssetType, AssetAllocationData>>(AllocationsJson);
+            allocations ??= AssetMetadata.DeserializeAllocations(AllocationsJson);
+            // Retorna os dados de alocação.
+            return allocations;
         }
     }
 
