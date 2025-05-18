@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls_devexpress="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             x:Class="Finance.Controls.Navigation.NavigationBar"
+             NavigationPage.HasNavigationBar="False">
+
+    <!-- Estrutura principal: 1 linha de 56 de altura, 3 colunas (ícone, título, ferramentas) -->
+    <Grid RowDefinitions="56" ColumnDefinitions="Auto,*,Auto" RowSpacing="0" ColumnSpacing="0" Margin="0,0,0,10">
+        <!-- Botão/ícone da esquerda: menu ou voltar -->
+        <Border x:Name="icon" Grid.Column="0" HeightRequest="40" WidthRequest="40" Margin="7,0,0,0" StrokeThickness="0">
+            <Border.StrokeShape>
+                <!-- Define borda arredondada (círculo) -->
+                <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+
+            <!-- Gatilho de toque para ação do botão -->
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BackButton_Clicked" />
+            </Border.GestureRecognizers>
+
+            <!-- Ícone FontAwesome: menu (☰) ou voltar (←), definido dinamicamente -->
+            <Label x:Name="glyph" Margin="6" Text="&#xf0c9;" FontFamily="IconsSolid" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray000}}" />
+        </Border>
+
+        <!-- Título da página -->
+        <Label x:Name="title" Grid.Column="1" Margin="20,0,7,0" FontSize="Medium" FontAutoScalingEnabled="True" FontFamily="OpenSansRegular" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource PrimaryDark}}" MaxLines="1" LineBreakMode="MiddleTruncation" />
+
+        <!-- Área de itens de ferramentas no canto direito -->
+        <HorizontalStackLayout x:Name="toolBarItemsView" Grid.Column="2" VerticalOptions="Center" Margin="0,0,8,0" />
+    </Grid>
+</ContentView>

@@ -1,6 +1,6 @@
-using System.Globalization;
+using Finance.Utilities;
 
-namespace Finance.Controls;
+namespace Finance.Controls.Cards;
 
 public partial class WalletStatusCard : ContentView {
     public static readonly BindableProperty PriceProperty = BindableProperty.Create(nameof(Price), typeof(float?), typeof(WalletStatusCard), null, propertyChanged: OnPriceChanged);
@@ -9,23 +9,23 @@ public partial class WalletStatusCard : ContentView {
     public static readonly BindableProperty PerformanceProperty = BindableProperty.Create(nameof(Performance), typeof(float?), typeof(WalletStatusCard), null, propertyChanged: OnPerformanceChanged);
 
     public float? Price {
-        get { return (float?)GetValue(PriceProperty); }
-        set { SetValue(PriceProperty, value); }
+        get => (float?)GetValue(PriceProperty);
+        set => SetValue(PriceProperty, value);
     }
 
     public float? Profitability {
-        get { return (float?)GetValue(ProfitabilityProperty); }
-        set { SetValue(ProfitabilityProperty, value); }
+        get => (float?)GetValue(ProfitabilityProperty);
+        set => SetValue(ProfitabilityProperty, value);
     }
 
     public float? Variation {
-        get { return (float?)GetValue(VariationProperty); }
-        set { SetValue(VariationProperty, value); }
+        get => (float?)GetValue(VariationProperty);
+        set => SetValue(VariationProperty, value);
     }
 
     public float? Performance {
-        get { return (float?)GetValue(PerformanceProperty); }
-        set { SetValue(PerformanceProperty, value); }
+        get => (float?)GetValue(PerformanceProperty);
+        set => SetValue(PerformanceProperty, value);
     }
 
     public WalletStatusCard() {

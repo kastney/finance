@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:styles="clr-namespace:Finance.Resources.Styles"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
+             x:Class="Finance.Pages.Walleting.CreateWalletPage"
+             x:DataType="viewModel:CreateWalletViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- Estilos locais da página (ex: MultilineEditStyle pode definir padding, fontes, cores etc.) -->
+    <ContentPage.Resources>
+        <styles:MultilineEditStyle />
+    </ContentPage.Resources>
+
+    <!-- Layout principal em grade com três linhas: topo (auto), corpo (*), rodapé (auto) -->
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Barra de navegação com título e botão de voltar -->
+        <navigation:NavigationBar Title="Nova Carteira" IsRoot="False" Clicked="BackButtom_Clicked" />
+        <!-- Corpo principal com campo de entrada -->
+        <VerticalStackLayout Margin="15,0" Spacing="10" Grid.Row="1">
+            <!-- Campo de entrada para o nome da carteira com validação e estilo -->
+            <editors:MultilineEdit x:Name="entry"
+                                   Text="{Binding WalletName.Value}"
+                                   HasError="{Binding WalletName.HasError}"
+                                   ErrorText="{Binding WalletName.ErrorText}"
+                                   IsReadOnly="{Binding IsRunning}"
+                                   LabelText="Nome da Carteira"
+                                   PlaceholderText="Minha Carteira"
+                                   StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf555;}"
+                                   Keyboard="Text"
+                                   MaxCharacterCount="50"
+                                   MaxCharacterCountOverflowMode="LimitInput"
+                                   ReturnType="Done"
+                                   ReturnCommand="{Binding CreateCommand}" />
+        </VerticalStackLayout>
+        <!-- Botão inferior com indicador de carregamento (ao salvar carteira) -->
+        <buttons:IndicatorButton Grid.Row="2" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Salvar Carteira" Command="{Binding CreateCommand}" />
+    </Grid>
+</ContentPage>

@@ -3,8 +3,8 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net9.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Pixel 5 - API 34 (Android 14.0 – API 34)</ActiveDebugProfile>
-    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
+    <ActiveDebugProfile>Samsung SM-G9650 (Android 10.0 – API 29)</ActiveDebugProfile>
+    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
     <DefaultDevice>pixel_5_-_api_34</DefaultDevice>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
@@ -17,43 +17,37 @@
     <MauiXaml Update="Controls\Cards\AssetCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Controls\IndicatorButton.xaml">
+    <MauiXaml Update="Controls\Buttons\IndicatorButton.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Controls\IndicatorButtonError.xaml">
+    <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Controls\NavigationBar.xaml">
+    <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Controls\SmallButtonCard.xaml">
+    <MauiXaml Update="Controls\Buttons\SmallButtonCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Controls\ToolbarItem.xaml">
+    <MauiXaml Update="Controls\Navigation\ToolbarItem.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml">
+    <MauiXaml Update="Pages\Walleting\DeleteWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
+    <MauiXaml Update="Pages\Walleting\CreateWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
+    <MauiXaml Update="Pages\Initialize\PresentationPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
+    <MauiXaml Update="Pages\Initialize\LoadingPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Pages\WalletPresentationPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Pages\LoadingPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Pages\SelectWallet\SelectWalletPage.xaml">
+    <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">

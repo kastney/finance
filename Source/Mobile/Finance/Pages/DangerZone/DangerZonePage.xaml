@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:viewModel="clr-namespace:Finance.Pages.DangerZone"
              x:Class="Finance.Pages.DangerZone.DangerZonePage"
+             x:DataType="viewModel:DangerZoneViewModel"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
+    <!-- Estrutura principal com barra de navegação e conteúdo rolável -->
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="Zona de Perigo" IsRoot="False" Clicked="BackButtom_Clicked" />
+        <!-- Barra de navegação personalizada com botão de retorno -->
+        <navigation:NavigationBar Title="Zona de Perigo" IsRoot="False" Clicked="BackButtom_Clicked" />
+
+        <!-- Conteúdo principal da página, rolável verticalmente -->
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <!-- Conteúdo empilhado verticalmente com margens e espaçamento -->
             <VerticalStackLayout Margin="20,10,20,50" Spacing="10">
+                <!-- Título da seção para apagar carteira -->
                 <Label Text="Apagar esta carteira" FontAttributes="Bold" FontSize="Small" />
+                <!-- Mensagem de aviso sobre a ação irreversível -->
                 <Label Text="Depois de apagar uma carteira, não há como voltar atrás. Por favor, tenha certeza!" FontSize="Micro" />
-                <controls:IndicatorButtonError Text="Apagar Carteira" Glyph="&#xf2ed;" IsRunning="{Binding IsRunning}" Command="{Binding DeleteWalletCommand}" />
+                <!-- Botão de ação com estado de carregamento vinculado ao ViewModel -->
+                <buttons:IndicatorButtonError Text="Apagar Carteira" Glyph="&#xf2ed;" IsRunning="{Binding IsRunning}" Command="{Binding DeleteWalletCommand}" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

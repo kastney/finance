@@ -1,75 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:Finance.Controls.Cards"
              xmlns:charts="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
-             xmlns:controls="clr-namespace:Finance.Controls"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:viewModell="clr-namespace:Finance.Pages"
              x:Class="Finance.Pages.MainPage"
+             x:DataType="viewModell:MainViewModel"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
+    <!-- ... -->
     <Grid RowDefinitions="Auto,*">
-        <controls:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
-            <controls:NavigationBar.ToolbarItems>
+        <!-- ... -->
+        <navigation:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
+            <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
-                    <controls:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
+                    <!-- ... -->
+                    <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
                 </VerticalStackLayout>
-            </controls:NavigationBar.ToolbarItems>
-        </controls:NavigationBar>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
+
+        <!-- ... -->
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
+            <!-- ... -->
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-                <controls:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
-                <Border Style="{x:StaticResource Card}">
-                    <VerticalStackLayout>
-                        <Label Text="Posição na Carteira" Padding="10" FontFamily="" FontAttributes="Bold" />
-                        <charts:PieChartView HeightRequest="280" SelectionBehavior="Hatch" IsEnabled="{Binding HasAsset}">
-                            <charts:PieChartView.Series>
-                                <charts:DonutSeries>
-                                    <charts:DonutSeries.Data>
-                                        <charts:PieSeriesDataAdapter AllowLiveDataUpdates="True" DataSource="{Binding WalletPosition}" LabelDataMember="Label" ValueDataMember="Value" />
-                                    </charts:DonutSeries.Data>
-                                    <charts:DonutSeries.Label>
-                                        <charts:PieSeriesLabel Position="TwoColumns" TextPattern="{}{L}&#x0a;{VP}%">
-                                            <charts:PieSeriesLabel.Style>
-                                                <charts:PieSeriesLabelStyle ConnectorThickness="2">
-                                                    <charts:PieSeriesLabelStyle.TextStyle>
-                                                        <charts:TextStyle x:Name="labelStyle" />
-                                                    </charts:PieSeriesLabelStyle.TextStyle>
-                                                </charts:PieSeriesLabelStyle>
-                                            </charts:PieSeriesLabel.Style>
-                                        </charts:PieSeriesLabel>
-                                    </charts:DonutSeries.Label>
-                                </charts:DonutSeries>
-                            </charts:PieChartView.Series>
-                            <charts:PieChartView.Hint>
-                                <charts:PieHint Enabled="False" />
-                            </charts:PieChartView.Hint>
-                            <charts:PieChartView.Legend>
-                                <charts:Legend Visible="{Binding HasAsset}" Orientation="LeftToRight" HorizontalPosition="Center" VerticalPosition="BottomOutside">
-                                    <charts:Legend.Style>
-                                        <charts:LegendStyle BackgroundColor="Transparent" ItemsHorizontalIndent="25">
-                                            <charts:LegendStyle.TextStyle>
-                                                <charts:TextStyle x:Name="legendStyle" />
-                                            </charts:LegendStyle.TextStyle>
-                                        </charts:LegendStyle>
-                                    </charts:Legend.Style>
-                                </charts:Legend>
-                            </charts:PieChartView.Legend>
-                            <charts:PieChartView.ChartStyle>
-                                <charts:PieChartStyle x:Name="chartStyle" Palette="{Binding Palette}" BorderColor="Transparent" BorderThickness="0" SeriesIndent="70" Padding="10" />
-                            </charts:PieChartView.ChartStyle>
-                        </charts:PieChartView>
-                    </VerticalStackLayout>
-                </Border>
+                <!-- ... -->
+                <cards:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
+             
+                <!-- ... -->
+                <Label Text="Lista de Ativos" FontAttributes="Bold" />
+                <!-- ... -->
+                <cards:AssetCard Title="Ações"
+                                 Color="DarkOrange"
+                                 AssetCount="3"
+                                 Price="352"
+                                 Variation="1"
+                                 Performance="1.7"
+                                 Culture="pt-br"
+                                 Flag="pt-br"
+                                 IsVisible="True" />
+                <cards:AssetCard Title="FIIs"
+                                 Color="DarkCyan"
+                                 AssetCount="6"
+                                 Price="3256"
+                                 Variation="2"
+                                 Performance="5"
+                                 Culture="pt-br"
+                                 Flag="pt-br"
+                                 IsVisible="True" />
 
-                <Label Text="Lista de Ativos" FontFamily="" FontAttributes="Bold" IsVisible="{Binding HasAssetTitle}" />
-                <controls:AssetCard Icon="&#xe473;" Title="{Binding Wallet.BrazilStocksName}" TitleColor="{Binding Wallet.BrazilStocksColor}" AssetCount="{Binding Wallet.BrazilStocksCount}" Price="{Binding Wallet.BrazilStocksPrice}" Variation="{Binding Wallet.BrazilStocksVariation}" Performance="{Binding Wallet.BrazilStocksPerformance}" IsVisible="{Binding HasBrazilStocks}" />
-                <controls:AssetCard Icon="&#xf64f;" Title="{Binding Wallet.FIIsName}" TitleColor="{Binding Wallet.FIIsColor}" AssetCount="{Binding Wallet.FIIsCount}" Price="{Binding Wallet.FIIsPrice}" Variation="{Binding Wallet.FIIsVariation}" Performance="{Binding Wallet.FIIsPerformance}" IsVisible="{Binding HasFIIs}" />
-
+                <!-- ... -->
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
-                    <Label Text="Opções da Carteira" Grid.Row="0" Grid.ColumnSpan="3" FontFamily="" FontAttributes="Bold" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding StrategyCommand}" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Histórico" Glyph="&#xf1da;" Command="{Binding HistoricCommand}" />
-                    <controls:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+                    <!-- ... -->
+                    <Label Text="Mais Opções" Grid.Row="0" Grid.ColumnSpan="3" FontAttributes="Bold" />
+                    <!-- ... -->
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:collection="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:models="clr-namespace:Finance.Models"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
+             x:Class="Finance.Pages.Walleting.SelectWalletPage"
+             x:DataType="viewModel:SelectWalletViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- Layout principal da página dividido em duas linhas: barra de navegação e conteúdo -->
+    <Grid RowDefinitions="Auto,*">
+        <!-- Barra de navegação personalizada com botão de retorno e botão "+" -->
+        <navigation:NavigationBar Title="Selecionar Carteira" IsRoot="False" Clicked="BackButtom_Clicked">
+            <navigation:NavigationBar.ToolbarItems>
+                <VerticalStackLayout>
+                    <!-- Botão "+" no canto superior direito para adicionar uma nova carteira -->
+                    <navigation:ToolbarItem Glyph="&#x2b;" Command="{Binding NewWalletCommand}" />
+                </VerticalStackLayout>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
+
+        <!-- Conteúdo principal da página com lista de carteiras e mensagem de vazio -->
+        <Grid Grid.Row="1">
+            <!-- Mensagem exibida quando não há carteiras disponíveis para seleção -->
+            <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
+                <Label Text="Não há outra carteira para selecionar aqui!&#10;&#10;Você pode criar uma nova carteira no botão + no canto superior direito da tela." FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
+            </Border>
+            <!-- Lista de carteiras disponíveis com opção de seleção -->
+            <collection:DXCollectionView ItemSeparatorThickness="0" IsScrollBarVisible="False" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}">
+                <!-- Template de exibição de cada item da lista (carteira) -->
+                <collection:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:DataType="models:Wallet" Style="{x:StaticResource Card}" Margin="15,0,15,210">
+                            <Grid HeightRequest="70" ColumnDefinitions="Auto, *" ColumnSpacing="20">
+                                <!-- Ícone representando a carteira -->
+                                <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                                <!-- Nome da carteira -->
+                                <Label Text="{Binding Name}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </collection:DXCollectionView.ItemTemplate>
+                <!-- Ordenação alfabética pelo nome da carteira -->
+                <collection:DXCollectionView.SortDescriptions>
+                    <collection:SortDescription FieldName="Name" SortOrder="Ascending" />
+                </collection:DXCollectionView.SortDescriptions>
+            </collection:DXCollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

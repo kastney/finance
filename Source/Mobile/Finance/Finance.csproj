@@ -126,25 +126,22 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="DevExpress.Maui.Charts" Version="24.1.4" />
 		<PackageReference Include="DevExpress.Maui.Editors" Version="24.1.4" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.22" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.22" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.60" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Controls\Cards\WalletStatusCard.xaml.cs">
 	    <DependentUpon>WalletStatusCard.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml.cs">
+	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Historic\HistoricPage.xaml.cs">
-	    <DependentUpon>HistoricPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Pages\WalletPresentationPage.xaml.cs">
-	    <DependentUpon>WalletPresentationPage.xaml</DependentUpon>
+	  <Compile Update="Pages\Initialize\PresentationPage.xaml.cs">
+	    <DependentUpon>PresentationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
@@ -158,43 +155,37 @@
 	  <MauiXaml Update="Controls\Cards\AssetCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\IndicatorButton.xaml">
+	  <MauiXaml Update="Controls\Buttons\IndicatorButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\IndicatorButtonError.xaml">
+	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\NavigationBar.xaml">
+	  <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\SmallButtonCard.xaml">
+	  <MauiXaml Update="Controls\Buttons\SmallButtonCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\ToolbarItem.xaml">
+	  <MauiXaml Update="Controls\Navigation\ToolbarItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\DangerZone\Delete\DeleteWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\DeleteWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\CreateWallet\CreateWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\CreateWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Historic\HistoricPage.xaml">
+	  <MauiXaml Update="Pages\Initialize\PresentationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
+	  <MauiXaml Update="Pages\Initialize\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\WalletPresentationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SelectWallet\SelectWalletPage.xaml">
+	  <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">
@@ -203,6 +194,17 @@
 	  <MauiXaml Update="Services\Navigation\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Using Include="CommunityToolkit.Mvvm.ComponentModel" />
+	  <Using Include="CommunityToolkit.Mvvm.Input" />
+	  <Using Include="DevExpress.Maui" />
+	  <Using Include="Microsoft.Extensions.Logging" />
+	  <Using Include="SQLite" />
+	  <Using Include="System.Collections.ObjectModel" />
+	  <Using Include="System.Globalization" />
+	  <Using Include="System.Windows.Input" />
 	</ItemGroup>
 
 </Project>

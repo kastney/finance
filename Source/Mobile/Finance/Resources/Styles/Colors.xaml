@@ -23,6 +23,9 @@
     <Color x:Key="Red">#F42323</Color>
     <Color x:Key="RedDark">#F44B4B</Color>
 
+    <Color x:Key="TextColor">#404040</Color>
+    <Color x:Key="TextColorDark">#ACACAC</Color>
+
     <Color x:Key="White">#C8C8C8</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
