@@ -19,12 +19,6 @@ internal partial class SelectWalletViewModel : ViewModel {
     private Wallet selectedWallet;
 
     /// <summary>
-    /// Indica se a lista de carteiras disponíveis está vazia, afetando a exibição de mensagens de aviso.
-    /// </summary>
-    [ObservableProperty]
-    private bool isEmpty;
-
-    /// <summary>
     /// Nome da carteira atualmente selecionada, utilizado para exibição na interface.
     /// </summary>
     [ObservableProperty]
@@ -71,9 +65,6 @@ internal partial class SelectWalletViewModel : ViewModel {
 
         // Define o nome da carteira atual, se disponível.
         CurrentWalletName = walletService.Wallet?.Name ?? string.Empty;
-
-        // Define se a lista está vazia, para exibir ou ocultar mensagem apropriada.
-        IsEmpty = Wallets.Count == 0;
     }
 
     #endregion Start Methods

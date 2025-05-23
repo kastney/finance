@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cells="clr-namespace:Finance.Controls.Cells"
              xmlns:controls="http://schemas.devexpress.com/maui"
              xmlns:models="clr-namespace:Finance.Models"
              xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
@@ -23,50 +24,27 @@
         </navigation:NavigationBar>
 
         <!-- A carteira atualmente selecionada no aplicativo -->
-        <Border Grid.Row="1" Style="{x:StaticResource Card}" Margin="15,0,15,15">
-            <Grid HeightRequest="70" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20">
-                <!-- Ícone representando a carteira -->
-                <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                <!-- Nome da carteira -->
-                <Label Text="{Binding CurrentWalletName}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                <!-- Ícone de seleção -->
-                <RadioButton Grid.Column="2" IsEnabled="False" IsChecked="True" />
-            </Grid>
+        <cells:WalletSelectionCell Grid.Row="1" Text="{Binding CurrentWalletName}" IsChecked="True">
             <!-- Gestor de eventos para detectar toques na carteira atualmente selecionada -->
-            <Border.GestureRecognizers>
+            <cells:WalletSelectionCell.GestureRecognizers>
                 <!-- O evento de clique no controle -->
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-            </Border.GestureRecognizers>
-        </Border>
+            </cells:WalletSelectionCell.GestureRecognizers>
+        </cells:WalletSelectionCell>
 
-        <!-- Conteúdo principal da página com lista de carteiras e mensagem de vazio -->
-        <Grid Grid.Row="2">
-            <!-- Mensagem exibida quando não há carteiras disponíveis para seleção -->
-            <Border Grid.Row="2" Grid.ColumnSpan="3" IsVisible="{Binding IsEmpty}" HeightRequest="150" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
-                <Label Text="Não há outra carteira para selecionar aqui!&#10;&#10;Você pode criar uma nova carteira no botão + no canto superior direito da tela." FontSize="Micro" TextColor="Gray" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="20" />
-            </Border>
-            <!-- Lista de carteiras disponíveis com opção de seleção -->
-            <controls:DXCollectionView ItemSeparatorThickness="0" IsScrollBarVisible="False" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}">
-                <!-- Template de exibição de cada item da lista (carteira) -->
-                <controls:DXCollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border x:DataType="models:Wallet" Style="{x:StaticResource Card}" Margin="15,0,15,15">
-                            <Grid HeightRequest="70" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20">
-                                <!-- Ícone representando a carteira -->
-                                <Label Text="&#xf555;" FontFamily="IconsSolid" FontSize="Small" VerticalTextAlignment="Center" Margin="20,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                                <!-- Nome da carteira -->
-                                <Label Text="{Binding Name}" Grid.Column="1" FontSize="Small" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Margin="0,0,20,0" MaxLines="1" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
-                                <!-- Ícone de seleção -->
-                                <RadioButton Grid.Column="2" IsEnabled="False" IsChecked="False" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </controls:DXCollectionView.ItemTemplate>
-                <!-- Ordenação alfabética pelo nome da carteira -->
-                <controls:DXCollectionView.SortDescriptions>
-                    <controls:SortDescription FieldName="Name" SortOrder="Ascending" />
-                </controls:DXCollectionView.SortDescriptions>
-            </controls:DXCollectionView>
-        </Grid>
+        <!-- Lista de carteiras disponíveis com opção de seleção -->
+        <controls:DXCollectionView Grid.Row="2" ItemSeparatorThickness="0" IsScrollBarVisible="False" ItemsSource="{Binding Wallets}" SelectionMode="Single" TapCommand="{Binding SelectWalletCommand}" SelectedItem="{Binding SelectedWallet, Mode=OneWayToSource}">
+            <!-- Template de exibição de cada item da lista (carteira) -->
+            <controls:DXCollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Layout de cada carteira para selecionar -->
+                    <cells:WalletSelectionCell x:DataType="models:Wallet" Text="{Binding Name}" />
+                </DataTemplate>
+            </controls:DXCollectionView.ItemTemplate>
+            <!-- Ordenação alfabética pelo nome da carteira -->
+            <controls:DXCollectionView.SortDescriptions>
+                <controls:SortDescription FieldName="Name" SortOrder="Ascending" />
+            </controls:DXCollectionView.SortDescriptions>
+        </controls:DXCollectionView>
     </Grid>
 </ContentPage>
