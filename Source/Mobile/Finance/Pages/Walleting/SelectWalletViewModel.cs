@@ -24,6 +24,12 @@ internal partial class SelectWalletViewModel : ViewModel {
     [ObservableProperty]
     private bool isEmpty;
 
+    /// <summary>
+    /// Nome da carteira atualmente selecionada, utilizado para exibição na interface.
+    /// </summary>
+    [ObservableProperty]
+    private string currentWalletName;
+
     #endregion Fields
 
     #region Properties
@@ -62,6 +68,9 @@ internal partial class SelectWalletViewModel : ViewModel {
             // Adiciona cada carteira à coleção observável.
             Wallets.Add(wallet);
         }
+
+        // Define o nome da carteira atual, se disponível.
+        CurrentWalletName = walletService.Wallet?.Name ?? string.Empty;
 
         // Define se a lista está vazia, para exibir ou ocultar mensagem apropriada.
         IsEmpty = Wallets.Count == 0;

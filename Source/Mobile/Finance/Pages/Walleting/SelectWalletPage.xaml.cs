@@ -79,5 +79,15 @@ public partial class SelectWalletPage : ContentPage {
         }
     }
 
+    /// <summary>
+    /// Executado quando um gesto de toque é detectado na interface.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento (pode ser nulo).</param>
+    /// <param name="e">Argumentos do evento de toque (pode ser nulo).</param>
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) {
+        // Executa a ação de clique do botão de voltar, permitindo navegação personalizada.
+        BackButtom_Clicked(null, null);
+    }
+
     #endregion Navigation Methods
 }
