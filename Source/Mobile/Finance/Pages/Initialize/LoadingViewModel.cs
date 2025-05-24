@@ -5,7 +5,7 @@ using Finance.Utilities;
 namespace Finance.Pages.Initialize;
 
 /// <summary>
-/// ViewModel responsável por controlar o processo de inicialização do aplicativo, 
+/// ViewModel responsável por controlar o processo de inicialização do aplicativo,
 /// decidindo a navegação com base na existência de uma carteira configurada.
 /// </summary>
 internal class LoadingViewModel {
@@ -40,7 +40,7 @@ internal class LoadingViewModel {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Método assíncrono que decide a página inicial com base na existência de uma carteira.
@@ -56,5 +56,5 @@ internal class LoadingViewModel {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 }

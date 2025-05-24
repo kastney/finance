@@ -4,6 +4,7 @@
              xmlns:cards="clr-namespace:Finance.Controls.Cards"
              xmlns:charts="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
              xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:models="clr-namespace:Finance.Models"
              xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              xmlns:viewModell="clr-namespace:Finance.Pages"
              x:Class="Finance.Pages.MainPage"
@@ -11,53 +12,61 @@
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
 
-    <!-- ... -->
+    <!-- Estrutura principal da página com barra de navegação e conteúdo -->
     <Grid RowDefinitions="Auto,*">
-        <!-- ... -->
+        <!-- Barra de navegação superior com o nome da carteira e botão para trocar -->
         <navigation:NavigationBar Title="{Binding Wallet.Name}" IsBackButton="False">
             <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
-                    <!-- ... -->
+                    <!-- Botão para selecionar/trocar carteira -->
                     <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
 
-        <!-- ... -->
+        <!-- Conteúdo principal da página com rolagem vertical -->
         <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
-            <!-- ... -->
+            <!-- Layout vertical contendo os elementos da página -->
             <VerticalStackLayout Spacing="20" Margin="15,0,15,50">
-                <!-- ... -->
+                <!-- Cartão com status geral da carteira (preço, rentabilidade, etc.) -->
                 <cards:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
-             
-                <!-- ... -->
-                <Label Text="Lista de Ativos" FontAttributes="Bold" />
-                <!-- ... -->
-                <cards:AssetCard Title="Ações"
-                                 Color="DarkOrange"
-                                 AssetCount="3"
-                                 Price="352"
-                                 Variation="1"
-                                 Performance="1.7"
-                                 Culture="pt-br"
-                                 Flag="pt-br"
-                                 IsVisible="True" />
-                <cards:AssetCard Title="FIIs"
-                                 Color="DarkCyan"
-                                 AssetCount="6"
-                                 Price="3256"
-                                 Variation="2"
-                                 Performance="5"
-                                 Culture="pt-br"
-                                 Flag="pt-br"
-                                 IsVisible="True" />
 
-                <!-- ... -->
+                <!-- Lista de grupos de ativos definidos na estratégia da carteira -->
+                <VerticalStackLayout Spacing="20" BindableLayout.ItemsSource="{Binding Wallet.Strategy}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <!-- Layout de cada grupo de ativos -->
+                            <VerticalStackLayout Spacing="20" x:DataType="models:AssetGroup">
+                                <!-- Nome do grupo de ativos -->
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <!-- Lista de ativos dentro do grupo -->
+                                <VerticalStackLayout Spacing="20" BindableLayout.ItemsSource="{Binding Assets}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:AssetAllocation">
+                                            <!-- Cartão individual de ativo com dados e meta do tipo -->
+                                            <cards:AssetCard Title="{Binding Meta.Title}"
+                                                             Color="Gray"
+                                                             AssetCount="{Binding Data.Count}"
+                                                             Price="{Binding Data.Price}"
+                                                             Variation="{Binding Data.Variation}"
+                                                             Performance="{Binding Data.Performance}"
+                                                             Culture="{Binding Meta.Culture}"
+                                                             Flag="{Binding Meta.Flag}"
+                                                             IsVisible="True" />
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <!-- Grade com botões de ações adicionais -->
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
-                    <!-- ... -->
+                    <!-- Título da seção de opções adicionais -->
                     <Label Text="Mais Opções" Grid.Row="0" Grid.ColumnSpan="3" FontAttributes="Bold" />
-                    <!-- ... -->
-                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+                    <!-- Botão para acessar a "zona de perigo" (ações sensíveis) -->
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

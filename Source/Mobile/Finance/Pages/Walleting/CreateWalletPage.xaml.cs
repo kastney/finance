@@ -30,7 +30,7 @@ public partial class CreateWalletPage : ContentPage {
 
     #endregion Constructors
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Executado automaticamente quando a página aparece na tela.
@@ -52,7 +52,7 @@ public partial class CreateWalletPage : ContentPage {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 

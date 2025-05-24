@@ -30,7 +30,7 @@ public partial class DangerZonePage : ContentPage {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Executado quando a página aparece na tela. Controla o estado de carregamento.
@@ -49,7 +49,7 @@ public partial class DangerZonePage : ContentPage {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 

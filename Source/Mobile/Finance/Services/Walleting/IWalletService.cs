@@ -56,5 +56,5 @@ internal interface IWalletService {
     /// <returns>Lista de objetos <see cref="Wallet"/> disponíveis.</returns>
     Task<List<Wallet>> AvailableWallets();
 
-    #endregion Management Methods
+    #endregion Wallet Management Methods
 }
