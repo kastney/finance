@@ -62,16 +62,7 @@ internal static class AssetMetadata {
     /// Essa estrutura é usada por carteiras recém-criadas antes de qualquer personalização.
     /// </summary>
     /// <returns>Lista contendo o grupo padrão com os ativos suportados.</returns>
-    public static List<AssetGroup> GetDefaultStrategy() => [
-       new() {
-            Name = "Lista de Ativos",
-            Assets = [
-                new() { Type = AssetType.BRA_STOCK },
-                new() { Type = AssetType.BRA_FII },
-                new() { Type = AssetType.BRA_BDR }
-            ]
-        }
-    ];
+    public static List<AssetGroup> GetDefaultStrategy() => [];
 
     /// <summary>
     /// Tenta desserializar uma estratégia personalizada a partir de uma string JSON.

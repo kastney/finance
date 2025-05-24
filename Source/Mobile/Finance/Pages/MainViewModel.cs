@@ -16,19 +16,30 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private Wallet wallet;
 
-    #endregion Fields
-
-    #region Start Methods
+    /// <summary>
+    /// Representa a estratégia de agrupamento de ativos definida para esta carteira.
+    /// </summary>
+    public ObservableCollection<AssetGroup> Strategy { get; set; }
 
     /// <summary>
-    /// Inicia o carregamento dos dados da ViewModel, chamando o método de atualização.
+    /// Indica se a estratégia da carteira está vazia ou não.
     /// </summary>
-    internal void Initialization() {
-        // Atualiza os dados da carteira a partir do serviço associado.
-        Update();
+    [ObservableProperty]
+    private bool isStrategy;
+
+    #endregion Fields
+
+    #region Constructor
+
+    /// <summary>
+    /// Inicializa a instância do ViewModel definindo o estado inicial da estratégia da carteira.
+    /// </summary>
+    public MainViewModel() {
+        // Inicializa a coleção de estratégia como uma nova ObservableCollection.
+        Strategy = [];
     }
 
-    #endregion Start Methods
+    #endregion Constructor
 
     #region Update Methods
 
@@ -38,6 +49,18 @@ internal partial class MainViewModel : ViewModel {
     public override void Update() {
         // Obtém a carteira atual do serviço de carteiras.
         Wallet = walletService.Wallet;
+
+        // Limpa a coleção de estratégia para evitar duplicação de dados.
+        Strategy.Clear();
+        // Percorre cada estratégia na carteira e adiciona à coleção de estratégia.
+        foreach(var strategy in Wallet.Strategy) {
+            // Adiciona a estratégia atual à coleção de estratégia.
+            Strategy.Add(strategy);
+        }
+
+        // Verifica se a estratégia da carteira está vazia.
+        IsStrategy = Strategy.Count != 0;
+
         // Notifica a interface de que a propriedade Wallet foi alterada.
         OnPropertyChanged(nameof(Wallet));
     }
@@ -51,7 +74,7 @@ internal partial class MainViewModel : ViewModel {
     /// </summary>
     /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
     [RelayCommand]
-    private async Task SelectWallet() {
+    private async Task NavigateToSelectWallet() {
         // Impede execução simultânea do comando.
         if(!IsRunning) {
             // Sinaliza que a execução está em andamento.
@@ -72,7 +95,7 @@ internal partial class MainViewModel : ViewModel {
     /// </summary>
     /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
     [RelayCommand]
-    private async Task DangerZone() {
+    private async Task NavigateToDangerZone() {
         // Impede execução simultânea do comando.
         if(!IsRunning) {
             // Sinaliza que a execução está em andamento.
@@ -80,6 +103,27 @@ internal partial class MainViewModel : ViewModel {
 
             // Navega até a página "zona de perigo".
             await navigationService.NavigateTo("dangerZone");
+            // Pequeno atraso para garantir estabilidade de navegação.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
+    /// <summary>
+    /// Comando responsável por navegar até a página de estratégia da carteira.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    [RelayCommand]
+    private async Task NavigateToStrategy() {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de estratégia da carteira.
+            await navigationService.NavigateTo("strategy");
             // Pequeno atraso para garantir estabilidade de navegação.
             await Task.Delay(100);
 

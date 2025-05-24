@@ -19,7 +19,7 @@
             <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
                     <!-- Botão para selecionar/trocar carteira -->
-                    <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding SelectWalletCommand}" />
+                    <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding NavigateToSelectWalletCommand}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
@@ -32,7 +32,7 @@
                 <cards:WalletStatusCard Price="0" Profitability="0" Variation="0" Performance="0" />
 
                 <!-- Lista de grupos de ativos definidos na estratégia da carteira -->
-                <VerticalStackLayout Spacing="20" BindableLayout.ItemsSource="{Binding Wallet.Strategy}">
+                <VerticalStackLayout Spacing="20" BindableLayout.ItemsSource="{Binding Strategy}" IsVisible="{Binding IsStrategy}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <!-- Layout de cada grupo de ativos -->
@@ -65,8 +65,10 @@
                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" RowSpacing="20" ColumnSpacing="20">
                     <!-- Título da seção de opções adicionais -->
                     <Label Text="Mais Opções" Grid.Row="0" Grid.ColumnSpan="3" FontAttributes="Bold" />
+                    <!-- Botão para acessar a estratégia da carteira -->
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" Command="{Binding NavigateToStrategyCommand}" />
                     <!-- Botão para acessar a "zona de perigo" (ações sensíveis) -->
-                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding DangerZoneCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding NavigateToDangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

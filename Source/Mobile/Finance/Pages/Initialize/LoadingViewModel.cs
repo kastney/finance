@@ -49,7 +49,7 @@ internal class LoadingViewModel {
         // Verifica se já existe uma carteira cadastrada.
         if(await walletService.Exists()) {
             // Se existir, navega para a página principal e inicia sua lógica interna.
-            if(await navigationService.NavigateTo("///main") is MainPage page) { page.Initialization(); }
+            await navigationService.NavigateTo("///main");
         } else {
             // Se não existir, navega para a página de apresentação.
             await navigationService.NavigateTo("///presentation");

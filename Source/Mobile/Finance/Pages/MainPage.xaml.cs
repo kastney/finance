@@ -33,14 +33,6 @@ public partial class MainPage : ContentPage {
     #region Start Methods
 
     /// <summary>
-    /// Executa a lógica de inicialização da ViewModel, incluindo carregamento de dados.
-    /// </summary>
-    internal void Initialization() {
-        // Chama o método de inicialização definido na ViewModel.
-        viewModel.Initialization();
-    }
-
-    /// <summary>
     /// Evento acionado quando a página se torna visível. Controla a flag de execução para evitar chamadas duplicadas.
     /// </summary>
     protected override async void OnAppearing() {

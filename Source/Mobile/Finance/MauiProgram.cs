@@ -1,6 +1,7 @@
 ﻿using Finance.Pages;
 using Finance.Pages.DangerZone;
 using Finance.Pages.Initialize;
+using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 using Finance.Services.Navigation;
 using Finance.Services.Walleting;
@@ -69,6 +70,8 @@ public static class MauiProgram {
         builder.Services.AddTransient<DeleteWalletViewModel>();
         // Registra a ViewModel da zona de perigo como instância transitória.
         builder.Services.AddTransient<DangerZoneViewModel>();
+        // Registra a ViewModel da página de estratégia como instância transitória.
+        builder.Services.AddTransient<StrategyViewModel>();
 
         #endregion ViewModels
 
