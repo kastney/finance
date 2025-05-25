@@ -1,4 +1,5 @@
 ﻿using Finance.Models;
+using Finance.Utilities;
 
 namespace Finance.Services.Walleting;
 
@@ -64,8 +65,10 @@ internal class WalletService : IWalletService {
         // Se nenhuma carteira foi encontrada, retorna falso.
         if(result.Count == 0) { return false; }
 
+        // Obtém o identificador salvo da carteira definida como atual.
+        var walletId = Preferences.Get("WalletId", default(string));
         // Verifica se a carteira atual (armazenada nas preferências) ainda existe no banco.
-        Wallet = (await database.QueryAsync<Wallet>($"SELECT * FROM wallets WHERE id='{Preferences.Get("WalletId", default(string))}' LIMIT 1")).FirstOrDefault();
+        Wallet = (await database.QueryAsync<Wallet>("SELECT * FROM wallets WHERE id = ? LIMIT 1", walletId)).FirstOrDefault();
         // Se a carteira atual for encontrada, retorna verdadeiro.
         if(Wallet is not null) { return true; }
 
@@ -88,7 +91,7 @@ internal class WalletService : IWalletService {
         await Init();
 
         // Verifica se há alguma carteira no banco com o nome informado.
-        var result = await database.QueryAsync<Wallet>($"SELECT id FROM wallets WHERE name='{name}' LIMIT 1");
+        var result = await database.QueryAsync<Wallet>("SELECT id FROM wallets WHERE name = ? LIMIT 1", name);
 
         // Retorna verdadeiro se houver pelo menos uma ocorrência.
         return result.Count != 0;
@@ -103,7 +106,7 @@ internal class WalletService : IWalletService {
         await Init();
 
         // Retorna todas as carteiras exceto a atualmente ativa.
-        return await database.QueryAsync<Wallet>($"SELECT id,name FROM wallets WHERE name!='{Wallet.Name}'");
+        return await database.QueryAsync<Wallet>("SELECT id,name FROM wallets WHERE name != ?", Wallet.Name);
     }
 
     /// <summary>
@@ -138,4 +141,47 @@ internal class WalletService : IWalletService {
     }
 
     #endregion Start Methods
+
+    #region Strategy Methods
+
+    /// <summary>
+    /// Adiciona um novo grupo de ativos à estratégia da carteira e atualiza o banco de dados.
+    /// </summary>
+    /// <param name="assetGroupName">Nome do grupo de ativos a ser adicionado.</param>
+    /// <returns>
+    /// Uma tarefa que representa a operação assíncrona.
+    /// O resultado será <c>true</c> indicando que a estratégia foi atualizada com sucesso.
+    /// </returns>
+    public async Task<bool> AddAssetGroup(string assetGroupName) {
+        try {
+            // Cria o novo grupo de ativos com o nome especificado e adiciona à estratégia da carteira.
+            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName });
+
+            // Serializa a estratégia atualizada em uma string JSON.
+            var newStrategy = AssetMetadata.SerializeStrategy(Wallet.Strategy);
+
+            // Inicializa o banco de dados, caso ainda não tenha sido feito.
+            await Init();
+
+            // Executa a atualização diretamente via comando SQL.
+            var rowsAffected = await database.ExecuteAsync("UPDATE wallets SET StrategyJson = ? WHERE id = ?", newStrategy, Wallet.Id);
+
+            // Se a atualização afetou pelo menos uma linha, atualiza a propriedade local.
+            if(rowsAffected > 0) {
+                // Atualiza a propriedade serializada StrategyJson da carteira.
+                Wallet.StrategyJson = newStrategy;
+
+                // Retorna verdadeiro indicando que o grupo foi adicionado e a estratégia atualizada com sucesso.
+                return true;
+            }
+
+            // Caso não tenha afetado nenhuma linha, considera como falha.
+            return false;
+        } catch {
+            // Em caso de erro durante qualquer etapa, retorna falso indicando falha na atualização.
+            return false;
+        }
+    }
+
+    #endregion Strategy Methods
 }

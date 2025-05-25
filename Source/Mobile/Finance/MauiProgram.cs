@@ -72,6 +72,8 @@ public static class MauiProgram {
         builder.Services.AddTransient<DangerZoneViewModel>();
         // Registra a ViewModel da página de estratégia como instância transitória.
         builder.Services.AddTransient<StrategyViewModel>();
+        // Registra a ViewModel da página de criação de um Grupo de Ativos como instância transitória.
+        builder.Services.AddTransient<CreateAssetGroupViewModel>();
 
         #endregion ViewModels
 

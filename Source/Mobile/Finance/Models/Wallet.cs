@@ -126,5 +126,15 @@ internal class Wallet {
         return Allocations.TryGetValue(type, out var data) ? data : new();
     }
 
+    /// <summary>
+    /// Verifica se já existe um grupo de ativos com o nome especificado na estratégia atual.
+    /// </summary>
+    /// <param name="assetGroupName">Nome do grupo de ativos a ser verificado.</param>
+    /// <returns>Verdadeiro se o nome do grupo existir; caso contrário, falso.</returns>
+    internal bool AssetGroupNameExists(string assetGroupName) {
+        // Procura pelo grupo de ativos com o nome especificado na estratégia atual.
+        return strategy.FirstOrDefault(a => a.Name.Equals(assetGroupName)) is not null;
+    }
+
     #endregion Methods
 }

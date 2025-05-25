@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Finance.Controls.Cells.AssetGroupCell">
+
+    <Border Style="{x:StaticResource Card}" Margin="15,0,15,15">
+        <Grid HeightRequest="70" ColumnDefinitions="Auto,*" ColumnSpacing="20">
+            <!-- Ícone para informar que o card pode ser movimentado -->
+            <Label Text="&#xf0c9;" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray900}}" />
+            <Label Grid.Column="1" Text="Name" VerticalTextAlignment="Center" FontAttributes="Bold" />
+            <Label Text="Assets.Count" />
+        </Grid>
+    </Border>
+</ContentView>

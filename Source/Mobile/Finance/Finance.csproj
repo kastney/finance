@@ -173,6 +173,9 @@
 	  <MauiXaml Update="Pages\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Strategy\CreateAssetGroupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

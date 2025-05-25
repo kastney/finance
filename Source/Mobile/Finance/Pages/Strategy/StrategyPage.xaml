@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cells="clr-namespace:Finance.Controls.Cells"
+             xmlns:controls="http://schemas.devexpress.com/maui"
+             xmlns:models="clr-namespace:Finance.Models"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Strategy"
+             x:Class="Finance.Pages.Strategy.StrategyPage"
+             x:DataType="viewModel:StrategyViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- Estrutura principal com barra de navegação e conteúdo rolável -->
+    <Grid RowDefinitions="Auto,*">
+        <!-- Barra de navegação personalizada com botão de retorno e botão "+" -->
+        <navigation:NavigationBar Title="Estratégia" IsRoot="False" Clicked="BackButtom_Clicked">
+            <navigation:NavigationBar.ToolbarItems>
+                <VerticalStackLayout>
+                    <!-- Botão "+" no canto superior direito para adicionar uma nova carteira -->
+                    <navigation:ToolbarItem Glyph="&#x2b;" Command="{Binding NewAssetGroupCommand}" />
+                </VerticalStackLayout>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
+
+        <!-- Conteúdo principal da página com lista de carteiras e mensagem de vazio -->
+        <Grid Grid.Row="1">
+            <!-- Mensagem exibida quando não há carteiras disponíveis para seleção -->
+            <Border IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
+                <VerticalStackLayout>
+                    <!-- Label com ícone de alerta e título "Atenção" estilizado -->
+                    <Label FontSize="Small" HorizontalTextAlignment="Start" Padding="20,10">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <!-- Ícone de aviso com cor adaptada ao tema (claro/escuro) -->
+                                <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Texto "Atenção" em negrito com mesma cor do ícone -->
+                                <Span Text="  Atenção" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!-- Mensagem explicativa para o usuário sobre como criar um grupo de ativos -->
+                    <Label Text="Parece que ainda não há nenhum Grupo de Ativos nesta carteira!&#10;&#10;Para começar a organizar seus ativos financeiros, você precisa criar pelo menos um grupo.&#10;&#10;É bem simples: basta tocar no botão + no canto superior direito da tela." FontSize="Micro" HorizontalTextAlignment="Justify" Padding="20,10,20,20" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Lista principal de grupos de ativos usando o DevExpress CollectionView -->
+            <controls:DXCollectionView ItemsSource="{Binding Strategy}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False">
+                <!-- Template de exibição de cada item da lista -->
+                <controls:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Layout de cada grupo de ativos -->
+                        <cells:AssetGroupCell x:DataType="models:AssetGroup" />
+                    </DataTemplate>
+                </controls:DXCollectionView.ItemTemplate>
+            </controls:DXCollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>
