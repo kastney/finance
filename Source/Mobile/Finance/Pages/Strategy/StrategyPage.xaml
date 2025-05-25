@@ -18,7 +18,7 @@
             <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
                     <!-- Botão "+" no canto superior direito para adicionar uma nova carteira -->
-                    <navigation:ToolbarItem Glyph="&#x2b;" Command="{Binding NewAssetGroupCommand}" />
+                    <navigation:ToolbarItem Glyph="&#x2b;" IsVisible="{Binding HasNewAssetGroup}" Command="{Binding NewAssetGroupCommand}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
@@ -27,22 +27,19 @@
         <Grid Grid.Row="1">
             <!-- Mensagem exibida quando não há carteiras disponíveis para seleção -->
             <Border IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
-                <VerticalStackLayout>
-                    <!-- Label com ícone de alerta e título "Atenção" estilizado -->
-                    <Label FontSize="Small" HorizontalTextAlignment="Start" Padding="20,10">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <!-- Ícone de aviso com cor adaptada ao tema (claro/escuro) -->
-                                <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                                <!-- Texto "Atenção" em negrito com mesma cor do ícone -->
-                                <Span Text="  Atenção" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" FontAttributes="Bold" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
-                    <!-- Mensagem explicativa para o usuário sobre como criar um grupo de ativos -->
-                    <Label Text="Parece que ainda não há nenhum Grupo de Ativos nesta carteira!&#10;&#10;Para começar a organizar seus ativos financeiros, você precisa criar pelo menos um grupo.&#10;&#10;É bem simples: basta tocar no botão + no canto superior direito da tela." FontSize="Micro" HorizontalTextAlignment="Justify" Padding="20,10,20,20" />
-                </VerticalStackLayout>
+                <!-- Label com ícone de alerta e título "Atenção" estilizado -->
+                <Label FontSize="Micro" HorizontalTextAlignment="Start" Padding="15,10">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <!-- Ícone de aviso com cor adaptada ao tema (claro/escuro) -->
+                            <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                            <!-- Texto "Atenção" em negrito com mesma cor do ícone -->
+                            <Span Text="  Estratégia não definida!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                            <!-- Mensagem explicativa para o usuário sobre como criar um grupo de ativos -->
+                            <Span Text="&#10;Ainda não há nenhum Grupo de Ativos nesta carteira!&#10;Para começar a organizar seus ativos financeiros, você precisa criar pelo menos um grupo.&#10;Basta tocar no botão + no canto superior direito da tela." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </Border>
 
             <!-- Lista principal de grupos de ativos usando o DevExpress CollectionView -->
@@ -51,7 +48,7 @@
                 <controls:DXCollectionView.ItemTemplate>
                     <DataTemplate>
                         <!-- Layout de cada grupo de ativos -->
-                        <cells:AssetGroupCell x:DataType="models:AssetGroup" />
+                        <cells:AssetGroupCell x:DataType="models:AssetGroup" Name="{Binding Name}" Count="{Binding Assets.Count}" />
                     </DataTemplate>
                 </controls:DXCollectionView.ItemTemplate>
             </controls:DXCollectionView>

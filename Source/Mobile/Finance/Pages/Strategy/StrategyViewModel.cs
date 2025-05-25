@@ -22,6 +22,12 @@ internal partial class StrategyViewModel : ViewModel {
     private bool isEmpty;
 
     /// <summary>
+    /// Flag que indica se é permitido a criação de um novo Grupo de Ativos.
+    /// </summary>
+    [ObservableProperty]
+    private bool hasNewAssetGroup;
+
+    /// <summary>
     /// Flag que indica se é permitido arrastar e soltar itens na interface.
     /// </summary>
     [ObservableProperty]
@@ -49,6 +55,8 @@ internal partial class StrategyViewModel : ViewModel {
     public override void Update() {
         // Obtém a instância do serviço de carteiras.
         var wallet = walletService.Wallet;
+        // Verifica se é permitido a criação de um novo Grupo de Ativos.
+        HasNewAssetGroup = wallet.Strategy.Count < AssetMetadata.Data.Count;
 
         // Limpa a coleção de grupos de ativos.
         Strategy.Clear();
@@ -57,7 +65,7 @@ internal partial class StrategyViewModel : ViewModel {
             // Adiciona cada grupo de ativos à coleção.
             Strategy.Add(strategy);
         }
-
+                
         // Verifica se a estratégia da carteira possui mais de um grupo.
         IsAllowDragDropItems = wallet.Strategy.Count > 1;
         // Verifica se a estratégia da carteira está vazia.

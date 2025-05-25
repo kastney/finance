@@ -3,12 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance.Controls.Cells.AssetGroupCell">
 
+    <!-- Contêiner visual com estilo de cartão e espaçamento externo -->
     <Border Style="{x:StaticResource Card}" Margin="15,0,15,15">
-        <Grid HeightRequest="70" ColumnDefinitions="Auto,*" ColumnSpacing="20">
-            <!-- Ícone para informar que o card pode ser movimentado -->
-            <Label Text="&#xf0c9;" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray900}}" />
-            <Label Grid.Column="1" Text="Name" VerticalTextAlignment="Center" FontAttributes="Bold" />
-            <Label Text="Assets.Count" />
+        <!-- Estrutura de grade com 4 linhas e 2 colunas, com espaçamento entre colunas e preenchimento interno -->
+        <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="10,*" ColumnSpacing="20" Padding="0,5">
+            <!-- Ícone para indicar que o card pode ser movido (ex: arrastar e soltar) -->
+            <Label Text="&#xf0c9;" Grid.RowSpan="4" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+
+            <!-- Nome do grupo de ativos, exibido com destaque -->
+            <Label x:Name="nameText" Grid.Column="1" VerticalTextAlignment="Center" FontAttributes="Bold" Margin="0,5" />
+
+            <!-- Título estático indicando que a próxima informação refere-se aos ativos do grupo -->
+            <Label Grid.Row="1" Grid.Column="1" Text="Ativos" FontSize="Micro" />
+            <!-- Quantidade de ativos presentes no grupo -->
+            <Label x:Name="countText" Grid.Row="2" Grid.Column="1" FontSize="Micro" />
+
+            <!-- Mensagem de aviso exibida quando o grupo está vazio -->
+            <Label x:Name="warningText" Grid.Row="3" Grid.Column="1" FontSize="Micro" Margin="0,5" IsVisible="False">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <!-- Ícone de alerta visualizando a situação de atenção -->
+                        <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Mensagem informando que o grupo está vazio -->
+                        <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Instrução adicional para o usuário incluir pelo menos um ativo -->
+                        <Span Text="&#10;Adicione pelo menos um tipo de ativo para que ele fique válido!" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
         </Grid>
     </Border>
 </ContentView>
