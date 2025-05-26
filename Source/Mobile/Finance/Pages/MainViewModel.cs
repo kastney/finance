@@ -27,6 +27,12 @@ internal partial class MainViewModel : ViewModel {
     [ObservableProperty]
     private bool isStrategy;
 
+    /// <summary>
+    /// Indica se existe algo que necessita de atenção no botão de estratégia.
+    /// </summary>
+    [ObservableProperty]
+    private bool isWarningStrategy;
+
     #endregion Fields
 
     #region Constructor
@@ -60,6 +66,8 @@ internal partial class MainViewModel : ViewModel {
 
         // Verifica se a estratégia da carteira está vazia.
         IsStrategy = Strategy.Count != 0;
+        // Verifica se existe algo que precisa de atenção no botão de estratégia.
+        IsWarningStrategy = Strategy.Count == 0 || Strategy.Any(a => a.Assets.Count == 0);
 
         // Notifica a interface de que a propriedade Wallet foi alterada.
         OnPropertyChanged(nameof(Wallet));
