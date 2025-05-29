@@ -65,7 +65,7 @@ internal partial class StrategyViewModel : ViewModel {
             // Adiciona cada grupo de ativos à coleção.
             Strategy.Add(strategy);
         }
-                
+
         // Verifica se a estratégia da carteira possui mais de um grupo.
         IsAllowDragDropItems = wallet.Strategy.Count > 1;
         // Verifica se a estratégia da carteira está vazia.
@@ -98,4 +98,17 @@ internal partial class StrategyViewModel : ViewModel {
     }
 
     #endregion Navigation Methods
+
+    #region Walleting Methods
+
+    /// <summary>
+    /// Salva a ordenação atual da estratégia da carteira no serviço de carteiras.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    public async Task SaveSorting() {
+        // Salva a ordenação atual da estratégia no serviço de carteiras.
+        await walletService.SaveSortingStrategy([.. Strategy]);
+    }
+
+    #endregion Walleting Methods
 }

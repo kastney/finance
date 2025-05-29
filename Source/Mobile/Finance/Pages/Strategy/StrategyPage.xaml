@@ -43,7 +43,7 @@
             </Border>
 
             <!-- Lista principal de grupos de ativos usando o DevExpress CollectionView -->
-            <controls:DXCollectionView ItemsSource="{Binding Strategy}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False">
+            <controls:DXCollectionView ItemsSource="{Binding Strategy}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False" CompleteItemDragDrop="DXCollectionView_CompleteItemDragDrop">
                 <!-- Template de exibição de cada item da lista -->
                 <controls:DXCollectionView.ItemTemplate>
                     <DataTemplate>

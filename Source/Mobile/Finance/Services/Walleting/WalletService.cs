@@ -183,5 +183,31 @@ internal class WalletService : IWalletService {
         }
     }
 
+    /// <summary>
+    /// Salva a estratégia de ordenação atualizada no banco de dados local.
+    /// </summary>
+    /// <param name="strategy">Lista de grupos de ativos que representa a nova estratégia a ser salva.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a ordenação da estratégia.</returns>
+    public async Task SaveSortingStrategy(List<AssetGroup> strategy) {
+        try {
+            // Serializa a estratégia atualizada em uma string JSON.
+            var newStrategy = AssetMetadata.SerializeStrategy(strategy);
+
+            // Inicializa o banco de dados, caso ainda não tenha sido feito.
+            await Init();
+
+            // Executa a atualização diretamente via comando SQL.
+            var rowsAffected = await database.ExecuteAsync("UPDATE wallets SET StrategyJson = ? WHERE id = ?", newStrategy, Wallet.Id);
+
+            // Se a atualização afetou pelo menos uma linha, atualiza a propriedade local.
+            if(rowsAffected > 0) {
+                // Atualiza a propriedade serializada StrategyJson da carteira.
+                Wallet.StrategyJson = newStrategy;
+            }
+        } catch {
+            // Em caso de erro, não faz nada por enquanto.
+        }
+    }
+
     #endregion Strategy Methods
 }

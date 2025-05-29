@@ -57,4 +57,18 @@ public partial class StrategyPage : ContentPage {
     }
 
     #endregion Navigation Methods
+
+    #region Walleting Methods
+
+    /// <summary>
+    /// Evento disparado quando o CollectionView completa uma operação de arrastar e soltar itens.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento.</param>
+    /// <param name="e">Argumentos do evento.</param>
+    private async void DXCollectionView_CompleteItemDragDrop(object sender, DevExpress.Maui.CollectionView.CompleteItemDragDropEventArgs e) {
+        // Chama o método no ViewModel para salvar a nova ordem dos itens após o arrastar e soltar.
+        await viewModel.SaveSorting();
+    }
+
+    #endregion Walleting Methods
 }

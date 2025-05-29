@@ -60,8 +60,11 @@ internal partial class MainViewModel : ViewModel {
         Strategy.Clear();
         // Percorre cada estratégia na carteira e adiciona à coleção de estratégia.
         foreach(var strategy in Wallet.Strategy) {
-            // Adiciona a estratégia atual à coleção de estratégia.
-            Strategy.Add(strategy);
+            // Verifica se existe algo dentro do grupo de ativos.
+            if(strategy.Assets.Count != 0) {
+                // Adiciona a estratégia atual à coleção de estratégia.
+                Strategy.Add(strategy);
+            }
         }
 
         // Verifica se a estratégia da carteira está vazia.

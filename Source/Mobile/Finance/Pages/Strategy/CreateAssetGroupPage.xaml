@@ -34,7 +34,7 @@
                                    PlaceholderText="Meu Grupo de Ativos"
                                    StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf200;}"
                                    Keyboard="Text"
-                                   MaxCharacterCount="50"
+                                   MaxCharacterCount="25"
                                    MaxCharacterCountOverflowMode="LimitInput"
                                    ReturnType="Done"
                                    ReturnCommand="{Binding CreateCommand}" />
