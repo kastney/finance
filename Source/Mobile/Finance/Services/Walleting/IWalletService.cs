@@ -56,5 +56,26 @@ internal interface IWalletService {
     /// <returns>Lista de objetos <see cref="Wallet"/> disponíveis.</returns>
     Task<List<Wallet>> AvailableWallets();
 
-    #endregion Management Methods
+    #endregion Wallet Management Methods
+
+    #region Strategy Methods
+
+    /// <summary>
+    /// Adiciona um novo grupo de ativos à estratégia da carteira, caso ainda não exista.
+    /// </summary>
+    /// <param name="assetGroupName">Nome do grupo de ativos a ser adicionado.</param>
+    /// <returns>
+    /// Uma tarefa que representa a operação assíncrona.
+    /// O resultado será <c>true</c> se o grupo for adicionado com sucesso; <c>falso</c> se já existir um grupo com o mesmo nome.
+    /// </returns>
+    Task<bool> AddAssetGroup(string assetGroupName);
+
+    /// <summary>
+    /// Ordena os grupos de ativos na estratégia da carteira com base em um critério específico.
+    /// </summary>
+    /// <param name="strategy">Lista de grupos de ativos.d</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a ordenação da estratégia.</returns>
+    Task SaveSortingStrategy(List<AssetGroup> strategy);
+
+    #endregion Strategy Methods
 }

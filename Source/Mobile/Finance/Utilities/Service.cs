@@ -16,7 +16,7 @@ internal static class Service {
             // Em plataformas Android, obtém os serviços a partir da aplicação MAUI atual.
             return IPlatformApplication.Current.Services;
 #else
-             // Para outras plataformas, ainda não implementado (retorna nulo).
+            // Para outras plataformas, ainda não implementado (retorna nulo).
             return null;
 #endif
         }

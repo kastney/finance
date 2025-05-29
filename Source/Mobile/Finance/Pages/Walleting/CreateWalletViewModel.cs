@@ -63,7 +63,11 @@ internal partial class CreateWalletViewModel : ViewModel {
         IsRunning = true;
 
         // Cria uma nova instância da carteira com o nome fornecido.
-        var wallet = new Wallet { Name = WalletName.Value };
+        var wallet = new Wallet {
+            Name = WalletName.Value,
+            StrategyJson = JsonSerializer.Serialize(AssetMetadata.GetDefaultStrategy()),
+            AllocationsJson = JsonSerializer.Serialize(AssetMetadata.GetDefaultAllocations()),
+        };
         // Persiste a carteira no serviço de armazenamento.
         await walletService.Create(wallet);
         // Define a carteira criada como a carteira atual do contexto.

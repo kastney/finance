@@ -89,28 +89,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Enumerations\**" />
 	  <AndroidResource Remove="Models\Assets\**" />
 	  <AndroidResource Remove="Models\Operations\**" />
-	  <Compile Remove="Enumerations\**" />
 	  <Compile Remove="Models\Assets\**" />
 	  <Compile Remove="Models\Operations\**" />
-	  <EmbeddedResource Remove="Enumerations\**" />
 	  <EmbeddedResource Remove="Models\Assets\**" />
 	  <EmbeddedResource Remove="Models\Operations\**" />
-	  <MauiCss Remove="Enumerations\**" />
 	  <MauiCss Remove="Models\Assets\**" />
 	  <MauiCss Remove="Models\Operations\**" />
-	  <MauiXaml Remove="Enumerations\**" />
 	  <MauiXaml Remove="Models\Assets\**" />
 	  <MauiXaml Remove="Models\Operations\**" />
-	  <None Remove="Enumerations\**" />
 	  <None Remove="Models\Assets\**" />
 	  <None Remove="Models\Operations\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Remove="Controls\Calendar.xaml.cs" />
+	  <Compile Remove="Enumerations\FixedType.cs" />
+	  <Compile Remove="Enumerations\IndexerType.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -124,34 +120,26 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="DevExpress.Maui.Charts" Version="24.1.4" />
-		<PackageReference Include="DevExpress.Maui.Editors" Version="24.1.4" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.60" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
+		<PackageReference Include="DevExpress.Maui.Charts" Version="24.2.7" />
+		<PackageReference Include="DevExpress.Maui.CollectionView" Version="24.2.7" />
+		<PackageReference Include="DevExpress.Maui.Editors" Version="24.2.7" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.70" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.70" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Controls\Cards\WalletStatusCard.xaml.cs">
-	    <DependentUpon>WalletStatusCard.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Initialize\PresentationPage.xaml.cs">
 	    <DependentUpon>PresentationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\MainPage.xaml.cs">
-	    <DependentUpon>MainPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cards\AssetCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -159,6 +147,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cells\AssetGroupCell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cells\WalletSelectionCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
@@ -171,6 +168,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Strategy\CreateAssetGroupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Walleting\DeleteWalletPage.xaml">
@@ -204,6 +210,8 @@
 	  <Using Include="SQLite" />
 	  <Using Include="System.Collections.ObjectModel" />
 	  <Using Include="System.Globalization" />
+	  <Using Include="System.Text.Json" />
+	  <Using Include="System.Text.Json.Serialization" />
 	  <Using Include="System.Windows.Input" />
 	</ItemGroup>
 

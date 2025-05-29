@@ -42,7 +42,7 @@
                 <Label Grid.Row="1" Grid.Column="3" Text="Performance" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                 <Label Grid.Row="2" Grid.Column="3" x:Name="performance" VerticalTextAlignment="Start" FontAttributes="Bold" />
             </Grid>
-            
+
             <!-- Linha inferior que pode representar o estado do ativo com cor -->
             <BoxView x:Name="color" HeightRequest="7" />
         </VerticalStackLayout>
