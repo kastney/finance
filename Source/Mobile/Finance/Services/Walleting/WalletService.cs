@@ -155,7 +155,7 @@ internal class WalletService : IWalletService {
     public async Task<bool> AddAssetGroup(string assetGroupName) {
         try {
             // Cria o novo grupo de ativos com o nome especificado e adiciona à estratégia da carteira.
-            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName });
+            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName, Enabled = true });
 
             // Serializa a estratégia atualizada em uma string JSON.
             var newStrategy = AssetMetadata.SerializeStrategy(Wallet.Strategy);
@@ -184,11 +184,11 @@ internal class WalletService : IWalletService {
     }
 
     /// <summary>
-    /// Salva a estratégia de ordenação atualizada no banco de dados local.
+    /// Atualiza os grupos de ativos na estratégia.
     /// </summary>
     /// <param name="strategy">Lista de grupos de ativos que representa a nova estratégia a ser salva.</param>
-    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a ordenação da estratégia.</returns>
-    public async Task SaveSortingStrategy(List<AssetGroup> strategy) {
+    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a estratégia.</returns>
+    public async Task<bool> UpdateStrategy(List<AssetGroup> strategy) {
         try {
             // Serializa a estratégia atualizada em uma string JSON.
             var newStrategy = AssetMetadata.SerializeStrategy(strategy);
@@ -203,9 +203,16 @@ internal class WalletService : IWalletService {
             if(rowsAffected > 0) {
                 // Atualiza a propriedade serializada StrategyJson da carteira.
                 Wallet.StrategyJson = newStrategy;
+
+                // Retorna verdadeiro indicando que a estratégia atualizada com sucesso.
+                return true;
             }
+
+            // Caso não tenha afetado nenhuma linha, considera como falha.
+            return false;
         } catch {
-            // Em caso de erro, não faz nada por enquanto.
+            // Em caso de erro durante qualquer etapa, retorna falso indicando falha na atualização.
+            return false;
         }
     }
 

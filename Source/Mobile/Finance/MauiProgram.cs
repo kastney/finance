@@ -48,7 +48,7 @@ public static class MauiProgram {
         #region Services
 
         // Registra o serviço de navegação como singleton.
-        builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<INavigationService, Services.Navigation.NavigationService>();
         // Registra o serviço de gerenciamento de carteiras como singleton.
         builder.Services.AddSingleton<IWalletService, WalletService>();
 

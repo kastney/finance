@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="http://schemas.devexpress.com/maui"
+             xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              x:Class="Finance.Controls.Cells.AssetGroupCell">
 
     <!-- Contêiner visual com estilo de cartão e espaçamento externo -->
     <Border Style="{x:StaticResource Card}" Margin="15,0,15,15">
         <!-- Estrutura de grade com 4 linhas e 2 colunas, com espaçamento entre colunas e preenchimento interno -->
-        <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="10,*" ColumnSpacing="20" Padding="0,5">
+        <Grid RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="10,*" ColumnSpacing="20" Padding="0,5,0,0">
             <!-- Ícone para indicar que o card pode ser movido (ex: arrastar e soltar) -->
-            <Label Text="&#xf0c9;" Grid.RowSpan="4" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+            <Label Text="&#xf0c9;" Grid.RowSpan="6" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
 
             <!-- Nome do grupo de ativos, exibido com destaque -->
-            <Label x:Name="nameText" Grid.Column="1" VerticalTextAlignment="Center" FontAttributes="Bold" Margin="0,5" />
+            <Label x:Name="nameText" Grid.Column="1" VerticalTextAlignment="Center" FontSize="Small" FontAttributes="Bold" Margin="0,5,0,10" />
 
             <!-- Título estático indicando que a próxima informação refere-se aos ativos do grupo -->
             <Label Grid.Row="1" Grid.Column="1" Text="Ativos" FontSize="Micro" />
             <!-- Quantidade de ativos presentes no grupo -->
             <Label x:Name="countText" Grid.Row="2" Grid.Column="1" FontSize="Micro" />
 
+            <!-- Barra de ferramentas para manipular um grupo de ativos -->
+            <controls:DXToolbar Grid.Column="1" Grid.Row="3" ItemSpacing="2" HeightRequest="10" Margin="-10,5,10,0" BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
+                <!-- Item customizável para um botão que ativar ou desativar um grupo de ativos -->
+                <controls:ToolbarCustomItem>
+                    <!-- Switch para ativar e desativar o grupo de ativos -->
+                    <control:DXSwitch x:Name="checkedSwitch" TrackBorderThickness="1" CheckedChanged="CheckedSwitch_CheckedChanged" />
+                </controls:ToolbarCustomItem>
+
+                <!-- Botão para abrir a configuração da porcentagem do grupo -->
+                <controls:ToolbarNavigationButton PageName="PercentageSettings" Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf200;}" IconHeight="20" />
+                <!-- Página com a configuração de porcentagem -->
+                <controls:ToolbarPage Name="PercentageSettings">
+                    <!-- Item customizável para adicionar um slider -->
+                    <controls:ToolbarCustomItem>
+                        <!-- Slider para configurar a porcentagem do grupo de ativos -->
+                        <Slider WidthRequest="250" ThumbColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" MinimumTrackColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" MaximumTrackColor="Gray" />
+                    </controls:ToolbarCustomItem>
+                </controls:ToolbarPage>
+
+                <!-- Botão para abrir a configuração de cores -->
+                <controls:ToolbarNavigationButton PageName="ColorSettings" Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf53f;}" IconHeight="20" />
+                <!-- Página com a configuração de cores -->
+                <controls:ToolbarPage Name="ColorSettings">
+                    <!-- Um seletor de cores disponíveis -->
+                    <controls:ToolbarColorSelector />
+                </controls:ToolbarPage>
+
+                <!-- Botão para editar o nome do grupo ativos -->
+                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf044;}" IconHeight="20" />
+
+                <!-- Botão para apagar o grupo de ativos -->
+                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf2ed;}" IconHeight="20" />
+
+                <!-- Botão para abrir os ativos do grupo -->
+                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf07c;}" IconHeight="20" />
+            </controls:DXToolbar>
+
             <!-- Mensagem de aviso exibida quando o grupo está vazio -->
-            <Label x:Name="warningText" Grid.Row="3" Grid.Column="1" FontSize="Micro" Margin="0,5" IsVisible="False">
+            <Label x:Name="warningText" Grid.Row="4" Grid.Column="1" FontSize="Micro" Margin="0,10" IsVisible="False">
                 <Label.FormattedText>
                     <FormattedString>
                         <!-- Ícone de alerta visualizando a situação de atenção -->
@@ -31,6 +70,9 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+
+            <!-- Linha inferior que pode representar o estado do ativo com cor -->
+            <BoxView x:Name="color" Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="7" />
         </Grid>
     </Border>
 </ContentView>

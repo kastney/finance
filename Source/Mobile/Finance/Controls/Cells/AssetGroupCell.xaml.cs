@@ -1,3 +1,5 @@
+using Finance.Delegates;
+
 namespace Finance.Controls.Cells;
 
 /// <summary>
@@ -17,6 +19,11 @@ public partial class AssetGroupCell : ContentView {
     /// Propriedade vinculável para armazenar a quantidade de ativos no grupo. Sempre que alterado, dispara o método OnCountChanged.
     /// </summary>
     public static readonly BindableProperty CountProperty = BindableProperty.Create(nameof(Count), typeof(int?), typeof(AssetGroupCell), null, propertyChanged: OnCountChanged);
+
+    /// <summary>
+    /// Propriedade vinculável para armazenar o valor de ativo de um grupo. Sempre que alterado, dispara o método OnIsCheckedChanged.
+    /// </summary>
+    public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(AssetGroupCell), false, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnIsCheckedChanged);
 
     #endregion Fields
 
@@ -38,7 +45,24 @@ public partial class AssetGroupCell : ContentView {
         set => SetValue(CountProperty, value);
     }
 
+    /// <summary>
+    /// Obtém ou define o valor de ativo ou desativo do grupo de ativos.
+    /// </summary>
+    public bool IsChecked {
+        get => (bool)GetValue(IsCheckedProperty);
+        set => SetValue(IsCheckedProperty, value);
+    }
+
     #endregion Properties
+
+    #region Events
+
+    /// <summary>
+    /// Dispare quando o status do grupo de ativos for alterado.
+    /// </summary>
+    public event EnabledAssetGroupEventHandler CheckedChanged;
+
+    #endregion Events
 
     #region Constructor
 
@@ -83,6 +107,33 @@ public partial class AssetGroupCell : ContentView {
         control.warningText.IsVisible = value <= 0;
         // Atualiza o texto do componente countText para refletir a nova quantidade de ativos.
         control.countText.Text = value.ToString();
+    }
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade IsChecked for alterada.
+    /// Atualiza o valor do interruptor que ativa ou desativa o grupo de ativos.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnIsCheckedChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o bindable é do tipo AssetGroupCell.
+        if(bindable is not AssetGroupCell control) { return; }
+        // Define o valor interruptor do grupo de dativos.
+        control.checkedSwitch.IsChecked = (bool)newValue;
+    }
+
+    /// <summary>
+    /// Método chamado quando o usuário interage com o interruptor de ativação do grupo de ativos.
+    /// Atualiza o valor do interruptor com base na alteração do usuário.
+    /// </summary>
+    /// <param name="sender">Objeto que chamou este evento.</param>
+    /// <param name="e">Os argumentos do evento.</param>
+    private void CheckedSwitch_CheckedChanged(object sender, ValueChangedEventArgs<bool> e) {
+        // Define o valor do interruptor do grupo de dativos.
+        IsChecked = e.NewValue;
+        // Dispara o evento Changed para notificar que o grupo de ativos foi alterado.
+        CheckedChanged?.Invoke(Name);
     }
 
     #endregion Methods

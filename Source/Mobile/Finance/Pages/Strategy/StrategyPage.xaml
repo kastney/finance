@@ -48,7 +48,7 @@
                 <controls:DXCollectionView.ItemTemplate>
                     <DataTemplate>
                         <!-- Layout de cada grupo de ativos -->
-                        <cells:AssetGroupCell x:DataType="models:AssetGroup" Name="{Binding Name}" Count="{Binding Assets.Count}" />
+                        <cells:AssetGroupCell x:DataType="models:AssetGroup" Name="{Binding Name}" Count="{Binding Assets.Count}" IsChecked="{Binding Enabled}" CheckedChanged="AssetGroupCell_CheckedChanged" />
                     </DataTemplate>
                 </controls:DXCollectionView.ItemTemplate>
             </controls:DXCollectionView>

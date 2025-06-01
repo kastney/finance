@@ -104,10 +104,32 @@ internal partial class StrategyViewModel : ViewModel {
     /// <summary>
     /// Salva a ordenação atual da estratégia da carteira no serviço de carteiras.
     /// </summary>
-    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    /// <returns>Uma tarefa assíncrona que representa a operação de salvar a ordenação.</returns>
     public async Task SaveSorting() {
         // Salva a ordenação atual da estratégia no serviço de carteiras.
-        await walletService.SaveSortingStrategy([.. Strategy]);
+        await walletService.UpdateStrategy([.. Strategy]);
+    }
+
+    /// <summary>
+    /// Atualiza o estado de habilitação de um grupo de ativos no serviço de carteiras.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu a mudança.</param>
+    /// <returns>Uma tarefa assíncrona que representa a operação de salvar o status de um grupo de ativos.</returns>
+    public async Task UpdateAssetGroupChecked(string name) {
+        // Atualiza o estado de habilitação do grupo de ativos no serviço de carteiras.
+        if(!await walletService.UpdateStrategy([.. Strategy])) {
+            // Aguara um tempo para atualizar na tela.
+            await Task.Delay(100);
+            // Obtém a carteira atual do serviço de carteiras.
+            var wallet = walletService.Wallet;
+            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            if(wallet.Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup group) {
+                // Inverte o estado de habilitação do grupo de ativos.
+                group.Enabled = !group.Enabled;
+                // Atualiza a interface.
+                Update();
+            }
+        }
     }
 
     #endregion Walleting Methods

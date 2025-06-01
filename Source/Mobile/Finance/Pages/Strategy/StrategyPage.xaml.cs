@@ -70,5 +70,14 @@ public partial class StrategyPage : ContentPage {
         await viewModel.SaveSorting();
     }
 
+    /// <summary>
+    /// Evento disparado quando ocorrer uma muança do status de ativado de um grupo de ativos.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
+    private async void AssetGroupCell_CheckedChanged(string name) {
+        // Chama o método no ViewModel para atualizar o status de ativado do grupo de ativos.
+        await viewModel.UpdateAssetGroupChecked(name);
+    }
+
     #endregion Walleting Methods
 }

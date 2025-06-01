@@ -14,3 +14,9 @@ using System.Diagnostics.CodeAnalysis;
 // interoperabilidade com o Windows Runtime. A classe afetada não é utilizada
 // diretamente em cenários de interoperabilidade com WinRT.
 [assembly: SuppressMessage("CsWinRT", "CsWinRT1030", Justification = "Classe não usada em interoperabilidade direta com WinRT.", Scope = "module")]
+
+// Suprime o aviso IDE0051 que indica membros privados não utilizados.
+// Este membro é necessário para a lógica de verificação de estado do grupo de ativos,
+// mas não é utilizado diretamente no código atual. A suprimenda é temporária
+// e será revisada posteriormente para garantir que não há código morto.
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_CheckedChanged(System.String)")]

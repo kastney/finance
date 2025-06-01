@@ -18,6 +18,11 @@ internal class AssetGroup {
     /// </summary>
     public List<AssetAllocation> Assets { get; set; }
 
+    /// <summary>
+    /// Indicador do estado de ativado de um grupo de ativos.
+    /// </summary>
+    public bool Enabled { get; set; }
+
     #endregion Properties
 
     #region Constructor

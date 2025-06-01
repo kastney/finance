@@ -206,6 +206,7 @@
 	  <Using Include="CommunityToolkit.Mvvm.ComponentModel" />
 	  <Using Include="CommunityToolkit.Mvvm.Input" />
 	  <Using Include="DevExpress.Maui" />
+	  <Using Include="DevExpress.Maui.Core" />
 	  <Using Include="Microsoft.Extensions.Logging" />
 	  <Using Include="SQLite" />
 	  <Using Include="System.Collections.ObjectModel" />

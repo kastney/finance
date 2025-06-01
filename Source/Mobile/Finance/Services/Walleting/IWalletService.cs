@@ -71,11 +71,11 @@ internal interface IWalletService {
     Task<bool> AddAssetGroup(string assetGroupName);
 
     /// <summary>
-    /// Ordena os grupos de ativos na estratégia da carteira com base em um critério específico.
+    /// Atualiza os grupos de ativos na estratégia.
     /// </summary>
-    /// <param name="strategy">Lista de grupos de ativos.d</param>
-    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a ordenação da estratégia.</returns>
-    Task SaveSortingStrategy(List<AssetGroup> strategy);
+    /// <param name="strategy">Lista de grupos de ativos.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de salvar a estratégia.</returns>
+    Task<bool> UpdateStrategy(List<AssetGroup> strategy);
 
     #endregion Strategy Methods
 }
