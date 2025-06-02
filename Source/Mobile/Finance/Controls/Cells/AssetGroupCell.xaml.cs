@@ -25,6 +25,31 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(AssetGroupCell), false, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnIsCheckedChanged);
 
+    /// <summary>
+    /// Propriedade vinculável para armazenar o valor da porcentagem do grupo de ativos. Sempre que alterado, dispara o método OnPercentageChanged.
+    /// </summary>
+    public static readonly BindableProperty PercentageProperty = BindableProperty.Create(nameof(Percentage), typeof(int), typeof(AssetGroupCell), -1, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnPercentageChanged);
+
+    /// <summary>
+    /// Propriedade vinculável para armazenar o valor da porcentagem disponível para ser utilizado entre os grupos de ativos.
+    /// </summary>
+    public static readonly BindableProperty PercentageAvailableProperty = BindableProperty.Create(nameof(PercentageAvailable), typeof(int), typeof(AssetGroupCell), 100, propertyChanged: OnPercentageAvailableChanged);
+
+    /// <summary>
+    /// O valor máxima da porcentage para ser selecionado no slider.
+    /// </summary>
+    private double maximumPercentageSlider;
+
+    /// <summary>
+    /// Flag para controlar se o usuário está clicando no slider.
+    /// </summary>
+    private bool isPressedSlider;
+
+    /// <summary>
+    /// O valor atual da porcentagem do grupo de ativos.
+    /// </summary>
+    private int currentPercentage;
+
     #endregion Fields
 
     #region Properties
@@ -53,6 +78,22 @@ public partial class AssetGroupCell : ContentView {
         set => SetValue(IsCheckedProperty, value);
     }
 
+    /// <summary>
+    /// Obtém ou define o valor da porcentagem do grupo de ativos.
+    /// </summary>
+    public int Percentage {
+        get => (int)GetValue(PercentageProperty);
+        set => SetValue(PercentageProperty, value);
+    }
+
+    /// <summary>
+    /// Obtém ou define o valor da porcentagem disponível para ser utilizado entre os grupos de ativos.
+    /// </summary>
+    public int PercentageAvailable {
+        get => (int)GetValue(PercentageAvailableProperty);
+        set => SetValue(PercentageAvailableProperty, value);
+    }
+
     #endregion Properties
 
     #region Events
@@ -61,6 +102,11 @@ public partial class AssetGroupCell : ContentView {
     /// Dispare quando o status do grupo de ativos for alterado.
     /// </summary>
     public event EnabledAssetGroupEventHandler CheckedChanged;
+
+    /// <summary>
+    /// Dispara quando a porcentagem do grupo de ativos for alterado.
+    /// </summary>
+    public event PercentageAssetGroupEventHanler PercentageChanged;
 
     #endregion Events
 
@@ -79,6 +125,8 @@ public partial class AssetGroupCell : ContentView {
 
     #region Methods
 
+    #region Name
+
     /// <summary>
     /// Método chamado automaticamente quando a propriedade Name for alterada.
     /// Atualiza o texto do componente visual correspondente.
@@ -92,6 +140,10 @@ public partial class AssetGroupCell : ContentView {
         // Atualiza o texto do componente nameText para refletir o novo nome.
         control.nameText.Text = value;
     }
+
+    #endregion Name
+
+    #region Count
 
     /// <summary>
     /// Método chamado automaticamente quando a propriedade Count for alterada.
@@ -108,6 +160,10 @@ public partial class AssetGroupCell : ContentView {
         // Atualiza o texto do componente countText para refletir a nova quantidade de ativos.
         control.countText.Text = value.ToString();
     }
+
+    #endregion Count
+
+    #region Checked
 
     /// <summary>
     /// Método chamado automaticamente quando a propriedade IsChecked for alterada.
@@ -130,11 +186,115 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="sender">Objeto que chamou este evento.</param>
     /// <param name="e">Os argumentos do evento.</param>
     private void CheckedSwitch_CheckedChanged(object sender, ValueChangedEventArgs<bool> e) {
-        // Define o valor do interruptor do grupo de dativos.
+        // Define o valor do interruptor do grupo de ativos.
         IsChecked = e.NewValue;
-        // Dispara o evento Changed para notificar que o grupo de ativos foi alterado.
+        // Dispara o evento para notificar que o grupo de ativos foi alterado.
         CheckedChanged?.Invoke(Name);
     }
+
+    #endregion Checked
+
+    #region Percentage
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade Porcentage for alterada.
+    /// Atualiza o valor do slider de porcentagem do grupo de ativos.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnPercentageChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o bindable é do tipo AssetGroupCell e define o valor da porcentagem do grupo de ativos.
+        if(bindable is not AssetGroupCell control || newValue is not int value) { return; }
+
+        // Normalização do valor da porcentagem.
+        double percentage = value < 0 ? 0 : value > 100 ? 100 : value;
+
+        // Define o valor no slider de porcentagem.
+        control.percentageSlider.Value = percentage / 100;
+        // Define o valor do texto informativo no card.
+        control.percentageText.Text = $"{value}%";
+
+        // Atualização do porcentagem máxima selecionável no slider.
+        control.maximumPercentageSlider = (double)(control.Percentage + control.PercentageAvailable) / 100;
+    }
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade PorcentageAvailable for alterada.
+    /// Atualiza o valor da porcentagem disponível para ser utilizado entre os grupos de ativos.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnPercentageAvailableChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o bindable é do tipo AssetGroupCell e define o valor da porcentagem disponível para os grupos de ativos.
+        if(bindable is not AssetGroupCell control || newValue is not int value) { return; }
+        // Normalização do valor da porcentage disponível.
+        if(value < 0) {
+            // Se for menor do que 0, então deixa no menor valor possível (que é o 0).
+            control.PercentageAvailable = 0;
+        } else if(value > 100) {
+            // Se for maior do que 100, então deixa no maior valor possível (que é o 100).
+            control.PercentageAvailable = 100;
+        }
+
+        // Atualização do porcentagem máxima selecionável no slider.
+        control.maximumPercentageSlider = (double)(control.Percentage + control.PercentageAvailable) / 100;
+    }
+
+    /// <summary>
+    /// Evento acionado sempre que o valor do slider de porcentagem for alterado.
+    /// Responsável por validar se o valor atual excede o máximo permitido, e ajustá-lo caso necessário.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento, neste caso o próprio slider.</param>
+    /// <param name="e">Argumentos do evento de alteração de valor.</param>
+    private void PercentageSlider_ValueChanged(object sender, EventArgs e) {
+        // Verifica se o slider está sendo pressionado e se o valor atual excede o máximo permitido.
+        if(isPressedSlider && percentageSlider.Value > maximumPercentageSlider) {
+            // Verifica se a diferença entre o valor atual e o máximo é significativa, evitando ajustes desnecessários devido a pequenas diferenças de ponto flutuante.
+            if(Math.Abs(percentageSlider.Value - maximumPercentageSlider) > 0.0001) {
+                // Ajusta o valor do slider para o valor máximo permitido.
+                percentageSlider.Value = maximumPercentageSlider;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Evento acionado quando o usuário inicia a interação com o slider (pressiona o controle).
+    /// Define a flag de que o slider está sendo pressionado e força a validação do valor atual.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento, neste caso o próprio slider.</param>
+    /// <param name="e">Argumentos do evento de toque do DevExpress.</param>
+    private void PercentageSlider_TapPressed(object sender, DXTapEventArgs e) {
+        // Salva o valor atual da porcentagem antes de começar o processo de mudança.
+        currentPercentage = Percentage;
+        // Indica que o slider está atualmente sendo pressionado.
+        isPressedSlider = true;
+        // Força a validação imediata do valor atual do slider.
+        PercentageSlider_ValueChanged(null, null);
+    }
+
+    /// <summary>
+    /// Evento acionado quando o usuário finaliza a interação com o slider (solta o controle).
+    /// Reseta a flag de interação e atualiza a propriedade Percentage se houver alteração real no valor.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento, neste caso o próprio slider.</param>
+    /// <param name="e">Argumentos do evento de toque do DevExpress.</param>
+    private void PercentageSlider_TapReleased(object sender, DXTapEventArgs e) {
+        // Indica que o slider não está mais sendo pressionado.
+        isPressedSlider = false;
+        // Converte o valor atual do slider para um inteiro representando a porcentagem.
+        var newPercentage = (int)(percentageSlider.Value * 100);
+        // Se a porcentagem atual for diferente da armazenada, atualiza a propriedade Percentage.
+        if(Percentage != newPercentage) {
+            // Atualiza a propriedade Percentage com o novo valor.
+            Percentage = newPercentage;
+            // Dispara o evento para notificar que o grupo de ativos foi alterado.
+            PercentageChanged?.Invoke(Name, currentPercentage);
+        }
+    }
+
+    #endregion Percentage
 
     #endregion Methods
 }

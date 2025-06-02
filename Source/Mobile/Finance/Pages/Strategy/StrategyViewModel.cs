@@ -33,6 +33,12 @@ internal partial class StrategyViewModel : ViewModel {
     [ObservableProperty]
     private bool isAllowDragDropItems;
 
+    /// <summary>
+    /// A quantidade de porcentagem disponível para ser utilizado entre os grupos de ativos.
+    /// </summary>
+    [ObservableProperty]
+    private int percentageAvailable;
+
     #endregion Fields
 
     #region Constructor
@@ -55,19 +61,26 @@ internal partial class StrategyViewModel : ViewModel {
     public override void Update() {
         // Obtém a instância do serviço de carteiras.
         var wallet = walletService.Wallet;
+
         // Verifica se é permitido a criação de um novo Grupo de Ativos.
         HasNewAssetGroup = wallet.Strategy.Count < AssetMetadata.Data.Count;
+
+        // Obtém a quantidade de porcentagem disponível para os grupos.
+        PercentageAvailable = 100 - wallet.Strategy.Sum(a => a.Percentage);
 
         // Limpa a coleção de grupos de ativos.
         Strategy.Clear();
         // Percorre cada grupo de ativos na carteira e adiciona à coleção.
         foreach(var strategy in wallet.Strategy) {
+            // Define a quantidade de porcentagem disponível para uso entre os grupos de ativos.
+            strategy.PercentageAvailable = PercentageAvailable;
             // Adiciona cada grupo de ativos à coleção.
             Strategy.Add(strategy);
         }
 
         // Verifica se a estratégia da carteira possui mais de um grupo.
         IsAllowDragDropItems = wallet.Strategy.Count > 1;
+
         // Verifica se a estratégia da carteira está vazia.
         IsEmpty = wallet.Strategy.Count == 0;
     }
@@ -115,22 +128,68 @@ internal partial class StrategyViewModel : ViewModel {
     /// </summary>
     /// <param name="name">Nome do grupo de ativos que sofreu a mudança.</param>
     /// <returns>Uma tarefa assíncrona que representa a operação de salvar o status de um grupo de ativos.</returns>
-    public async Task UpdateAssetGroupChecked(string name) {
+    public async Task UpdateChecked(string name) {
         // Atualiza o estado de habilitação do grupo de ativos no serviço de carteiras.
         if(!await walletService.UpdateStrategy([.. Strategy])) {
             // Aguara um tempo para atualizar na tela.
             await Task.Delay(100);
-            // Obtém a carteira atual do serviço de carteiras.
-            var wallet = walletService.Wallet;
             // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
-            if(wallet.Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup group) {
+            if(Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup localGroup) {
                 // Inverte o estado de habilitação do grupo de ativos.
-                group.Enabled = !group.Enabled;
-                // Atualiza a interface.
-                Update();
+                localGroup.Enabled = !localGroup.Enabled;
+            }
+            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup globalGroup) {
+                // Inverte o estado de habilitação do grupo de ativos.
+                globalGroup.Enabled = !globalGroup.Enabled;
             }
         }
     }
 
+    /// <summary>
+    /// Atualiza a porcentagem de um grupo de ativos no serviço de carteiras.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu a mudança.</param>
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
+    /// <returns>Uma tarefa assíncrona que representa a operação de salvar a porcentagem de um grupo de ativos.</returns>
+    public async Task UpdatePercentage(string name, int oldPercentage) {
+        // Atualiza a porcentage do grupo de ativos no serviço de carteiras.
+        if(!await walletService.UpdateStrategy([.. Strategy])) {
+            // Aguara um tempo para atualizar na tela.
+            await Task.Delay(100);
+
+            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            if(Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup localGroup) {
+                // Inverte o estado de habilitação do grupo de ativos.
+                localGroup.Percentage = oldPercentage;
+            }
+            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup globalGroup) {
+                // Inverte o estado de habilitação do grupo de ativos.
+                globalGroup.Percentage = oldPercentage;
+            }
+        }
+
+        // Atualiza a porcentagem disponível.
+        UpdatePercentageAvailable();
+    }
+
     #endregion Walleting Methods
+
+    #region Private Methods
+
+    /// <summary>
+    /// Atualiza a porcentagem disponível.
+    /// </summary>
+    private void UpdatePercentageAvailable() {
+        // Obtém a quantidade de porcentagem disponível para os grupos.
+        PercentageAvailable = 100 - walletService.Wallet.Strategy.Sum(a => a.Percentage);
+        // Percorrendo todos os grupos de ativos existentes.
+        foreach(var group in Strategy) {
+            // Atualiza a porcentagem disponível em cada grupo de ativos.
+            group.PercentageAvailable = PercentageAvailable;
+        }
+    }
+
+    #endregion Private Methods
 }

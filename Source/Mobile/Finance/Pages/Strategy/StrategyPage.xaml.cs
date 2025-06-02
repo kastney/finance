@@ -76,7 +76,17 @@ public partial class StrategyPage : ContentPage {
     /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
     private async void AssetGroupCell_CheckedChanged(string name) {
         // Chama o método no ViewModel para atualizar o status de ativado do grupo de ativos.
-        await viewModel.UpdateAssetGroupChecked(name);
+        await viewModel.UpdateChecked(name);
+    }
+
+    /// <summary>
+    /// Evento disparado quando ocorrer uma mudança na porcentagem de um grupo de ativos.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
+    private async void AssetGroupCell_PercentageChanged(string name, int oldPercentage) {
+        // Chama o método no ViewModel para atualizar a porcentagem do grupo de ativos.
+        await viewModel.UpdatePercentage(name, oldPercentage);
     }
 
     #endregion Walleting Methods

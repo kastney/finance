@@ -20,3 +20,10 @@ using System.Diagnostics.CodeAnalysis;
 // mas não é utilizado diretamente no código atual. A suprimenda é temporária
 // e será revisada posteriormente para garantir que não há código morto.
 [assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_CheckedChanged(System.String)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_PercentageChanged(System.String,System.Int32)")]
+
+// Suprime o aviso CsWinRT1028 que recomenda que a classe seja marcada como `partial`
+// para facilitar a interoperabilidade e geração de código com o WinRT. Como a classe
+// `AssetGroup` não será exposta ou usada diretamente nesse contexto, a marcação como
+// `partial` é desnecessária neste momento. A suprimenda é temporária e será revisada.
+[assembly: SuppressMessage("Usage", "CsWinRT1028:Class is not marked partial", Justification = "<Pendente>", Scope = "type", Target = "~T:Finance.Models.AssetGroup")]

@@ -155,7 +155,7 @@ internal class WalletService : IWalletService {
     public async Task<bool> AddAssetGroup(string assetGroupName) {
         try {
             // Cria o novo grupo de ativos com o nome especificado e adiciona à estratégia da carteira.
-            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName, Enabled = true });
+            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName, Enabled = true, Percentage = 0 });
 
             // Serializa a estratégia atualizada em uma string JSON.
             var newStrategy = AssetMetadata.SerializeStrategy(Wallet.Strategy);
