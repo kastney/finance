@@ -35,7 +35,7 @@
                 </controls:ToolbarCustomItem>
 
                 <!-- Botão para abrir a configuração da porcentagem do grupo -->
-                <controls:ToolbarNavigationButton PageName="PercentageSettings" Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf200;}" IconHeight="20" />
+                <controls:ToolbarNavigationButton x:Name="percentageButton" PageName="PercentageSettings" Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf200;}" IconHeight="20" IsEnabled="False" />
                 <!-- Página com a configuração de porcentagem -->
                 <controls:ToolbarPage Name="PercentageSettings">
                     <!-- Item customizável para adicionar um slider -->

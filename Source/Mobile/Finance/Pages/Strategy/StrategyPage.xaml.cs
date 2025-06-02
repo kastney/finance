@@ -65,7 +65,7 @@ public partial class StrategyPage : ContentPage {
     /// </summary>
     /// <param name="sender">Objeto que disparou o evento.</param>
     /// <param name="e">Argumentos do evento.</param>
-    private async void DXCollectionView_CompleteItemDragDrop(object sender, DevExpress.Maui.CollectionView.CompleteItemDragDropEventArgs e) {
+    private async void DXCollectionView_CompleteItemDragDrop(object sender, CompleteItemDragDropEventArgs e) {
         // Chama o método no ViewModel para salvar a nova ordem dos itens após o arrastar e soltar.
         await viewModel.SaveSorting();
     }
@@ -74,9 +74,10 @@ public partial class StrategyPage : ContentPage {
     /// Evento disparado quando ocorrer uma muança do status de ativado de um grupo de ativos.
     /// </summary>
     /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
-    private async void AssetGroupCell_CheckedChanged(string name) {
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
+    private async void AssetGroupCell_CheckedChanged(string name, int oldPercentage) {
         // Chama o método no ViewModel para atualizar o status de ativado do grupo de ativos.
-        await viewModel.UpdateChecked(name);
+        await viewModel.UpdateChecked(name, oldPercentage);
     }
 
     /// <summary>

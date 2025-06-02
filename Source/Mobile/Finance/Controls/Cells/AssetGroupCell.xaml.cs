@@ -101,7 +101,7 @@ public partial class AssetGroupCell : ContentView {
     /// <summary>
     /// Dispare quando o status do grupo de ativos for alterado.
     /// </summary>
-    public event EnabledAssetGroupEventHandler CheckedChanged;
+    public event PercentageAssetGroupEventHanler CheckedChanged;
 
     /// <summary>
     /// Dispara quando a porcentagem do grupo de ativos for alterado.
@@ -174,9 +174,11 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="newValue">Novo valor da propriedade.</param>
     private static void OnIsCheckedChanged(BindableObject bindable, object oldValue, object newValue) {
         // Verifica se o bindable é do tipo AssetGroupCell.
-        if(bindable is not AssetGroupCell control) { return; }
+        if(bindable is not AssetGroupCell control || newValue is not bool value) { return; }
         // Define o valor interruptor do grupo de dativos.
-        control.checkedSwitch.IsChecked = (bool)newValue;
+        control.checkedSwitch.IsChecked = value;
+        // Define se o botão de estratégia está ou não ativado para interação.
+        control.percentageButton.IsEnabled = value;
     }
 
     /// <summary>
@@ -185,11 +187,23 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     /// <param name="sender">Objeto que chamou este evento.</param>
     /// <param name="e">Os argumentos do evento.</param>
-    private void CheckedSwitch_CheckedChanged(object sender, ValueChangedEventArgs<bool> e) {
-        // Define o valor do interruptor do grupo de ativos.
-        IsChecked = e.NewValue;
-        // Dispara o evento para notificar que o grupo de ativos foi alterado.
-        CheckedChanged?.Invoke(Name);
+    private async void CheckedSwitch_CheckedChanged(object sender, ValueChangedEventArgs<bool> e) {
+        // Verifica se o usuário quer de fato desativar o grupo de ativos.
+        if(!IsChecked || await Shell.Current.DisplayAlert("Atenção", "Ao desativar este grupo de ativos, ele não será mais considerado nos cálculos de balanceamento da sua carteira. Tem certeza de que deseja desativá-lo?", "Sim", "Não")) {
+            // Define o valor do interruptor do grupo de ativos.
+            IsChecked = e.NewValue;
+
+            // Salva o valor atual da porcentagem antes de começar o processo de mudança.
+            currentPercentage = Percentage;
+            // Define o valor da porcentagem do grupo.
+            Percentage = 0;
+
+            // Dispara o evento para notificar que o grupo de ativos foi alterado.
+            CheckedChanged?.Invoke(Name, currentPercentage);
+        } else {
+            // Volta ao valor anterior do interruptor.
+            checkedSwitch.IsChecked = IsChecked;
+        }
     }
 
     #endregion Checked

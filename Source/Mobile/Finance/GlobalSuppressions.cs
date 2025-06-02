@@ -19,8 +19,8 @@ using System.Diagnostics.CodeAnalysis;
 // Este membro é necessário para a lógica de verificação de estado do grupo de ativos,
 // mas não é utilizado diretamente no código atual. A suprimenda é temporária
 // e será revisada posteriormente para garantir que não há código morto.
-[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_CheckedChanged(System.String)")]
 [assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_PercentageChanged(System.String,System.Int32)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_CheckedChanged(System.String,System.Int32)")]
 
 // Suprime o aviso CsWinRT1028 que recomenda que a classe seja marcada como `partial`
 // para facilitar a interoperabilidade e geração de código com o WinRT. Como a classe

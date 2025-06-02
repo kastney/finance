@@ -127,8 +127,9 @@ internal partial class StrategyViewModel : ViewModel {
     /// Atualiza o estado de habilitação de um grupo de ativos no serviço de carteiras.
     /// </summary>
     /// <param name="name">Nome do grupo de ativos que sofreu a mudança.</param>
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
     /// <returns>Uma tarefa assíncrona que representa a operação de salvar o status de um grupo de ativos.</returns>
-    public async Task UpdateChecked(string name) {
+    public async Task UpdateChecked(string name, int oldPercentage) {
         // Atualiza o estado de habilitação do grupo de ativos no serviço de carteiras.
         if(!await walletService.UpdateStrategy([.. Strategy])) {
             // Aguara um tempo para atualizar na tela.
@@ -137,13 +138,20 @@ internal partial class StrategyViewModel : ViewModel {
             if(Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup localGroup) {
                 // Inverte o estado de habilitação do grupo de ativos.
                 localGroup.Enabled = !localGroup.Enabled;
+                // Restaura o valor da porcentagem antiga.
+                localGroup.Percentage = oldPercentage;
             }
             // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
             if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup globalGroup) {
                 // Inverte o estado de habilitação do grupo de ativos.
                 globalGroup.Enabled = !globalGroup.Enabled;
+                // Restaura o valor da porcentagem antiga.
+                globalGroup.Percentage = oldPercentage;
             }
         }
+
+        // Atualiza a porcentagem disponível.
+        UpdatePercentageAvailable();
     }
 
     /// <summary>
@@ -158,14 +166,14 @@ internal partial class StrategyViewModel : ViewModel {
             // Aguara um tempo para atualizar na tela.
             await Task.Delay(100);
 
-            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            // Se a atualização falhar, atualiza o valor da porcentagem antes da mudança.
             if(Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup localGroup) {
-                // Inverte o estado de habilitação do grupo de ativos.
+                // Atualiza o valor da porcentagem antiga.
                 localGroup.Percentage = oldPercentage;
             }
-            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
+            // Se a atualização falhar, atualiza o valor da porcentagem antes da mudança.
             if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup globalGroup) {
-                // Inverte o estado de habilitação do grupo de ativos.
+                // Atualiza o valor da porcentagem antiga.
                 globalGroup.Percentage = oldPercentage;
             }
         }
