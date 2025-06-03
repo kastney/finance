@@ -109,5 +109,14 @@ public partial class StrategyPage : ContentPage {
         await viewModel.Rename(name);
     }
 
+    /// <summary>
+    /// Manipula o evento de solicitação de remoção de um grupo de ativos.
+    /// </summary>
+    /// <param name="name">O nome do grupo de ativos que deve ser renomeado.</param>
+    private async void AssetGroupCell_DeleteClicked(string name) {
+        // Chama o método de remoção no viewModel, passando o nome do grupo.
+        await viewModel.Delete(name);
+    }
+
     #endregion Walleting Methods
 }

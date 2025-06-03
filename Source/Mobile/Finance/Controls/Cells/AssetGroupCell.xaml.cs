@@ -132,6 +132,11 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     public event AssetGroupEventHanler RenameClicked;
 
+    /// <summary>
+    /// Dispara quando o usuário aperta o botão de deletar.
+    /// </summary>
+    public event AssetGroupEventHanler DeleteClicked;
+
     #endregion Events
 
     #region Constructor
@@ -185,6 +190,8 @@ public partial class AssetGroupCell : ContentView {
         control.warningText.IsVisible = value <= 0;
         // Atualiza o texto do componente countText para refletir a nova quantidade de ativos.
         control.countText.Text = value.ToString();
+        // Define se o botão es deletar está ativo ou não para interação.
+        control.deleteButton.IsEnabled = control.warningText.IsVisible;
     }
 
     #endregion Count
@@ -403,6 +410,23 @@ public partial class AssetGroupCell : ContentView {
     }
 
     #endregion Rename
+
+    #region Delete
+
+    /// <summary>
+    /// Manipula o evento de clique no botão de renomear do toolbar.
+    /// </summary>
+    /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
+    /// <param name="e">Os dados do evento de clique.</param>
+    private async void DeleteToolbarButton_Clicked(object sender, EventArgs e) {
+        // Exibe uma caixa de diálogo para confirmar a exclusão do grupo de ativos.
+        if(await Shell.Current.DisplayAlert("Deletar o grupo de ativos!", $"Tem certeza de que deseja apagar o grupo de ativos \"{Name}\"?", "Sim", "Não")) {
+            // Dispara o evento DeleteClicked, passando o nome atual como argumento para notificar os assinantes.
+            DeleteClicked?.Invoke(Name);
+        }
+    }
+
+    #endregion Delete
 
     #endregion Methods
 }
