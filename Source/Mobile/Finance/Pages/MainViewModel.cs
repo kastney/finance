@@ -62,7 +62,7 @@ internal partial class MainViewModel : ViewModel {
         foreach(var strategy in Wallet.Strategy) {
             // Verifica se existe algo dentro do grupo de ativos.
             if(strategy.Enabled) {
-            //if(strategy.Assets.Count != 0) {
+                //if(strategy.Assets.Count != 0) {
                 // Adiciona a estratégia atual à coleção de estratégia.
                 Strategy.Add(strategy);
             }
