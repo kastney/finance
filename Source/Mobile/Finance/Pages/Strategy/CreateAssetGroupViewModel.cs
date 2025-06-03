@@ -68,11 +68,20 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
                 // Interrompe o fluxo para correção do nome.
                 return;
             }
-
+            
+            // Verifica se o nome do grupo já existe na carteira atual.
+            if(walletService.Wallet.AssetGroupNameExists(AssetGroupName.Value)) {
+                // Adiciona mensagem de erro para o usuário informar que o nome está em uso.
+                AssetGroupName.AddError("Nome do Grupo de Ativos já está em uso, tente outro nome!");
+                // Interrompe o fluxo para correção do nome.
+                return;
+            }
+            
             // Obtém o grupo de ativos que será editado.
             var group = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(GroupName));
             // Atualiza a informação paro o novo nome do grupo de ativos.
             group.Name = AssetGroupName.Value;
+            
             // Salva no banco de dados.
             if(await walletService.UpdateStrategy(walletService.Wallet.Strategy)) {
                 // Retorna para a página anterior.

@@ -13,6 +13,16 @@ internal class Wallet {
     #region Fields
 
     /// <summary>
+    /// Representa a estratégia de agrupamento de ativos definida para esta carteira.
+    /// </summary>
+    private string strategyJson;
+
+    /// <summary>
+    /// Representa as alocações de dados (quantidade, preço, etc.) por tipo de ativo.
+    /// </summary>
+    private string allocationsJson;
+
+    /// <summary>
     /// Cache para armazenar a estratégia de agrupamento de ativos.
     /// </summary>
     private List<AssetGroup> strategy;
@@ -41,12 +51,32 @@ internal class Wallet {
     /// <summary>
     /// Representação serializada da estratégia de agrupamento de ativos definida para esta carteira.
     /// </summary>
-    public string StrategyJson { get; set; }
+    public string StrategyJson {
+        get => strategyJson;
+        set {
+            // Atribui o valor à variável privada e garante que a estratégia seja inicializada corretamente.
+            strategyJson = value;
+            // Invalida o cache.
+            strategy = null;
+            // Recria a estratégia.
+            _ = Strategy;
+        }
+    }
 
     /// <summary>
     /// Representação serializada das alocações de dados (quantidade, preço, etc.) por tipo de ativo.
     /// </summary>
-    public string AllocationsJson { get; set; }
+    public string AllocationsJson {
+        get => allocationsJson;
+        set {
+            // Atribui o valor à variável privada e garante que as alocações sejam inicializadas corretamente.
+            allocationsJson = value;
+            // Invalida o cache.
+            allocations = null;
+            // Recria a alocação.
+            _ = Allocations;
+        }
+    }
 
     #endregion Database Properties
 
