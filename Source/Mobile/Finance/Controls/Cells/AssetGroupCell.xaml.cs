@@ -1,4 +1,5 @@
 using Finance.Delegates;
+using Finance.Utilities;
 
 namespace Finance.Controls.Cells;
 
@@ -34,6 +35,11 @@ public partial class AssetGroupCell : ContentView {
     /// Propriedade vinculável para armazenar o valor da porcentagem disponível para ser utilizado entre os grupos de ativos.
     /// </summary>
     public static readonly BindableProperty PercentageAvailableProperty = BindableProperty.Create(nameof(PercentageAvailable), typeof(int), typeof(AssetGroupCell), 100, propertyChanged: OnPercentageAvailableChanged);
+
+    /// <summary>
+    /// Propriedade vinculável para armazenar a cor do grupo de ativos. Sempre que alterado, dispara o método OnColorChanged.
+    /// </summary>
+    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(int?), typeof(AssetGroupCell), null, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnColorChanged);
 
     /// <summary>
     /// O valor máxima da porcentage para ser selecionado no slider.
@@ -94,6 +100,14 @@ public partial class AssetGroupCell : ContentView {
         set => SetValue(PercentageAvailableProperty, value);
     }
 
+    /// <summary>
+    /// Obtém ou define a cor do grupo de ativos.
+    /// </summary>
+    public int? Color {
+        get => (int?)GetValue(ColorProperty);
+        set => SetValue(ColorProperty, value);
+    }
+
     #endregion Properties
 
     #region Events
@@ -108,6 +122,11 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     public event PercentageAssetGroupEventHanler PercentageChanged;
 
+    /// <summary>
+    /// Dispara quando a cor do grupo de ativos for alterado.
+    /// </summary>
+    public event PercentageAssetGroupEventHanler ColorChanged;
+
     #endregion Events
 
     #region Constructor
@@ -119,6 +138,8 @@ public partial class AssetGroupCell : ContentView {
     public AssetGroupCell() {
         // Inicializa os componentes definidos na interface XAML.
         InitializeComponent();
+        // Obtém todas as cores disponíveis.
+        colorSelector.ItemsSource = ColorUtility.GetColors();
     }
 
     #endregion Constructor
@@ -189,7 +210,7 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="e">Os argumentos do evento.</param>
     private async void CheckedSwitch_CheckedChanged(object sender, ValueChangedEventArgs<bool> e) {
         // Verifica se o usuário quer de fato desativar o grupo de ativos.
-        if(!IsChecked || await Shell.Current.DisplayAlert("Atenção", "Ao desativar este grupo de ativos, ele não será mais considerado nos cálculos de balanceamento da sua carteira. Tem certeza de que deseja desativá-lo?", "Sim", "Não")) {
+        if(!IsChecked || await Shell.Current.DisplayAlert("Desativar grupo de ativos!", $"Ao desativar o grupo de ativos \"{Name}\", ele não será mais considerado nos cálculos de balanceamento da sua carteira.\n\nTem certeza de que deseja desativá-lo?", "Sim", "Não")) {
             // Define o valor do interruptor do grupo de ativos.
             IsChecked = e.NewValue;
 
@@ -309,6 +330,60 @@ public partial class AssetGroupCell : ContentView {
     }
 
     #endregion Percentage
+
+    #region Color
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade Color for alterada.
+    /// Atualiza a cor do grupo de ativos no card.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnColorChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Garante que o bindable é uma instância válida de AssetGroupCell e que o novo valor é um inteiro.
+        if(bindable is not AssetGroupCell control || newValue is not int value) { return; }
+
+        // Obtém a quantidade de cores existentes.
+        var count = control.colorSelector.ItemsSource.Count();
+        // Normalização do valor da cor.
+        if(value < 0) {
+            // Se o novo valor for menor que 0, então atribui o primeiro item.
+            value = 0;
+        } else if(value > count) {
+            // Se o novo valor for maior do que a quantidade máxima de cores, então atribui a última cor disponível.
+            value = count;
+        }
+
+        // Exibe ou oculta a mensagem de aviso dependendo se a quantidade é zero ou negativa.
+        control.colorSelector.SelectedIndex = value;
+        // Define a cor na barra final com a cor selecionada.
+        control.color.Color = control.colorSelector.SelectedColor;
+    }
+
+    /// <summary>
+    /// Manipula o evento de mudança de cor selecionada no seletor de cores.
+    /// Quando o usuário seleciona uma nova cor, armazena a cor atual, atualiza a seleção
+    /// e dispara o evento de notificação de mudança.
+    /// </summary>
+    /// <param name="sender">O objeto que disparou o evento, normalmente o seletor de cores.</param>
+    /// <param name="e">Argumentos do evento contendo informações sobre a nova cor selecionada.</param>
+    private void ColorSelector_SelectedColorChanged(object sender, ValueChangedEventArgs<Color> e) {
+        // Armazena a cor atualmente configurada antes de realizar a alteração.
+        var previousColor = Color is null ? default : Color.Value;
+
+        // Verifica se o seletor de cor está corretamente instanciado.
+        if(colorSelector is null) { return; }
+        // Verifica se a cor é uma nova cor.
+        if(Color != colorSelector.SelectedIndex) {
+            // Atualiza o valor da propriedade Color com o índice selecionado no seletor.
+            Color = colorSelector.SelectedIndex;
+            // Dispara o evento ColorChanged, notificando que a cor foi alterada, passando o nome e a cor anterior.
+            ColorChanged?.Invoke(Name, previousColor);
+        }
+    }
+
+    #endregion Color
 
     #endregion Methods
 }

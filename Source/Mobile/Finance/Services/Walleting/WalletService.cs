@@ -154,8 +154,17 @@ internal class WalletService : IWalletService {
     /// </returns>
     public async Task<bool> AddAssetGroup(string assetGroupName) {
         try {
+            // Número total de cores disponíveis na aplicação.
+            int totalColors = ColorUtility.GetColors().Count;
+            // Lista de todos os índices de cores disponíveis: 0, 1, ..., N-1
+            var allColorIndices = Enumerable.Range(0, totalColors).ToList();
+            // Obtém todas as cores já utilizadas nos grupos existentes.
+            var usedColors = Wallet.Strategy.Select(g => g.Color).ToList();
+            // Busca a primeira cor que ainda não foi utilizada.
+            var nextAvailableColor = allColorIndices.Except(usedColors).FirstOrDefault();
+
             // Cria o novo grupo de ativos com o nome especificado e adiciona à estratégia da carteira.
-            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName, Enabled = true, Percentage = 0 });
+            Wallet.Strategy.Add(new AssetGroup { Name = assetGroupName, Enabled = true, Percentage = 0, Color = nextAvailableColor });
 
             // Serializa a estratégia atualizada em uma string JSON.
             var newStrategy = AssetMetadata.SerializeStrategy(Wallet.Strategy);

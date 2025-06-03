@@ -50,7 +50,7 @@
                 <!-- Página com a configuração de cores -->
                 <controls:ToolbarPage Name="ColorSettings">
                     <!-- Um seletor de cores disponíveis -->
-                    <controls:ToolbarColorSelector />
+                    <controls:ToolbarColorSelector x:Name="colorSelector" ItemWidth="30" ItemCornerRadius="0" SelectionBorderThickness="6" SelectionBorderCornerRadius="0" SelectionBorderPadding="0" SelectionBorderColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" Spacing="10" SelectedColorChanged="ColorSelector_SelectedColorChanged" />
                 </controls:ToolbarPage>
 
                 <!-- Botão para editar o nome do grupo ativos -->

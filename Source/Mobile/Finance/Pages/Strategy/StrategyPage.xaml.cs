@@ -90,5 +90,15 @@ public partial class StrategyPage : ContentPage {
         await viewModel.UpdatePercentage(name, oldPercentage);
     }
 
+    /// <summary>
+    /// Evento disparado quando ocorrer uma mudança na cor de um grupo de ativos.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
+    /// <param name="oldColor">O valor da cor antes da mudança.</param>
+    private async void AssetGroupCell_ColorChanged(string name, int oldColor) {
+        // Chama o método no ViewModel para atualizar a porcentagem do grupo de ativos.
+        await viewModel.UpdateColor(name, oldColor);
+    }
+
     #endregion Walleting Methods
 }

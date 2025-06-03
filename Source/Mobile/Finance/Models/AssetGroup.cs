@@ -33,6 +33,11 @@ internal class AssetGroup : INotifyPropertyChanged {
     /// </summary>
     private int percentageAvailable;
 
+    /// <summary>
+    /// Campo que armazena a cor do grupo de ativos.
+    /// </summary>
+    private int color;
+
     #endregion Fields
 
     #region Properties
@@ -76,6 +81,14 @@ internal class AssetGroup : INotifyPropertyChanged {
     public int PercentageAvailable {
         get => percentageAvailable;
         set => SetProperty(ref percentageAvailable, value);
+    }
+
+    /// <summary>
+    /// A cor do grupo de ativos.
+    /// </summary>
+    public int Color {
+        get => color;
+        set => SetProperty(ref color, value);
     }
 
     #endregion Properties

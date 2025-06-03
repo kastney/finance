@@ -54,7 +54,7 @@
                 <controls:DXCollectionView.ItemTemplate>
                     <DataTemplate>
                         <!-- Layout de cada grupo de ativos -->
-                        <cells:AssetGroupCell x:DataType="models:AssetGroup" Name="{Binding Name}" Count="{Binding Assets.Count}" IsChecked="{Binding Enabled}" CheckedChanged="AssetGroupCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetGroupCell_PercentageChanged" />
+                        <cells:AssetGroupCell x:DataType="models:AssetGroup" Name="{Binding Name}" Count="{Binding Assets.Count}" IsChecked="{Binding Enabled}" CheckedChanged="AssetGroupCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetGroupCell_PercentageChanged" Color="{Binding Color}" ColorChanged="AssetGroupCell_ColorChanged" />
                     </DataTemplate>
                 </controls:DXCollectionView.ItemTemplate>
             </controls:DXCollectionView>

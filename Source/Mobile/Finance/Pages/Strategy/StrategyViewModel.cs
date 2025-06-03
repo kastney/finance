@@ -134,20 +134,13 @@ internal partial class StrategyViewModel : ViewModel {
         if(!await walletService.UpdateStrategy([.. Strategy])) {
             // Aguara um tempo para atualizar na tela.
             await Task.Delay(100);
-            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
-            if(Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup localGroup) {
-                // Inverte o estado de habilitação do grupo de ativos.
-                localGroup.Enabled = !localGroup.Enabled;
-                // Restaura o valor da porcentagem antiga.
-                localGroup.Percentage = oldPercentage;
-            }
-            // Se a atualização falhar, inverte o estado do grupo de ativos localmente.
-            if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(name)) is AssetGroup globalGroup) {
-                // Inverte o estado de habilitação do grupo de ativos.
-                globalGroup.Enabled = !globalGroup.Enabled;
-                // Restaura o valor da porcentagem antiga.
-                globalGroup.Percentage = oldPercentage;
-            }
+
+            // Obtém o grupo de ativos local.
+            var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
+            // Inverte o estado de habilitação do grupo de ativos.
+            group.Enabled = !group.Enabled;
+            // Restaura o valor da porcentagem antiga.
+            group.Percentage = oldPercentage;
         }
 
         // Atualiza a porcentagem disponível.
@@ -166,20 +159,69 @@ internal partial class StrategyViewModel : ViewModel {
             // Aguara um tempo para atualizar na tela.
             await Task.Delay(100);
 
-            // Se a atualização falhar, atualiza o valor da porcentagem antes da mudança.
-            if(Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup localGroup) {
-                // Atualiza o valor da porcentagem antiga.
-                localGroup.Percentage = oldPercentage;
-            }
-            // Se a atualização falhar, atualiza o valor da porcentagem antes da mudança.
-            if(walletService.Wallet.Strategy.FirstOrDefault(g => g.Name == name) is AssetGroup globalGroup) {
-                // Atualiza o valor da porcentagem antiga.
-                globalGroup.Percentage = oldPercentage;
-            }
+            // Obtém o grupo de ativos local.
+            var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
+            // Atualiza o valor da porcentagem antiga.
+            group.Percentage = oldPercentage;
         }
 
         // Atualiza a porcentagem disponível.
         UpdatePercentageAvailable();
+    }
+
+    /// <summary>
+    /// Atualiza a cor de um grupo de ativos no serviço de carteiras.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu a mudança.</param>
+    /// <param name="oldColor">O valor da cor antes da mudança.</param>
+    /// <returns>Uma tarefa assíncrona que representa a operação de salvar a cor de um grupo de ativos.</returns>
+    public async Task UpdateColor(string name, int oldColor) {
+        // Obtém o grupo de ativos local.
+        var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
+        // Obtém o grupo se já estiver usando essa cor.
+        var existingGroup = Strategy.FirstOrDefault(g => !g.Name.Equals(name) && g.Color == group.Color);
+
+        // Variável para saber se o usuário quer trocar as cores entre os grupos.
+        bool swap = false;
+        // Variável auxiliar para armazenar a cor atual do grupo existente antes da troca.
+        int currentColor = 0;
+
+        try {
+            // Verifica se já existe um grupo de ativos com a cor selecionada.
+            if(existingGroup is not null) {
+                // Pergunta ao usuário se quer trocar as cores.
+                swap = await Shell.Current.DisplayAlert("Cor já em uso!", $"A cor selecionada já está sendo usada pelo grupo de ativos \"{existingGroup.Name}\".\n\nDeseja trocar as cores entre os grupos?", "Sim", "Não");
+
+                // Verifica se o usuário quer trocar as cores entre os grupos.
+                if(swap) {
+                    // Armazena a cor atual do grupo existente para possibilitar o rollback, se necessário.
+                    currentColor = existingGroup.Color;
+                    // Troca as cores entre o grupo local e o grupo existente utilizando desestruturação.
+                    existingGroup.Color = oldColor;
+                } else {
+                    // Força uma exceção para realizar o rollback caso o usuário não queira trocar as cores.
+                    throw new Exception();
+                }
+            }
+
+            // Tenta atualizar a estratégia no serviço de carteiras.
+            if(!await walletService.UpdateStrategy([.. Strategy])) {
+                // Indica que ocorreu algum erro ao salvar no banco de dados.
+                throw new Exception();
+            }
+        } catch {
+            // Aguarda um tempo para permitir que a interface reflita as alterações.
+            await Task.Delay(100);
+
+            // Rollback: restaura o valor da cor antiga no grupo local.
+            group.Color = oldColor;
+
+            // Se houve troca de cores, desfaz a troca restaurando a cor original do grupo existente.
+            if(swap && existingGroup is not null) {
+                // Rollback: restaura a cor do grupo existente para seu valor original.
+                existingGroup.Color = currentColor;
+            }
+        }
     }
 
     #endregion Walleting Methods
@@ -191,7 +233,7 @@ internal partial class StrategyViewModel : ViewModel {
     /// </summary>
     private void UpdatePercentageAvailable() {
         // Obtém a quantidade de porcentagem disponível para os grupos.
-        PercentageAvailable = 100 - walletService.Wallet.Strategy.Sum(a => a.Percentage);
+        PercentageAvailable = 100 - Strategy.Sum(a => a.Percentage);
         // Percorrendo todos os grupos de ativos existentes.
         foreach(var group in Strategy) {
             // Atualiza a porcentagem disponível em cada grupo de ativos.
