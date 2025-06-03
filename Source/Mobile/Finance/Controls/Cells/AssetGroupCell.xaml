@@ -54,7 +54,7 @@
                 </controls:ToolbarPage>
 
                 <!-- Botão para editar o nome do grupo ativos -->
-                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf044;}" IconHeight="20" />
+                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf044;}" IconHeight="20" Clicked="RenameToolbarButton_Clicked" />
 
                 <!-- Botão para apagar o grupo de ativos -->
                 <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf2ed;}" IconHeight="20" />

@@ -27,7 +27,7 @@ public partial class AppShell : Shell {
         // Registra a rota para a página de estratégia da carteira.
         Routing.RegisterRoute("strategy", typeof(StrategyPage));
         // Registra a rota para a página de criação de Grupos de Ativos.
-        Routing.RegisterRoute("strategy/add", typeof(CreateAssetGroupPage));
+        Routing.RegisterRoute("strategy/edit", typeof(CreateAssetGroupPage));
         // Registra a rota para a página da zona de perigo (ações críticas).
         Routing.RegisterRoute("dangerZone", typeof(DangerZonePage));
         // Registra a rota para a página de exclusão de carteiras dentro da zona de perigo.

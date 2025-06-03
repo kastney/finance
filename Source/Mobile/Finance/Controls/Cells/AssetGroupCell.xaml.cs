@@ -115,17 +115,22 @@ public partial class AssetGroupCell : ContentView {
     /// <summary>
     /// Dispare quando o status do grupo de ativos for alterado.
     /// </summary>
-    public event PercentageAssetGroupEventHanler CheckedChanged;
+    public event ValueAssetGroupEventHanler CheckedChanged;
 
     /// <summary>
     /// Dispara quando a porcentagem do grupo de ativos for alterado.
     /// </summary>
-    public event PercentageAssetGroupEventHanler PercentageChanged;
+    public event ValueAssetGroupEventHanler PercentageChanged;
 
     /// <summary>
     /// Dispara quando a cor do grupo de ativos for alterado.
     /// </summary>
-    public event PercentageAssetGroupEventHanler ColorChanged;
+    public event ValueAssetGroupEventHanler ColorChanged;
+
+    /// <summary>
+    /// Dispara quando o usuário aperta o botão de renomear.
+    /// </summary>
+    public event AssetGroupEventHanler RenameClicked;
 
     #endregion Events
 
@@ -384,6 +389,20 @@ public partial class AssetGroupCell : ContentView {
     }
 
     #endregion Color
+
+    #region Rename
+
+    /// <summary>
+    /// Manipula o evento de clique no botão de renomear do toolbar.
+    /// </summary>
+    /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
+    /// <param name="e">Os dados do evento de clique.</param>
+    private void RenameToolbarButton_Clicked(object sender, EventArgs e) {
+        // Dispara o evento RenameClicked, passando o nome atual como argumento para notificar os assinantes.
+        RenameClicked?.Invoke(Name);
+    }
+
+    #endregion Rename
 
     #endregion Methods
 }

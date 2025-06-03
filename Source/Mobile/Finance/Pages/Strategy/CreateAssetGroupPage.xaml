@@ -20,7 +20,7 @@
     <!-- Layout principal da página organizado em grid com 3 linhas -->
     <Grid RowDefinitions="Auto,*,Auto">
         <!-- Barra de navegação personalizada -->
-        <navigation:NavigationBar Title="Novo Grupo de Ativos" IsRoot="False" Clicked="BackButtom_Clicked" />
+        <navigation:NavigationBar x:Name="navigationBar" IsRoot="False" Clicked="BackButtom_Clicked" />
 
         <!-- Conteúdo principal: campo para entrada do nome do grupo de ativos -->
         <VerticalStackLayout Margin="15,0" Spacing="10" Grid.Row="1">
@@ -37,10 +37,10 @@
                                    MaxCharacterCount="25"
                                    MaxCharacterCountOverflowMode="LimitInput"
                                    ReturnType="Done"
-                                   ReturnCommand="{Binding CreateCommand}" />
+                                   ReturnCommand="{Binding SaveCommand}" />
         </VerticalStackLayout>
 
         <!-- Botão de ação para salvar o novo grupo de ativos -->
-        <buttons:IndicatorButton Grid.Row="2" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Salvar Grupo de Ativos" Command="{Binding CreateCommand}" />
+        <buttons:IndicatorButton Grid.Row="2" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Salvar grupo de ativos" Command="{Binding SaveCommand}" />
     </Grid>
 </ContentPage>

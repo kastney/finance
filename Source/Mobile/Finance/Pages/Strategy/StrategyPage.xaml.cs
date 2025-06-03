@@ -100,5 +100,14 @@ public partial class StrategyPage : ContentPage {
         await viewModel.UpdateColor(name, oldColor);
     }
 
+    /// <summary>
+    /// Manipula o evento de solicitação de renomeação de um grupo de ativos.
+    /// </summary>
+    /// <param name="name">O nome do grupo de ativos que deve ser renomeado.</param>
+    private async void AssetGroupCell_RenameClicked(string name) {
+        // Chama o método de renomeação no viewModel, passando o nome do grupo.
+        await viewModel.Rename(name);
+    }
+
     #endregion Walleting Methods
 }

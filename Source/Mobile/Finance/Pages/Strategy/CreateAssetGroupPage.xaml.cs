@@ -6,6 +6,7 @@ namespace Finance.Pages.Strategy;
 /// Página para criação de um novo grupo de ativos, responsável pela interface visual
 /// e interação do usuário com a ViewModel correspondente.
 /// </summary>
+[QueryProperty(nameof(GroupName), "group")]
 public partial class CreateAssetGroupPage : ContentPage {
 
     #region Fields
@@ -16,6 +17,15 @@ public partial class CreateAssetGroupPage : ContentPage {
     private readonly CreateAssetGroupViewModel viewModel;
 
     #endregion Fields
+
+    #region Properties
+
+    /// <summary>
+    /// Nome do grupo de ativos. <c>null</c> indica que a página será de criação; caso contrário a página será de edição.
+    /// </summary>
+    public string GroupName { get; set; }
+
+    #endregion Properties
 
     #region Constructor
 
@@ -39,19 +49,23 @@ public partial class CreateAssetGroupPage : ContentPage {
     /// Executa operações de inicialização como foco em campo e controle de estado.
     /// </summary>
     protected override async void OnAppearing() {
-        // Verifica se não está em execução outro processo para evitar duplicidade.
-        if(!viewModel.IsRunning) {
-            // Define a flag indicando que a operação está em execução.
-            viewModel.IsRunning = true;
-
-            // Pequena pausa para garantir que a interface esteja pronta para receber foco.
-            await Task.Delay(100);
-            // Define o foco no campo de entrada para o usuário digitar imediatamente.
-            entry.Focus();
-
-            // Reset da flag indicando fim da operação.
-            viewModel.IsRunning = false;
+        // Verifica se a página está no mode de criação ou de edição;
+        if(string.IsNullOrWhiteSpace(GroupName)) {
+            // Informa na barra de navegação que é o mode de criação.
+            navigationBar.Title = "Novo grupo de ativos";
+        } else {
+            // Informa na barra de navegação que é o mode de edição.
+            navigationBar.Title = "Editar grupo de ativos";
+            // Define o viewModel com o mode de Edição.
+            viewModel.GroupName = GroupName;
+            // Adiciona no viewModel o nome do grupo de ativos.
+            viewModel.AssetGroupName.Value = GroupName;
         }
+
+        // Pequena pausa para garantir que a interface esteja pronta para receber foco.
+        await Task.Delay(100);
+        // Define o foco no campo de entrada para o usuário digitar imediatamente.
+        entry.Focus();
     }
 
     #endregion Start Methods

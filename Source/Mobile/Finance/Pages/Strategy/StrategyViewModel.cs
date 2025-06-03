@@ -101,7 +101,7 @@ internal partial class StrategyViewModel : ViewModel {
             IsRunning = true;
 
             // Navega até a página de estratégia da carteira.
-            await navigationService.NavigateTo("add");
+            await navigationService.NavigateTo("edit");
             // Pequeno atraso para garantir estabilidade de navegação.
             await Task.Delay(100);
 
@@ -132,12 +132,13 @@ internal partial class StrategyViewModel : ViewModel {
     public async Task UpdateChecked(string name, int oldPercentage) {
         // Atualiza o estado de habilitação do grupo de ativos no serviço de carteiras.
         if(!await walletService.UpdateStrategy([.. Strategy])) {
-            // Aguara um tempo para atualizar na tela.
-            await Task.Delay(100);
-
             // Obtém o grupo de ativos local.
             var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
             // Inverte o estado de habilitação do grupo de ativos.
+
+            // Informa ao usuário que ocorreu um erro ao modificar se o grupo de ativos está ativo ou não.
+            await Shell.Current.DisplayAlert("Não foi possível alterar o status de ativação", $"Ocorreu um erro ao tentar salvar o novo status de ativação do grupo de ativos \"{group.Name}\".", "OK");
+
             group.Enabled = !group.Enabled;
             // Restaura o valor da porcentagem antiga.
             group.Percentage = oldPercentage;
@@ -156,11 +157,12 @@ internal partial class StrategyViewModel : ViewModel {
     public async Task UpdatePercentage(string name, int oldPercentage) {
         // Atualiza a porcentage do grupo de ativos no serviço de carteiras.
         if(!await walletService.UpdateStrategy([.. Strategy])) {
-            // Aguara um tempo para atualizar na tela.
-            await Task.Delay(100);
-
             // Obtém o grupo de ativos local.
             var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
+
+            // Informa ao usuário que ocorreu um erro ao modificar a porcentagem do grupo de ativos.
+            await Shell.Current.DisplayAlert("Não foi possível alterar a porcentagem", $"Ocorreu um erro ao tentar salvar a nova porcentagem para o grupo de ativos \"{group.Name}\".", "OK");
+
             // Atualiza o valor da porcentagem antiga.
             group.Percentage = oldPercentage;
         }
@@ -218,9 +220,33 @@ internal partial class StrategyViewModel : ViewModel {
 
             // Se houve troca de cores, desfaz a troca restaurando a cor original do grupo existente.
             if(swap && existingGroup is not null) {
+                // Informa ao usuário que ocorreu um erro ao modificar a cor do grupo de ativos.
+                await Shell.Current.DisplayAlert("Não foi possível alterar a cor", $"Ocorreu um erro ao tentar salvar a nova cor para o grupo de ativos \"{group.Name}\".", "OK");
+
                 // Rollback: restaura a cor do grupo existente para seu valor original.
                 existingGroup.Color = currentColor;
             }
+        }
+    }
+
+    /// <summary>
+    /// Realiza a navegação para a página de edição de um grupo de ativos na estratégia da carteira.
+    /// </summary>
+    /// <param name="name">O nome do grupo de ativos que será renomeado.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona.</returns>
+    public async Task Rename(string name) {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de estratégia da carteira.
+            await navigationService.NavigateTo($"edit?group={name}");
+            // Pequeno atraso para garantir estabilidade de navegação.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
         }
     }
 
