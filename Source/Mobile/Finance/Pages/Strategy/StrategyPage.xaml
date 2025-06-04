@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:Finance.Controls.Cards"
              xmlns:cells="clr-namespace:Finance.Controls.Cells"
              xmlns:controls="http://schemas.devexpress.com/maui"
              xmlns:models="clr-namespace:Finance.Models"
@@ -23,7 +24,8 @@
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
 
-        <Label Grid.Row="1" HorizontalTextAlignment="Center" Text="{Binding PercentageAvailable}" />
+        <!-- Cartão com um gráfico de pizza com a distribuição dos grupos de ativos -->
+        <cards:StrategyChartCard Grid.Row="1" Data="{Binding StrategyDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" />
 
         <!-- Conteúdo principal da página com lista de carteiras e mensagem de vazio -->
         <Grid Grid.Row="2">

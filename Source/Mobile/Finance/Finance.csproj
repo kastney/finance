@@ -149,6 +149,9 @@
 	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cards\StrategyChartCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

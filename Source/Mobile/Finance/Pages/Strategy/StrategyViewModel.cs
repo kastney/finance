@@ -39,6 +39,12 @@ internal partial class StrategyViewModel : ViewModel {
     [ObservableProperty]
     private int percentageAvailable;
 
+    /// <summary>
+    /// Coleção de dados de pizza que representa a estratégia de alocação de ativos.
+    /// </summary>
+    [ObservableProperty]
+    private List<PieData> strategyDataSeries;
+
     #endregion Fields
 
     #region Constructor
@@ -85,11 +91,22 @@ internal partial class StrategyViewModel : ViewModel {
         // Obtém a quantidade de porcentagem disponível para os grupos.
         PercentageAvailable = 100 - wallet.Strategy.Sum(a => a.Percentage);
 
-        // Percorrendo todos os grupos de ativos existentes.
+        // Inicializa a lista que representará os dados do gráfico de pizza (PieChart).
+        var seriesData = new List<PieData>();
+
+        // Percorre todos os grupos de ativos existentes na estratégia da carteira.
         foreach(var group in Strategy) {
             // Atualiza a porcentagem disponível em cada grupo de ativos.
             group.PercentageAvailable = PercentageAvailable;
+            // Só adiciona os grupos que possuem porcentagem diferente de zero.
+            if(group.Percentage != 0) {
+                // Adiciona os dados do grupo à lista de dados do gráfico.
+                seriesData.Add(new PieData(group.Name, group.Percentage, group.Color));
+            }
         }
+
+        // Atualiza a propriedade responsável por fornecer os dados ao gráfico de alocação.
+        StrategyDataSeries = seriesData;
 
         // Verifica se a estratégia da carteira possui mais de um grupo.
         IsAllowDragDropItems = wallet.Strategy.Count > 1;
@@ -134,6 +151,9 @@ internal partial class StrategyViewModel : ViewModel {
     public async Task SaveSorting() {
         // Salva a ordenação atual da estratégia no serviço de carteiras.
         await walletService.UpdateStrategy([.. Strategy]);
+
+        // Atualiza as propriedades da página.
+        UpdateProperties(walletService.Wallet);
     }
 
     /// <summary>
@@ -224,6 +244,9 @@ internal partial class StrategyViewModel : ViewModel {
                 // Indica que ocorreu algum erro ao salvar no banco de dados.
                 throw new Exception();
             }
+
+            // Atualiza as propriedades da página.
+            UpdateProperties(walletService.Wallet);
         } catch {
             // Aguarda um tempo para permitir que a interface reflita as alterações.
             await Task.Delay(100);

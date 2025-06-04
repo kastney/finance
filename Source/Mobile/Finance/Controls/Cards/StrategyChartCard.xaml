@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
+             x:Class="Finance.Controls.Cards.StrategyChartCard">
+
+    <!-- Contêiner visual com estilo de cartão e margens para espaçamento -->
+    <Border Style="{x:StaticResource Card}" Margin="15,0,15,15">
+        <!-- Estrutura em grade: uma linha para o gráfico e outra para a mensagem de aviso -->
+        <Grid RowDefinitions="*,Auto">
+            <!-- Exibe o gráfico de pizza com altura fixa e comportamento de seleção em hachura -->
+            <charts:PieChartView HeightRequest="250" SelectionBehavior="Hatch">
+                <!-- Define as séries do gráfico -->
+                <charts:PieChartView.Series>
+                    <!-- Série do tipo Donut (rosquinha) para representar as alocações -->
+                    <charts:DonutSeries>
+                        <!-- Fonte de dados da série -->
+                        <charts:DonutSeries.Data>
+                            <!-- Adaptador que conecta a lista de PieData ao gráfico -->
+                            <charts:PieSeriesDataAdapter x:Name="seriesData" AllowLiveDataUpdates="True" LabelDataMember="Label" ValueDataMember="Value" />
+                        </charts:DonutSeries.Data>
+
+                        <!-- Configura o rótulo de cada fatia do gráfico -->
+                        <charts:DonutSeries.Label>
+                            <!-- Padrão de exibição: nome da alocação e porcentagem em nova linha -->
+                            <charts:PieSeriesLabel Position="TwoColumns" TextPattern="{}{L}&#x0a;{VP}%">
+                                <!-- Estilo do rótulo da série -->
+                                <charts:PieSeriesLabel.Style>
+                                    <!-- Estilo com conector mais espesso para melhor visualização -->
+                                    <charts:PieSeriesLabelStyle ConnectorThickness="2">
+                                        <!-- Estilo do texto do rótulo -->
+                                        <charts:PieSeriesLabelStyle.TextStyle>
+                                            <!-- Referência ao estilo de texto que será alterado conforme o tema -->
+                                            <charts:TextStyle x:Name="labelStyle" />
+                                        </charts:PieSeriesLabelStyle.TextStyle>
+                                    </charts:PieSeriesLabelStyle>
+                                </charts:PieSeriesLabel.Style>
+                            </charts:PieSeriesLabel>
+                        </charts:DonutSeries.Label>
+                    </charts:DonutSeries>
+                </charts:PieChartView.Series>
+
+                <!-- Desabilita as dicas (tooltips) ao interagir com o gráfico -->
+                <charts:PieChartView.Hint>
+                    <!-- Desabilita as dicas -->
+                    <charts:PieHint Enabled="False" />
+                </charts:PieChartView.Hint>
+
+                <!-- Estilo geral do gráfico de pizza -->
+                <charts:PieChartView.ChartStyle>
+                    <!-- Referência ao estilo do gráfico para alterar cores e bordas conforme o tema -->
+                    <charts:PieChartStyle x:Name="chartStyle" BorderColor="Transparent" BorderThickness="0" SeriesIndent="70" Padding="10" />
+                </charts:PieChartView.ChartStyle>
+            </charts:PieChartView>
+
+            <!-- Mensagem de aviso exibida abaixo do gráfico caso haja porcentagem não alocada -->
+            <Label x:Name="warningText" Grid.Row="1" FontSize="Micro" Margin="15,10">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <!-- Ícone de aviso (exclamação) com cor de alerta conforme o tema -->
+                        <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Texto indicando que a carteira não está completamente alocada -->
+                        <Span Text="  Carteira sem alocação completa!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Texto explicativo sobre a existência de alocação incompleta -->
+                        <Span Text="&#10;Existe " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- Label dinâmica que exibe a porcentagem não alocada, em negrito -->
+                        <Span x:Name="percentageLabel" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- Mensagem orientando o usuário a completar a alocação -->
+                        <Span Text=" da carteira não alocado a nenhum grupo. Complete a alocação para finalizar a estratégia!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- Ícone de configuração representando a ação de ajustar as porcentagens -->
+                        <Span Text="&#xf200;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- Texto finalizando a instrução ao usuário -->
+                        <Span Text=" para configurar as porcentagens dos grupos." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+    </Border>
+</ContentView>
