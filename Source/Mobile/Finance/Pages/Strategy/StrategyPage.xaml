@@ -25,7 +25,7 @@
         </navigation:NavigationBar>
 
         <!-- Cartão com um gráfico de pizza com a distribuição dos grupos de ativos -->
-        <cards:StrategyChartCard Grid.Row="1" Data="{Binding StrategyDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" />
+        <cards:StrategyChartCard Grid.Row="1" Data="{Binding StrategyDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" />
 
         <!-- Conteúdo principal da página com lista de carteiras e mensagem de vazio -->
         <Grid Grid.Row="2">
@@ -40,7 +40,7 @@
                             <!-- Texto "Atenção" em negrito com mesma cor do ícone -->
                             <Span Text="  Estratégia não definida!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                             <!-- Mensagem explicativa para o usuário sobre como criar um grupo de ativos -->
-                            <Span Text="&#10;Ainda não há nenhum Grupo de Ativos nesta carteira!&#10;Para começar a organizar seus ativos financeiros, você precisa criar pelo menos um grupo de ativos.&#10;Basta tocar no botão " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                            <Span Text="&#10;Ainda não há nenhum Grupo de Ativos nesta carteira!&#10;Para começar a organizar seus ativos financeiros, você precisa criar pelo menos um grupo de ativos.&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                             <!-- O ícone de mais -->
                             <Span Text="&#x2b;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                             <!-- O restante das instruções. -->

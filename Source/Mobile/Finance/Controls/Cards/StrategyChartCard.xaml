@@ -54,7 +54,7 @@
             </charts:PieChartView>
 
             <!-- Mensagem de aviso exibida abaixo do gráfico caso haja porcentagem não alocada -->
-            <Label x:Name="warningText" Grid.Row="1" FontSize="Micro" Margin="15,10">
+            <Label x:Name="warningText" Grid.Row="1" FontSize="Micro" Margin="15,10" IsVisible="False">
                 <Label.FormattedText>
                     <FormattedString>
                         <!-- Ícone de aviso (exclamação) com cor de alerta conforme o tema -->

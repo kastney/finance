@@ -13,12 +13,17 @@ public partial class StrategyChartCard : ContentView {
     /// <summary>
     /// Propriedade vinculável que representa a porcentagem ainda não alocada da carteira.
     /// </summary>
-    public static readonly BindableProperty PercentageAvailableProperty = BindableProperty.Create(nameof(PercentageAvailable), typeof(int), typeof(StrategyChartCard), -1, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnPercentageAvailableChanged);
+    public static readonly BindableProperty PercentageAvailableProperty = BindableProperty.Create(nameof(PercentageAvailable), typeof(int), typeof(StrategyChartCard), -1, propertyChanged: OnPercentageAvailableChanged);
 
     /// <summary>
     /// Propriedade vinculável que representa os dados para exibição no gráfico de pizza.
     /// </summary>
     public static readonly BindableProperty DataProperty = BindableProperty.Create(nameof(Data), typeof(List<PieData>), typeof(StrategyChartCard), null, propertyChanged: OnDataChanged);
+
+    /// <summary>
+    /// Propriedade vinculável para indicar se mostra o aviso ao usuário.
+    /// </summary>
+    public static readonly BindableProperty HasWarningProperty = BindableProperty.Create(nameof(HasWarning), typeof(bool), typeof(StrategyChartCard), false, propertyChanged: OnHasWarningChanged);
 
     #endregion Fields
 
@@ -38,6 +43,14 @@ public partial class StrategyChartCard : ContentView {
     public List<PieData> Data {
         get => (List<PieData>)GetValue(DataProperty);
         set => SetValue(DataProperty, value);
+    }
+
+    /// <summary>
+    /// Obtém ou define o valor se mostra ou não a mensagem de avisos.
+    /// </summary>
+    public bool HasWarning {
+        get => (bool)GetValue(HasWarningProperty);
+        set => SetValue(HasWarningProperty, value);
     }
 
     #endregion Properties
@@ -71,8 +84,6 @@ public partial class StrategyChartCard : ContentView {
         if(bindable is not StrategyChartCard control || newValue is not int value) { return; }
         // Atualiza o rótulo de porcentagem.
         control.percentageLabel.Text = $"{value}%";
-        // Exibe ou oculta o aviso com base na porcentagem disponível.
-        control.warningText.IsVisible = value != 0;
     }
 
     /// <summary>
@@ -111,6 +122,20 @@ public partial class StrategyChartCard : ContentView {
 
         // Define o datasource do gráfico com a lista de dados atualizada.
         control.seriesData.DataSource = list;
+    }
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade HasWarning for alterada.
+    /// Mostra ou não a mensagem de aviso ao usuário.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnHasWarningChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o bindable é do tipo StrategyChartCard e define o valor da porcentagem disponível para os grupos de ativos.
+        if(bindable is not StrategyChartCard control || newValue is not bool value) { return; }
+        // Exibe ou oculta o aviso com base na porcentagem disponível.
+        control.warningText.IsVisible = value;
     }
 
     /// <summary>

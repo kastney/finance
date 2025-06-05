@@ -45,6 +45,12 @@ internal partial class StrategyViewModel : ViewModel {
     [ObservableProperty]
     private List<PieData> strategyDataSeries;
 
+    /// <summary>
+    /// Flag que indica se a mensage de aviso é visível ou não.
+    /// </summary>
+    [ObservableProperty]
+    private bool hasWarning;
+
     #endregion Fields
 
     #region Constructor
@@ -113,6 +119,9 @@ internal partial class StrategyViewModel : ViewModel {
 
         // Verifica se a estratégia da carteira está vazia.
         IsEmpty = wallet.Strategy.Count == 0;
+
+        // Mostra ou não a mensagem de aviso ao usuário.
+        HasWarning = Strategy.Count != 0 && PercentageAvailable != 0;
     }
 
     #endregion Update Methods
