@@ -30,7 +30,7 @@ public partial class LoadingPage : ContentPage {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Método chamado externamente para iniciar o processo de inicialização definido no ViewModel.
@@ -40,7 +40,7 @@ public partial class LoadingPage : ContentPage {
         viewModel.Initialization();
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 

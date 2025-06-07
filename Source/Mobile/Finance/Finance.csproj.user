@@ -11,9 +11,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="Controls\Cards\AssetCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -21,6 +18,18 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cards\StrategyChartCard.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cells\AssetGroupCell.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cells\WalletSelectionCell.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\Navigation\NavigationBar.xaml">
@@ -33,6 +42,18 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Strategy\AssetGroupPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Strategy\CreateAssetGroupPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Strategy\StrategyPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\Walleting\DeleteWalletPage.xaml">
@@ -48,6 +69,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Resources\Styles\AutoCompleteEditStyle.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">

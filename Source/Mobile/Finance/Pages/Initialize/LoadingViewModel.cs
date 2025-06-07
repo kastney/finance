@@ -5,7 +5,7 @@ using Finance.Utilities;
 namespace Finance.Pages.Initialize;
 
 /// <summary>
-/// ViewModel responsável por controlar o processo de inicialização do aplicativo, 
+/// ViewModel responsável por controlar o processo de inicialização do aplicativo,
 /// decidindo a navegação com base na existência de uma carteira configurada.
 /// </summary>
 internal class LoadingViewModel {
@@ -40,7 +40,7 @@ internal class LoadingViewModel {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Método assíncrono que decide a página inicial com base na existência de uma carteira.
@@ -49,12 +49,12 @@ internal class LoadingViewModel {
         // Verifica se já existe uma carteira cadastrada.
         if(await walletService.Exists()) {
             // Se existir, navega para a página principal e inicia sua lógica interna.
-            if(await navigationService.NavigateTo("///main") is MainPage page) { page.Initialization(); }
+            await navigationService.NavigateTo("///main");
         } else {
             // Se não existir, navega para a página de apresentação.
             await navigationService.NavigateTo("///presentation");
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 }
