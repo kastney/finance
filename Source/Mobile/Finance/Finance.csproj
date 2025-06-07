@@ -137,6 +137,9 @@
 	  <Compile Update="Pages\Initialize\PresentationPage.xaml.cs">
 	    <DependentUpon>PresentationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\Styles\AutoCompleteEditStyle.xaml.cs">
+	    <DependentUpon>AutoCompleteEditStyle.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -176,6 +179,9 @@
 	  <MauiXaml Update="Pages\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Strategy\AssetGroupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Strategy\CreateAssetGroupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -195,6 +201,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Walleting\SelectWalletPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\AutoCompleteEditStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MultilineEditStyle.xaml">

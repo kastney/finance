@@ -342,5 +342,26 @@ internal partial class StrategyViewModel : ViewModel {
         }
     }
 
+    /// <summary>
+    /// Abre um grupo de ativos específico na estratégia da carteira, permitindo a visualização ou edição de seus detalhes.
+    /// </summary>
+    /// <param name="name">O nome do grupo de ativos que será aberto.</param>
+    /// <returns>Uma tarefa assíncrona que representa a operação de abertura do grupo.</returns>
+    public async Task OpenGroup(string name) {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de estratégia da carteira.
+            await navigationService.NavigateTo($"group?name={name}");
+            // Pequeno atraso para garantir estabilidade de navegação.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
     #endregion Walleting Methods
 }

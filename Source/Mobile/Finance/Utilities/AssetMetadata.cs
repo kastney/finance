@@ -90,6 +90,41 @@ internal static class AssetMetadata {
         return JsonSerializer.Serialize(strategy, JsonOptions);
     }
 
+    /// <summary>
+    /// Retorna uma lista de ativos disponíveis para o usuário, incluindo título, cultura, bandeira e tokens de pesquisa.
+    /// </summary>
+    /// <returns>Lista de ativos disponíveis com metadados.</returns>
+    public static AvailableAsset[] GetAvailableAssets() {
+        return [
+            // Ações Brasileiras.
+            new AvailableAsset {
+                Title = "Ações ",
+                Locale = "Brasil ",
+                Flag = "pt_br",
+                Token = "acoes ação acao stock empresa negocios negócios brasileiros brasileiras brazilians",
+                Type = AssetType.BRA_STOCK
+            },
+            // Fundos Imobiliários Brasileiros.
+            new AvailableAsset {
+                Title = "Fundo de Investimento Imobiliário ",
+                Locale = "Brasil ",
+                Flag = "pt_br",
+                Subtitle = "FII ",
+                Token = "fii imóveis imoveis imóvel imovel imobiliario brasileiros brasileiras brazilians",
+                Type = AssetType.BRA_FII
+            },
+            // Brazilian Depositary Receipts.
+            new AvailableAsset {
+                Title = "Brazilian Depositary Receipts ",
+                Locale = "Brasil ",
+                Flag = "pt_br",
+                Subtitle = "BDR ",
+                Token = "bdr exterior ações acoes ação acao stock empresa negocios negócios brasileiros brasileiras brazilians",
+                Type = AssetType.BRA_BDR
+            }
+        ];
+    }
+
     #endregion Strategy Methods
 
     #region Allocation Methods

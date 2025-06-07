@@ -137,6 +137,11 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     public event AssetGroupEventHanler DeleteClicked;
 
+    /// <summary>
+    /// Dispara quando o usuário aperta o botão de abrir grupo.
+    /// </summary>
+    public event AssetGroupEventHanler OpenGroupClicked;
+
     #endregion Events
 
     #region Constructor
@@ -427,6 +432,20 @@ public partial class AssetGroupCell : ContentView {
     }
 
     #endregion Delete
+
+    #region ToGroup
+
+    /// <summary>
+    /// Manipula o evento de clique no botão de abrir grupo do toolbar.
+    /// </summary>
+    /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
+    /// <param name="e">Os dados do evento de clique.</param>
+    private void OpenGroupToolbarButton_Clicked(object sender, EventArgs e) {
+        // Dispara o evento OpenGroupClicked, passando o nome atual como argumento para notificar os assinantes.
+        OpenGroupClicked?.Invoke(Name);
+    }
+
+    #endregion ToGroup
 
     #endregion Methods
 }

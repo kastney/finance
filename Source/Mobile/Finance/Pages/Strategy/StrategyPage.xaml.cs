@@ -118,5 +118,14 @@ public partial class StrategyPage : ContentPage {
         await viewModel.Delete(name);
     }
 
+    /// <summary>
+    /// Manipula o evento para abrir um grupo de ativos específico, permitindo ao usuário visualizar ou editar detalhes do grupo selecionado.
+    /// </summary>
+    /// <param name="name">O nome do grupo de ativos que deve ser renomeado.</param>
+    private async void AssetGroupCell_OpenGroupClicked(string name) {
+        // Chama o método no viewModel para abrir o grupo de ativos selecionado.
+        await viewModel.OpenGroup(name);
+    }
+
     #endregion Walleting Methods
 }

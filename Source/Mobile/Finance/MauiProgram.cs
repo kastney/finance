@@ -74,6 +74,8 @@ public static class MauiProgram {
         builder.Services.AddTransient<StrategyViewModel>();
         // Registra a ViewModel da página de criação de um Grupo de Ativos como instância transitória.
         builder.Services.AddTransient<CreateAssetGroupViewModel>();
+        // Registra a ViewModel da página de edição dos ativos dentro do grupo de ativos.
+        builder.Services.AddTransient<AssetGroupViewModel>();
 
         #endregion ViewModels
 

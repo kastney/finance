@@ -60,7 +60,7 @@
                 <controls:ToolbarButton x:Name="deleteButton" Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf2ed;}" IconHeight="20" Clicked="DeleteToolbarButton_Clicked" />
 
                 <!-- Botão para abrir os ativos do grupo -->
-                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf07c;}" IconHeight="20" />
+                <controls:ToolbarButton Icon="{FontImageSource FontFamily=IconsSolid, Size=50, Glyph=&#xf07c;}" IconHeight="20" Clicked="OpenGroupToolbarButton_Clicked" />
             </controls:DXToolbar>
 
             <!-- Mensagem de aviso exibida quando o grupo está vazio -->
