@@ -56,6 +56,11 @@ public partial class AssetGroupCell : ContentView {
     /// </summary>
     private int currentPercentage;
 
+    /// <summary>
+    /// Indica se a célula está atualmente em execução ou não, usado para evitar múltiplas execuções simultâneas de eventos.
+    /// </summary>
+    private bool isRunning;
+
     #endregion Fields
 
     #region Properties
@@ -410,8 +415,17 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
     /// <param name="e">Os dados do evento de clique.</param>
     private void RenameToolbarButton_Clicked(object sender, EventArgs e) {
-        // Dispara o evento RenameClicked, passando o nome atual como argumento para notificar os assinantes.
-        RenameClicked?.Invoke(Name);
+        // Verifica se a célula não está em execução para evitar múltiplas chamadas simultâneas.
+        if(!isRunning) {
+            // Define a flag para indicar que a célula está em execução, evitando chamadas concorrentes.
+            isRunning = true;
+
+            // Dispara o evento RenameClicked, passando o nome atual como argumento para notificar os assinantes.
+            RenameClicked?.Invoke(Name);
+
+            // Reseta a flag de execução após o término do processo.
+            isRunning = false;
+        }
     }
 
     #endregion Rename
@@ -424,10 +438,19 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
     /// <param name="e">Os dados do evento de clique.</param>
     private async void DeleteToolbarButton_Clicked(object sender, EventArgs e) {
-        // Exibe uma caixa de diálogo para confirmar a exclusão do grupo de ativos.
-        if(await Shell.Current.DisplayAlert("Deletar o grupo de ativos!", $"Tem certeza de que deseja apagar o grupo de ativos \"{Name}\"?", "Sim", "Não")) {
-            // Dispara o evento DeleteClicked, passando o nome atual como argumento para notificar os assinantes.
-            DeleteClicked?.Invoke(Name);
+        // Verifica se a célula não está em execução para evitar múltiplas chamadas simultâneas.
+        if(!isRunning) {
+            // Define a flag para indicar que a célula está em execução, evitando chamadas concorrentes.
+            isRunning = true;
+
+            // Exibe uma caixa de diálogo para confirmar a exclusão do grupo de ativos.
+            if(await Shell.Current.DisplayAlert("Deletar o grupo de ativos!", $"Tem certeza de que deseja apagar o grupo de ativos \"{Name}\"?", "Sim", "Não")) {
+                // Dispara o evento DeleteClicked, passando o nome atual como argumento para notificar os assinantes.
+                DeleteClicked?.Invoke(Name);
+            }
+
+            // Reseta a flag de execução após o término do processo.
+            isRunning = false;
         }
     }
 
@@ -441,8 +464,17 @@ public partial class AssetGroupCell : ContentView {
     /// <param name="sender">O objeto que disparou o evento, geralmente o botão.</param>
     /// <param name="e">Os dados do evento de clique.</param>
     private void OpenGroupToolbarButton_Clicked(object sender, EventArgs e) {
-        // Dispara o evento OpenGroupClicked, passando o nome atual como argumento para notificar os assinantes.
-        OpenGroupClicked?.Invoke(Name);
+        // Verifica se a célula não está em execução para evitar múltiplas chamadas simultâneas.
+        if(!isRunning) {
+            // Define a flag para indicar que a célula está em execução, evitando chamadas concorrentes.
+            isRunning = true;
+
+            // Dispara o evento OpenGroupClicked, passando o nome atual como argumento para notificar os assinantes.
+            OpenGroupClicked?.Invoke(Name);
+
+            // Reseta a flag de execução após o término do processo.
+            isRunning = false;
+        }
     }
 
     #endregion ToGroup

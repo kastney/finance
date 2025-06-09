@@ -38,7 +38,7 @@
             <!-- Área expansível que contém o campo de busca por ativos -->
             <controls:DXExpander controls:DXDockLayout.Dock="Top" IsExpanded="{Binding IsExpanded}">
                 <!-- Campo de auto-complete para buscar tipos de ativos -->
-                <editors:AutoCompleteEdit x:Name="assetEntry" PlaceholderText="Ações, FIIs, DBRs, ..." LabelText="Buscar por tipo de ativos  " Margin="15,0,15,20" NoResultsFoundText="Tipo de ativo não encontrado!" StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf688;}" SubmitIconVisibility="Never" SelectionChanged="AutoCompleteEdit_SelectionChanged" Completed="AssetEntry_Completed">
+                <editors:AutoCompleteEdit x:Name="assetEntry" PlaceholderText="Ações, FIIs, DBRs, ..." LabelText="Buscar por tipo de ativos  " Margin="15,0,15,20" NoResultsFoundText="Tipo de ativo não encontrado!" StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xe529;}" SubmitIconVisibility="Never" SelectionChanged="AutoCompleteEdit_SelectionChanged" Completed="AssetEntry_Completed">
                     <!-- Define a origem de dados e o critério de filtragem -->
                     <editors:AutoCompleteEdit.ItemsSourceProvider>
                         <!-- Origem de dados com filtragem por título ou token do ativo -->
