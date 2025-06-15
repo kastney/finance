@@ -22,6 +22,8 @@
     <Color x:Key="GreenDark">#41B346</Color>
     <Color x:Key="Red">#F42323</Color>
     <Color x:Key="RedDark">#F44B4B</Color>
+    <Color x:Key="Warning">#FF5A00</Color>
+    <Color x:Key="WarningDark">#FF9600</Color>
 
     <Color x:Key="TextColor">#404040</Color>
     <Color x:Key="TextColorDark">#ACACAC</Color>

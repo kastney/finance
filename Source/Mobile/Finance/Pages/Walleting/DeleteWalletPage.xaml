@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
-             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"             
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
              xmlns:viewModel="clr-namespace:Finance.Pages.Walleting"
              x:Class="Finance.Pages.Walleting.DeleteWalletPage"
              x:DataType="viewModel:DeleteWalletViewModel"
@@ -26,7 +26,7 @@
                         <Span Text="{Binding Wallet.Name}" FontAttributes="Bold" />
                     </FormattedString>
                 </Label.FormattedText>
-            </Label>            
+            </Label>
             <!-- Aviso importante ao usuário sobre a irreversibilidade da ação -->
             <Label Text="Depois de apagar esta carteira, não há como voltar atrás. Por favor, tenha certeza!" />
         </VerticalStackLayout>

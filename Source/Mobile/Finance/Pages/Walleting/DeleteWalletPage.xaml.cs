@@ -31,7 +31,7 @@ public partial class DeleteWalletPage : ContentPage {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Executa ações quando a página aparece, iniciando e finalizando o indicador de carregamento.
@@ -54,7 +54,7 @@ public partial class DeleteWalletPage : ContentPage {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 
