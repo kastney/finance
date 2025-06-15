@@ -28,7 +28,7 @@
                 <!-- Empilha itens verticalmente dentro da toolbar -->
                 <VerticalStackLayout>
                     <!-- Botão de ação com ícone de pesquisa, que ativa o modo expandido -->
-                    <navigation:ToolbarItem Glyph="&#xf00e;" Command="{Binding ExpandedCommand}" Clicked="ToolbarItem_Clicked" />
+                    <navigation:ToolbarItem Glyph="&#xf00e;" IsEnabled="{Binding HasNewAsset}" Command="{Binding ExpandedCommand}" Clicked="ToolbarItem_Clicked" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>

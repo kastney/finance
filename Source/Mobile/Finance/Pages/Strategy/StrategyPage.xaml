@@ -19,7 +19,7 @@
             <navigation:NavigationBar.ToolbarItems>
                 <VerticalStackLayout>
                     <!-- Botão "+" no canto superior direito para adicionar uma nova carteira -->
-                    <navigation:ToolbarItem Glyph="&#x2b;" IsVisible="{Binding HasNewAssetGroup}" Command="{Binding NewAssetGroupCommand}" />
+                    <navigation:ToolbarItem Glyph="&#x2b;" IsEnabled="{Binding HasNewAssetGroup}" Command="{Binding NewAssetGroupCommand}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
