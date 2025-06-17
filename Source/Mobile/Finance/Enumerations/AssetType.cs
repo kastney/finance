@@ -4,7 +4,7 @@
 /// Representa os diferentes tipos de ativos que podem compor uma carteira de investimentos.
 /// Cada tipo é identificado por um valor numérico único, utilizado para integração com dados externos.
 /// </summary>
-internal enum AssetType {
+public enum AssetType {
 
     /// <summary>
     /// Ações brasileiras (ações listadas na B3).

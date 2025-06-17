@@ -25,9 +25,14 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_RenameClicked(System.String)")]
 [assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_DeleteClicked(System.String)")]
 [assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.StrategyPage.AssetGroupCell_OpenGroupClicked(System.String)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.AssetGroupPage.AssetTypeCell_CheckedChanged(System.String,System.Int32)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.AssetGroupPage.AssetTypeCell_PercentageChanged(System.String,System.Int32)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.AssetGroupPage.AssetTypeCell_ColorChanged(System.String,System.Int32)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remover membros privados não utilizados", Justification = "<Pendente>", Scope = "member", Target = "~M:Finance.Pages.Strategy.AssetGroupPage.AssetTypeCell_DeleteClicked(System.String)")]
 
 // Suprime o aviso CsWinRT1028 que recomenda que a classe seja marcada como `partial`
 // para facilitar a interoperabilidade e geração de código com o WinRT. Como a classe
 // `AssetGroup` não será exposta ou usada diretamente nesse contexto, a marcação como
 // `partial` é desnecessária neste momento. A suprimenda é temporária e será revisada.
 [assembly: SuppressMessage("Usage", "CsWinRT1028:Class is not marked partial", Justification = "<Pendente>", Scope = "type", Target = "~T:Finance.Models.AssetGroup")]
+[assembly: SuppressMessage("Usage", "CsWinRT1028:Class is not marked partial", Justification = "<Pendente>", Scope = "type", Target = "~T:Finance.Models.AssetAllocation")]

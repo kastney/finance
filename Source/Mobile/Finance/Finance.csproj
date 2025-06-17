@@ -131,6 +131,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\Cards\GroupChartCard.xaml.cs">
+	    <DependentUpon>GroupChartCard.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Controls\Cells\AssetTypeCell.xaml.cs">
+	    <DependentUpon>AssetTypeCell.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
 	  </Compile>
@@ -152,10 +158,16 @@
 	  <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cards\GroupChartCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cards\StrategyChartCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cells\AssetTypeCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cells\AssetGroupCell.xaml">

@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 using Finance.Utilities;
 
 namespace Finance.Pages;
@@ -56,17 +57,8 @@ internal partial class MainViewModel : ViewModel {
         // Obtém a carteira atual do serviço de carteiras.
         Wallet = walletService.Wallet;
 
-        // Limpa a coleção de estratégia para evitar duplicação de dados.
-        Strategy.Clear();
-        // Percorre cada estratégia na carteira e adiciona à coleção de estratégia.
-        foreach(var strategy in Wallet.Strategy) {
-            // Verifica se existe algo dentro do grupo de ativos.
-            if(strategy.Enabled) {
-                //if(strategy.Assets.Count != 0) {
-                // Adiciona a estratégia atual à coleção de estratégia.
-                Strategy.Add(strategy);
-            }
-        }
+        // Atualiza a visualização dos ativos da estratégia da carteira.
+        UpdateStrategy();
 
         // Verifica se a estratégia da carteira está vazia.
         IsStrategy = Strategy.Count != 0;
@@ -75,6 +67,69 @@ internal partial class MainViewModel : ViewModel {
 
         // Notifica a interface de que a propriedade Wallet foi alterada.
         OnPropertyChanged(nameof(Wallet));
+    }
+
+    /// <summary>
+    /// Atualiza a visualização dos ativos da estratégia da carteira.
+    /// </summary>
+    private void UpdateStrategy() {
+        // Limpa a coleção de estratégias visíveis na interface para evitar duplicação de dados.
+        Strategy.Clear();
+        // Mantém controle dos tipos de ativos que já foram incluídos, para depois saber quais ainda faltam.
+        var usedAssetTypes = new HashSet<AssetType>();
+        // Percorre cada grupo de ativos (AssetGroup) presente na carteira.
+        foreach(var group in Wallet.Strategy) {
+            // Cria uma lista temporária para armazenar apenas os tipos de ativos (AssetAllocation) que devem ser exibidos.
+            var filteredAssets = new List<AssetAllocation>();
+            // Percorre cada tipo de ativo dentro do grupo atual.
+            foreach(var asset in group.Assets) {
+                // Verifica as regras de exibição:
+                // - Se o tipo de ativo possui pelo menos um item na sua lista de dados (Data.Count > 0), ele deve ser exibido.
+                // - Ou, se o grupo estiver habilitado e o tipo de ativo também estiver habilitado, ele deve ser exibido.
+                if(asset.Data.Count > 0 || (group.Enabled && asset.Enabled)) {
+                    // Adiciona o tipo de ativo à lista de exibição do grupo.
+                    filteredAssets.Add(asset);
+                    // Marca esse tipo de ativo como utilizado.
+                    usedAssetTypes.Add(asset.Type);
+                }
+            }
+            // Se o grupo tiver pelo menos um tipo de ativo que atenda às regras de exibição:
+            if(filteredAssets.Count > 0) {
+                // Cria uma nova instância do grupo com os ativos filtrados.
+                var filteredGroup = new AssetGroup {
+                    // Define o nome do grupo com o nome original.
+                    Name = group.Name,
+                    // Mantém o status de habilitação original do grupo (embora, na prática, a exibição dependa da filtragem acima).
+                    Enabled = group.Enabled,
+                    // Associa ao grupo apenas os tipos de ativos que devem ser exibidos.
+                    Assets = filteredAssets
+                };
+                // Adiciona o grupo filtrado à coleção de estratégias visíveis na interface.
+                Strategy.Add(filteredGroup);
+            }
+        }
+
+        // Após processar todos os grupos existentes, verifica se há tipos de ativos "soltos".
+        var miscellaneousAssets = new List<AssetAllocation>();
+        // Percorre todas as alocações conhecidas da carteira.
+        foreach(var allocation in Wallet.Allocations) {
+            // Se o tipo de ativo ainda não foi usado e tem quantidade maior que zero:
+            if(!usedAssetTypes.Contains(allocation.Key) && allocation.Value.Count > 0) {
+                // Cria uma instância de AssetAllocation representando o tipo de ativo.
+                miscellaneousAssets.Add(new AssetAllocation {
+                    Type = allocation.Key
+                });
+            }
+        }
+        // Se houver algum ativo solto, cria o grupo "Diversos".
+        if(miscellaneousAssets.Count > 0) {
+            var miscellaneousGroup = new AssetGroup {
+                Name = "Diversos",
+                Assets = miscellaneousAssets
+            };
+            // Adiciona o grupo "Diversos" ao final da lista de estratégias visíveis.
+            Strategy.Add(miscellaneousGroup);
+        }
     }
 
     #endregion Update Methods

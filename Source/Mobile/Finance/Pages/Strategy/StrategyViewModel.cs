@@ -176,11 +176,11 @@ internal partial class StrategyViewModel : ViewModel {
         if(!await walletService.UpdateStrategy([.. Strategy])) {
             // Obtém o grupo de ativos local.
             var group = Strategy.FirstOrDefault(g => g.Name.Equals(name));
-            // Inverte o estado de habilitação do grupo de ativos.
 
             // Informa ao usuário que ocorreu um erro ao modificar se o grupo de ativos está ativo ou não.
             await Shell.Current.DisplayAlert("Não foi possível alterar o status de ativação!", $"Ocorreu um erro ao tentar salvar o novo status de ativação do grupo de ativos \"{group.Name}\".", "OK");
 
+            // Inverte o estado de habilitação do grupo de ativos.
             group.Enabled = !group.Enabled;
             // Restaura o valor da porcentagem antiga.
             group.Percentage = oldPercentage;

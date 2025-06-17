@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:Finance.Controls.Cards"
              xmlns:cells="clr-namespace:Finance.Controls.Cells"
              xmlns:controls="http://schemas.devexpress.com/maui"
              xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
@@ -71,6 +72,10 @@
 
             <!-- Layout inferior contendo a lista de ativos e mensagens de aviso -->
             <VerticalStackLayout controls:DXDockLayout.Dock="Bottom">
+                <!-- Cartão com um gráfico de pizza com a distribuição dos tipos de ativos -->
+                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" />
+
+                <!-- Layout com a lista e uma mensagem de lista vazia -->
                 <Grid >
                     <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
                     <Border IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
@@ -99,7 +104,7 @@
                         <controls:DXCollectionView.ItemTemplate>
                             <DataTemplate>
                                 <!-- Controle personalizado para exibir os dados do ativo -->
-                                <cells:AssetGroupCell x:DataType="models:AssetAllocation" Name="{Binding Meta.Title}" />
+                                <cells:AssetTypeCell x:DataType="models:AssetAllocation" GroupColor="{Binding GroupColor}" Type="{Binding Type}" Flag="{Binding Meta.Flag}" Name="{Binding Meta.Title}" IsChecked="{Binding Enabled}" CheckedChanged="AssetTypeCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetTypeCell_PercentageChanged" Color="{Binding Color}" ColorChanged="AssetTypeCell_ColorChanged" DeleteClicked="AssetTypeCell_DeleteClicked" />
                             </DataTemplate>
                         </controls:DXCollectionView.ItemTemplate>
                     </controls:DXCollectionView>

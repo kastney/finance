@@ -145,6 +145,45 @@ public partial class AssetGroupPage : ContentPage {
         }
     }
 
+    /// <summary>
+    /// Evento disparado quando ocorrer uma muança do status de ativado de um tipo de ativo.
+    /// </summary>
+    /// <param name="name">Nome do tipo de ativo que sofreu alteração.</param>
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
+    private async void AssetTypeCell_CheckedChanged(string name, int oldPercentage) {
+        // Chama o método no ViewModel para atualizar o status de ativado do tipo de ativo.
+        await viewModel.UpdateChecked(name, oldPercentage);
+    }
+
+    /// <summary>
+    /// Evento disparado quando ocorrer uma mudança na porcentagem de um tipo de ativo.
+    /// </summary>
+    /// <param name="name">Nome do tipo de ativo que sofreu alteração.</param>
+    /// <param name="oldPercentage">O valor da porcentagem antes da mudança.</param>
+    private async void AssetTypeCell_PercentageChanged(string name, int oldPercentage) {
+        // Chama o método no ViewModel para atualizar a porcentagem do tipo de ativo.
+        await viewModel.UpdatePercentage(name, oldPercentage);
+    }
+
+    /// <summary>
+    /// Evento disparado quando ocorrer uma mudança na cor de um tipo de ativo.
+    /// </summary>
+    /// <param name="name">Nome do grupo de ativos que sofreu alteração.</param>
+    /// <param name="oldColor">O valor da cor antes da mudança.</param>
+    private async void AssetTypeCell_ColorChanged(string name, int oldColor) {
+        // Chama o método no ViewModel para atualizar a porcentagem do grupo de ativos.
+        await viewModel.UpdateColor(name, oldColor);
+    }
+
+    /// <summary>
+    /// Manipula o evento de solicitação de remoção de um tipo de ativo.
+    /// </summary>
+    /// <param name="name">O nome do tipo de ativo que deve ser renomeado.</param>
+    private async void AssetTypeCell_DeleteClicked(string name) {
+        // Chama o método de remoção no viewModel, passando o nome do grupo.
+        await viewModel.Delete(name);
+    }
+
     #endregion Asset Methods
 
     #region Private Methods
@@ -164,5 +203,5 @@ public partial class AssetGroupPage : ContentPage {
         await Task.Delay(100);
     }
 
-    #endregion
+    #endregion Private Methods
 }

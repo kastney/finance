@@ -20,10 +20,16 @@
     <MauiXaml Update="Controls\Buttons\IndicatorButtonError.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Controls\Cards\GroupChartCard.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Controls\Cards\StrategyChartCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Cells\AssetTypeCell.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Controls\Cells\AssetGroupCell.xaml">
