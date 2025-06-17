@@ -15,9 +15,14 @@ public partial class AssetCard : ContentView {
     public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(AssetCard), string.Empty, propertyChanged: OnTitleChanged);
 
     /// <summary>
-    /// Propriedade vinculável que define a cor associada ao ativo.
+    /// Propriedade vinculável para armazenar a cor do tipo de ativo. Sempre que alterado, dispara o método OnColorChanged.
     /// </summary>
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(AssetCard), default, propertyChanged: OnColorChanged);
+    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(int?), typeof(AssetCard), null, propertyChanged: OnColorChanged);
+
+    /// <summary>
+    /// Propriedade vinculável para armazenar a cor do grupo de ativos. Sempre que alterado, dispara o método OnGruopColorChanged.
+    /// </summary>
+    public static readonly BindableProperty GroupColorProperty = BindableProperty.Create(nameof(GroupColor), typeof(int?), typeof(AssetCard), null);
 
     /// <summary>
     /// Propriedade vinculável que define a quantidade de ativos.
@@ -62,11 +67,19 @@ public partial class AssetCard : ContentView {
     }
 
     /// <summary>
-    /// Obtém ou define a cor do cartão.
+    /// Obtém ou define a cor do tipo de ativo.
     /// </summary>
-    public Color Color {
-        get => (Color)GetValue(ColorProperty);
+    public int? Color {
+        get => (int?)GetValue(ColorProperty);
         set => SetValue(ColorProperty, value);
+    }
+
+    /// <summary>
+    /// Obtém ou define a cor do grupo de ativos.
+    /// </summary>
+    public int? GroupColor {
+        get => (int?)GetValue(GroupColorProperty);
+        set => SetValue(GroupColorProperty, value);
     }
 
     /// <summary>
@@ -161,9 +174,9 @@ public partial class AssetCard : ContentView {
     /// <param name="newValue">Novo valor da propriedade.</param>
     private static void OnColorChanged(BindableObject bindable, object oldValue, object newValue) {
         // Verifica se o objeto é um AssetCard e se a nova cor é válida.
-        if(bindable is not AssetCard control || newValue is not Color color) { return; }
+        if(bindable is not AssetCard control || newValue is not int color) { return; }
         // Aplica a nova cor ao indicador.
-        control.color.Color = color;
+        control.color.Color = ColorUtility.GetColor(control.GroupColor.Value, color);
     }
 
     /// <summary>

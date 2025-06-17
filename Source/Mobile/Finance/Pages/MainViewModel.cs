@@ -75,8 +75,10 @@ internal partial class MainViewModel : ViewModel {
     private void UpdateStrategy() {
         // Limpa a coleção de estratégias visíveis na interface para evitar duplicação de dados.
         Strategy.Clear();
+
         // Mantém controle dos tipos de ativos que já foram incluídos, para depois saber quais ainda faltam.
         var usedAssetTypes = new HashSet<AssetType>();
+
         // Percorre cada grupo de ativos (AssetGroup) presente na carteira.
         foreach(var group in Wallet.Strategy) {
             // Cria uma lista temporária para armazenar apenas os tipos de ativos (AssetAllocation) que devem ser exibidos.
@@ -87,6 +89,8 @@ internal partial class MainViewModel : ViewModel {
                 // - Se o tipo de ativo possui pelo menos um item na sua lista de dados (Data.Count > 0), ele deve ser exibido.
                 // - Ou, se o grupo estiver habilitado e o tipo de ativo também estiver habilitado, ele deve ser exibido.
                 if(asset.Data.Count > 0 || (group.Enabled && asset.Enabled)) {
+                    // Define a cor do grupo de ativos.
+                    asset.GroupColor = group.Color;
                     // Adiciona o tipo de ativo à lista de exibição do grupo.
                     filteredAssets.Add(asset);
                     // Marca esse tipo de ativo como utilizado.
@@ -111,14 +115,20 @@ internal partial class MainViewModel : ViewModel {
 
         // Após processar todos os grupos existentes, verifica se há tipos de ativos "soltos".
         var miscellaneousAssets = new List<AssetAllocation>();
+        // Obtém a cor do grupo de ativos diversos.
+        var miscellaneousColorIndex = ColorUtility.DefaultGruopColor();
+        // Um índice para as cores dos ativos, para as cores do grupo de ativos diversos.
+        int assetColorIndex = 0;
         // Percorre todas as alocações conhecidas da carteira.
         foreach(var allocation in Wallet.Allocations) {
             // Se o tipo de ativo ainda não foi usado e tem quantidade maior que zero:
             if(!usedAssetTypes.Contains(allocation.Key) && allocation.Value.Count > 0) {
                 // Cria uma instância de AssetAllocation representando o tipo de ativo.
-                miscellaneousAssets.Add(new AssetAllocation {
-                    Type = allocation.Key
-                });
+                var asset = new AssetAllocation { Type = allocation.Key, GroupColor = miscellaneousColorIndex, Color = assetColorIndex++ };
+                // Define a carteira atual.
+                asset.SetWallet(Wallet);
+                // Adiciona o tipo de ativo na lista de diversos.
+                miscellaneousAssets.Add(asset);
             }
         }
         // Se houver algum ativo solto, cria o grupo "Diversos".
