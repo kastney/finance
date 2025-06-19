@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Finance"
              x:Class="Finance.App">
-    
+
     <!-- Define os recursos globais do aplicativo, que podem ser usados em qualquer lugar do projeto. -->
     <Application.Resources>
         <!-- Define um dicionário de recursos para agrupar estilos, cores, templates, etc. -->

@@ -1,6 +1,7 @@
 ﻿using Finance.Pages;
 using Finance.Pages.DangerZone;
 using Finance.Pages.Initialize;
+using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 using Finance.Services.Navigation;
 using Finance.Services.Walleting;
@@ -47,7 +48,7 @@ public static class MauiProgram {
         #region Services
 
         // Registra o serviço de navegação como singleton.
-        builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<INavigationService, Services.Navigation.NavigationService>();
         // Registra o serviço de gerenciamento de carteiras como singleton.
         builder.Services.AddSingleton<IWalletService, WalletService>();
 
@@ -69,6 +70,12 @@ public static class MauiProgram {
         builder.Services.AddTransient<DeleteWalletViewModel>();
         // Registra a ViewModel da zona de perigo como instância transitória.
         builder.Services.AddTransient<DangerZoneViewModel>();
+        // Registra a ViewModel da página de estratégia como instância transitória.
+        builder.Services.AddTransient<StrategyViewModel>();
+        // Registra a ViewModel da página de criação de um Grupo de Ativos como instância transitória.
+        builder.Services.AddTransient<CreateAssetGroupViewModel>();
+        // Registra a ViewModel da página de edição dos ativos dentro do grupo de ativos.
+        builder.Services.AddTransient<AssetGroupViewModel>();
 
         #endregion ViewModels
 

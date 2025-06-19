@@ -31,7 +31,7 @@ public partial class SelectWalletPage : ContentPage {
 
     #endregion Constructor
 
-    #region Started Methods
+    #region Start Methods
 
     /// <summary>
     /// Executado automaticamente quando a página aparece na tela.
@@ -51,7 +51,7 @@ public partial class SelectWalletPage : ContentPage {
         }
     }
 
-    #endregion Started Methods
+    #endregion Start Methods
 
     #region Navigation Methods
 
@@ -77,6 +77,16 @@ public partial class SelectWalletPage : ContentPage {
             // Solicita ao ViewModel que execute a navegação de retorno.
             await viewModel.NavigationBack();
         }
+    }
+
+    /// <summary>
+    /// Executado quando um gesto de toque é detectado na interface.
+    /// </summary>
+    /// <param name="sender">Objeto que disparou o evento (pode ser nulo).</param>
+    /// <param name="e">Argumentos do evento de toque (pode ser nulo).</param>
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) {
+        // Executa a ação de clique do botão de voltar, permitindo navegação personalizada.
+        BackButtom_Clicked(null, null);
     }
 
     #endregion Navigation Methods

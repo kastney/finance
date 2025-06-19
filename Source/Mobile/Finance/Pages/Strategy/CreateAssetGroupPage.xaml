@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Finance.Controls.Buttons"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:styles="clr-namespace:Finance.Resources.Styles"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Strategy"
+             x:Class="Finance.Pages.Strategy.CreateAssetGroupPage"
+             x:DataType="viewModel:CreateAssetGroupViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- Definição dos recursos visuais locais da página -->
+    <ContentPage.Resources>
+        <!-- Aplicação de estilo customizado para campos de edição multilinha -->
+        <styles:MultilineEditStyle />
+    </ContentPage.Resources>
+
+    <!-- Layout principal da página organizado em grid com 3 linhas -->
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Barra de navegação personalizada -->
+        <navigation:NavigationBar x:Name="navigationBar" IsRoot="False" Clicked="BackButtom_Clicked" />
+
+        <!-- Conteúdo principal: campo para entrada do nome do grupo de ativos -->
+        <VerticalStackLayout Margin="15,0" Spacing="10" Grid.Row="1">
+            <!-- Campo de texto multilinha para o nome do grupo -->
+            <editors:MultilineEdit x:Name="entry"
+                                   Text="{Binding AssetGroupName.Value}"
+                                   HasError="{Binding AssetGroupName.HasError}"
+                                   ErrorText="{Binding AssetGroupName.ErrorText}"
+                                   IsReadOnly="{Binding IsRunning}"
+                                   LabelText="Nome do Grupo de Ativos"
+                                   PlaceholderText="Meu Grupo de Ativos"
+                                   StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xf200;}"
+                                   Keyboard="Text"
+                                   MaxCharacterCount="20"
+                                   MaxCharacterCountOverflowMode="LimitInput"
+                                   ReturnType="Done"
+                                   ReturnCommand="{Binding SaveCommand}" />
+        </VerticalStackLayout>
+
+        <!-- Botão de ação para salvar o novo grupo de ativos -->
+        <buttons:IndicatorButton Grid.Row="2" Margin="20,0,20,30" Glyph="&#xf0c7;" IsRunning="{Binding IsRunning}" Text="Salvar grupo de ativos" Command="{Binding SaveCommand}" />
+    </Grid>
+</ContentPage>

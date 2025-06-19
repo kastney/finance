@@ -1,4 +1,6 @@
-﻿namespace Finance.Services.Navigation;
+﻿using Finance.Utilities;
+
+namespace Finance.Services.Navigation;
 
 /// <summary>
 /// Serviço responsável por gerenciar a navegação entre páginas no aplicativo,
@@ -29,8 +31,13 @@ internal class NavigationService : INavigationService {
         // Pequeno atraso para garantir a estabilidade da pilha de navegação.
         await Task.Delay(10);
 
+        // Obtém a página atual após a navegação, considerando se é a última da pilha ou não.
+        var page = Shell.Current.Navigation.NavigationStack.Count <= 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
+        // Se a página atual possui um contexto de dados do tipo ViewModel, chama o método Update.
+        if(page is not null && page.BindingContext is ViewModel viewModel) { viewModel.Update(); }
+
         // Retorna a página atualmente visível após a navegação.
-        return Shell.Current.Navigation.NavigationStack.Count == 1 ? Shell.Current.CurrentPage : Shell.Current.Navigation.NavigationStack[Shell.Current.Navigation.NavigationStack.Count - 1];
+        return page;
     }
 
     /// <summary>

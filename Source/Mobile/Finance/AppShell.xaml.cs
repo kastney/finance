@@ -1,4 +1,5 @@
 ﻿using Finance.Pages.DangerZone;
+using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 
 namespace Finance;
@@ -23,6 +24,12 @@ public partial class AppShell : Shell {
         Routing.RegisterRoute("create", typeof(CreateWalletPage));
         // Registra a rota para a página de seleção de carteiras.
         Routing.RegisterRoute("select", typeof(SelectWalletPage));
+        // Registra a rota para a página de estratégia da carteira.
+        Routing.RegisterRoute("strategy", typeof(StrategyPage));
+        // Registra a rota para a página de criação de Grupos de Ativos com um parâmetro de nome do grupo.
+        Routing.RegisterRoute("strategy/edit", typeof(CreateAssetGroupPage));
+        // Registra a rota para a página do Grupo de Ativos da estratégia com um parâmetro de nome do grupo.
+        Routing.RegisterRoute("strategy/group", typeof(AssetGroupPage));
         // Registra a rota para a página da zona de perigo (ações críticas).
         Routing.RegisterRoute("dangerZone", typeof(DangerZonePage));
         // Registra a rota para a página de exclusão de carteiras dentro da zona de perigo.

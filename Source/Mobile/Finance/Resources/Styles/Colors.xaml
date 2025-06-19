@@ -15,11 +15,17 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
-    <Color x:Key="Error">#FF1E00</Color>
-    <Color x:Key="ErrorDark">#FF5000</Color>
+    <Color x:Key="Error">#F42323</Color>
+    <Color x:Key="ErrorDisabled">#55F42323</Color>
+    <Color x:Key="ErrorDark">#FF4800</Color>
+    <Color x:Key="ErrorDarkDisabled">#55FF4800</Color>
 
     <Color x:Key="Green">#118B0D</Color>
     <Color x:Key="GreenDark">#41B346</Color>
+    
+    <Color x:Key="Warning">#FF5A00</Color>
+    <Color x:Key="WarningDark">#FF9600</Color>
+    
     <Color x:Key="Red">#F42323</Color>
     <Color x:Key="RedDark">#F44B4B</Color>
 

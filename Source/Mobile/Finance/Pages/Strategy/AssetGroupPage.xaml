@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:Finance.Controls.Cards"
+             xmlns:cells="clr-namespace:Finance.Controls.Cells"
+             xmlns:controls="http://schemas.devexpress.com/maui"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:models="clr-namespace:Finance.Models"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:styles="clr-namespace:Finance.Resources.Styles"
+             xmlns:viewModel="clr-namespace:Finance.Pages.Strategy"
+             x:Class="Finance.Pages.Strategy.AssetGroupPage"
+             x:DataType="viewModel:AssetGroupViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- Declara recursos usados na página, como estilos personalizados -->
+    <ContentPage.Resources>
+        <!-- Estilo usado nos campos de AutoCompleteEdit -->
+        <styles:AutoCompleteEditStyle />
+    </ContentPage.Resources>
+
+    <!-- Layout principal organizado em Grid com duas linhas: uma para o topo e uma para o conteúdo -->
+    <Grid RowDefinitions="Auto,*">
+        <!-- Barra de navegação personalizada da aplicação -->
+        <navigation:NavigationBar Title="{Binding GroupName}" IsRoot="False" Clicked="BackButtom_Clicked">
+            <!-- Itens da barra de ferramentas posicionados à direita -->
+            <navigation:NavigationBar.ToolbarItems>
+                <!-- Empilha itens verticalmente dentro da toolbar -->
+                <VerticalStackLayout>
+                    <!-- Botão de ação com ícone de pesquisa, que ativa o modo expandido -->
+                    <navigation:ToolbarItem Glyph="&#xf00e;" IsEnabled="{Binding HasNewAsset}" Command="{Binding ExpandedCommand}" Clicked="ToolbarItem_Clicked" />
+                </VerticalStackLayout>
+            </navigation:NavigationBar.ToolbarItems>
+        </navigation:NavigationBar>
+
+        <!-- Layout da área principal com controle DockLayout do DevExpress -->
+        <controls:DXDockLayout Grid.Row="1" StretchLastItem="False">
+            <!-- Área expansível que contém o campo de busca por ativos -->
+            <controls:DXExpander controls:DXDockLayout.Dock="Top" IsExpanded="{Binding IsExpanded}">
+                <!-- Campo de auto-complete para buscar tipos de ativos -->
+                <editors:AutoCompleteEdit x:Name="assetEntry" PlaceholderText="Ações, FIIs, DBRs, ..." LabelText="Buscar por tipo de ativos  " Margin="15,0,15,20" NoResultsFoundText="Tipo de ativo não encontrado!" StartIcon="{FontImageSource FontFamily=IconsSolid, Size=22, Glyph=&#xe529;}" SubmitIconVisibility="Never" SelectionChanged="AutoCompleteEdit_SelectionChanged" Completed="AssetEntry_Completed">
+                    <!-- Define a origem de dados e o critério de filtragem -->
+                    <editors:AutoCompleteEdit.ItemsSourceProvider>
+                        <!-- Origem de dados com filtragem por título ou token do ativo -->
+                        <editors:FilteredItemsSourceProvider ItemsSource="{Binding AvailableAssets}" FilterCondition="Contains" FilterComparisonType="CurrentCultureIgnoreCase" FilterMembers="Token" />
+                    </editors:AutoCompleteEdit.ItemsSourceProvider>
+                    <!-- Template de visualização dos itens sugeridos -->
+                    <editors:AutoCompleteEdit.ItemTemplate>
+                        <DataTemplate x:DataType="models:AvailableAsset">
+                            <!-- Layout do item sugerido -->
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="20,*" Padding="10,20" RowSpacing="5" ColumnSpacing="2" HeightRequest="80">
+                                <!-- Título do ativo sugerido -->
+                                <Label Grid.ColumnSpan="2" Text="{Binding LongName}" FontSize="Caption" FontAttributes="Bold" VerticalTextAlignment="End" />
+
+                                <!-- Bandeira do ativo -->
+                                <Border Grid.Row="1" Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 5" WidthRequest="12" HeightRequest="12">
+                                    <!-- Exibe a imagem da bandeira do país do ativo -->
+                                    <Image Source="{Binding Flag}" />
+                                </Border>
+
+                                <!-- Subtítulo do ativo sugerido -->
+                                <Label Grid.Row="1" Grid.Column="2" FontSize="Micro" HorizontalTextAlignment="Start" VerticalTextAlignment="Start">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <!-- O nome do país onde esse tipo de ativo existe -->
+                                            <Span Text="{Binding Country}" />
+                                            <Span Text="            "/>
+                                            <!-- O nome curto do tipo de ativo -->
+                                            <Span Text="{Binding ShortName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </editors:AutoCompleteEdit.ItemTemplate>
+                </editors:AutoCompleteEdit>
+            </controls:DXExpander>
+
+            <!-- Layout inferior contendo a lista de ativos e mensagens de aviso -->
+            <Grid controls:DXDockLayout.Dock="Bottom" RowDefinitions="Auto,Auto,*">
+                <!-- Cartão com um gráfico de pizza com a distribuição dos tipos de ativos -->
+                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" />
+
+                <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
+                <Border Grid.Row="1" IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
+                    <!-- Mensagem detalhada para informar que o grupo está vazio -->
+                    <Label FontSize="Micro" Padding="15,10">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <!-- Ícone de alerta visualizando a situação de atenção -->
+                                <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia -->
+                                <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Instrução adicional para o usuário incluir pelo menos um tipo de ativo -->
+                                <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <!-- Ícone de bolça de dinheiro -->
+                                <Span Text="&#xf00e;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <!-- O restante das instruções para o usuário -->
+                                <Span Text=" no canto superior direito da tela para exibir a barra de pesquisa e procurar pelos tipos de ativos disponíveis." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+
+                <!-- Lista dos ativos adicionados ao grupo -->
+                <controls:DXCollectionView Grid.Row="2" ItemsSource="{Binding Assets}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False" CompleteItemDragDrop="DXCollectionView_CompleteItemDragDrop">
+                    <!-- Template de visualização de cada item da lista -->
+                    <controls:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!-- Controle personalizado para exibir os dados do ativo -->
+                            <cells:AssetTypeCell x:DataType="models:AssetAllocation" GroupColor="{Binding GroupColor}" Type="{Binding Type}" Flag="{Binding Meta.Flag}" Name="{Binding Meta.LongName}" IsChecked="{Binding Enabled}" CheckedChanged="AssetTypeCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetTypeCell_PercentageChanged" Color="{Binding Color}" ColorChanged="AssetTypeCell_ColorChanged" DeleteClicked="AssetTypeCell_DeleteClicked" />
+                        </DataTemplate>
+                    </controls:DXCollectionView.ItemTemplate>
+                </controls:DXCollectionView>
+            </Grid>
+        </controls:DXDockLayout>
+    </Grid>
+</ContentPage>

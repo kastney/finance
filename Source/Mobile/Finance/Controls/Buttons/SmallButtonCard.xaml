@@ -11,13 +11,15 @@
         </VerticalStackLayout.GestureRecognizers>
 
         <!-- Container com bordas arredondadas que envolve o ícone ou o indicador de carregamento -->
-        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" HeightRequest="60" StrokeThickness="0">
+        <Border HeightRequest="70" StrokeThickness="0" Style="{x:StaticResource Card}">
             <!-- Define o formato da borda como retângulo arredondado -->
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="8" StrokeThickness="0" />
             </Border.StrokeShape>
             <!-- Grade que sobrepõe o ícone e o indicador (visibilidade controlada dinamicamente) -->
             <Grid>
+                <!-- Ícone de aviso de atenção na parte superior direito -->
+                <Label x:Name="warningIcon" Text=" &#xf071; " FontFamily="IconsSolid" HorizontalTextAlignment="End" Padding="0,5,2,0" FontSize="Micro" IsVisible="False" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                 <!-- Ícone centralizado que representa a ação do botão -->
                 <Label x:Name="icon" FontFamily="IconsSolid" IsVisible="True" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                 <!-- Indicador de carregamento que substitui o ícone quando necessário -->
