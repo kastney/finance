@@ -357,7 +357,7 @@ public partial class AssetTypeCell : ContentView {
     /// <param name="newValue">Novo valor da propriedade.</param>
     private static void OnColorChanged(BindableObject bindable, object oldValue, object newValue) {
         // Garante que o bindable é uma instância válida de AssetTypeCell e que o novo valor é um inteiro.
-        if(bindable is not AssetTypeCell control || newValue is not int value) { return; }
+        if(bindable is not AssetTypeCell control || newValue is not int value || value == -1) { return; }
 
         // Obtém a quantidade de cores existentes.
         var count = control.colorSelector.ItemsSource.Count();

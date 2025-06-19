@@ -115,7 +115,7 @@ public partial class GroupChartCard : ContentView {
         // Se houver porcentagem disponível, adiciona o segmento "Não alocado" ao gráfico.
         if(control.PercentageAvailable > 0) {
             // Adiciona um novo segmento de dados representando a porcentagem não alocada.
-            list.Add(new PieData("Não alocado", control.PercentageAvailable, -1));
+            list.Add(new PieData("Não alocado", control.PercentageAvailable, -2));
             // Incrementa o contador de segmentos de dados.
             count++;
         }

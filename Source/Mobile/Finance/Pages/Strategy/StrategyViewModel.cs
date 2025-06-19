@@ -92,7 +92,7 @@ internal partial class StrategyViewModel : ViewModel {
     /// <param name="wallet">A carteira atual.</param>
     private void UpdateProperties(Wallet wallet) {
         // Verifica se é permitido a criação de um novo Grupo de Ativos.
-        HasNewAssetGroup = wallet.Strategy.Count < AssetMetadata.Data.Count;
+        HasNewAssetGroup = wallet.Strategy.Count < AssetMetadata.Meta.Count;
 
         // Obtém a quantidade de porcentagem disponível para os grupos.
         PercentageAvailable = 100 - wallet.Strategy.Sum(a => a.Percentage);

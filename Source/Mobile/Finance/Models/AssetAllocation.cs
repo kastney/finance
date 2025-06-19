@@ -63,7 +63,7 @@ internal class AssetAllocation : INotifyPropertyChanged {
     /// São usados apenas para exibição e não são persistidos no banco de dados.
     /// </summary>
     [JsonIgnore]
-    public AssetAllocationMeta Meta => AssetMetadata.Data.TryGetValue(Type, out var meta) ? meta : new();
+    public AssetAllocationMeta Meta => AssetMetadata.Meta.TryGetValue(Type, out var meta) ? meta : new();
 
     /// <summary>
     /// Dados dinâmicos da alocação, como quantidade, preço e variação.

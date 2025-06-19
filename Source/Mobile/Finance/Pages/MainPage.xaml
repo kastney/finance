@@ -44,7 +44,7 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="models:AssetAllocation">
                                             <!-- Cartão individual de ativo com dados e meta do tipo -->
-                                            <cards:AssetCard Title="{Binding Meta.Title}"
+                                            <cards:AssetCard Title="{Binding Meta.LongName}"
                                                              GroupColor="{Binding GroupColor}"
                                                              Color="{Binding Color}"
                                                              AssetCount="{Binding Data.Count}"

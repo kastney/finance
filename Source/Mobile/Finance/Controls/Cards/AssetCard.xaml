@@ -10,21 +10,23 @@
             <!-- Grade com três linhas e quatro colunas para organizar os dados do ativo -->
             <Grid RowDefinitions="*,*,*" ColumnDefinitions="40,*,Auto,Auto" ColumnSpacing="15" Padding="10">
                 <!-- Cabeçalho com bandeira e título do ativo -->
-                <HorizontalStackLayout Grid.ColumnSpan="3" Margin="0,0,0,10" Spacing="10">
+                <Grid Grid.ColumnSpan="4" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,15" ColumnSpacing="10">
                     <!-- Ícone ou imagem da bandeira do país ou tipo de ativo -->
-                    <Border Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="20" HeightRequest="20">
+                    <Border Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="15" HeightRequest="15">
                         <Image x:Name="flag" BackgroundColor="Gray" />
                     </Border>
+
                     <!-- Título do ativo (nome ou identificação) -->
-                    <Label x:Name="title" FontSize="Medium" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}">
+                    <Label x:Name="title" Grid.Column="1" FontSize="Caption" FontAttributes="Bold" LineBreakMode="TailTruncation" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}">
                         <!-- Sombra leve para destacar o título -->
                         <Label.Shadow>
                             <Shadow Radius="1" Opacity="0.2" Brush="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                         </Label.Shadow>
                     </Label>
-                </HorizontalStackLayout>
-                <!-- Ícone de aviso, visível apenas em situações específicas (ex: erro de dados) -->
-                <Label Grid.Column="3" IsVisible="False" Text="&#xf06a;" FontSize="Small" FontFamily="IconsSolid" VerticalTextAlignment="Start" HorizontalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}" />
+
+                    <!-- Ícone de aviso, visível apenas em situações específicas (ex: erro de dados) -->
+                    <Label Grid.Column="2" IsVisible="False" Text="&#xf071; " FontSize="Micro" VerticalTextAlignment="Center" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                </Grid>
 
                 <!-- Seção de dados: quantidade de ativos -->
                 <Label Grid.Row="1" Grid.Column="0" Text="Ativos" FontSize="Micro" VerticalTextAlignment="End" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />

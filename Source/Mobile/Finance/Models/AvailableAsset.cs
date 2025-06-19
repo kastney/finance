@@ -12,12 +12,12 @@ internal class AvailableAsset {
     /// <summary>
     /// Representa o nome do ativo disponível.
     /// </summary>
-    public string Title { get; set; }
+    public string LongName { get; set; }
 
     /// <summary>
     /// Um nome alternativo ou secundário para o ativo, usado para fornecer mais contexto ou detalhes.
     /// </summary>
-    public string Subtitle { get; set; }
+    public string ShortName { get; set; }
 
     /// <summary>
     /// Representa a bandeira do país ou região associada ao ativo.
@@ -27,7 +27,7 @@ internal class AvailableAsset {
     /// <summary>
     /// Representa o país ou região associada ao ativo.
     /// </summary>
-    public string Locale { get; set; }
+    public string Country { get; set; }
 
     /// <summary>
     /// Cadeia de textos chaves para auxílio na busca e filtragem do ativo.

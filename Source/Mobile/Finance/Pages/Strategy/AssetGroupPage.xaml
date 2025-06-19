@@ -43,27 +43,34 @@
                     <!-- Define a origem de dados e o critério de filtragem -->
                     <editors:AutoCompleteEdit.ItemsSourceProvider>
                         <!-- Origem de dados com filtragem por título ou token do ativo -->
-                        <editors:FilteredItemsSourceProvider ItemsSource="{Binding AvailableAssets}" FilterCondition="Contains" FilterComparisonType="CurrentCultureIgnoreCase" FilterMembers="Title,Token" />
+                        <editors:FilteredItemsSourceProvider ItemsSource="{Binding AvailableAssets}" FilterCondition="Contains" FilterComparisonType="CurrentCultureIgnoreCase" FilterMembers="Token" />
                     </editors:AutoCompleteEdit.ItemsSourceProvider>
                     <!-- Template de visualização dos itens sugeridos -->
                     <editors:AutoCompleteEdit.ItemTemplate>
                         <DataTemplate x:DataType="models:AvailableAsset">
                             <!-- Layout do item sugerido -->
-                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="10,20" RowSpacing="5">
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="20,*" Padding="10,20" RowSpacing="5" ColumnSpacing="2" HeightRequest="80">
                                 <!-- Título do ativo sugerido -->
-                                <Label Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="Small" FontAttributes="Bold" />
-                                <!-- Linha com bandeira do país e código de localização -->
-                                <HorizontalStackLayout Grid.Row="1" Spacing="5">
-                                    <!-- Bandeira do ativo -->
-                                    <Border Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 5" WidthRequest="15" HeightRequest="15">
-                                        <!-- Exibe a imagem da bandeira do país do ativo -->
-                                        <Image Source="{Binding Flag}" />
-                                    </Border>
-                                    <!-- Código da localização -->
-                                    <Label FontSize="Micro" Text="{Binding Locale}" VerticalTextAlignment="Center" />
-                                </HorizontalStackLayout>
+                                <Label Grid.ColumnSpan="2" Text="{Binding LongName}" FontSize="Caption" FontAttributes="Bold" VerticalTextAlignment="End" />
+
+                                <!-- Bandeira do ativo -->
+                                <Border Grid.Row="1" Margin="0" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 5" WidthRequest="12" HeightRequest="12">
+                                    <!-- Exibe a imagem da bandeira do país do ativo -->
+                                    <Image Source="{Binding Flag}" />
+                                </Border>
+
                                 <!-- Subtítulo do ativo sugerido -->
-                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding Subtitle}" FontSize="Micro" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="2" FontSize="Micro" HorizontalTextAlignment="Start" VerticalTextAlignment="Start">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <!-- O nome do país onde esse tipo de ativo existe -->
+                                            <Span Text="{Binding Country}" />
+                                            <Span Text="            "/>
+                                            <!-- O nome curto do tipo de ativo -->
+                                            <Span Text="{Binding ShortName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </editors:AutoCompleteEdit.ItemTemplate>
@@ -71,45 +78,42 @@
             </controls:DXExpander>
 
             <!-- Layout inferior contendo a lista de ativos e mensagens de aviso -->
-            <VerticalStackLayout controls:DXDockLayout.Dock="Bottom">
+            <Grid controls:DXDockLayout.Dock="Bottom" RowDefinitions="Auto,Auto,*">
                 <!-- Cartão com um gráfico de pizza com a distribuição dos tipos de ativos -->
                 <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" />
 
-                <!-- Layout com a lista e uma mensagem de lista vazia -->
-                <Grid >
-                    <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
-                    <Border IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
-                        <!-- Mensagem detalhada para informar que o grupo está vazio -->
-                        <Label FontSize="Micro" Padding="15,10">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <!-- Ícone de alerta visualizando a situação de atenção -->
-                                    <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                                    <!-- Mensagem informando que a lista está vazia -->
-                                    <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                                    <!-- Instrução adicional para o usuário incluir pelo menos um tipo de ativo -->
-                                    <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-                                    <!-- Ícone de bolça de dinheiro -->
-                                    <Span Text="&#xf00e;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-                                    <!-- O restante das instruções para o usuário -->
-                                    <Span Text=" no canto superior direito da tela para exibir a barra de pesquisa e procurar pelos tipos de ativos disponíveis." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </Border>
+                <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
+                <Border Grid.Row="1" IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
+                    <!-- Mensagem detalhada para informar que o grupo está vazio -->
+                    <Label FontSize="Micro" Padding="15,10">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <!-- Ícone de alerta visualizando a situação de atenção -->
+                                <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia -->
+                                <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Instrução adicional para o usuário incluir pelo menos um tipo de ativo -->
+                                <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <!-- Ícone de bolça de dinheiro -->
+                                <Span Text="&#xf00e;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <!-- O restante das instruções para o usuário -->
+                                <Span Text=" no canto superior direito da tela para exibir a barra de pesquisa e procurar pelos tipos de ativos disponíveis." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
 
-                    <!-- Lista dos ativos adicionados ao grupo -->
-                    <controls:DXCollectionView ItemsSource="{Binding Assets}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False" CompleteItemDragDrop="DXCollectionView_CompleteItemDragDrop">
-                        <!-- Template de visualização de cada item da lista -->
-                        <controls:DXCollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <!-- Controle personalizado para exibir os dados do ativo -->
-                                <cells:AssetTypeCell x:DataType="models:AssetAllocation" GroupColor="{Binding GroupColor}" Type="{Binding Type}" Flag="{Binding Meta.Flag}" Name="{Binding Meta.Title}" IsChecked="{Binding Enabled}" CheckedChanged="AssetTypeCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetTypeCell_PercentageChanged" Color="{Binding Color}" ColorChanged="AssetTypeCell_ColorChanged" DeleteClicked="AssetTypeCell_DeleteClicked" />
-                            </DataTemplate>
-                        </controls:DXCollectionView.ItemTemplate>
-                    </controls:DXCollectionView>
-                </Grid>
-            </VerticalStackLayout>
+                <!-- Lista dos ativos adicionados ao grupo -->
+                <controls:DXCollectionView Grid.Row="2" ItemsSource="{Binding Assets}" AllowDragDropItems="{Binding IsAllowDragDropItems}" SelectionMode="Single" IsScrollBarVisible="False" CompleteItemDragDrop="DXCollectionView_CompleteItemDragDrop">
+                    <!-- Template de visualização de cada item da lista -->
+                    <controls:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!-- Controle personalizado para exibir os dados do ativo -->
+                            <cells:AssetTypeCell x:DataType="models:AssetAllocation" GroupColor="{Binding GroupColor}" Type="{Binding Type}" Flag="{Binding Meta.Flag}" Name="{Binding Meta.LongName}" IsChecked="{Binding Enabled}" CheckedChanged="AssetTypeCell_CheckedChanged" Percentage="{Binding Percentage}" PercentageAvailable="{Binding PercentageAvailable}" PercentageChanged="AssetTypeCell_PercentageChanged" Color="{Binding Color}" ColorChanged="AssetTypeCell_ColorChanged" DeleteClicked="AssetTypeCell_DeleteClicked" />
+                        </DataTemplate>
+                    </controls:DXCollectionView.ItemTemplate>
+                </controls:DXCollectionView>
+            </Grid>
         </controls:DXDockLayout>
     </Grid>
 </ContentPage>

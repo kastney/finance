@@ -10,9 +10,14 @@ internal class AssetAllocationMeta {
     #region Properties
 
     /// <summary>
-    /// Título descritivo do tipo de ativo (ex: "Ações", "FIIs").
+    /// Nome curto descritivo do tipo do ativo.
     /// </summary>
-    public string Title { get; set; }
+    public string ShortName { get; set; }
+
+    /// <summary>
+    /// Nome longo descritivo do tipo do ativo.
+    /// </summary>
+    public string LongName { get; set; }
 
     /// <summary>
     /// Código de cultura utilizado para formatação regional (ex: "pt-br", "en-us").

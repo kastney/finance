@@ -10,7 +10,7 @@ internal static class ColorUtility {
     /// </summary>
     private static readonly List<List<string>> ColorGroups = [
         // Grupo Vermelho.
-        ["#ffa183", "#ff805b", "#ff5b34", "#ff2401", "#d12508", "#a4240c", "#7a200d"],
+        ["#ffa183", "#ff805b", "#ff5b34", "#ff4326", "#d12508", "#a4240c", "#7a200d"],
         // Grupo Amarelo.
         ["#ffea98", "#ffe474", "#ffdd4c", "#ffd700", "#d0af12", "#a38a17", "#786518"],
         // Grupo Verde.

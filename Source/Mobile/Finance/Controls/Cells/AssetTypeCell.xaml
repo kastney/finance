@@ -14,12 +14,12 @@
             <Label Text="&#xf0c9;" Grid.RowSpan="6" FontFamily="IconsSolid" FontSize="Medium" WidthRequest="25" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
 
             <!-- Ícone ou imagem da bandeira do país ou tipo de ativo -->
-            <Border Grid.Column="2" Margin="0,0,10,5" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="20" HeightRequest="20">
+            <Border Grid.Column="2" Margin="0,0,5,5" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="15" HeightRequest="15">
                 <Image x:Name="flag" BackgroundColor="Gray" />
             </Border>
             
             <!-- Nome do grupo de ativos, exibido com destaque -->
-            <Label x:Name="nameText" Grid.Column="3" Grid.ColumnSpan="2" FontSize="Small" FontAttributes="Bold" Margin="0,5,0,10" />
+            <Label x:Name="nameText" Grid.Column="3" Grid.ColumnSpan="2" FontSize="Caption" LineBreakMode="TailTruncation" FontAttributes="Bold" Margin="0,5,10,10" />
 
             <!-- Título estático indicando que a próxima informação refere-se a porcentagem do grupo de ativos -->
             <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Text="Porcentagem" FontSize="Micro" />

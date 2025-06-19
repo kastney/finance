@@ -23,12 +23,13 @@ internal static class AssetMetadata {
     /// Retorna um dicionário com os metadados de cada tipo de ativo, incluindo título, cultura e bandeira associada.
     /// Esses dados são utilizados para exibição amigável na interface do usuário.
     /// </summary>
-    public static Dictionary<AssetType, AssetAllocationMeta> Data => new() {
+    public static Dictionary<AssetType, AssetAllocationMeta> Meta => new() {
         {
             // Ações brasileiras.
             AssetType.BRA_STOCK,
             new AssetAllocationMeta() {
-                Title = "Ações",
+                ShortName = "Ação BR",
+                LongName = "Ação Brasileira",
                 Culture = "pt-br",
                 Flag = "pt-br"
             }
@@ -37,7 +38,8 @@ internal static class AssetMetadata {
             // Fundos Imobiliários Brasileiros.
             AssetType.BRA_FII,
             new AssetAllocationMeta() {
-                Title = "FIIs",
+                ShortName = "FII",
+                LongName = "Fundo de Investimento Imobiliário",
                 Culture = "pt-br",
                 Flag = "pt-br"
             }
@@ -46,10 +48,32 @@ internal static class AssetMetadata {
             // Brazilian Depositary Receipts.
             AssetType.BRA_BDR,
             new AssetAllocationMeta() {
-                Title = "BDRs",
+                ShortName = "BDR",
+                LongName = "Brazilian Depositary Receipt",
                 Culture = "pt-br",
                 Flag = "pt-br"
             }
+        }
+    };
+
+    /// <summary>
+    /// Lista de tokens para sistema de busca do aplicativo.
+    /// </summary>
+    public static Dictionary<AssetType, string> Tokens => new() {
+        {
+            // Ações brasileiras.
+            AssetType.BRA_STOCK,
+            "ações acoes ação acao stocks empresas negocios negócios business brasileiros brasileiras brazilians "
+        },
+        {
+            // Fundos Imobiliários Brasileiros.
+            AssetType.BRA_FII,
+            "fii fiis imóveis imoveis imóvel imovel imobiliarios brasileiros brasileiras brazilians "
+        },
+        {
+            // Brazilian Depositary Receipts.
+            AssetType.BRA_BDR,
+            "bdr bdrs depositary receipts exterior ações acoes ação acao stocks empresas negocios negócios business brasileiros brasileiras brazilians "
         }
     };
 
@@ -88,41 +112,6 @@ internal static class AssetMetadata {
     public static string SerializeStrategy(List<AssetGroup> strategy) {
         // Serializa a lista de grupos de ativos em uma string JSON.
         return JsonSerializer.Serialize(strategy, JsonOptions);
-    }
-
-    /// <summary>
-    /// Retorna uma lista de ativos disponíveis para o usuário, incluindo título, cultura, bandeira e tokens de pesquisa.
-    /// </summary>
-    /// <returns>Lista de ativos disponíveis com metadados.</returns>
-    public static AvailableAsset[] GetAvailableAssets() {
-        return [
-            // Ações Brasileiras.
-            new AvailableAsset {
-                Title = "Ações ",
-                Locale = "Brasil ",
-                Flag = "pt_br",
-                Token = "acoes ação acao stock empresa negocios negócios brasileiros brasileiras brazilians",
-                Type = AssetType.BRA_STOCK
-            },
-            // Fundos Imobiliários Brasileiros.
-            new AvailableAsset {
-                Title = "Fundo de Investimento Imobiliário ",
-                Locale = "Brasil ",
-                Flag = "pt_br",
-                Subtitle = "FII ",
-                Token = "fii imóveis imoveis imóvel imovel imobiliario brasileiros brasileiras brazilians",
-                Type = AssetType.BRA_FII
-            },
-            // Brazilian Depositary Receipts.
-            new AvailableAsset {
-                Title = "Brazilian Depositary Receipts ",
-                Locale = "Brasil ",
-                Flag = "pt_br",
-                Subtitle = "BDR ",
-                Token = "bdr exterior ações acoes ação acao stock empresa negocios negócios brasileiros brasileiras brazilians",
-                Type = AssetType.BRA_BDR
-            }
-        ];
     }
 
     #endregion Strategy Methods

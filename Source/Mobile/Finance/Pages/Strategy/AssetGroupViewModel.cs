@@ -65,6 +65,11 @@ internal partial class AssetGroupViewModel : ViewModel {
     [ObservableProperty]
     private bool hasWarning;
 
+    /// <summary>
+    /// Lista de países.
+    /// </summary>
+    private readonly Dictionary<string, string> countries = [];
+
     #endregion Fields
 
     #region Properties
@@ -113,9 +118,28 @@ internal partial class AssetGroupViewModel : ViewModel {
         // Limpa a coleção de ativos disponíveis antes de adicionar novos.
         AvailableAssets.Clear();
         // Percorre todos os ativos disponíveis e os adiciona à coleção de ativos observáveis.
-        foreach(var asset in AssetMetadata.GetAvailableAssets()) {
+        foreach(var asset in AssetMetadata.Meta) {
+            // Tenta pegar o nome do país com base na cultura.
+            if(!countries.TryGetValue(asset.Value.Culture, out string country)) {
+                // Se não acho, obtém uma cultura.
+                var culture = new CultureInfo(asset.Value.Culture);
+                // Cria uma região com base na cultura.
+                var region = new RegionInfo(culture.LCID);
+                // Obtém o nome do país pela região.
+                country = region.DisplayName;
+                // Salva o nome do país para ser utilizado posteriormente.
+                countries.Add(asset.Value.Culture, country);
+            }
+
             // Obtém os ativos disponíveis utilizando a classe AssetMetadata.
-            AvailableAssets.Add(asset);
+            AvailableAssets.Add(new AvailableAsset {
+                Type = asset.Key,
+                LongName = asset.Value.LongName,
+                ShortName = asset.Value.ShortName,
+                Flag = asset.Value.Flag.Replace("-", "_"),
+                Token = AssetMetadata.Tokens[asset.Key],
+                Country = country
+            });
         }
 
         // Obtém o grupo de ativos atual.
@@ -127,10 +151,20 @@ internal partial class AssetGroupViewModel : ViewModel {
         Assets.Clear();
         // Percorre todos os tipos de ativos existente dentro do grupo.
         foreach(var asset in group.Assets) {
+            // Cria o novo ativo com as informações do ativo atual
+            var newAsset = new AssetAllocation {
+                Type = asset.Type,
+                Color = asset.Color,
+                Enabled = asset.Enabled,
+                GroupColor = group.Color,
+                Percentage = asset.Percentage,
+                PercentageAvailable = asset.PercentageAvailable,
+            };
+
             // Remove o ativo da lista de ativos disponíveis, pois ele já está alocado no grupo.
             RemoveAvailableAsset(asset.Type);
             // Adiciona o ativo na lista de ativos do grupo.
-            Assets.Add(asset);
+            Assets.Add(newAsset);
         }
 
         // Atualiza todas as propriedades vinculáveis da página.
@@ -159,7 +193,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Só adiciona os grupos que possuem porcentagem diferente de zero.
             if(asset.Percentage != 0) {
                 // Adiciona os dados do grupo à lista de dados do gráfico.
-                seriesData.Add(new PieData(asset.Meta.Title, asset.Percentage, asset.Color));
+                seriesData.Add(new PieData(asset.Meta.ShortName, asset.Percentage, asset.Color));
             }
         }
 
@@ -236,7 +270,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Verifica se o tipo de ativo já existe em outro grupo.
             if(existingAllocation is not null) {
                 // Pergunta ao usuário se deseja mover o ativo do grupo existente para o grupo atual.
-                if(!await Shell.Current.DisplayAlert("Tipo de ativo já utilizado em outro grupo!", $"O tipo de ativo \"{asset.Title}\" que você selecionou já está sendo utilizado no grupo \"{existingGroup.Name}\"!\n\nDeseja mover este tipo de ativo do grupo \"{existingGroup.Name}\" para o grupo \"{GroupName}\"?", "Sim", "Não")) {
+                if(!await Shell.Current.DisplayAlert("Tipo de ativo já utilizado em outro grupo!", $"O tipo de ativo \"{asset.LongName}\" que você selecionou já está sendo utilizado no grupo \"{existingGroup.Name}\"!\n\nDeseja mover este tipo de ativo do grupo \"{existingGroup.Name}\" para o grupo \"{GroupName}\"?", "Sim", "Não")) {
                     // Caso o usuário escolha não mover o ativo, marca que há um novo ativo disponível e encerra a execução.
                     HasNewAsset = true;
                     // Finaliza o método de adição de um novo tipo de ativo no grupo.
@@ -255,10 +289,10 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Busca a primeira cor que ainda não foi utilizada.
             var nextAvailableColor = allColorIndices.Except(usedColors).FirstOrDefault();
 
-            // Cria uma nova alocação de ativo com o tipo especificado.
-            var newAsset = new AssetAllocation { Type = asset.Type, Color = nextAvailableColor, Enabled = true, Percentage = 0 };
             // Localiza o grupo atual dentro da estratégia da carteira.
             var currentGroup = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(GroupName));
+            // Cria uma nova alocação de ativo com o tipo especificado.
+            var newAsset = new AssetAllocation { Type = asset.Type, Color = nextAvailableColor, GroupColor = currentGroup.Color, Enabled = true, Percentage = 0 };
 
             // Adiciona o novo ativo ao grupo atual.
             currentGroup.Assets.Add(newAsset);
@@ -268,7 +302,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Tenta salvar a estratégia atualizada na fonte de dados (API, serviço, etc.).
             if(!await walletService.UpdateStrategy(walletService.Wallet.Strategy)) {
                 // Caso ocorra falha na atualização, exibe uma mensagem de erro ao usuário.
-                await Shell.Current.DisplayAlert("Erro ao adicionar ativo", $"Não foi possível adicionar o tipo de ativo \"{asset.Title}\" no grupo \"{GroupName}\".", "OK");
+                await Shell.Current.DisplayAlert("Erro ao adicionar ativo", $"Não foi possível adicionar o tipo de ativo \"{asset.LongName}\" no grupo \"{GroupName}\".", "OK");
 
                 // Remove o novo ativo do grupo atual, desfazendo a tentativa de adição.
                 currentGroup.Assets.Remove(newAsset);
@@ -331,7 +365,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             var asset = group.Assets.FirstOrDefault(a => a.Type == Enum.Parse<AssetType>(name));
 
             // Informa ao usuário que ocorreu um erro ao modificar se o grupo de ativos está ativo ou não.
-            await Shell.Current.DisplayAlert("Não foi possível alterar o status de ativação!", $"Ocorreu um erro ao tentar salvar o novo status de ativação do tipo de ativos \"{asset.Meta.Title}\".", "OK");
+            await Shell.Current.DisplayAlert("Não foi possível alterar o status de ativação!", $"Ocorreu um erro ao tentar salvar o novo status de ativação do tipo de ativos \"{asset.Meta.LongName}\".", "OK");
 
             // Inverte o estado de habilitação do tipo de ativo.
             asset.Enabled = !asset.Enabled;
@@ -361,7 +395,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             var asset = group.Assets.FirstOrDefault(a => a.Type == Enum.Parse<AssetType>(name));
 
             // Informa ao usuário que ocorreu um erro ao modificar a porcentagem do tipo de ativo.
-            await Shell.Current.DisplayAlert("Não foi possível alterar a porcentagem!", $"Ocorreu um erro ao tentar salvar a nova porcentagem para o tipo de ativo \"{asset.Meta.Title}\".", "OK");
+            await Shell.Current.DisplayAlert("Não foi possível alterar a porcentagem!", $"Ocorreu um erro ao tentar salvar a nova porcentagem para o tipo de ativo \"{asset.Meta.LongName}\".", "OK");
 
             // Atualiza o valor da porcentagem antiga.
             asset.Percentage = oldPercentage;
@@ -394,7 +428,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Verifica se já existe um tipo de ativo com a cor selecionada.
             if(existingAsset is not null) {
                 // Pergunta ao usuário se quer trocar as cores.
-                swap = await Shell.Current.DisplayAlert("Cor já em uso!", $"A cor selecionada já está sendo usada pelo tipo de ativo \"{existingAsset.Meta.Title}\".\n\nDeseja trocar as cores entre os tipos de ativos?", "Sim", "Não");
+                swap = await Shell.Current.DisplayAlert("Cor já em uso!", $"A cor selecionada já está sendo usada pelo tipo de ativo \"{existingAsset.Meta.LongName}\".\n\nDeseja trocar as cores entre os tipos de ativos?", "Sim", "Não");
 
                 // Verifica se o usuário quer trocar as cores entre os tipos de ativos.
                 if(swap) {
@@ -431,7 +465,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Se houve troca de cores, desfaz a troca restaurando a cor original do tipo de ativo existente.
             if(swap && existingAsset is not null) {
                 // Informa ao usuário que ocorreu um erro ao modificar a cor do tipo de ativo.
-                await Shell.Current.DisplayAlert("Não foi possível alterar a cor!", $"Ocorreu um erro ao tentar salvar a nova cor para o para o tipo de ativo \"{asset.Meta.Title}\".", "OK");
+                await Shell.Current.DisplayAlert("Não foi possível alterar a cor!", $"Ocorreu um erro ao tentar salvar a nova cor para o para o tipo de ativo \"{asset.Meta.LongName}\".", "OK");
 
                 // Rollback: restaura a cor do tipo de ativo existente para seu valor original.
                 existingAsset.Color = currentColor;
@@ -480,7 +514,7 @@ internal partial class AssetGroupViewModel : ViewModel {
             // Tenta atualizar a estratégia no serviço de carteiras.
             if(!await walletService.UpdateStrategy(walletService.Wallet.Strategy)) {
                 // Informa ao usuário que ocorreu um erro ao remover o tipo de ativo.
-                await Shell.Current.DisplayAlert("Não foi possível deletar!", $"Ocorreu um erro ao tentar deletar o tipo de ativo \"{asset.Meta.Title}\".", "OK");
+                await Shell.Current.DisplayAlert("Não foi possível deletar!", $"Ocorreu um erro ao tentar deletar o tipo de ativo \"{asset.Meta.LongName}\".", "OK");
 
                 // Rollback: Adicionando o tipo de ativo novamente na lista.
                 Assets.Insert(index, asset);
