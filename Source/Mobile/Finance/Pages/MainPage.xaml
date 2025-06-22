@@ -20,6 +20,8 @@
                 <VerticalStackLayout>
                     <!-- Botão para selecionar/trocar carteira -->
                     <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding NavigateToSelectWalletCommand}" />
+                    <!-- Botão para abrir notificações da carteira -->
+                    <navigation:ToolbarItem Glyph="&#xf0f3;" Command="{Binding NavigateToNotifyCommand}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>

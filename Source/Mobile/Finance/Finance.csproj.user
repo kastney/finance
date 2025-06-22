@@ -53,6 +53,9 @@
     <MauiXaml Update="Pages\MainPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\Notify\NotifyPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\Strategy\AssetGroupPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
