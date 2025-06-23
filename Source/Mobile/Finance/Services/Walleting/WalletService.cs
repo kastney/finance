@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 using Finance.Utilities;
 
 namespace Finance.Services.Walleting;
@@ -226,4 +227,97 @@ internal class WalletService : IWalletService {
     }
 
     #endregion Strategy Methods
+
+    #region Notification Methods
+
+    /// <summary>
+    /// Adiciona uma notificação no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será adicioinada.</param>
+    /// <param name="key">A chave de identificação da notificação. O valor é <c>null</c> por padrão.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de adicionar uma notificação.</returns>
+    public async Task<bool> AddNotification(NotificationCodes notification, string key = null) {
+        try {
+            // Verifica se a notificação já existe na carteira.
+            if(Wallet.Notifications.Any(a => a.Id == notification && a.Key == key)) {
+                // Notificação já existe, então não adiciona novamente.
+                return false;
+            }
+
+            // Adiciona a nova notificação na lista de notificações da carteira.
+            Wallet.Notifications.Add(new Notification(notification) { Key = key });
+
+            // Serializa a lista de notificações em uma string JSON.
+            var newNotifications = NotificationMetadata.SerializeStrategy(Wallet.Notifications);
+
+            // Inicializa o banco de dados, caso ainda não tenha sido feito.
+            await Init();
+
+            // Executa a atualização diretamente via comando SQL.
+            var rowsAffected = await database.ExecuteAsync("UPDATE wallets SET NotificationsJson = ? WHERE id = ?", newNotifications, Wallet.Id);
+
+            // Se a atualização afetou pelo menos uma linha, atualiza a propriedade local.
+            if(rowsAffected > 0) {
+                // Atualiza a propriedade serializada StrategyJson da carteira.
+                Wallet.NotificationsJson = newNotifications;
+
+                // Retorna verdadeiro indicando que o grupo foi adicionado e a estratégia atualizada com sucesso.
+                return true;
+            }
+
+            // Caso não tenha afetado nenhuma linha, considera como falha.
+            return false;
+        } catch {
+            // Em caso de erro durante qualquer etapa, retorna falso indicando falha na atualização.
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Remove uma notificação no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será removida.</param>
+    /// <param name="key">A chave de identificação da notificação. O valor é <c>null</c> por padrão.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de remover uma notificação.</returns>
+    public async Task<bool> RemoveNotification(NotificationCodes notification, string key = null) {
+        try {
+            // Procura a notificação na lista, com o mesmo Id e a mesma chave.
+            var existingNotification = Wallet.Notifications.FirstOrDefault(a => a.Id == notification && a.Key == key);
+
+            // Se a notificação não existir, não há o que remover.
+            if(existingNotification is null) {
+                // Retorna false.
+                return false;
+            }
+
+            // Remove a notificação da lista.
+            Wallet.Notifications.Remove(existingNotification);
+
+            // Serializa a lista de notificações em uma string JSON.
+            var newNotifications = NotificationMetadata.SerializeStrategy(Wallet.Notifications);
+
+            // Inicializa o banco de dados, caso ainda não tenha sido feito.
+            await Init();
+
+            // Executa a atualização diretamente via comando SQL.
+            var rowsAffected = await database.ExecuteAsync("UPDATE wallets SET NotificationsJson = ? WHERE id = ?", newNotifications, Wallet.Id);
+
+            // Se a atualização afetou pelo menos uma linha, atualiza a propriedade local.
+            if(rowsAffected > 0) {
+                // Atualiza a propriedade serializada StrategyJson da carteira.
+                Wallet.NotificationsJson = newNotifications;
+
+                // Retorna verdadeiro indicando que o grupo foi adicionado e a estratégia atualizada com sucesso.
+                return true;
+            }
+
+            // Caso não tenha afetado nenhuma linha, considera como falha.
+            return false;
+        } catch {
+            // Em caso de erro durante qualquer etapa, retorna falso indicando falha na atualização.
+            return false;
+        }
+    }
+
+    #endregion Notification Methods
 }

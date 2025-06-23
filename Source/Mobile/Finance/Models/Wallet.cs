@@ -151,7 +151,7 @@ internal class Wallet {
             // Verifica se a lista de notificações já foi carregada.
             if(notifications is null) {
                 // Desserializa a lista de notificações ou retorna a lista vazia.
-                notifications ??= [];
+                notifications ??= NotificationMetadata.DeserializeNotification(NotificationsJson);
             }
             // Retorna as notificações da carteira.
             return notifications;
