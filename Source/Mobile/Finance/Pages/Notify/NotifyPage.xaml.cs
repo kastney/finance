@@ -1,3 +1,4 @@
+using Finance.Controls.Cells;
 using Finance.Utilities;
 
 namespace Finance.Pages.Notify;
@@ -57,4 +58,21 @@ public partial class NotifyPage : ContentPage {
     }
 
     #endregion Navigation Methods
+
+    #region Methods
+
+    /// <summary>
+    /// Dispara quando o usuário clica em uma notificação.
+    /// </summary>
+    /// <param name="sender">O objeto que chamou o evento.</param>
+    /// <param name="e">Os argumentos para o evento.</param>
+    private async void NotificationCell_Clicked(object sender, EventArgs e) {
+        // Obtém a célula clicada.
+        if(sender is NotificationCell notification) {
+            // Chama a navegação para a notificação.
+            await viewModel.NavigateTo(notification.Code.Value, notification.Key);
+        }
+    }
+
+    #endregion Methods
 }

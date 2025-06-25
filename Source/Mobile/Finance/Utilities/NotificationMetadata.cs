@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 
 namespace Finance.Utilities;
 
@@ -17,6 +18,25 @@ internal static class NotificationMetadata {
     private static JsonSerializerOptions JsonOptions { get; } = new() {
         // Configuração para tratar os nomes das propriedades de forma case-insensitive.
         PropertyNameCaseInsensitive = true
+    };
+
+    /// <summary>
+    /// Retorna um dicionário com os metadados de cada tipo de notificações, incluindo título, descrição e ícone.
+    /// Esses dados são utilizados para exibição amigável na interface do usuário.
+    /// </summary>
+    public static Dictionary<NotificationCodes, Notification> Data => new() {
+        {
+            // Notificação para estratégia vazia.
+            NotificationCodes.STRATEGY_EMPTY,
+            new Notification {
+                Icon = "\uf200",
+                Title = "Estratégia não definida",
+                Description = "Ainda não há nenhum Grupo de Ativos configurado nesta carteira!",
+                Tag = "Estratégia",
+                Level = NotificationLevel.Warning,
+                Route = "strategy"
+            }
+        }
     };
 
     #endregion Properties

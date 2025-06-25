@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="http://schemas.devexpress.com/maui"
+             xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:editors="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             x:Class="Finance.Controls.Cells.NotificationCell">
+
+    <!-- Contêiner visual com estilo de cartão e espaçamento externo -->
+    <Border Style="{x:StaticResource Card}" Margin="15,0,15,15">
+        <!-- Estrutura de grade com 4 linhas e 2 colunas, com espaçamento entre colunas e preenchimento interno -->
+        <Grid RowDefinitions="*,*,*" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15" RowSpacing="5" Padding="10">
+            <!-- O ícone da notificação -->
+            <Label x:Name="iconText" Grid.RowSpan="3" FontFamily="IconsSolid" VerticalTextAlignment="Center" FontSize="Medium" />
+
+            <!-- O título da notificação, exibido com destaque -->
+            <Label x:Name="titleText" Grid.Column="1" FontSize="Small" FontAttributes="Bold" />
+            <!-- A tag de categoria da notificação -->
+            <Border Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" Padding="10,0">
+                <!-- O texto da tag de categoria -->
+                <Label x:Name="tagText" FontSize="Micro" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
+            </Border>
+            <!-- A descrição da notificação -->
+            <Label x:Name="descriptionText" Grid.Row="2" Grid.Column="1" FontSize="Micro" />
+
+            <!-- Seta para direita -->
+            <Label Grid.Column="2" Grid.RowSpan="3" Text="&#xf054;" FontFamily="IconsSolid" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        </Grid>
+        <!-- Define que a célular reconhecerá gesto do usuário -->
+        <Border.GestureRecognizers>
+            <!-- Configura o gesto de toque em cima da célula -->
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+        </Border.GestureRecognizers>
+    </Border>
+</ContentView>

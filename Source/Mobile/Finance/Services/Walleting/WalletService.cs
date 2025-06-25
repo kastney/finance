@@ -245,7 +245,7 @@ internal class WalletService : IWalletService {
             }
 
             // Adiciona a nova notificação na lista de notificações da carteira.
-            Wallet.Notifications.Add(new Notification(notification) { Key = key });
+            Wallet.Notifications.Add(new Notification { Id = notification, Key = key });
 
             // Serializa a lista de notificações em uma string JSON.
             var newNotifications = NotificationMetadata.SerializeStrategy(Wallet.Notifications);

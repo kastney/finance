@@ -28,7 +28,7 @@
             <controls:DXCollectionView.ItemTemplate>
                 <DataTemplate>
                     <!-- ... -->
-                    <cells:AssetGroupCell x:DataType="models:Notification" />
+                    <cells:NotificationCell x:DataType="models:Notification" Code="{Binding Id}" Key="{Binding Key}" Icon="{Binding Icon}" Title="{Binding Title}" Description="{Binding Description}" Tag="{Binding Tag}" Level="{Binding Level}" Clicked="NotificationCell_Clicked" />
                 </DataTemplate>
             </controls:DXCollectionView.ItemTemplate>
         </controls:DXCollectionView>

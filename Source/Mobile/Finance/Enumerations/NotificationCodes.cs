@@ -3,7 +3,7 @@
 /// <summary>
 /// Códigos para o sistema de notificação do Finance.
 /// </summary>
-internal enum NotificationCodes {
+public enum NotificationCodes {
 
     #region Strategy
 
