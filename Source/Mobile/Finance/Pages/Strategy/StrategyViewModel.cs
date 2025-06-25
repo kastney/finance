@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 using Finance.Utilities;
 
 namespace Finance.Pages.Strategy;
@@ -333,6 +334,12 @@ internal partial class StrategyViewModel : ViewModel {
 
             // Atualiza as propriedades da página.
             UpdateProperties(walletService.Wallet);
+
+            // Verifica se a lista está vazia.
+            if(walletService.Wallet.Strategy.Count == 0) {
+                // Adiciona a notificação de estratégia vazia.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_EMPTY);
+            }
 
             // Pequeno atraso para garantir estabilidade de navegação.
             await Task.Delay(100);

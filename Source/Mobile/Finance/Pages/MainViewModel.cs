@@ -168,6 +168,27 @@ internal partial class MainViewModel : ViewModel {
     }
 
     /// <summary>
+    /// Comando responsável por navegar até a tela de notificações da carteira.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    [RelayCommand]
+    private async Task NavigateToNotify() {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de seleção de carteira.
+            await navigationService.NavigateTo("notify");
+            // Pequeno atraso para evitar sobreposição de ações.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
+    /// <summary>
     /// Comando responsável por navegar até a "zona de perigo", onde ações sensíveis são realizadas.
     /// </summary>
     /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
