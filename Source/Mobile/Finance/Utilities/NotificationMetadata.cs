@@ -79,5 +79,18 @@ internal static class NotificationMetadata {
         return JsonSerializer.Serialize(notifications, JsonOptions);
     }
 
+    /// <summary>
+    /// Verifica se existe alguma notificação com rota igual ou que esteja em sub-rota da rota informada.
+    /// </summary>
+    /// <param name="notifications">Lista de notificações a ser verificada.</param>
+    /// <param name="route">Rota base para comparação, como "strategy" ou "strategy/group".</param>
+    /// <returns>True se existir uma notificação que tenha a mesma rota ou sub-rota da rota informada.</returns>
+    public static bool HasNotificationForRoute(this IEnumerable<Notification> notifications, string route) {
+        // Verifica se existe rota para ser verificada.
+        if(string.IsNullOrWhiteSpace(route)) { return false; }
+        // Procura se existe alguma notificação que contém a rota enviada.
+        return notifications.Any(n => !string.IsNullOrEmpty(n.Route) && (n.Route.Equals(route, StringComparison.OrdinalIgnoreCase) || n.Route.StartsWith(route + "/", StringComparison.OrdinalIgnoreCase)));
+    }
+
     #endregion Notification Methods
 }

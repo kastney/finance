@@ -21,7 +21,7 @@
                     <!-- Botão para selecionar/trocar carteira -->
                     <navigation:ToolbarItem Glyph="&#xf555;" Command="{Binding NavigateToSelectWalletCommand}" />
                     <!-- Botão para abrir notificações da carteira -->
-                    <navigation:ToolbarItem Glyph="&#xf0f3;" Command="{Binding NavigateToNotifyCommand}" />
+                    <navigation:ToolbarItem Glyph="&#xf0f3;" Command="{Binding NavigateToNotificationCommand}" HasWarning="{Binding IsNotification}" />
                 </VerticalStackLayout>
             </navigation:NavigationBar.ToolbarItems>
         </navigation:NavigationBar>
@@ -54,8 +54,7 @@
                                                              Variation="{Binding Data.Variation}"
                                                              Performance="{Binding Data.Performance}"
                                                              Culture="{Binding Meta.Culture}"
-                                                             Flag="{Binding Meta.Flag}"
-                                                             IsVisible="True" />
+                                                             Flag="{Binding Meta.Flag}" />
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </VerticalStackLayout>
@@ -69,7 +68,7 @@
                     <!-- Título da seção de opções adicionais -->
                     <Label Text="Mais Opções" Grid.Row="0" Grid.ColumnSpan="3" FontAttributes="Bold" />
                     <!-- Botão para acessar a estratégia da carteira -->
-                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" IsWarning="{Binding IsWarningStrategy}" Command="{Binding NavigateToStrategyCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" IsWarning="{Binding IsNotificationStrategy}" Command="{Binding NavigateToStrategyCommand}" />
                     <!-- Botão para acessar a "zona de perigo" (ações sensíveis) -->
                     <buttons:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding NavigateToDangerZoneCommand}" />
                 </Grid>
