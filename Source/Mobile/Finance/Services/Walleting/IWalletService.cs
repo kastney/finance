@@ -98,5 +98,15 @@ internal interface IWalletService {
     /// <returns>Uma tarefa que representa a operação assíncrona de remover uma notificação.</returns>
     Task<bool> RemoveNotification(NotificationCodes notification, string key = null);
 
+    /// <summary>
+    /// Renomeia uma notificação existente no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será renomeada.</param>
+    /// <param name="key">A chave de identificação da notificação.</param>
+    /// <param name="newKey">A nova chave de identificação da notificação.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de renomear a chava de uma notificação.</returns>
+    Task<bool> RenameNotification(NotificationCodes notification, string key, string newKey);
+
+
     #endregion Notification Methods
 }

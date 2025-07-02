@@ -90,10 +90,14 @@
                             <FormattedString>
                                 <!-- Ícone de alerta visualizando a situação de atenção -->
                                 <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                                <!-- Mensagem informando que a lista está vazia -->
-                                <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia, parte 1 -->
+                                <Span Text="  Grupo &quot;" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Nome do Grupo de Ativos -->
+                                <Span Text="{Binding GroupName}" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia, parte 2 -->
+                                <Span Text="&quot; está vazio" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                                 <!-- Instrução adicional para o usuário incluir pelo menos um tipo de ativo -->
-                                <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <Span Text="&#10;Adicione pelo menos um tipo de ativo nesse grupo!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                                 <!-- Ícone de bolça de dinheiro -->
                                 <Span Text="&#xf00e;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                                 <!-- O restante das instruções para o usuário -->

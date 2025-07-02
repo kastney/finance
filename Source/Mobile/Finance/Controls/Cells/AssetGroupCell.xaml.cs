@@ -180,6 +180,8 @@ public partial class AssetGroupCell : ContentView {
         if(bindable is not AssetGroupCell control || newValue is not string value) { return; }
         // Atualiza o texto do componente nameText para refletir o novo nome.
         control.nameText.Text = value;
+        // Atualiza o texto do componente de aviso para refletir o novo nome.
+        control.gruopText.Text = value;
     }
 
     #endregion Name

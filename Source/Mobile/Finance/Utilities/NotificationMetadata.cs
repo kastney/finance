@@ -38,6 +38,7 @@ internal static class NotificationMetadata {
             }
         },
         {
+            // Notificação para porcentagem de alocação não definida.
             NotificationCodes.STRATEGY_PERCENTAGE_NOT_DEFINED,
             new Notification {
                 Icon = "\uf200",
@@ -46,6 +47,18 @@ internal static class NotificationMetadata {
                 Tag = "Estratégia",
                 Level = NotificationLevel.Warning,
                 Route = "strategy"
+            }
+        },
+        {
+            // Notificação para grupo de ativos vazio.
+            NotificationCodes.STRATEGY_GROUP_EMPTY,
+            new Notification {
+                Icon = "\uf200",
+                Title = "Grupo \"{key}\" está vazio",
+                Description = "Ainda não há nenhum Ativo configurado no grupo \"{key}\"!",
+                Tag = "Estratégia",
+                Level = NotificationLevel.Warning,
+                Route = "strategy/group?name={key}"
             }
         }
     };

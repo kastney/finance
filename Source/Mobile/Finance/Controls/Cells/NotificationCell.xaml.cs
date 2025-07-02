@@ -157,6 +157,13 @@ public partial class NotificationCell : ContentView {
     private static void OnTitleChanged(BindableObject bindable, object oldValue, object newValue) {
         // Garante que o bindable é uma instância válida de NotificationCell e que o novo valor é uma string.
         if(bindable is not NotificationCell control || newValue is not string value) { return; }
+
+        // Verifica se a propriedade Key está definida e substitui a chave no texto do título, se necessário.
+        if(!string.IsNullOrEmpty(control.Key)) {
+            // Substitui a chave no texto do título, se a propriedade Key estiver definida.
+            value = value.Replace("{key}", control.Key, StringComparison.OrdinalIgnoreCase);
+        }
+
         // Atualiza o texto do componente titleText para refletir o novo nome.
         control.titleText.Text = value;
     }
@@ -171,6 +178,13 @@ public partial class NotificationCell : ContentView {
     private static void OnDescriptionChanged(BindableObject bindable, object oldValue, object newValue) {
         // Garante que o bindable é uma instância válida de NotificationCell e que o novo valor é uma string.
         if(bindable is not NotificationCell control || newValue is not string value) { return; }
+
+        // Verifica se a propriedade Key está definida e substitui a chave no texto do título, se necessário.
+        if(!string.IsNullOrEmpty(control.Key)) {
+            // Substitui a chave no texto do título, se a propriedade Key estiver definida.
+            value = value.Replace("{key}", control.Key, StringComparison.OrdinalIgnoreCase);
+        }
+
         // Atualiza o texto do componente descriptionText para refletir o novo nome.
         control.descriptionText.Text = value;
     }

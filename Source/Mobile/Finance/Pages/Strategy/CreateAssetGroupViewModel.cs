@@ -85,6 +85,9 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
 
             // Salva no banco de dados.
             if(await walletService.UpdateStrategy(walletService.Wallet.Strategy)) {
+                // Renomea na lista de notificações.
+                await walletService.RenameNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName, AssetGroupName.Value);
+
                 // Retorna para a página anterior.
                 await NavigationBack();
             }
@@ -103,6 +106,8 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
                     // Adiciona a notificação de estratégia vazia.
                     await walletService.RemoveNotification(NotificationCodes.STRATEGY_EMPTY);
                 }
+                // Adiciona a notificação de grupo de ativos vazio.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, AssetGroupName.Value);
 
                 // Retorna para a página anterior.
                 await NavigationBack();

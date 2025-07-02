@@ -320,6 +320,9 @@ internal partial class AssetGroupViewModel : ViewModel {
                 return;
             }
 
+            // Remove a notificação de grupo de ativos vazio.
+            await walletService.RemoveNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName);
+
             // Remove o ativo da lista de ativos disponíveis para adição, evitando duplicações.
             RemoveAvailableAsset(asset.Type);
             // Atualiza as propriedades do grupo, refletindo as mudanças na interface.
@@ -522,6 +525,12 @@ internal partial class AssetGroupViewModel : ViewModel {
                 group.Assets = [.. Assets];
                 // Remove o ativo da lista de ativos disponíveis para adição, evitando duplicações.
                 RemoveAvailableAsset(type);
+            }
+
+            // Verifica se o grupo de ativos ficou vazio após a remoção do tipo de ativo.
+            if(Assets.Count == 0) {
+                // Adiciona a notificação de grupo de ativos vazio.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName);
             }
 
             // Atualiza as propriedades da página.

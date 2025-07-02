@@ -17,5 +17,10 @@ public enum NotificationCodes {
     /// </summary>
     STRATEGY_PERCENTAGE_NOT_DEFINED = 754,
 
+    /// <summary>
+    /// Indica que o grupo de ativos da estratégia está vazio, ou seja, não há ativos alocados nesse grupo.
+    /// </summary>
+    STRATEGY_GROUP_EMPTY = 217,
+
     #endregion Strategy
 }
