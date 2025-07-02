@@ -36,6 +36,17 @@ internal static class NotificationMetadata {
                 Level = NotificationLevel.Warning,
                 Route = "strategy"
             }
+        },
+        {
+            NotificationCodes.STRATEGY_PERCENTAGE_NOT_DEFINED,
+            new Notification {
+                Icon = "\uf200",
+                Title = "Estratégia sem alocação definida",
+                Description = "Parte da carteira permanece não alocada entre os Grupos de Ativos!",
+                Tag = "Estratégia",
+                Level = NotificationLevel.Warning,
+                Route = "strategy"
+            }
         }
     };
 
