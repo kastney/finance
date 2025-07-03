@@ -134,8 +134,14 @@
 	  <Compile Update="Controls\Cards\GroupChartCard.xaml.cs">
 	    <DependentUpon>GroupChartCard.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Controls\Cells\NotificationCell.xaml.cs">
+	    <DependentUpon>NotificationCell.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Controls\Cells\AssetTypeCell.xaml.cs">
 	    <DependentUpon>AssetTypeCell.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Notify\NotifyPage.xaml.cs">
+	    <DependentUpon>NotifyPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Walleting\DeleteWalletPage.xaml.cs">
 	    <DependentUpon>DeleteWalletPage.xaml</DependentUpon>
@@ -167,6 +173,9 @@
 	  <MauiXaml Update="Controls\Cards\WalletStatusCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\Cells\NotificationCell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\Cells\AssetTypeCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -189,6 +198,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Notify\NotifyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Strategy\AssetGroupPage.xaml">

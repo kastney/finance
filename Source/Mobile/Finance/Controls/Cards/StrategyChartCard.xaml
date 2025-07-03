@@ -60,13 +60,11 @@
                         <!-- Ícone de aviso (exclamação) com cor de alerta conforme o tema -->
                         <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                         <!-- Texto indicando que a carteira não está completamente alocada -->
-                        <Span Text="  Carteira sem alocação completa!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                        <!-- Texto explicativo sobre a existência de alocação incompleta -->
-                        <Span Text="&#10;Existe " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <Span Text="  Estratégia sem alocação definida&#10;" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                         <!-- Label dinâmica que exibe a porcentagem não alocada, em negrito -->
                         <Span x:Name="percentageLabel" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                         <!-- Mensagem orientando o usuário a completar a alocação -->
-                        <Span Text=" da carteira não alocado a nenhum grupo. Complete a alocação para finalizar a estratégia!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <Span Text=" da carteira ainda não foi alocada a nenhum grupo. Distribua esse valor entre os grupos abaixo!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                         <!-- Ícone de configuração representando a ação de ajustar as porcentagens -->
                         <Span Text="&#xf200;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                         <!-- Texto finalizando a instrução ao usuário -->

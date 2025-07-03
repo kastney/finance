@@ -1,4 +1,5 @@
-﻿using Finance.Utilities;
+﻿using Finance.Enumerations;
+using Finance.Utilities;
 using Finance.Validators.Objects;
 using Finance.Validators.Rules;
 
@@ -68,7 +69,7 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
                 // Interrompe o fluxo para correção do nome.
                 return;
             }
-            
+
             // Verifica se o nome do grupo já existe na carteira atual.
             if(walletService.Wallet.AssetGroupNameExists(AssetGroupName.Value)) {
                 // Adiciona mensagem de erro para o usuário informar que o nome está em uso.
@@ -76,14 +77,17 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
                 // Interrompe o fluxo para correção do nome.
                 return;
             }
-            
+
             // Obtém o grupo de ativos que será editado.
             var group = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(GroupName));
             // Atualiza a informação paro o novo nome do grupo de ativos.
             group.Name = AssetGroupName.Value;
-            
+
             // Salva no banco de dados.
             if(await walletService.UpdateStrategy(walletService.Wallet.Strategy)) {
+                // Renomea na lista de notificações.
+                await walletService.RenameNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName, AssetGroupName.Value);
+
                 // Retorna para a página anterior.
                 await NavigationBack();
             }
@@ -97,6 +101,14 @@ internal partial class CreateAssetGroupViewModel : ViewModel {
             }
             // Tenta adicionar o novo grupo ao serviço e navega para a página anterior em caso de sucesso.
             if(await walletService.AddAssetGroup(AssetGroupName.Value)) {
+                // Verifica se a lista está vazia.
+                if(walletService.Wallet.Strategy.Count != 0) {
+                    // Adiciona a notificação de estratégia vazia.
+                    await walletService.RemoveNotification(NotificationCodes.STRATEGY_EMPTY);
+                }
+                // Adiciona a notificação de grupo de ativos vazio.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, AssetGroupName.Value);
+
                 // Retorna para a página anterior.
                 await NavigationBack();
             }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cells="clr-namespace:Finance.Controls.Cells"
+             xmlns:controls="http://schemas.devexpress.com/maui"
+             xmlns:models="clr-namespace:Finance.Models"
+             xmlns:navigation="clr-namespace:Finance.Controls.Navigation"
+             xmlns:viewModell="clr-namespace:Finance.Pages.Notify"
+             x:Class="Finance.Pages.Notify.NotifyPage"
+             x:DataType="viewModell:NotifyViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <!-- ... -->
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- ... -->
+        <navigation:NavigationBar Title="Notificações" IsRoot="False" Clicked="BackButtom_Clicked" />
+
+        <!-- ... -->
+        <Border Grid.Row="1" IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
+            <!-- ... -->
+            <Label FontSize="Micro" Text="Tudo tranquilo por aqui. Nenhuma notificação no momento!" HorizontalTextAlignment="Start" Padding="15,20" />
+        </Border>
+
+        <!-- ... -->
+        <controls:DXCollectionView Grid.Row="2" ItemsSource="{Binding Notifications}" AllowDragDropItems="False" SelectionMode="Single" IsScrollBarVisible="False">
+            <!-- ... -->
+            <controls:DXCollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- ... -->
+                    <cells:NotificationCell x:DataType="models:Notification" Code="{Binding Id}" Key="{Binding Key}" Icon="{Binding Icon}" Title="{Binding Title}" Description="{Binding Description}" Tag="{Binding Tag}" Level="{Binding Level}" Clicked="NotificationCell_Clicked" />
+                </DataTemplate>
+            </controls:DXCollectionView.ItemTemplate>
+        </controls:DXCollectionView>
+    </Grid>
+</ContentPage>
