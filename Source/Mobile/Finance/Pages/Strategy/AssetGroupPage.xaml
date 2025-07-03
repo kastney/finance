@@ -80,7 +80,7 @@
             <!-- Layout inferior contendo a lista de ativos e mensagens de aviso -->
             <Grid controls:DXDockLayout.Dock="Bottom" RowDefinitions="Auto,Auto,*">
                 <!-- Cartão com um gráfico de pizza com a distribuição dos tipos de ativos -->
-                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" />
+                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" GroupName="{Binding GroupName}" />
 
                 <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
                 <Border Grid.Row="1" IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">

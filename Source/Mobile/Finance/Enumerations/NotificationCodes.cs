@@ -22,5 +22,10 @@ public enum NotificationCodes {
     /// </summary>
     STRATEGY_GROUP_EMPTY = 217,
 
+    /// <summary>
+    /// Indica que a porcentagem dentro de um Grupo de Ativos não foi completamente definida.
+    /// </summary>
+    STRATEGY_GROUP_PERCENTAGE_NOT_DEFINED = 234,
+
     #endregion Strategy
 }

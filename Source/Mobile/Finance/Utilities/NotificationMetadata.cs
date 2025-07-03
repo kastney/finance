@@ -60,6 +60,18 @@ internal static class NotificationMetadata {
                 Level = NotificationLevel.Warning,
                 Route = "strategy/group?name={key}"
             }
+        },
+        {
+            // Notificcação para porcentagem de alocação dentro de um grupo de ativos que não foi definida.
+            NotificationCodes.STRATEGY_GROUP_PERCENTAGE_NOT_DEFINED,
+            new Notification {
+                Icon = "\uf200",
+                Title = "Grupo \"{key}\" sem alocação definida",
+                Description = "Parte do grupo \"{key}\" permanece não alocada entre os Tipos de Ativos!",
+                Tag = "Estratégia",
+                Level = NotificationLevel.Warning,
+                Route = "strategy/group?name={key}"
+            }
         }
     };
 
