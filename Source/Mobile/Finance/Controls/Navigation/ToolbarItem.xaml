@@ -15,21 +15,26 @@
             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
         </Border.GestureRecognizers>
 
-        <!-- Ícone centralizado dentro da borda, padrão: menu -->
-        <Label x:Name="icon" Margin="6" Text="&#xf0c9;" FontFamily="IconsSolid" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}">
-            <!-- Estados visuais para o Label (ex: cor quando desabilitado) -->
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
-                        <VisualState x:Name="Disabled">
-                            <VisualState.Setters>
-                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </VisualStateManager.VisualStateGroups>
-        </Label>
+        <!-- Layout básico para o ícone do botão -->
+        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+            <!-- Ícone centralizado dentro da borda, padrão: menu -->
+            <Label x:Name="icon" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="6" Text="&#xf0c9;" FontFamily="IconsSolid" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}">
+                <!-- Estados visuais para o Label (ex: cor quando desabilitado) -->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Label>
+            <!-- Indicador visual de avisos -->
+            <BoxView x:Name="bullet" Grid.Column="1" HeightRequest="10" WidthRequest="10" CornerRadius="10" Color="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" BackgroundColor="Transparent" IsVisible="False" />
+        </Grid>
     </Border>
 </ContentView>

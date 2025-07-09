@@ -1,6 +1,7 @@
 ﻿using Finance.Pages;
 using Finance.Pages.DangerZone;
 using Finance.Pages.Initialize;
+using Finance.Pages.Notify;
 using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 using Finance.Services.Navigation;
@@ -64,6 +65,8 @@ public static class MauiProgram {
         builder.Services.AddTransient<MainViewModel>();
         // Registra a ViewModel para seleção de carteira como instância transitória.
         builder.Services.AddTransient<SelectWalletViewModel>();
+        // Registra a ViewModel para página de notificações da página como instância transitória.
+        builder.Services.AddTransient<NotifyViewModel>();
         // Registra a ViewModel para criação de carteira como instância transitória.
         builder.Services.AddTransient<CreateWalletViewModel>();
         // Registra a ViewModel da página de exclusão de carteira como instância transitória.

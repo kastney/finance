@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 using Finance.Utilities;
 
 namespace Finance.Pages.Strategy;
@@ -90,7 +91,7 @@ internal partial class StrategyViewModel : ViewModel {
     /// Atualiza as propriedades da página.
     /// </summary>
     /// <param name="wallet">A carteira atual.</param>
-    private void UpdateProperties(Wallet wallet) {
+    private async void UpdateProperties(Wallet wallet) {
         // Verifica se é permitido a criação de um novo Grupo de Ativos.
         HasNewAssetGroup = wallet.Strategy.Count < AssetMetadata.Meta.Count;
 
@@ -122,6 +123,15 @@ internal partial class StrategyViewModel : ViewModel {
 
         // Mostra ou não a mensagem de aviso ao usuário.
         HasWarning = Strategy.Count != 0 && PercentageAvailable != 0;
+
+        // Adiciona notificação de estratégia vazia, se necessário.
+        if(PercentageAvailable == 0) {
+            // Remove a notificação de estratégia sem percentual definido, se existir.
+            await walletService.RemoveNotification(NotificationCodes.STRATEGY_PERCENTAGE_NOT_DEFINED);
+        } else if(wallet.Strategy.Count != 0) {
+            // Adiciona um notificação de estratégia sem percentual definido.
+            await walletService.AddNotification(NotificationCodes.STRATEGY_PERCENTAGE_NOT_DEFINED);
+        }
     }
 
     #endregion Update Methods
@@ -333,6 +343,12 @@ internal partial class StrategyViewModel : ViewModel {
 
             // Atualiza as propriedades da página.
             UpdateProperties(walletService.Wallet);
+
+            // Verifica se a lista está vazia.
+            if(walletService.Wallet.Strategy.Count == 0) {
+                // Adiciona a notificação de estratégia vazia.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_EMPTY);
+            }
 
             // Pequeno atraso para garantir estabilidade de navegação.
             await Task.Delay(100);

@@ -29,10 +29,16 @@ internal partial class MainViewModel : ViewModel {
     private bool isStrategy;
 
     /// <summary>
+    /// Indica se existe alguma notificação.
+    /// </summary>
+    [ObservableProperty]
+    private bool isNotification;
+
+    /// <summary>
     /// Indica se existe algo que necessita de atenção no botão de estratégia.
     /// </summary>
     [ObservableProperty]
-    private bool isWarningStrategy;
+    private bool isNotificationStrategy;
 
     #endregion Fields
 
@@ -63,7 +69,9 @@ internal partial class MainViewModel : ViewModel {
         // Verifica se a estratégia da carteira está vazia.
         IsStrategy = Strategy.Count != 0;
         // Verifica se existe algo que precisa de atenção no botão de estratégia.
-        IsWarningStrategy = Strategy.Count == 0 || Strategy.Any(a => a.Assets.Count == 0);
+        IsNotificationStrategy = Wallet.Notifications.HasNotificationForRoute("strategy");
+        // Verifica se existe alguma notificação.
+        IsNotification = Wallet.Notifications.Count != 0;
 
         // Notifica a interface de que a propriedade Wallet foi alterada.
         OnPropertyChanged(nameof(Wallet));
@@ -159,6 +167,27 @@ internal partial class MainViewModel : ViewModel {
 
             // Navega até a página de seleção de carteira.
             await navigationService.NavigateTo("select");
+            // Pequeno atraso para evitar sobreposição de ações.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
+    /// <summary>
+    /// Comando responsável por navegar até a tela de notificações da carteira.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    [RelayCommand]
+    private async Task NavigateToNotification() {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de seleção de carteira.
+            await navigationService.NavigateTo("notify");
             // Pequeno atraso para evitar sobreposição de ações.
             await Task.Delay(100);
 

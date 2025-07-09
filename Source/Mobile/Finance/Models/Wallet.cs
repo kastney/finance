@@ -23,6 +23,11 @@ internal class Wallet {
     private string allocationsJson;
 
     /// <summary>
+    /// Representa a lista de notificações da carteira.
+    /// </summary>
+    private string notificationsJson;
+
+    /// <summary>
     /// Cache para armazenar a estratégia de agrupamento de ativos.
     /// </summary>
     private List<AssetGroup> strategy;
@@ -31,6 +36,11 @@ internal class Wallet {
     /// Cache para armazenar os dados de alocação de ativos por tipo.
     /// </summary>
     private Dictionary<AssetType, AssetAllocationData> allocations;
+
+    /// <summary>
+    /// Cache para armazenar a lista de notificações.
+    /// </summary>
+    private List<Notification> notifications;
 
     #endregion Fields
 
@@ -78,6 +88,21 @@ internal class Wallet {
         }
     }
 
+    /// <summary>
+    /// Representação serializada da lista de notificações da carteira.
+    /// </summary>
+    public string NotificationsJson {
+        get => notificationsJson;
+        set {
+            // Atribui o valor à variável privada e garante que a lista de notificações sejam inicializadas corretamente.
+            notificationsJson = value;
+            // Invalida o cache
+            notifications = null;
+            // Recria a lista de notificações.
+            _ = Notifications;
+        }
+    }
+
     #endregion Database Properties
 
     #region Runtime Properties
@@ -116,6 +141,23 @@ internal class Wallet {
         }
     }
 
+    /// <summary>
+    /// Dados da lista de notificações da carteira.
+    /// Calculado dinamicamente com base em <see cref="NotificationsJson"/>.
+    /// </summary>
+    [Ignore]
+    public List<Notification> Notifications {
+        get {
+            // Verifica se a lista de notificações já foi carregada.
+            if(notifications is null) {
+                // Desserializa a lista de notificações ou retorna a lista vazia.
+                notifications ??= NotificationMetadata.DeserializeNotification(NotificationsJson);
+            }
+            // Retorna as notificações da carteira.
+            return notifications;
+        }
+    }
+
     #endregion Runtime Properties
 
     #region Methods
@@ -137,7 +179,7 @@ internal class Wallet {
     /// <returns>Verdadeiro se o nome do grupo existir; caso contrário, falso.</returns>
     internal bool AssetGroupNameExists(string assetGroupName) {
         // Procura pelo grupo de ativos com o nome especificado na estratégia atual.
-        return strategy.FirstOrDefault(a => a.Name.Equals(assetGroupName)) is not null;
+        return Strategy.FirstOrDefault(a => a.Name.Equals(assetGroupName)) is not null;
     }
 
     #endregion Methods

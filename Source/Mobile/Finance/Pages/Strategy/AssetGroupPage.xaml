@@ -65,7 +65,7 @@
                                         <FormattedString>
                                             <!-- O nome do país onde esse tipo de ativo existe -->
                                             <Span Text="{Binding Country}" />
-                                            <Span Text="            "/>
+                                            <Span Text="            " />
                                             <!-- O nome curto do tipo de ativo -->
                                             <Span Text="{Binding ShortName}" />
                                         </FormattedString>
@@ -80,7 +80,7 @@
             <!-- Layout inferior contendo a lista de ativos e mensagens de aviso -->
             <Grid controls:DXDockLayout.Dock="Bottom" RowDefinitions="Auto,Auto,*">
                 <!-- Cartão com um gráfico de pizza com a distribuição dos tipos de ativos -->
-                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" />
+                <cards:GroupChartCard Data="{Binding AssetGroupDataSeries}" PercentageAvailable="{Binding PercentageAvailable}" HasWarning="{Binding HasWarning}" GroupColor="{Binding GroupColor}" GroupName="{Binding GroupName}" />
 
                 <!-- Exibe uma mensagem quando não existem ativos adicionados ao grupo -->
                 <Border Grid.Row="1" IsVisible="{Binding IsEmpty}" Style="{x:StaticResource Card}" Margin="15,0" VerticalOptions="Start">
@@ -90,10 +90,14 @@
                             <FormattedString>
                                 <!-- Ícone de alerta visualizando a situação de atenção -->
                                 <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                                <!-- Mensagem informando que a lista está vazia -->
-                                <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia, parte 1 -->
+                                <Span Text="  Grupo &quot;" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Nome do Grupo de Ativos -->
+                                <Span Text="{Binding GroupName}" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                                <!-- Mensagem informando que a lista está vazia, parte 2 -->
+                                <Span Text="&quot; está vazio" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                                 <!-- Instrução adicional para o usuário incluir pelo menos um tipo de ativo -->
-                                <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                                <Span Text="&#10;Adicione pelo menos um tipo de ativo nesse grupo!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                                 <!-- Ícone de bolça de dinheiro -->
                                 <Span Text="&#xf00e;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                                 <!-- O restante das instruções para o usuário -->

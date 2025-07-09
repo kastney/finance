@@ -27,6 +27,11 @@ public partial class ToolbarItem : ContentView {
     /// </summary>
     public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ToolbarItem));
 
+    /// <summary>
+    /// Propriedade vinculável que define se aparece ou não a bolinha de aviso em cima do ícone.
+    /// </summary>
+    public static readonly BindableProperty HasWarningProperty = BindableProperty.Create(nameof(HasWarning), typeof(bool?), typeof(ToolbarItem), null, propertyChanged: OnHasWarningChanged);
+
     #endregion Fields
 
     #region Properties
@@ -61,6 +66,14 @@ public partial class ToolbarItem : ContentView {
     public ICommand Command {
         get => (ICommand)GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
+    }
+
+    /// <summary>
+    /// A bolinha de aviso em cima do ícone.
+    /// </summary>
+    public bool? HasWarning {
+        get => (bool?)GetValue(HasWarningProperty);
+        set => SetValue(HasWarningProperty, value);
     }
 
     #endregion Properties
@@ -145,6 +158,20 @@ public partial class ToolbarItem : ContentView {
         if(Command is not null && Command.CanExecute(null)) {
             Command.Execute(null);
         }
+    }
+
+    /// <summary>
+    /// Manipulador chamado quando a propriedade <see cref="HasWarning"/> é alterada.
+    /// Mostra ou esconde a bolinha de aviso em cima do ícone.
+    /// </summary>
+    /// <param name="bindable">O controle que disparou a alteração.</param>
+    /// <param name="oldValue">Valor anterior da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnHasWarningChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o objeto é do tipo ToolbarItem e possui um novo valor.
+        if(bindable is not ToolbarItem control || newValue is not bool value) { return; }
+        // Atualiza o tamanho da fonte do ícone.
+        control.bullet.IsVisible = value;
     }
 
     #endregion Methods

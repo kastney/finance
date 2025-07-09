@@ -1,4 +1,5 @@
-﻿using Finance.Models;
+﻿using Finance.Enumerations;
+using Finance.Models;
 
 namespace Finance.Services.Walleting;
 
@@ -78,4 +79,33 @@ internal interface IWalletService {
     Task<bool> UpdateStrategy(List<AssetGroup> strategy);
 
     #endregion Strategy Methods
+
+    #region Notification Methods
+
+    /// <summary>
+    /// Adiciona uma notificação no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será adicioinada.</param>
+    /// <param name="key">A chave de identificação da notificação. O valor é <c>null</c> por padrão.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de adicionar uma notificação.</returns>
+    Task<bool> AddNotification(NotificationCodes notification, string key = null);
+
+    /// <summary>
+    /// Remove uma notificação no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será removida.</param>
+    /// <param name="key">A chave de identificação da notificação. O valor é <c>null</c> por padrão.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de remover uma notificação.</returns>
+    Task<bool> RemoveNotification(NotificationCodes notification, string key = null);
+
+    /// <summary>
+    /// Renomeia uma notificação existente no sistema de notificações do aplicativo.
+    /// </summary>
+    /// <param name="notification">A notificação que será renomeada.</param>
+    /// <param name="key">A chave de identificação da notificação.</param>
+    /// <param name="newKey">A nova chave de identificação da notificação.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona de renomear a chava de uma notificação.</returns>
+    Task<bool> RenameNotification(NotificationCodes notification, string key, string newKey);
+
+    #endregion Notification Methods
 }

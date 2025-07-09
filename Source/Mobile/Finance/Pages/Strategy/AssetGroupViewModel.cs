@@ -174,7 +174,7 @@ internal partial class AssetGroupViewModel : ViewModel {
     /// <summary>
     /// Atualiza as propriedades vinculáveis da página.
     /// </summary>
-    private void UpdateProperties() {
+    private async void UpdateProperties() {
         // Verifica se é permitido a criação de um novo Grupo de Ativos.
         HasNewAsset = AvailableAssets.Count != 0;
 
@@ -211,6 +211,15 @@ internal partial class AssetGroupViewModel : ViewModel {
 
         // Mostra ou não a mensagem de aviso ao usuário.
         HasWarning = Assets.Count != 0 && PercentageAvailable != 0;
+
+        // Adiciona notificação de estratégia vazia, se necessário.
+        if(PercentageAvailable == 0) {
+            // Remove a notificação de estratégia sem percentual definido, se existir.
+            await walletService.RemoveNotification(NotificationCodes.STRATEGY_GROUP_PERCENTAGE_NOT_DEFINED, GroupName);
+        } else if(Assets.Count != 0) {
+            // Adiciona um notificação de estratégia sem percentual definido.
+            await walletService.AddNotification(NotificationCodes.STRATEGY_GROUP_PERCENTAGE_NOT_DEFINED, GroupName);
+        }
     }
 
     #endregion Start Methods
@@ -320,6 +329,9 @@ internal partial class AssetGroupViewModel : ViewModel {
                 return;
             }
 
+            // Remove a notificação de grupo de ativos vazio.
+            await walletService.RemoveNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName);
+
             // Remove o ativo da lista de ativos disponíveis para adição, evitando duplicações.
             RemoveAvailableAsset(asset.Type);
             // Atualiza as propriedades do grupo, refletindo as mudanças na interface.
@@ -386,6 +398,15 @@ internal partial class AssetGroupViewModel : ViewModel {
     public async Task UpdatePercentage(string name, int oldPercentage) {
         // Obtém o grupo de ativos local.
         var group = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(GroupName));
+
+        // Cria uma tivo auxiliar para atualizar a interface.
+        var auxAsset = new AssetAllocation();
+        // Adiciona o ativo auxiliar na lista.
+        Assets.Add(auxAsset);
+        // Atualiza as informações dos ativos.
+        group.Assets = [.. Assets];
+        // Remove o ativo auxiliar da lista.
+        Assets.Remove(auxAsset);
         // Atualiza as informações dos ativos.
         group.Assets = [.. Assets];
 
@@ -522,6 +543,12 @@ internal partial class AssetGroupViewModel : ViewModel {
                 group.Assets = [.. Assets];
                 // Remove o ativo da lista de ativos disponíveis para adição, evitando duplicações.
                 RemoveAvailableAsset(type);
+            }
+
+            // Verifica se o grupo de ativos ficou vazio após a remoção do tipo de ativo.
+            if(Assets.Count == 0) {
+                // Adiciona a notificação de grupo de ativos vazio.
+                await walletService.AddNotification(NotificationCodes.STRATEGY_GROUP_EMPTY, GroupName);
             }
 
             // Atualiza as propriedades da página.

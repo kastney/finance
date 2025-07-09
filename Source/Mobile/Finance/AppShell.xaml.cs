@@ -1,4 +1,5 @@
 ﻿using Finance.Pages.DangerZone;
+using Finance.Pages.Notify;
 using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
 
@@ -24,6 +25,8 @@ public partial class AppShell : Shell {
         Routing.RegisterRoute("create", typeof(CreateWalletPage));
         // Registra a rota para a página de seleção de carteiras.
         Routing.RegisterRoute("select", typeof(SelectWalletPage));
+        // Registra a rota para a página de notificações da carteira.
+        Routing.RegisterRoute("notify", typeof(NotifyPage));
         // Registra a rota para a página de estratégia da carteira.
         Routing.RegisterRoute("strategy", typeof(StrategyPage));
         // Registra a rota para a página de criação de Grupos de Ativos com um parâmetro de nome do grupo.

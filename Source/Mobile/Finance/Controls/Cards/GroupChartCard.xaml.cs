@@ -30,6 +30,11 @@ public partial class GroupChartCard : ContentView {
     /// </summary>
     public static readonly BindableProperty GroupColorProperty = BindableProperty.Create(nameof(GroupColor), typeof(int?), typeof(GroupChartCard), null);
 
+    /// <summary>
+    /// Propriedade vinculável para armazenar o nome do grupo de ativos. Sempre que alterado, dispara o método OnGruopNameChanged.
+    /// </summary>
+    public static readonly BindableProperty GroupNameProperty = BindableProperty.Create(nameof(GroupName), typeof(string), typeof(GroupChartCard), null, propertyChanged: OnGroupNameChanged);
+
     #endregion Fields
 
     #region Properties
@@ -64,6 +69,14 @@ public partial class GroupChartCard : ContentView {
     public int? GroupColor {
         get => (int?)GetValue(GroupColorProperty);
         set => SetValue(GroupColorProperty, value);
+    }
+
+    /// <summary>
+    /// Obtém ou define o nome do grupo de ativos.
+    /// </summary>
+    public string GroupName {
+        get => (string)GetValue(GroupNameProperty);
+        set => SetValue(GroupNameProperty, value);
     }
 
     #endregion Properties
@@ -169,6 +182,20 @@ public partial class GroupChartCard : ContentView {
             // Define a cor do texto dos rótulos para branco.
             labelStyle.Color = StaticResourceUtility.Get<Color>("White");
         }
+    }
+
+    /// <summary>
+    /// Método chamado automaticamente quando a propriedade GroupName for alterada.
+    /// Define o nome do grupo de ativos no controle visual de aviso.
+    /// </summary>
+    /// <param name="bindable">Instância da célula que sofreu a alteração.</param>
+    /// <param name="oldValue">Valor antigo da propriedade.</param>
+    /// <param name="newValue">Novo valor da propriedade.</param>
+    private static void OnGroupNameChanged(BindableObject bindable, object oldValue, object newValue) {
+        // Verifica se o bindable é do tipo GroupChartCard e define o valor do nome do grupo de ativos.
+        if(bindable is not GroupChartCard control || newValue is not string value) { return; }
+        // Define no controle visual o nome do grupo de ativos.
+        control.groupText.Text = value;
     }
 
     #endregion Methods

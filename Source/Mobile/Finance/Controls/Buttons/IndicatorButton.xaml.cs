@@ -56,7 +56,7 @@ public partial class IndicatorButton : ContentView {
     }
 
     /// <summary>
-    /// ...
+    /// Comando a ser executado quando o botão for tocado.
     /// </summary>
     public ICommand Command {
         get => (ICommand)GetValue(CommandProperty);

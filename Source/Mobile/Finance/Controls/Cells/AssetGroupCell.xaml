@@ -64,19 +64,45 @@
             </controls:DXToolbar>
 
             <!-- Mensagem de aviso exibida quando o grupo está vazio -->
-            <Label x:Name="warningText" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="Micro" Margin="0,0,0,10" IsVisible="False">
+            <Label x:Name="emptyWarningText" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="Micro" Margin="0,0,0,10" IsVisible="False">
                 <Label.FormattedText>
                     <FormattedString>
                         <!-- Ícone de alerta visualizando a situação de atenção -->
                         <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
-                        <!-- Mensagem informando que o grupo está vazio -->
-                        <Span Text="  Seu grupo está vazio no momento!" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Mensagem informando que o grupo está vazio, parte 1 -->
+                        <Span Text="  Grupo &quot;" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Nome do grupo -->
+                        <Span x:Name="emptyGruopText" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Mensagem informando que o grupo está vazio, parte 2 -->
+                        <Span Text="&quot; está vazio" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
                         <!-- Instrução adicional para o usuário incluir pelo menos um ativo -->
                         <Span Text="&#10;Adicione pelo menos um tipo de ativo ao grupo de ativos para que ele possa ficar válido!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                         <!-- Ícone de pasta aberta -->
                         <Span Text="&#xf07c;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                         <!-- O restante das instruções para o usuário -->
-                        <Span Text=" para adicionar um novo tipo ativo." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <Span Text=" para abrir esse grupo de ativos." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <!-- Mensagem de aviso exibida quando o grupo está com a alocação não definida -->
+            <Label x:Name="percentageWarningText" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="Micro" Margin="0,0,0,10" IsVisible="False">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <!-- Ícone de alerta visualizando a situação de atenção -->
+                        <Span Text="&#xf071;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Mensagem informando que o grupo está vazio, parte 1 -->
+                        <Span Text="  Grupo &quot;" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Nome do grupo -->
+                        <Span x:Name="percentageGruopText" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Mensagem informando que o grupo está vazio, parte 2 -->
+                        <Span Text="&quot; sem alocação definida" TextColor="{AppThemeBinding Light={StaticResource Warning}, Dark={StaticResource WarningDark}}" />
+                        <!-- Instrução adicional para o usuário incluir pelo menos um ativo -->
+                        <Span Text="&#10;Complete a alocação interna deste grupo de ativos. Ainda há uma porcentagem que não está alocada a nenhum tipo de ativo!&#10;Basta tocar em " TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- Ícone de pasta aberta -->
+                        <Span Text="&#xf07c;" FontFamily="IconsSolid" TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+                        <!-- O restante das instruções para o usuário -->
+                        <Span Text=" para abrir esse gupo de ativos." TextColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
