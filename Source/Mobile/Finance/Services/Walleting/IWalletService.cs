@@ -107,6 +107,5 @@ internal interface IWalletService {
     /// <returns>Uma tarefa que representa a operação assíncrona de renomear a chava de uma notificação.</returns>
     Task<bool> RenameNotification(NotificationCodes notification, string key, string newKey);
 
-
     #endregion Notification Methods
 }

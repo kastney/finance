@@ -17,7 +17,7 @@
             <Border Grid.Column="2" Margin="0,0,5,5" Padding="0" StrokeThickness="0" StrokeShape="RoundRectangle 4" WidthRequest="15" HeightRequest="15">
                 <Image x:Name="flag" BackgroundColor="Gray" />
             </Border>
-            
+
             <!-- Nome do grupo de ativos, exibido com destaque -->
             <Label x:Name="nameText" Grid.Column="3" Grid.ColumnSpan="2" FontSize="Caption" LineBreakMode="TailTruncation" FontAttributes="Bold" Margin="0,5,10,10" />
 

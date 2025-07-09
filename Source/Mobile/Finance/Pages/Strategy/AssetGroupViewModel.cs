@@ -398,6 +398,15 @@ internal partial class AssetGroupViewModel : ViewModel {
     public async Task UpdatePercentage(string name, int oldPercentage) {
         // Obtém o grupo de ativos local.
         var group = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(GroupName));
+
+        // Cria uma tivo auxiliar para atualizar a interface.
+        var auxAsset = new AssetAllocation();
+        // Adiciona o ativo auxiliar na lista.
+        Assets.Add(auxAsset);
+        // Atualiza as informações dos ativos.
+        group.Assets = [.. Assets];
+        // Remove o ativo auxiliar da lista.
+        Assets.Remove(auxAsset);
         // Atualiza as informações dos ativos.
         group.Assets = [.. Assets];
 

@@ -14,7 +14,7 @@
             <Label x:Name="iconText" Grid.RowSpan="3" FontFamily="IconsSolid" VerticalTextAlignment="Center" FontSize="Medium" />
 
             <!-- O título da notificação, exibido com destaque -->
-            <Label x:Name="titleText" Grid.Column="1" FontSize="Small" FontAttributes="Bold" />
+            <Label x:Name="titleText" Grid.Column="1" FontSize="Caption" FontAttributes="Bold" />
             <!-- A tag de categoria da notificação -->
             <Border Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" Padding="10,0">
                 <!-- O texto da tag de categoria -->

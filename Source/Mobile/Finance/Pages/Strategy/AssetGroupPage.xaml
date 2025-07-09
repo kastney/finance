@@ -65,7 +65,7 @@
                                         <FormattedString>
                                             <!-- O nome do país onde esse tipo de ativo existe -->
                                             <Span Text="{Binding Country}" />
-                                            <Span Text="            "/>
+                                            <Span Text="            " />
                                             <!-- O nome curto do tipo de ativo -->
                                             <Span Text="{Binding ShortName}" />
                                         </FormattedString>

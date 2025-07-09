@@ -22,10 +22,10 @@
 
     <Color x:Key="Green">#118B0D</Color>
     <Color x:Key="GreenDark">#41B346</Color>
-    
+
     <Color x:Key="Warning">#FF5A00</Color>
     <Color x:Key="WarningDark">#FF9600</Color>
-    
+
     <Color x:Key="Red">#F42323</Color>
     <Color x:Key="RedDark">#F44B4B</Color>
 

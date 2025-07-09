@@ -1,4 +1,5 @@
 using Finance.Delegates;
+using Finance.Services.Walleting;
 using Finance.Utilities;
 
 namespace Finance.Controls.Cells;
@@ -181,7 +182,7 @@ public partial class AssetGroupCell : ContentView {
         // Atualiza o texto do componente nameText para refletir o novo nome.
         control.nameText.Text = value;
         // Atualiza o texto do componente de aviso para refletir o novo nome.
-        control.gruopText.Text = value;
+        control.emptyGruopText.Text = control.percentageGruopText.Text = value;
     }
 
     #endregion Name
@@ -198,12 +199,34 @@ public partial class AssetGroupCell : ContentView {
     private static void OnCountChanged(BindableObject bindable, object oldValue, object newValue) {
         // Garante que o bindable é uma instância válida de AssetGroupCell e que o novo valor é um inteiro.
         if(bindable is not AssetGroupCell control || newValue is not int value) { return; }
-        // Exibe ou oculta a mensagem de aviso dependendo se a quantidade é zero ou negativa.
-        control.warningText.IsVisible = value <= 0;
+
         // Atualiza o texto do componente countText para refletir a nova quantidade de ativos.
         control.countText.Text = value.ToString();
-        // Define se o botão es deletar está ativo ou não para interação.
-        control.deleteButton.IsEnabled = control.warningText.IsVisible;
+
+        // Define visibilidade do aviso de lista vazia.
+        bool isEmpty = value <= 0;
+        // Define se o aviso de lista vazia deve ser exibido ou não.
+        control.emptyWarningText.IsVisible = isEmpty;
+
+        // Define se o botão de exclusão pode ser usado.
+        control.deleteButton.IsEnabled = isEmpty;
+
+        // Se não está vazio, verifica alocação percentual.
+        if(!isEmpty) {
+            // Obtém o serviço de carteira para verificar a alocação percentual do grupo de ativos.
+            var walletService = Service.Get<IWalletService>();
+            // Encontra o grupo de ativos na estratégia da carteira com base no nome do controle.
+            var group = walletService.Wallet.Strategy.FirstOrDefault(g => g.Name.Equals(control.Name));
+
+            // Mostra aviso se houver percentual não alocado (> 0).
+            bool hasUnallocated = group != null && (100 - group.Assets.Sum(a => a.Percentage)) > 0;
+
+            // Define a visibilidade do texto de aviso de porcentagem baseado na alocação.
+            control.percentageWarningText.IsVisible = hasUnallocated;
+        } else {
+            // Oculta o aviso de alocação se estiver vazio.
+            control.percentageWarningText.IsVisible = false;
+        }
     }
 
     #endregion Count
