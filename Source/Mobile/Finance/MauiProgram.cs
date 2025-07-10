@@ -1,6 +1,7 @@
 ﻿using Finance.Pages;
 using Finance.Pages.DangerZone;
 using Finance.Pages.Initialize;
+using Finance.Pages.Launches;
 using Finance.Pages.Notify;
 using Finance.Pages.Strategy;
 using Finance.Pages.Walleting;
@@ -79,6 +80,8 @@ public static class MauiProgram {
         builder.Services.AddTransient<CreateAssetGroupViewModel>();
         // Registra a ViewModel da página de edição dos ativos dentro do grupo de ativos.
         builder.Services.AddTransient<AssetGroupViewModel>();
+        // Registra a ViewModel da página de criação de um Ativo como instância transitória.
+        builder.Services.AddTransient<LaunchesViewModel>();
 
         #endregion ViewModels
 

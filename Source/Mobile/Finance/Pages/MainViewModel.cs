@@ -197,27 +197,6 @@ internal partial class MainViewModel : ViewModel {
     }
 
     /// <summary>
-    /// Comando responsável por navegar até a "zona de perigo", onde ações sensíveis são realizadas.
-    /// </summary>
-    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
-    [RelayCommand]
-    private async Task NavigateToDangerZone() {
-        // Impede execução simultânea do comando.
-        if(!IsRunning) {
-            // Sinaliza que a execução está em andamento.
-            IsRunning = true;
-
-            // Navega até a página "zona de perigo".
-            await navigationService.NavigateTo("dangerZone");
-            // Pequeno atraso para garantir estabilidade de navegação.
-            await Task.Delay(100);
-
-            // Finaliza a execução do comando.
-            IsRunning = false;
-        }
-    }
-
-    /// <summary>
     /// Comando responsável por navegar até a página de estratégia da carteira.
     /// </summary>
     /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
@@ -230,6 +209,48 @@ internal partial class MainViewModel : ViewModel {
 
             // Navega até a página de estratégia da carteira.
             await navigationService.NavigateTo("strategy");
+            // Pequeno atraso para garantir estabilidade de navegação.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
+    /// <summary>
+    /// Comando responsável por navegar até a página de lançamentos da carteira.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    [RelayCommand]
+    private async Task NavigateToLaunches() {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página de estratégia da carteira.
+            await navigationService.NavigateTo("launches");
+            // Pequeno atraso para garantir estabilidade de navegação.
+            await Task.Delay(100);
+
+            // Finaliza a execução do comando.
+            IsRunning = false;
+        }
+    }
+
+    /// <summary>
+    /// Comando responsável por navegar até a "zona de perigo", onde ações sensíveis são realizadas.
+    /// </summary>
+    /// <returns>Uma tarefa assíncrona que representa a operação de navegação.</returns>
+    [RelayCommand]
+    private async Task NavigateToDangerZone() {
+        // Impede execução simultânea do comando.
+        if(!IsRunning) {
+            // Sinaliza que a execução está em andamento.
+            IsRunning = true;
+
+            // Navega até a página "zona de perigo".
+            await navigationService.NavigateTo("dangerZone");
             // Pequeno atraso para garantir estabilidade de navegação.
             await Task.Delay(100);
 

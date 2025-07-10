@@ -140,6 +140,9 @@
 	  <Compile Update="Controls\Cells\AssetTypeCell.xaml.cs">
 	    <DependentUpon>AssetTypeCell.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Launches\LaunchesPage.xaml.cs">
+	    <DependentUpon>LaunchesPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Notify\NotifyPage.xaml.cs">
 	    <DependentUpon>NotifyPage.xaml</DependentUpon>
 	  </Compile>
@@ -195,6 +198,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DangerZone\DangerZonePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Launches\LaunchesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPage.xaml">

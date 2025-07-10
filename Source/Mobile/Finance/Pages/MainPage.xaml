@@ -69,8 +69,10 @@
                     <Label Text="Mais Opções" Grid.Row="0" Grid.ColumnSpan="3" FontAttributes="Bold" />
                     <!-- Botão para acessar a estratégia da carteira -->
                     <buttons:SmallButtonCard Grid.Row="1" Grid.Column="0" Text="Estratégia" Glyph="&#xf200;" IsWarning="{Binding IsNotificationStrategy}" Command="{Binding NavigateToStrategyCommand}" />
+                    <!-- Botão para acessar os lançamentos da carteira -->
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Lançamentos" Glyph="&#xf15c;" Command="{Binding NavigateToLaunchesCommand}" />
                     <!-- Botão para acessar a "zona de perigo" (ações sensíveis) -->
-                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="1" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding NavigateToDangerZoneCommand}" />
+                    <buttons:SmallButtonCard Grid.Row="1" Grid.Column="2" Text="Zona de Perigo" Glyph="&#xf071;" Command="{Binding NavigateToDangerZoneCommand}" />
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
